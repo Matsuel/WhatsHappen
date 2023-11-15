@@ -9,7 +9,7 @@ const LoginPage = () => {
   const [password, setPassword] = useState('');
 
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
     axios.post('http://localhost:3001/login', {email, password})
     .then(res => {
