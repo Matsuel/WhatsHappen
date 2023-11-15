@@ -1,8 +1,5 @@
-*{
-    background-color: #202020;
-}
-
 .welcomePage{
+    background-color: #202020;
     display: flex;
     flex-direction: column;
     align-items: center;
