@@ -11,7 +11,7 @@ const LoginPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post('http://localhost:3001/validatePassword', {email, password})
+    axios.post('http://localhost:3001/login', {email, password})
     .then(res => {
       if(res.data.validation){
         alert('Vous êtes connecté')
