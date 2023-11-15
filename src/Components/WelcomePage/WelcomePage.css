@@ -1,0 +1,49 @@
+*{
+    background-color: #202020;
+}
+
+.welcomePage{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100%;
+}
+
+.titleDiv{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.title{
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 20px;
+    color: #fff;
+    margin-bottom: 1rem;
+}
+
+.subTitle{
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    color: #9F9F9F;
+    margin-bottom: 1.5rem;
+}
+
+.button{
+    background-color: #00A884;
+    border: none;
+    border-radius: 5px;
+    color: #000;
+    width: 25%;
+    height: 1.5rem;
+    margin-bottom: 3rem;
+}
+
+.version{
+    color: #9F9F9F;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 16px;
+}
