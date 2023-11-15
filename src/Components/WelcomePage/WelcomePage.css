@@ -37,9 +37,13 @@
     border: none;
     border-radius: 5px;
     color: #000;
-    width: 25%;
-    height: 1.5rem;
+    width: 30%;
+    height: 2rem;
     margin-bottom: 3rem;
+}
+
+.button:hover{
+    cursor: pointer;
 }
 
 .version{
