@@ -14,8 +14,10 @@ const LoginPage = () => {
     axios.post('http://localhost:3001/login', {email, password})
     .then(res => {
       if(res.data.validation){
+        //REmplacer alert par une redirection
         alert('Vous êtes connecté')
       }else{
+        //REmplacer alert par une redirection
         alert('Vous n\'êtes pas connecté')
       }
     })
