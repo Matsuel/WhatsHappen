@@ -37,12 +37,23 @@ app.post('/login', (req,res)=>{
 app.post('/register', (req,res)=>{
     const {pseudo,email, hashedPassword} = req.body;
 
-    db.run(`INSERT INTO Users(username,mail,password) VALUES('${pseudo}','${hashedMail}','${hashedPassword}')`, (err)=>{
-        if(err){
+    db.all(`SELECT * FROM Users WHERE username= '${pseudo}' OR mail= '${email}'`, (err,rows)=>{
+        if (err){
             console.log(err.message);
         }
-        res.send({created:true});
+        if(rows.length>0){
+            res.send({created:false})
+        }else{
+            db.run(`INSERT INTO Users(username,mail,password) VALUES('${pseudo}','${email}','${hashedPassword}')`, (err)=>{
+                if(err){
+                    console.log(err.message);
+                }
+                res.send({created:true});
+            })
+        }
     })
+
+    
 })
 
 app.listen(3001,()=>{
