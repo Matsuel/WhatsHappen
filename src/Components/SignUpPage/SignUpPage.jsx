@@ -16,8 +16,7 @@ const SingUpPage = () => {
       alert("Les mots de passe ne correspondent pas");
     } else {
       const hashedPassword = bcrypt.hashSync(password, 10);
-      const hashedMail = bcrypt.hashSync(email, 10);
-      axios.post('http://localhost:3001/register', { pseudo, hashedMail, hashedPassword })
+      axios.post('http://localhost:3001/register', { pseudo, email, hashedPassword })
         .then(res => {
           if (res.data.created) {
             //REmplacer alert par une redirection

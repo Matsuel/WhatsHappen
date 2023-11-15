@@ -35,7 +35,7 @@ app.post('/login', (req,res)=>{
 })
 
 app.post('/register', (req,res)=>{
-    const {pseudo,hashedMail, hashedPassword} = req.body;
+    const {pseudo,email, hashedPassword} = req.body;
 
     db.run(`INSERT INTO Users(username,mail,password) VALUES('${pseudo}','${hashedMail}','${hashedPassword}')`, (err)=>{
         if(err){
