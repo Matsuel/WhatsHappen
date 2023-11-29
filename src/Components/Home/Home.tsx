@@ -17,6 +17,8 @@ const Home = () => {
         console.log(search)
     }
 
+    const [countArchived, setCountArchived] = useState(0)
+
     return (
         <div className='home-wrapper'>
             <div className="conversation">
@@ -40,7 +42,7 @@ const Home = () => {
                 <div className="archived-conv">
                     <img src={Archive} alt="Archive" className='archive-logo' />
                     <h1 className='archive-title'>Archivées</h1>
-                    <h1 className='archive-count'>0</h1>
+                    <h1 className='archive-count'>{countArchived}</h1>
                 </div>
             </div>
             <div className="converstion-active">
