@@ -32,6 +32,9 @@ const Home = () => {
                         <img src={Dots} alt="Dots" className="avatar" />
                     </div>
                 </div>
+                <div className="search-bar-conv">
+                    <input onChange={(e:any)=>handleChange(e)} type="text" placeholder="Rechercher ou commencer une nouvelle conversation" className="search-input-conv" />
+                </div>
             </div>
             <div className="converstion-active">
             </div>

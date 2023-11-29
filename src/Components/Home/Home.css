@@ -61,3 +61,27 @@
     width: 50%;
 }
 
+.search-bar-conv{
+    margin-top: 1rem;
+    width: 100%;
+}
+
+.search-input-conv, input[type="text"]{
+    height: 30px;
+    width: 90%;
+    border-radius: 5px;
+    padding-left: 10px;
+    background-color: #171717;
+    caret-color: #fff;
+    color: #c2c2c2;
+    border: none;
+    outline: none;
+}
+
+input[type="text"]::placeholder{
+    color: #c2c2c2;
+}
+
+.search-input-conv:focus{
+    border-bottom: 2px solid #035e4d;
+}
