@@ -6,6 +6,8 @@ import Add from '../../assets/add.svg'
 import Profile from '../../assets/Profile.svg'
 //@ts-ignore
 import Dots from '../../assets/Dots.svg'
+//@ts-ignore
+import Archive from '../../assets/Archive.svg'
 
 const Home = () => {
     const [search, setSearch] = useState('')
@@ -34,6 +36,11 @@ const Home = () => {
                 </div>
                 <div className="search-bar-conv">
                     <input onChange={(e:any)=>handleChange(e)} type="text" placeholder="Rechercher ou commencer une nouvelle conversation" className="search-input-conv" />
+                </div>
+                <div className="archived-conv">
+                    <img src={Archive} alt="Archive" className='archive-logo' />
+                    <h1 className='archive-title'>Archivées</h1>
+                    <h1 className='archive-count'>0</h1>
                 </div>
             </div>
             <div className="converstion-active">
