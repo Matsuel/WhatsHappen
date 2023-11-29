@@ -144,7 +144,7 @@ const Home = () => {
                     {conversationList.conversations.map((conversation: conversation) => (
                         <div className="conv" key={conversation.id}>
                             <div className="avatar-conv">
-                                <img src={Profile} alt="Avatar" className="avatar" />
+                                <img src={Profile} alt="Avatar" className="conv-logo" />
                             </div>
                             <div className="conv-details">
                                 <div className="conv-top-details">
@@ -154,7 +154,6 @@ const Home = () => {
                                     ) : (
                                         <h1 className="conv-hour-unread">{conversation.lastMessageHour}</h1>
                                     )}
-                                    <h1 className="conv-hour">{conversation.lastMessageHour}</h1>
                                 </div>
                                 <div className="conv-bottom-details">
                                         {conversation.isLastMessageSendRead ? (
@@ -164,18 +163,16 @@ const Home = () => {
                                             </div>
                                         ) : (
                                             <div className="lastMessageRead">
-                                                <h1 className="lastMessage">{conversation.lastMessage}</h1>
+                                                <h1 className="lastMessage message-read">{conversation.lastMessage}</h1>
                                             </div>
                                             
                                         )}
 
                                     {conversation.numberOfUnreadMessages > 0 ? (
-                                        <div className="numberOfUnreadMessages">
-                                            <h1 className="numberOfUnreadMessages">{conversation.numberOfUnreadMessages}</h1>
-                                        </div>
+                                        <h1 className="numberOfUnreadMessages">{conversation.numberOfUnreadMessages}</h1>
                                     ) : (
                                         <div className="">
-                                            
+
                                         </div>
                                     )}
                                 </div>

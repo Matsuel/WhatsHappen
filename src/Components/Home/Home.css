@@ -12,7 +12,8 @@
     flex-direction: column;
     align-items: center;
     /* justify-content: center; */
-    height: 100vh;
+    height: auto;
+    min-height: 100vh;
     width: 30%;
     background-color: #202020;
 }
@@ -118,4 +119,119 @@ input[type="text"]::placeholder{
     font-size: 15px;
     color: #10a187;
     margin-left: 10px;
+}
+
+.conv-list{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 80%;
+    margin-top: 1rem;
+    align-items: center;
+}
+
+.conv{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 5%;
+    margin-top: 1rem;
+}
+
+.avatar-conv{
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    margin-left: 30px;
+}
+
+.conv-details{
+    margin-right: 50px;
+}
+
+.conv-logo{
+    height: 20px;
+    width: 20px;
+    margin-left: 10px;
+    stroke: #fff;
+    fill: #fff;
+}
+
+.conv-top-details{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.conv-name{
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 10px;
+    color: #000;
+    margin-left: 10px;
+}
+
+.conv-hour{
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 10px;
+    color: #000;
+    margin-left: 10px;
+}
+
+.conv-hour-unread{
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 10px;
+    color: #4e7586;
+    margin-left: 10px;
+}
+
+.doubleTick{
+    height: 15px;
+    width: 15px;
+    margin-left: 10px;
+}
+
+.lastMessage{
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 10px;
+    color: #fff;
+    margin-left: 10px;
+}
+
+.lastMessageRead{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.lastMessageUnread{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.conv-bottom-details{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.numberOfUnreadMessages{
+    height: 15px;
+    width: 15px;
+    border-radius: 50%;
+    background-color: #10a187;
+    color: #fff;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 10px;
+    margin-left: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
 }
