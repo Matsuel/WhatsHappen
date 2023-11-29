@@ -2,6 +2,7 @@ import './App.css';
 import WelcomePage from './Components/WelcomePage/WelcomePage.tsx';
 import SingUpPage from './Components/SignUpPage/SignUpPage.tsx';
 import LoginPage from './Components/LoginPage/LoginPage.tsx';
+import Home from './Components/Home/Home.tsx';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 function App() {
@@ -9,7 +10,7 @@ function App() {
     <div className="App">
       <Router>
         <Routes>
-          <Route path="/" element={<WelcomePage />} />
+          <Route path="/" element={<Home />} />
           <Route path="/signup" element={<SingUpPage />} />
           <Route path="/login" element={<LoginPage />} />
         </Routes>
