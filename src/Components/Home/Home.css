@@ -102,6 +102,10 @@ input[type="text"]::placeholder{
     margin-left: 10px;
 }
 
+.archive-logo:hover{
+    cursor: pointer;
+}
+
 .archive-title{
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-size: 15px;
