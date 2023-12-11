@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import './Home.css'
 //@ts-ignore
 import Add from '../../assets/add.svg'
@@ -22,7 +22,7 @@ interface conversation {
     isArchived: boolean,
     isPin: boolean,
     messageType: string,
-    messages:[],
+    messages: [],
     numberOfUnreadMessages: number
 }
 
@@ -43,7 +43,7 @@ const conversationList: conversationList = {
             isArchived: false,
             isPin: false,
             messageType: 'text',
-            messages:[],
+            messages: [],
             numberOfUnreadMessages: 0
         },
         {
@@ -57,7 +57,7 @@ const conversationList: conversationList = {
             isArchived: false,
             isPin: false,
             messageType: 'text',
-            messages:[],
+            messages: [],
             numberOfUnreadMessages: 0
         },
         {
@@ -71,7 +71,7 @@ const conversationList: conversationList = {
             isArchived: false,
             isPin: false,
             messageType: 'text',
-            messages:[],
+            messages: [],
             numberOfUnreadMessages: 5
         },
         {
@@ -85,7 +85,7 @@ const conversationList: conversationList = {
             isArchived: false,
             isPin: false,
             messageType: 'text',
-            messages:[],
+            messages: [],
             numberOfUnreadMessages: 1
         },
         {
@@ -99,7 +99,7 @@ const conversationList: conversationList = {
             isArchived: false,
             isPin: false,
             messageType: 'text',
-            messages:[],
+            messages: [],
             numberOfUnreadMessages: 7
         }
     ]
@@ -133,7 +133,7 @@ const Home = () => {
                     </div>
                 </div>
                 <div className="search-bar-conv">
-                    <input onChange={(e:any)=>handleChange(e)} type="text" placeholder="Rechercher ou commencer une nouvelle conversation" className="search-input-conv" />
+                    <input onChange={(e: any) => handleChange(e)} type="text" placeholder="Rechercher ou commencer une nouvelle conversation" className="search-input-conv" />
                 </div>
                 <div className="archived-conv">
                     <img src={Archive} alt="Archive" className='archive-logo' />
@@ -149,24 +149,24 @@ const Home = () => {
                             <div className="conv-details">
                                 <div className="conv-top-details">
                                     <h1 className="conv-name">{conversation.name}</h1>
-                                    {conversation.isLastMessageReceivedRead  ? (
+                                    {conversation.isLastMessageReceivedRead ? (
                                         <h1 className="conv-hour">{conversation.lastMessageHour}</h1>
                                     ) : (
                                         <h1 className="conv-hour-unread">{conversation.lastMessageHour}</h1>
                                     )}
                                 </div>
                                 <div className="conv-bottom-details">
-                                        {conversation.isLastMessageSendRead ? (
-                                            <div className="lastMessageUnread">
-                                                <img src={DoubleTick} alt="DoubleTick" className="doubleTick" />
-                                                <h1 className="lastMessage">{conversation.lastMessage}</h1>
-                                            </div>
-                                        ) : (
-                                            <div className="lastMessageRead">
-                                                <h1 className="lastMessage message-read">{conversation.lastMessage}</h1>
-                                            </div>
-                                            
-                                        )}
+                                    {conversation.isLastMessageSendRead ? (
+                                        <div className="lastMessageUnread">
+                                            <img src={DoubleTick} alt="DoubleTick" className="doubleTick" />
+                                            <h1 className="lastMessage">{conversation.lastMessage}</h1>
+                                        </div>
+                                    ) : (
+                                        <div className="lastMessageRead">
+                                            <h1 className="lastMessage message-read">{conversation.lastMessage}</h1>
+                                        </div>
+
+                                    )}
 
                                     {conversation.numberOfUnreadMessages > 0 ? (
                                         <h1 className="numberOfUnreadMessages">{conversation.numberOfUnreadMessages}</h1>
