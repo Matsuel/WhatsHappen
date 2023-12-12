@@ -143,6 +143,10 @@ input[type="text"]::placeholder{
     height: 5%;
 }
 
+.conv:hover{
+    cursor: pointer;
+}
+
 .avatar-conv{
     height: 20px;
     width: 20px;
