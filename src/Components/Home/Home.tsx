@@ -142,7 +142,7 @@ const Home = () => {
                 </div>
                 <div className="conv-list">
                     {conversationList.conversations.map((conversation: conversation) => (
-                        <div className="conv" key={conversation.id}>
+                        <><div className="conv" key={conversation.id}>
                             <div className="avatar-conv">
                                 <img src={Profile} alt="Avatar" className="conv-logo" />
                             </div>
@@ -178,6 +178,13 @@ const Home = () => {
                                 </div>
                             </div>
                         </div>
+                            <>
+                                {conversation.id< conversationList.conversations.length ? (
+                                    <div className="conv-separator"/>
+                                ) : (
+                                    ""
+                                    )}
+                            </></>
                     ))}
                 </div>
             </div>
