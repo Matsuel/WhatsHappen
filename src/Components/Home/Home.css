@@ -1,10 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans&display=swap');
+
 .home-wrapper{
     height: 100%;
     width: 100%;
     display: flex;
     flex-direction: row;
     align-items: center;
-    background-color: #161f24;
+    /* background-color: #161f24; */
+    background-color: #F7F7FC;
     background-image: url("../../assets/chat-bg.png");
     background-position: center;
 }
@@ -17,7 +20,8 @@
     height: auto;
     min-height: 100vh;
     width: 20%;
-    background-color: #111b22;
+    background-color: #F5FAFC;
+    border-right: 1px dashed #035e4d;
 }
 
 .converstion-active{
@@ -28,8 +32,6 @@
     height: 100vh;
     width: 80%;
     /* background-color: #282828; */
-    
-
 }
 
 .conv-bar{
@@ -39,7 +41,7 @@
     justify-content: space-between;
     height: 5%;
     width: 100%;
-    background-color: #1f2c32;
+    background-color: #F5FAFC;
     color : #fff;
 }
 
@@ -51,11 +53,44 @@
     margin-right: 10px;
 }
 
-.title-conv-bar{
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    font-size: 20px;
+.type-conv{
+    width: 90%;
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    margin-top: 2rem;
+}
+
+.type-conv-title{
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 14px;
+    background-color: #fff;
+    color: #5A6A9D;
+    width: 33%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.type-conv-title:hover{
+    cursor: pointer;
+}
+
+.type-conv-title1{
+    border-bottom-left-radius: 15px;
+    border-top-left-radius: 15px;
+}
+
+.type-conv-title3{
+    border-bottom-right-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
+.type-conv-active{
+    background-color: #128C7E;
     color: #fff;
-    margin-left: 10px;
 }
 
 .avatar-title-wrapper-conv{
@@ -64,27 +99,36 @@
     align-items: center;
     justify-content: space-around;
     width: 50%;
+    height: 100%;
+    margin-top: 1rem;
 }
 
 .search-bar-conv{
     margin-top: 1rem;
     width: 100%;
+    height: 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .search-input-conv, input[type="text"]{
-    height: 30px;
-    width: 90%;
-    border-radius: 5px;
+    height: 40px;
+    width: 85%;
+    border-radius: 24px;
     padding-left: 10px;
-    background-color: #1f2c32;
-    caret-color: #fff;
-    color: #c2c2c2;
+    background-color: #fff;
+    caret-color: #9393C1;
+    color: #9393C1;
     border: none;
     outline: none;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 15px;
+    text-align: center;
 }
 
 input[type="text"]::placeholder{
-    color: #c2c2c2;
+    color: #9393C1;
 }
 
 .search-input-conv:focus{
@@ -98,7 +142,7 @@ input[type="text"]::placeholder{
     height: 5%;
     align-items: center;
     justify-content: space-around;
-    margin-top: 1rem;
+    margin-top: 2rem;
 }
 
 .archive-logo{
@@ -112,14 +156,14 @@ input[type="text"]::placeholder{
 }
 
 .archive-title{
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: 'Plus Jakarta Sans', sans-serif;
     font-size: 15px;
-    color: #fff;
+    color: #5A6A9D;
     margin-left: 10px;
 }
 
 .archive-count{
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: 'Plus Jakarta Sans', sans-serif;
     font-size: 15px;
     color: #10a187;
     margin-left: 10px;
@@ -134,23 +178,32 @@ input[type="text"]::placeholder{
     align-items: center;
 }
 
+.conv-wrapper{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+
 .conv{
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    height: 5%;
+    height: 90%;
 }
 
 .conv:hover{
     cursor: pointer;
+    background-color: #D1E4E8;
+    border-radius: 8px;
 }
 
 .avatar-conv{
-    height: 20px;
-    width: 20px;
-    border-radius: 50%;
+    height: 60px;
+    width: 60px;
+    border-radius: 8px;
     margin-left: 30px;
 }
 
@@ -160,13 +213,11 @@ input[type="text"]::placeholder{
 }
 
 .conv-logo{
-    height: 20px;
-    width: 20px;
+    height: 60px;
+    width: 60px;
     margin-left: 10px;
     stroke: #fff;
     fill: #fff;
-    border: 1px solid #fff;
-    border-radius: 50%;
 }
 
 .conv-top-details{
@@ -178,22 +229,22 @@ input[type="text"]::placeholder{
 }
 
 .conv-name{
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: 'Plus Jakarta Sans', sans-serif;
     font-size: 15px;
-    color: #fff;
+    color: #09132C;
     margin-left: 60px;
 }
 
 .conv-hour{
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    font-size: 15px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 10px;
     color: #838383;
     margin-left: 10px;
     margin-right: 40px;
 }
 
 .conv-hour-unread{
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: 'Plus Jakarta Sans', sans-serif;
     font-size: 10px;
     color: #4e7586;
     margin-left: 10px;
@@ -206,9 +257,9 @@ input[type="text"]::placeholder{
 }
 
 .lastMessage{
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: 'Plus Jakarta Sans', sans-serif;
     font-size: 13px;
-    color: #838383;
+    color: #09132C;
     margin-left: 10px;
 }
 
@@ -238,7 +289,7 @@ input[type="text"]::placeholder{
     border-radius: 50%;
     background-color: #10a187;
     color: #fff;
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: 'Plus Jakarta Sans', sans-serif;
     font-size: 10px;
     margin-left: 10px;
     display: flex;
@@ -251,4 +302,13 @@ input[type="text"]::placeholder{
     width: 100%;
     height: 1px;
     background-color: #1f2c32;
+}
+
+.no-conv{
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 15px;
+    color: #fff;
+    margin-top: 10px;
+    width: 90%;
+    text-align: center;
 }

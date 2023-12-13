@@ -9,7 +9,13 @@ import Dots from '../../assets/Dots.svg'
 //@ts-ignore
 import Archive from '../../assets/Archive.svg'
 //@ts-ignore
-import DoubleTick from '../../assets/DoubleTick.svg'
+import Read from '../../assets/Read.svg'
+//@ts-ignore
+import Circle from '../../assets/Circle.svg'
+//@ts-ignore
+import Expand from '../../assets/Expand.svg'
+//@ts-ignore
+import Conv1 from '../../assets/conv1.svg'
 
 interface conversation {
     id: number,
@@ -115,6 +121,16 @@ const Home = () => {
 
     const [countArchived, setCountArchived] = useState(0)
 
+    const [placeholderText, setPlaceholderText] = useState('Rechercher ou commencer une nouvelle conversation');
+
+    const handlePlaceholder = () => {
+        if (placeholderText === 'Rechercher ou commencer une nouvelle conversation') {
+            setPlaceholderText('')
+        } else {
+            setPlaceholderText('Rechercher ou commencer une nouvelle conversation')
+        }
+    }
+
     return (
         <div className='home-wrapper'>
             <div className="conversation">
@@ -123,17 +139,22 @@ const Home = () => {
                         <div className="avatar-conv-bar">
                             <img src={Profile} alt="Avatar" className="avatar" />
                         </div>
-                        <h1 className="title-conv-bar">
-                            Conversations
-                        </h1>
+                        <div className="avatar-conv-bar">
+                            <img src={Circle} alt="Circle" className='avatar' />
+                        </div>
                     </div>
                     <div className="avatar-dots-wrapper-conv">
-                        <img src={Add} alt="Add" className="avatar" />
-                        <img src={Dots} alt="Dots" className="avatar" />
+                        <img src={Expand} alt="Add" className="avatar" />
                     </div>
                 </div>
                 <div className="search-bar-conv">
-                    <input onChange={(e: any) => handleChange(e)} type="text" placeholder="Rechercher ou commencer une nouvelle conversation" className="search-input-conv" />
+                    <input onChange={(e: any) => handleChange(e)} type="text" placeholder={placeholderText} onClick={handlePlaceholder} onBlur={handlePlaceholder} className="search-input-conv" />
+                </div>
+                <div className="type-conv">
+                    <h1 className="type-conv-title type-conv-title1 type-conv-active">Favorites</h1>
+                    <h1 className="type-conv-title">Amis</h1>
+                    <h1 className="type-conv-title type-conv-title3">Groupes</h1>
+
                 </div>
                 <div className="archived-conv">
                     <img src={Archive} alt="Archive" className='archive-logo' />
@@ -141,51 +162,61 @@ const Home = () => {
                     <h1 className='archive-count'>{countArchived}</h1>
                 </div>
                 <div className="conv-list">
-                    {conversationList.conversations.map((conversation: conversation) => (
-                        <><div className="conv" key={conversation.id}>
-                            <div className="avatar-conv">
-                                <img src={Profile} alt="Avatar" className="conv-logo" />
-                            </div>
-                            <div className="conv-details">
-                                <div className="conv-top-details">
-                                    <h1 className="conv-name">{conversation.name}</h1>
-                                    {conversation.isLastMessageReceivedRead ? (
-                                        <h1 className="conv-hour">{conversation.lastMessageHour}</h1>
-                                    ) : (
-                                        <h1 className="conv-hour-unread">{conversation.lastMessageHour}</h1>
-                                    )}
-                                </div>
-                                <div className="conv-bottom-details">
-                                    {conversation.isLastMessageSendRead ? (
-                                        <div className="lastMessageUnread">
-                                            <img src={DoubleTick} alt="DoubleTick" className="doubleTick" />
-                                            <h1 className="lastMessage">{conversation.lastMessage}</h1>
-                                        </div>
-                                    ) : (
-                                        <div className="lastMessageRead">
-                                            <h1 className="lastMessage message-read">{conversation.lastMessage}</h1>
-                                        </div>
-
-                                    )}
-
-                                    {conversation.numberOfUnreadMessages > 0 ? (
-                                        <h1 className="numberOfUnreadMessages">{conversation.numberOfUnreadMessages}</h1>
-                                    ) : (
-                                        <div className="">
-
-                                        </div>
-                                    )}
-                                </div>
-                            </div>
+                    {conversationList.conversations.length === 0 ? (
+                        <div className="no-conv">
+                            Aucune converstation pour le moment appuyer sur le bouton + pour en créer une
                         </div>
-                            <>
-                                {conversation.id< conversationList.conversations.length ? (
-                                    <div className="conv-separator"/>
-                                ) : (
-                                    ""
+                    ) : (
+                        conversationList.conversations.map((conversation: conversation) => (
+                            <><div className="conv-wrapper">
+                                <div className="conv" key={conversation.id}>
+                                    <div className="avatar-conv">
+                                        <img src={Conv1} alt="Avatar" className="conv-logo" />
+                                    </div>
+                                    <div className="conv-details">
+                                        <audio src="" autoPlay></audio>
+                                        <div className="conv-top-details">
+                                            <h1 className="conv-name">{conversation.name}</h1>
+                                            {conversation.isLastMessageReceivedRead ? (
+                                                <h1 className="conv-hour">{conversation.lastMessageHour}</h1>
+                                            ) : (
+                                                <h1 className="conv-hour-unread">{conversation.lastMessageHour}</h1>
+                                            )}
+                                        </div>
+                                        <div className="conv-bottom-details">
+                                            {conversation.isLastMessageSendRead ? (
+                                                <div className="lastMessageUnread">
+                                                    <img src={Read} alt="DoubleTick" className="doubleTick" />
+                                                    <h1 className="lastMessage">{conversation.lastMessage}</h1>
+                                                </div>
+                                            ) : (
+                                                <div className="lastMessageRead">
+                                                    <h1 className="lastMessage message-read">{conversation.lastMessage}</h1>
+                                                </div>
+
+                                            )}
+
+                                            {conversation.numberOfUnreadMessages > 0 ? (
+                                                <h1 className="numberOfUnreadMessages">{conversation.numberOfUnreadMessages}</h1>
+                                            ) : (
+                                                <div className="">
+
+                                                </div>
+                                            )}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                                {/* <>
+                                    {conversation.id < conversationList.conversations.length ? (
+                                        <div className="conv-separator" />
+                                    ) : (
+                                        ""
                                     )}
-                            </></>
-                    ))}
+                                </> */}
+                                </>
+                        ))
+                    )}
                 </div>
             </div>
             <div className="converstion-active">
