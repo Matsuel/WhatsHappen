@@ -310,8 +310,8 @@ const Home = () => {
                                         <h1 className="alert-privacy-title">Messages et appels sont protégés par le chiffrement de bout en bout. Aucun tiers, pas même WhatsApp, ne peut lire ou écouter vos messages ou appels.</h1>
                                     </div>
                                     {conversationList.conversations[convActive - 1].messages.map((message: message) => (
-                                        <div className={`message ${message.sender === 'me' ? "message-me" : "message-him"}`}>
-                                            <div className="message-content">
+                                        <div className="message">
+                                            <div className={`${message.sender === 'me' ? "message-me" : "message-him"}`}>
                                                 <h1 className="message-content-text">{message.message}</h1>
                                                 <h1 className="message-content-hour">{message.hour}</h1>
                                             </div>
