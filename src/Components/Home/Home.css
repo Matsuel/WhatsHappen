@@ -208,7 +208,6 @@ input[type="text"]::placeholder{
 }
 
 .conv-details{
-    /* margin-right: 50px; */
     width: 100%;
 }
 
@@ -232,7 +231,7 @@ input[type="text"]::placeholder{
     font-family: 'Plus Jakarta Sans', sans-serif;
     font-size: 16px;
     color: #09132C;
-    margin-left: 60px;
+    margin-left: 25px;
 }
 
 .conv-hour{
@@ -253,7 +252,7 @@ input[type="text"]::placeholder{
 .doubleTick{
     height: 15px;
     width: 15px;
-    margin-left: 10px;
+    margin-left: 0px;
 }
 
 .lastMessage{
@@ -284,11 +283,11 @@ input[type="text"]::placeholder{
 }
 
 .numberOfUnreadMessages{
-    height: 15px;
-    width: 15px;
+    height: 20px;
+    width: 20px;
     border-radius: 50%;
-    background-color: #10a187;
-    color: #fff;
+    background-color: #DFF6F4;
+    color: #128C7E;
     font-family: 'Plus Jakarta Sans', sans-serif;
     font-size: 10px;
     margin-left: 10px;
@@ -296,12 +295,6 @@ input[type="text"]::placeholder{
     flex-direction: row;
     align-items: center;
     justify-content: center;
-}
-
-.conv-separator{
-    width: 100%;
-    height: 1px;
-    background-color: #1f2c32;
 }
 
 .no-conv{

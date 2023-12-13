@@ -1,11 +1,7 @@
 import React, { useState } from 'react'
 import './Home.css'
 //@ts-ignore
-import Add from '../../assets/add.svg'
-//@ts-ignore
 import Profile from '../../assets/Profile.svg'
-//@ts-ignore
-import Dots from '../../assets/Dots.svg'
 //@ts-ignore
 import Archive from '../../assets/Archive.svg'
 //@ts-ignore
@@ -174,7 +170,6 @@ const Home = () => {
                                         <img src={Conv1} alt="Avatar" className="conv-logo" />
                                     </div>
                                     <div className="conv-details">
-                                        <audio src="" autoPlay></audio>
                                         <div className="conv-top-details">
                                             <h1 className="conv-name">{conversation.name}</h1>
                                             {conversation.isLastMessageReceivedRead ? (
