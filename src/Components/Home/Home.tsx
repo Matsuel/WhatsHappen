@@ -200,7 +200,13 @@ const Home = () => {
                                             )}
 
                                             {conversation.numberOfUnreadMessages > 0 ? (
-                                                <h1 className="numberOfUnreadMessages">{conversation.numberOfUnreadMessages}</h1>
+                                                <h1 className="numberOfUnreadMessages">
+                                                    {conversation.numberOfUnreadMessages >5 ?(
+                                                        "5+"
+                                                    ):(
+                                                        conversation.numberOfUnreadMessages
+                                                    )}
+                                                </h1>
                                             ) : (
                                                 <div className="">
 
