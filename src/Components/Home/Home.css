@@ -470,9 +470,7 @@ input[type="text"]::placeholder{
     align-items: center;
     justify-content: center;
     width: 20%;
-    min-width: 20%;
-    max-width: 20%;
-    height: 100%;
+    height: auto;
 }
 
 .color-message-me{

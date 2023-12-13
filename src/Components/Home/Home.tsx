@@ -312,7 +312,7 @@ const Home = () => {
                                     <div className="message-area">
                                         {conversationList.conversations[convActive - 1].messages.map((message: message) => (
                                             <div className={`${message.sender === 'me' ? "message-me" : "message-him"}`}>
-                                                <div className={`"message-content" ${message.sender === 'me' ? "color-message-me" : "color-message-him"}`}>
+                                                <div className={`message-content ${message.sender === 'me' ? "color-message-me" : "color-message-him"}`}>
                                                     <h1 className="message-content-text">{message.message}</h1>
                                                     <h1 className="message-content-hour">{message.hour}</h1>
                                                 </div>
