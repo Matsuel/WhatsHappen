@@ -12,6 +12,8 @@ import Circle from '../../assets/Circle.svg'
 import Expand from '../../assets/Expand.svg'
 //@ts-ignore
 import Conv1 from '../../assets/conv1.svg'
+//@ts-ignore
+import PhoneConv from '../../assets/PhoneConv.svg'
 
 interface conversation {
     id: number,
@@ -112,7 +114,6 @@ const Home = () => {
 
     const handleChange = (e: any) => {
         setSearch(e.target.value)
-        console.log(search)
     }
 
     const [countArchived, setCountArchived] = useState(0)
@@ -154,9 +155,9 @@ const Home = () => {
                     <input onChange={(e: any) => handleChange(e)} type="text" placeholder={placeholderText} onClick={handlePlaceholder} onBlur={handlePlaceholder} className="search-input-conv" />
                 </div>
                 <div className="type-conv">
-                    <h1 key={0} className={`type-conv-title type-conv-title1 ${tabActive === 0 ? "type-conv-active":""}`} onClick={()=>handleTabActive(0)} >Favorites</h1>
-                    <h1 key={1} className={`type-conv-title ${tabActive === 1 ? "type-conv-active":""}`} onClick={()=>handleTabActive(1)}>Amis</h1>
-                    <h1 key={2} className={`type-conv-title type-conv-title3 ${tabActive === 2 ? "type-conv-active":""}`} onClick={()=>handleTabActive(2)}>Groupes</h1>
+                    <h1 key={0} className={`type-conv-title type-conv-title1 ${tabActive === 0 ? "type-conv-active" : ""}`} onClick={() => handleTabActive(0)} >Favorites</h1>
+                    <h1 key={1} className={`type-conv-title ${tabActive === 1 ? "type-conv-active" : ""}`} onClick={() => handleTabActive(1)}>Amis</h1>
+                    <h1 key={2} className={`type-conv-title type-conv-title3 ${tabActive === 2 ? "type-conv-active" : ""}`} onClick={() => handleTabActive(2)}>Groupes</h1>
 
                 </div>
                 <div className="archived-conv">
@@ -209,19 +210,18 @@ const Home = () => {
                                     </div>
                                 </div>
                             </div>
-                                {/* <>
-                                    {conversation.id < conversationList.conversations.length ? (
-                                        <div className="conv-separator" />
-                                    ) : (
-                                        ""
-                                    )}
-                                </> */}
-                                </>
+                            </>
                         ))
                     )}
                 </div>
             </div>
             <div className="converstion-active">
+                <div className="no-conv-active">
+                    <img src={PhoneConv} alt="" />
+                    <h1 className="no-conv-title-active">Gardez votré téléphone connecté</h1>
+                    <p className="no-conv-subtitle-active">Whatsapp se connecte à votre téléphone pour synchroniser les messages. Pour réduire l’utilisation des données. connectez votre téléphone au Wi-Fi.</p>
+
+                </div>
             </div>
         </div>
     )
