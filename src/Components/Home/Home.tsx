@@ -218,7 +218,7 @@ const Home = () => {
             <div className="converstion-active">
                 <div className="no-conv-active">
                     <img src={PhoneConv} alt="" />
-                    <h1 className="no-conv-title-active">Gardez votré téléphone connecté</h1>
+                    <h1 className="no-conv-title-active">Gardez votre téléphone connecté</h1>
                     <p className="no-conv-subtitle-active">Whatsapp se connecte à votre téléphone pour synchroniser les messages. Pour réduire l’utilisation des données. connectez votre téléphone au Wi-Fi.</p>
 
                 </div>
