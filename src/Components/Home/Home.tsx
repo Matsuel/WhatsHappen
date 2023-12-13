@@ -20,6 +20,10 @@ import Phone from '../../assets/Phone.svg'
 import Video from '../../assets/Video.svg'
 //@ts-ignore
 import Search from '../../assets/Search.svg'
+//@ts-ignore
+import Online from '../../assets/Online.svg'
+//@ts-ignore
+import Privacy from '../../assets/Privacy.svg'
 
 interface message {
     message: string,
@@ -212,7 +216,7 @@ const Home = () => {
                     ) : (
                         conversationList.conversations.map((conversation: conversation) => (
                             <><div className="conv-wrapper">
-                                <div className="conv" key={conversation.id} onClick={() => handleConvActive(conversation.id)}>
+                                <div className={`conv ${conversation.id=== convActive? "conv-active":""}`} key={conversation.id} onClick={() => handleConvActive(conversation.id)}>
                                     <div className="avatar-conv">
                                         <img src={Conv1} alt="Avatar" className="conv-logo" />
                                     </div>
@@ -273,7 +277,11 @@ const Home = () => {
                     <div className="conversation-with-datas">
                         <div className="conversation-bar">
                             <div className="conversation-infos">
-
+                                <img src={Conv1} alt="conv1" className='conv-logo-bar' />
+                                <div className="conversation-name-wrap">
+                                    <h1 className="conversation-name">{conversationList.conversations[convActive-1].name}</h1>
+                                    <h1 className="status"><img src={Online} alt="Online"/> En ligne</h1>
+                                </div>
                             </div>
                             <div className="conversation-actions">
                                 <button className='conversation-bar-button'>
@@ -288,16 +296,36 @@ const Home = () => {
                                 <button className='conversation-bar-button'>
                                     <img src={Expand} alt="Expand" className='conversation-bar-icon' />
                                 </button>
-
-
                             </div>
                         </div>
+                        <div className="conversation-messages">
+                            {conversationList.conversations[convActive-1].messages.length === 0 ? (
+                                <div className="no-messages">
+                                    <h1 className="no-messages-title">Aucun message pour le moment</h1>
+                                </div>
+                            ) : (
+                                <>
+                                <div className="alert-privacy">
+                                    <img src={Privacy} alt="Privacy" className="alert-privacy-logo"/>
+                                    <h1 className="alert-privacy-title">Messages et appels sont protégés par le chiffrement de bout en bout. Aucun tiers, pas même WhatsApp, ne peut lire ou écouter vos messages ou appels.</h1>
+                                </div>
+                                {conversationList.conversations[convActive-1].messages.map((message: message) => (
+                                    <div className={`message ${message.sender === 'me' ? "message-me" : "message-him"}`}>
+                                        <div className="message-content">
+                                            <div className="message-content-text">
+                                                <h1 className="message-content-text">{message.message}</h1>
+                                            </div>
+                                            <div className="message-content-hour">
+                                                <h1 className="message-content-hour">{message.hour}</h1>
+                                            </div>
+                                        </div>
+                                    </div>
+                                ))}
+                                </>
+                            )}
+                        </div>
                     </div>
-
-                )
-
-                }
-
+                )}
             </div>
         </div>
     )
