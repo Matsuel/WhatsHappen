@@ -14,6 +14,20 @@ import Expand from '../../assets/Expand.svg'
 import Conv1 from '../../assets/conv1.svg'
 //@ts-ignore
 import PhoneConv from '../../assets/PhoneConv.svg'
+//@ts-ignore
+import Phone from '../../assets/Phone.svg'
+//@ts-ignore
+import Video from '../../assets/Video.svg'
+//@ts-ignore
+import Search from '../../assets/Search.svg'
+
+interface message {
+    message: string,
+    hour: string,
+    sender: string,
+    isRead: boolean,
+    type: string
+}
 
 interface conversation {
     id: number,
@@ -26,13 +40,32 @@ interface conversation {
     isArchived: boolean,
     isPin: boolean,
     messageType: string,
-    messages: [],
+    messages: message[],
     numberOfUnreadMessages: number
 }
 
 interface conversationList {
     conversations: conversation[]
 }
+
+const messages: message[] = [
+    {
+        message: 'Salut',
+        hour: '12:00',
+        sender: 'me',
+        isRead: true,
+        type: 'text'
+    },
+    {
+        message: "Salut ça va ?",
+        hour: '12:00',
+        sender: 'him',
+        isRead: true,
+        type: 'text'
+    }
+
+]
+
 
 const conversationList: conversationList = {
     conversations: [
@@ -47,7 +80,7 @@ const conversationList: conversationList = {
             isArchived: false,
             isPin: false,
             messageType: 'text',
-            messages: [],
+            messages: messages,
             numberOfUnreadMessages: 0
         },
         {
@@ -118,13 +151,13 @@ const Home = () => {
 
     const [countArchived, setCountArchived] = useState(0)
 
-    const [placeholderText, setPlaceholderText] = useState('Rechercher ou commencer une nouvelle conversation');
+    const [placeholderText, setPlaceholderText] = useState('Rechercher une conversation');
 
     const handlePlaceholder = () => {
-        if (placeholderText === 'Rechercher ou commencer une nouvelle conversation') {
+        if (placeholderText !== '') {
             setPlaceholderText('')
         } else {
-            setPlaceholderText('Rechercher ou commencer une nouvelle conversation')
+            setPlaceholderText('Rechercher une conversation')
         }
     }
 
@@ -132,6 +165,12 @@ const Home = () => {
 
     const handleTabActive = (tab: number) => {
         setTabActive(tab)
+    }
+
+    const [convActive, setConvActive] = useState(0);
+
+    const handleConvActive = (conv: number) => {
+        setConvActive(conv)
     }
 
 
@@ -173,7 +212,7 @@ const Home = () => {
                     ) : (
                         conversationList.conversations.map((conversation: conversation) => (
                             <><div className="conv-wrapper">
-                                <div className="conv" key={conversation.id}>
+                                <div className="conv" key={conversation.id} onClick={() => handleConvActive(conversation.id)}>
                                     <div className="avatar-conv">
                                         <img src={Conv1} alt="Avatar" className="conv-logo" />
                                     </div>
@@ -201,9 +240,9 @@ const Home = () => {
 
                                             {conversation.numberOfUnreadMessages > 0 ? (
                                                 <h1 className="numberOfUnreadMessages">
-                                                    {conversation.numberOfUnreadMessages >5 ?(
+                                                    {conversation.numberOfUnreadMessages > 5 ? (
                                                         "5+"
-                                                    ):(
+                                                    ) : (
                                                         conversation.numberOfUnreadMessages
                                                     )}
                                                 </h1>
@@ -222,12 +261,43 @@ const Home = () => {
                 </div>
             </div>
             <div className="converstion-active">
-                <div className="no-conv-active">
-                    <img src={PhoneConv} alt="" />
-                    <h1 className="no-conv-title-active">Gardez votre téléphone connecté</h1>
-                    <p className="no-conv-subtitle-active">Whatsapp se connecte à votre téléphone pour synchroniser les messages. Pour réduire l’utilisation des données. connectez votre téléphone au Wi-Fi.</p>
+                {convActive === 0 ? (
+                    <div className="conversation-default">
+                        <div className="no-conv-active">
+                            <img src={PhoneConv} alt="" />
+                            <h1 className="no-conv-title-active">Gardez votre téléphone connecté</h1>
+                            <p className="no-conv-subtitle-active">Whatsapp se connecte à votre téléphone pour synchroniser les messages. Pour réduire l’utilisation des données. connectez votre téléphone au Wi-Fi.</p>
+                        </div>
+                    </div>
+                ) : (
+                    <div className="conversation-with-datas">
+                        <div className="conversation-bar">
+                            <div className="conversation-infos">
 
-                </div>
+                            </div>
+                            <div className="conversation-actions">
+                                <button className='conversation-bar-button'>
+                                    <img src={Phone} alt="Phone" className='conversation-bar-icon' />
+                                </button>
+                                <button className='conversation-bar-button'>
+                                    <img src={Video} alt="Video" className='conversation-bar-icon' />
+                                </button>
+                                <button className='conversation-bar-button'>
+                                    <img src={Search} alt="Search" className='conversation-bar-icon' />
+                                </button>
+                                <button className='conversation-bar-button'>
+                                    <img src={Expand} alt="Expand" className='conversation-bar-icon' />
+                                </button>
+
+
+                            </div>
+                        </div>
+                    </div>
+
+                )
+
+                }
+
             </div>
         </div>
     )
