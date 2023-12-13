@@ -127,6 +127,13 @@ const Home = () => {
         }
     }
 
+    const [tabActive, setTabActive] = useState(0);
+
+    const handleTabActive = (tab: number) => {
+        setTabActive(tab)
+    }
+
+
     return (
         <div className='home-wrapper'>
             <div className="conversation">
@@ -147,9 +154,9 @@ const Home = () => {
                     <input onChange={(e: any) => handleChange(e)} type="text" placeholder={placeholderText} onClick={handlePlaceholder} onBlur={handlePlaceholder} className="search-input-conv" />
                 </div>
                 <div className="type-conv">
-                    <h1 className="type-conv-title type-conv-title1 type-conv-active">Favorites</h1>
-                    <h1 className="type-conv-title">Amis</h1>
-                    <h1 className="type-conv-title type-conv-title3">Groupes</h1>
+                    <h1 key={0} className={`type-conv-title type-conv-title1 ${tabActive === 0 ? "type-conv-active":""}`} onClick={()=>handleTabActive(0)} >Favorites</h1>
+                    <h1 key={1} className={`type-conv-title ${tabActive === 1 ? "type-conv-active":""}`} onClick={()=>handleTabActive(1)}>Amis</h1>
+                    <h1 key={2} className={`type-conv-title type-conv-title3 ${tabActive === 2 ? "type-conv-active":""}`} onClick={()=>handleTabActive(2)}>Groupes</h1>
 
                 </div>
                 <div className="archived-conv">
