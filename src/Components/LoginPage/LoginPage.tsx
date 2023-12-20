@@ -1,12 +1,15 @@
 import React,{useState} from 'react'
 import './LoginPage.css'
+// @ts-ignore
 import WhatsApp from '../../assets/whatsapp.svg'
 import axios from 'axios'
+import { Navigate } from 'react-router-dom'
 
 const LoginPage = () => {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [logged , setLogged] = useState(false);
 
 
   const handleSubmit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
@@ -15,7 +18,7 @@ const LoginPage = () => {
     .then(res => {
       if(res.data.validation){
         //REmplacer alert par une redirection
-        alert('Vous êtes connecté')
+        setLogged(true);
       }else{
         //REmplacer alert par une redirection
         alert('Vous n\'êtes pas connecté')
@@ -25,6 +28,7 @@ const LoginPage = () => {
 
   return (
     <div className='LoginPage'>
+      {logged && <Navigate to='/' />}
       <div className="login">
         <form className='formClass'>
         <h1 className='title'> <img src={WhatsApp} width={40} className='logo'/>  Connexion</h1>

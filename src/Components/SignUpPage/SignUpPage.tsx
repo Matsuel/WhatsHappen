@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import './SignUpPage.css'
+// @ts-ignore
 import WhatsApp from '../../assets/whatsapp.svg'
 import axios from 'axios'
 import bcrypt from 'bcryptjs'
