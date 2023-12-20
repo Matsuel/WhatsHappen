@@ -475,10 +475,16 @@ input[type="text"]::placeholder{
 
 .color-message-me{
     background-color: #D7F8F4;
+    border-top-right-radius: 15px;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
 }
 
 .color-message-him{
     background-color: #fff;
+    border-top-right-radius: 15px;
+    border-top-left-radius: 15px;
+    border-bottom-right-radius: 15px;
 }
 
 .message-content-text{
@@ -490,11 +496,26 @@ input[type="text"]::placeholder{
     text-align: center;
 }
 
+.bottom-message{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 25%;
+    height: 10%;
+    place-self: flex-end;
+}
+
 .message-content-hour{
     font-family: 'Plus Jakarta Sans', sans-serif;
     font-size: 10px;
     color: #838383;
     margin-top: 10px;
     width: 90%;
-    text-align: center;
+    text-align: end;
+}
+
+.message-content-read{
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    color: #838383;
 }

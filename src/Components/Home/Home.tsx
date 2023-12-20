@@ -64,7 +64,7 @@ const messages: message[] = [
         message: "Salut ça va ?",
         hour: '12:00',
         sender: 'him',
-        isRead: true,
+        isRead: false,
         type: 'text'
     }
 
@@ -314,7 +314,15 @@ const Home = () => {
                                             <div className={`${message.sender === 'me' ? "message-me" : "message-him"}`}>
                                                 <div className={`message-content ${message.sender === 'me' ? "color-message-me" : "color-message-him"}`}>
                                                     <h1 className="message-content-text">{message.message}</h1>
-                                                    <h1 className="message-content-hour">{message.hour}</h1>
+                                                    <div className="bottom-message">
+                                                        {message.isRead ? (
+                                                            <img src={Read} alt="Read" className="message-content-read" />
+                                                        ) : (
+                                                            ""
+                                                        )
+                                                        }
+                                                        <h1 className="message-content-hour">{message.hour}</h1>
+                                                    </div>
                                                 </div>
                                             </div>
                                         ))}
