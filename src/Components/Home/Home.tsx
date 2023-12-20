@@ -1,25 +1,9 @@
 import React, { useState } from 'react'
 import './Home.css'
 //@ts-ignore
-import Profile from '../../assets/Profile.svg'
-//@ts-ignore
-import Archive from '../../assets/Archive.svg'
-//@ts-ignore
-import Read from '../../assets/Read.svg'
-//@ts-ignore
-import Circle from '../../assets/Circle.svg'
-//@ts-ignore
-import Expand from '../../assets/Expand.svg'
-//@ts-ignore
 import Conv1 from '../../assets/conv1.svg'
 //@ts-ignore
 import PhoneConv from '../../assets/PhoneConv.svg'
-//@ts-ignore
-import Phone from '../../assets/Phone.svg'
-//@ts-ignore
-import Video from '../../assets/Video.svg'
-//@ts-ignore
-import Search from '../../assets/Search.svg'
 //@ts-ignore
 import Online from '../../assets/Online.svg'
 //@ts-ignore
