@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const cors  = require('cors');
-const sqlite3 = require('sqlite3').verbose();
+const mongoose = require('mongoose');
 
 app.use(cors());
 app.use((req,res,next)=>{
@@ -10,50 +10,42 @@ app.use((req,res,next)=>{
 })
 app.use(express.json({limit:'10mb'}));
 
-const db = new sqlite3.Database('../src/database/WhatsApp.db', (err)=>{
-    if(err){
-        console.log(err.message);
-    }
-    console.log('Connected to the database');
-})
+mongoose.connect('mongodb://localhost:27017/Whatsapp', {useNewUrlParser: true, useUnifiedTopology: true})
+.then(()=>console.log('Connected to the database'))
+.catch((err)=>console.log(err));
 
-app.post('/login', (req,res)=>{
+const User = mongoose.model('User', new mongoose.Schema({
+    username: String,
+    mail: String,
+    password: String
+}));
+
+app.post('/login', async (req,res)=>{
     const {email, password} = req.body;
 
     console.log(email);
 
-    db.all(`SELECT * FROM Users WHERE username= '${email}' OR mail= '${email}' AND password = '${password}'`, (err,rows)=>{
-        if (err){
-            console.log(err.message);
-        }
-        if(rows.length>0){
-            res.send({validation:true})
-        }else{
-            res.send({validation:false})
-        }
-    })
+    const user = await User.findOne({$or: [{username: email}, {mail: email}]});
+    if(user){
+        console.log(user);
+        res.send({validation:true})
+    }else{
+        console.log(user);
+        res.send({validation:false})
+    }
 })
 
-app.post('/register', (req,res)=>{
+app.post('/register', async (req,res)=>{
     const {pseudo,email, hashedPassword} = req.body;
 
-    db.all(`SELECT * FROM Users WHERE username= '${pseudo}' OR mail= '${email}'`, (err,rows)=>{
-        if (err){
-            console.log(err.message);
-        }
-        if(rows.length>0){
-            res.send({created:false})
-        }else{
-            db.run(`INSERT INTO Users(username,mail,password) VALUES('${pseudo}','${email}','${hashedPassword}')`, (err)=>{
-                if(err){
-                    console.log(err.message);
-                }
-                res.send({created:true});
-            })
-        }
-    })
-
-    
+    const user = await User.findOne({$or: [{username: pseudo}, {mail: email}]});
+    if(user){
+        res.send({created:false})
+    }else{
+        const newUser = new User({username: pseudo, mail: email, password: hashedPassword});
+        await newUser.save();
+        res.send({created:true});
+    }
 })
 
 app.listen(3001,()=>{
