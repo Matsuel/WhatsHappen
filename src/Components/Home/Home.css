@@ -452,7 +452,8 @@ input[type="text"]::placeholder{
     align-items: center;
     justify-content: flex-end;
     width: 100%;
-    height: 10%;
+    min-height: 10%;
+    height: auto;
 }
 
 .message-him{
@@ -461,7 +462,8 @@ input[type="text"]::placeholder{
     align-items: center;
     justify-content: flex-start;
     width: 100%;
-    height: 10%;
+    min-height: 10%;
+    height: auto;
 }
 
 .message-content{
@@ -471,6 +473,7 @@ input[type="text"]::placeholder{
     justify-content: center;
     width: 20%;
     height: auto;
+    word-wrap: break-word;
 }
 
 .color-message-me{
@@ -492,7 +495,7 @@ input[type="text"]::placeholder{
     font-size: 14px;
     color: #09132C;
     margin-top: 10px;
-    width: 90%;
+    max-width: 90%;
     text-align: center;
 }
 

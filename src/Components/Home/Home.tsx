@@ -54,7 +54,7 @@ interface conversationList {
 
 const messages: message[] = [
     {
-        message: 'Salut',
+        message: 'Salut SalutSalutSalutSalutSalu tSalutSalutSalutSalu tSalutSalut',
         hour: '12:00',
         sender: 'me',
         isRead: true,
