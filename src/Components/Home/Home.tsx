@@ -150,22 +150,11 @@ const conversationList: conversationList = {
 }
 
 const Home = () => {
-    
-
-    
-
-    
-
-    
-
-    
-
     const [convActive, setConvActive] = useState(0);
 
     const handleConvActive = (conv: number) => {
         setConvActive(conv)
     }
-
 
     return (
         <div className='home-wrapper'>
