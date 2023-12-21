@@ -3,6 +3,7 @@ import React from 'react'
 import Read from '../../assets/Read.svg'
 //@ts-ignore
 import Privacy from '../../assets/Privacy.svg'
+import MessageBar from './MessageBar.tsx'
 
 
 interface message {

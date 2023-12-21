@@ -74,7 +74,7 @@ const ConvBar = ({ conversationList, convActive, handleConvActive }: { conversat
                 </div>
             </div>
             <div className="search-bar-conv">
-                <input onChange={(e: any) => handleChange(e)} type="text" placeholder={placeholderText} onClick={handlePlaceholder} onBlur={handlePlaceholder} className="search-input-conv" />
+                <input onChange={(e: any) => handleChange(e)} type="text" placeholder={placeholderText} onClick={handlePlaceholder} onBlur={handlePlaceholder} id='search-input-conv' className="search-input-conv" />
             </div>
             <div className="type-conv">
                 <h1 key={0} className={`type-conv-title type-conv-title1 ${tabActive === 0 ? "type-conv-active" : ""}`} onClick={() => handleTabActive(0)} >Favorites</h1>

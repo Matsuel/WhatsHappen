@@ -11,6 +11,7 @@ import Privacy from '../../assets/Privacy.svg'
 import ConversationsActions from './ConversationsActions.tsx'
 import Messages from './Messages.tsx'
 import ConvBar from './ConvBar.tsx'
+import MessageBar from './MessageBar.tsx'
 
 interface message {
     message: string,
@@ -165,6 +166,7 @@ const Home = () => {
                             <ConversationsActions />
                         </div>
                         <Messages conversationList={conversationList} convActive={convActive} />
+                        <MessageBar />
                     </div>
                 )}
             </div>
