@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
-import './SignUpPage.css'
+import './Register.css'
 // @ts-ignore
 import WhatsApp from '../../assets/whatsapp.svg'
 import axios from 'axios'
 import bcrypt from 'bcryptjs'
 
-const SingUpPage = () => {
+const Register = () => {
   const [pseudo, setPseudo] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -48,4 +48,4 @@ const SingUpPage = () => {
   )
 }
 
-export default SingUpPage
+export default Register
