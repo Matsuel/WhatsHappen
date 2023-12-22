@@ -117,7 +117,7 @@
     text-align: center;
 }
 
-input[type="text"]::placeholder{
+input[type="search-input-conv"]::placeholder{
     color: #9393C1;
 }
 
