@@ -31,7 +31,7 @@ app.post('/login', async (req,res)=>{
     if((user) && (await bcrypt.compare(password, user.password))){
         console.log(user);
         const token = jwt.sign({ userId: user._id }, "la securité c'est pas pour les noobs", { expiresIn: '1h' });
-        res.send({validation:true, token})
+        res.send({validation:true, token, pseudo: user.username})
     }else{
         console.log(user);
         res.send({validation:false})
@@ -48,7 +48,7 @@ app.post('/register', async (req,res)=>{
         const newUser = new User({username: pseudo, mail: email, password: hashedPassword});
         await newUser.save();
         const token = jwt.sign({ userId: user._id }, "la securité c'est pas pour les noobs", { expiresIn: '1h' });
-        res.send({created:true, token})
+        res.send({created:true, token, pseudo: newUser.username})
     }
 })
 

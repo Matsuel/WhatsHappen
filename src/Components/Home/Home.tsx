@@ -12,6 +12,7 @@ import ConversationsActions from './ConversationsActions.tsx'
 import Messages from './Messages.tsx'
 import ConvBar from './ConvBar.tsx'
 import MessageBar from './MessageBar.tsx'
+import Cookies from 'js-cookie';
 
 interface message {
     message: string,
@@ -139,6 +140,12 @@ const Home = () => {
 
     const handleConvActive = (conv: number) => {
         setConvActive(conv)
+    }
+
+    const cookie = Cookies.get('user');
+
+    if (!cookie) {
+        window.location.href = '/login';
     }
 
     return (

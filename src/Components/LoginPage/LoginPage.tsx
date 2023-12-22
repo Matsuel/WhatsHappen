@@ -10,7 +10,6 @@ const LoginPage = () => {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [logged , setLogged] = useState(false);
   const [error, setError] = useState('');
 
 
@@ -20,7 +19,7 @@ const LoginPage = () => {
     .then(res => {
       if(res.data.validation){
         Cookies.set('user', res.data.token, { expires: 1 });
-        setLogged(true);
+        Cookies.set('username', res.data.pseudo, { expires: 1 });
         window.location.href = '/';
       }else{
         setError('Identifiant ou mot de passe incorrect')
@@ -30,7 +29,6 @@ const LoginPage = () => {
 
   return (
     <div className='LoginPage'>
-      {logged && <Navigate to='/' />}
       <div className="login">
         <form className='formClass'>
         <h1 className='title'> <img src={WhatsApp} width={40} className='logo'/>  Connexion</h1>

@@ -11,6 +11,7 @@ import Circle from '../../assets/Circle.svg'
 import Expand from '../../assets/Expand.svg'
 //@ts-ignore
 import Conv1 from '../../assets/conv1.svg'
+import Cookies from 'js-cookie';
 
 interface conversation {
     id: number,
@@ -58,6 +59,11 @@ const ConvBar = ({ conversationList, convActive, handleConvActive }: { conversat
         setTabActive(tab)
     }
 
+    const logout = () => {
+        Cookies.remove('user');
+        window.location.href = '/login';
+    }
+
     return (
         <div className="conversation">
             <div className="conv-bar">
@@ -69,7 +75,7 @@ const ConvBar = ({ conversationList, convActive, handleConvActive }: { conversat
                         <img src={Circle} alt="Circle" className='avatar' />
                     </div>
                 </div>
-                <div className="avatar-dots-wrapper-conv">
+                <div onClick={()=>logout()} className="avatar-dots-wrapper-conv">
                     <img src={Expand} alt="Add" className="avatar" />
                 </div>
             </div>
