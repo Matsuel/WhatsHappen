@@ -4,6 +4,7 @@ import './LoginPage.css'
 import WhatsApp from '../../assets/whatsapp.svg'
 import axios from 'axios'
 import { Navigate } from 'react-router-dom'
+import Cookies from 'js-cookie';
 
 const LoginPage = () => {
 
@@ -18,6 +19,7 @@ const LoginPage = () => {
     axios.post('http://localhost:3001/login', {email, password})
     .then(res => {
       if(res.data.validation){
+        Cookies.set('user', res.data.token, { expires: 1 });
         setLogged(true);
         window.location.href = '/';
       }else{

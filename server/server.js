@@ -3,6 +3,7 @@ const app = express();
 const cors  = require('cors');
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 app.use(cors());
 app.use((req,res,next)=>{
@@ -29,7 +30,8 @@ app.post('/login', async (req,res)=>{
     const user = await User.findOne({$or: [{username: email}, {mail: email}]});
     if((user) && (await bcrypt.compare(password, user.password))){
         console.log(user);
-        res.send({validation:true})
+        const token = jwt.sign({ userId: user._id }, "la securité c'est pas pour les noobs", { expiresIn: '1h' });
+        res.send({validation:true, token})
     }else{
         console.log(user);
         res.send({validation:false})
@@ -45,7 +47,8 @@ app.post('/register', async (req,res)=>{
     }else{
         const newUser = new User({username: pseudo, mail: email, password: hashedPassword});
         await newUser.save();
-        res.send({created:true});
+        const token = jwt.sign({ userId: user._id }, "la securité c'est pas pour les noobs", { expiresIn: '1h' });
+        res.send({created:true, token})
     }
 })
 

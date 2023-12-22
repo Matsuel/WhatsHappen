@@ -4,6 +4,7 @@ import './Register.css'
 import WhatsApp from '../../assets/whatsapp.svg'
 import axios from 'axios'
 import bcrypt from 'bcryptjs'
+import Cookies from 'js-cookie';
 
 const Register = () => {
   const [pseudo, setPseudo] = useState('');
@@ -26,6 +27,7 @@ const Register = () => {
       axios.post('http://localhost:3001/register', { pseudo, email, hashedPassword })
         .then(res => {
           if (res.data.created) {
+            Cookies.set('user', res.data.token, { expires: 1 });
             setLogged(true);
             window.location.href = '/';
           } else {
