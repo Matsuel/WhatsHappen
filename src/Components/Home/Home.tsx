@@ -13,6 +13,7 @@ import Messages from './Messages.tsx'
 import ConvBar from './ConvBar.tsx'
 import MessageBar from './MessageBar.tsx'
 import Cookies from 'js-cookie';
+import { decodeToken } from 'react-jwt'
 
 interface message {
     message: string,
@@ -146,6 +147,9 @@ const Home = () => {
 
     if (!cookie) {
         window.location.href = '/login';
+    }else{
+        const user = decodeToken(cookie);
+        console.log(user);
     }
 
     return (

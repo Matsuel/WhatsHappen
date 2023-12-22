@@ -19,7 +19,6 @@ const LoginPage = () => {
     .then(res => {
       if(res.data.validation){
         Cookies.set('user', res.data.token, { expires: 1 });
-        Cookies.set('username', res.data.pseudo, { expires: 1 });
         window.location.href = '/';
       }else{
         setError('Identifiant ou mot de passe incorrect')
