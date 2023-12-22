@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const cors  = require('cors');
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
 
 app.use(cors());
 app.use((req,res,next)=>{
@@ -26,7 +27,7 @@ app.post('/login', async (req,res)=>{
     console.log(email);
 
     const user = await User.findOne({$or: [{username: email}, {mail: email}]});
-    if(user){
+    if((user) && (await bcrypt.compare(password, user.password))){
         console.log(user);
         res.send({validation:true})
     }else{
