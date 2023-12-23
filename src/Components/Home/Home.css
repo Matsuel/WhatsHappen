@@ -569,3 +569,22 @@ input[type="search-input-conv"]::placeholder{
 .message-input::placeholder{
     color: #8F8F8F;
 }
+
+.newConv-Button{
+    all: unset;
+    position: fixed;
+    bottom: 50px;
+    left: 300px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #128C7E;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.newConv-Button:hover{
+    cursor: pointer;
+}

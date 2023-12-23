@@ -11,6 +11,8 @@ import Circle from '../../assets/Circle.svg'
 import Expand from '../../assets/Expand.svg'
 //@ts-ignore
 import Conv1 from '../../assets/conv1.svg'
+// @ts-ignore
+import NewConv from '../../assets/NewConv.svg'
 import Cookies from 'js-cookie';
 
 interface conversation {
@@ -147,6 +149,9 @@ const ConvBar = ({ conversationList, convActive, handleConvActive }: { conversat
                         </>
                     ))
                 )}
+                <button className='newConv-Button'>
+                    <img src={NewConv} alt="NewConv" className="newConv" />
+                </button>
             </div>
         </div>
     )
