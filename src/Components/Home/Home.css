@@ -588,3 +588,16 @@ input[type="search-input-conv"]::placeholder{
 .newConv-Button:hover{
     cursor: pointer;
 }
+
+.newConv-modal{
+    height: 50%;
+    width: 20%;
+    background-color: #000;
+    position: fixed;
+    top: 50px;
+    left: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}

@@ -44,6 +44,7 @@ const ConvBar = ({ conversationList, convActive, handleConvActive }: { conversat
     const [placeholderText, setPlaceholderText] = useState('Rechercher une conversation');
     const [tabActive, setTabActive] = useState(0);
     const [countArchived, setCountArchived] = useState(0)
+    const [showModal, setShowModal] = useState(false)
 
     const handleChange = (e: any) => {
         setSearch(e.target.value)
@@ -64,6 +65,10 @@ const ConvBar = ({ conversationList, convActive, handleConvActive }: { conversat
     const logout = () => {
         Cookies.remove('user');
         window.location.href = '/login';
+    }
+
+    const handleShowModal = () => {
+        setShowModal(!showModal)
     }
 
     return (
@@ -88,7 +93,6 @@ const ConvBar = ({ conversationList, convActive, handleConvActive }: { conversat
                 <h1 key={0} className={`type-conv-title type-conv-title1 ${tabActive === 0 ? "type-conv-active" : ""}`} onClick={() => handleTabActive(0)} >Favorites</h1>
                 <h1 key={1} className={`type-conv-title ${tabActive === 1 ? "type-conv-active" : ""}`} onClick={() => handleTabActive(1)}>Amis</h1>
                 <h1 key={2} className={`type-conv-title type-conv-title3 ${tabActive === 2 ? "type-conv-active" : ""}`} onClick={() => handleTabActive(2)}>Groupes</h1>
-
             </div>
             <div className="archived-conv">
                 <img src={Archive} alt="Archive" className='archive-logo' />
@@ -126,9 +130,7 @@ const ConvBar = ({ conversationList, convActive, handleConvActive }: { conversat
                                             <div className="lastMessageRead">
                                                 <h1 className="lastMessage message-read">{conversation.lastMessage}</h1>
                                             </div>
-
                                         )}
-
                                         {conversation.numberOfUnreadMessages > 0 ? (
                                             <h1 className="numberOfUnreadMessages">
                                                 {conversation.numberOfUnreadMessages > 5 ? (
@@ -139,7 +141,6 @@ const ConvBar = ({ conversationList, convActive, handleConvActive }: { conversat
                                             </h1>
                                         ) : (
                                             <div className="">
-
                                             </div>
                                         )}
                                     </div>
@@ -149,7 +150,10 @@ const ConvBar = ({ conversationList, convActive, handleConvActive }: { conversat
                         </>
                     ))
                 )}
-                <button className='newConv-Button'>
+                <div className="newConv-modal" style={{display: showModal ? "": "none"}}>
+
+                </div>
+                <button className='newConv-Button' onClick={()=>handleShowModal()}>
                     <img src={NewConv} alt="NewConv" className="newConv" />
                 </button>
             </div>
