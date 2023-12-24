@@ -573,7 +573,7 @@ input[type="search-input-conv"]::placeholder{
 .newConv-Button{
     all: unset;
     position: fixed;
-    bottom: 50px;
+    bottom: 20px;
     left: 300px;
     width: 60px;
     height: 60px;
@@ -590,14 +590,25 @@ input[type="search-input-conv"]::placeholder{
 }
 
 .newConv-modal{
-    height: 50%;
+    height: 20%;
     width: 20%;
-    background-color: #000;
+    background-color: #fff;
     position: fixed;
-    top: 50px;
+    bottom: 85px;
     left: 0;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+
+.createConv-input{
+    width: 80%;
+    height: 10%;
+}
+
+.users-modal{
+    width: 80%;
+    height: auto;
+    overflow: auto;
 }

@@ -39,6 +39,12 @@ interface message {
     type: string
 }
 
+interface user {
+    id: number,
+    username: string,
+    email: string,
+}
+
 
 const ConvBar = ({ conversationList, convActive, handleConvActive }: { conversationList: any, convActive: number, handleConvActive: any }) => {
     const [search, setSearch] = useState('')
@@ -46,6 +52,7 @@ const ConvBar = ({ conversationList, convActive, handleConvActive }: { conversat
     const [tabActive, setTabActive] = useState(0);
     const [countArchived, setCountArchived] = useState(0)
     const [showModal, setShowModal] = useState(false)
+    const [users, setUsers] = useState<user[]>([]);
 
     const handleChange = (e: any) => {
         setSearch(e.target.value)
@@ -74,7 +81,7 @@ const ConvBar = ({ conversationList, convActive, handleConvActive }: { conversat
             const cookies = Cookies.get('user');
             axios.post('http://localhost:3001/users', {cookies})
             .then(res => {
-                console.log(res.data)
+                setUsers(res.data.users)
             })
         }
     }
@@ -159,6 +166,22 @@ const ConvBar = ({ conversationList, convActive, handleConvActive }: { conversat
                     ))
                 )}
                 <div className="newConv-modal" style={{display: showModal ? "": "none"}}>
+                    <input type="text" name="createConv-input" id="createConv-input" className='createConv-input' />
+                    <div className="users-modal">
+                        {users.map((user: user) => (
+                            <div className="user-modal">
+                                <div className="avatar-conv">
+                                    <img src={Conv1} alt="Avatar" className="conv-logo" />
+                                </div>
+                                <div className="conv-details">
+                                    <div className="conv-top-details">
+                                        <h1 className="conv-name">{user.username}</h1>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+
+                    </div>
 
                 </div>
                 <button className='newConv-Button' onClick={()=>handleShowModal()}>

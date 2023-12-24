@@ -58,7 +58,9 @@ app.post('/register', async (req,res)=>{
 app.post('/users', async (req,res)=>{
     const {cookies} = req.body;
     if(await checkToken(cookies)){
-        const users = await User.find();
+        let users = await User.find();
+        const decoded = jwt.verify(cookies, secretTest);
+        users = users.filter((user)=>user.username!==decoded.pseudo);
         console.log(users);
         res.send({users: users});
     }else{
