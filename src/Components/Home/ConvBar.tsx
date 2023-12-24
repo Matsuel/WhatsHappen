@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useEffect, useState} from 'react'
 //@ts-ignore
 import Profile from '../../assets/Profile.svg'
 //@ts-ignore
@@ -14,6 +14,7 @@ import Conv1 from '../../assets/conv1.svg'
 // @ts-ignore
 import NewConv from '../../assets/NewConv.svg'
 import Cookies from 'js-cookie';
+import axios from 'axios'
 
 interface conversation {
     id: number,
@@ -69,6 +70,13 @@ const ConvBar = ({ conversationList, convActive, handleConvActive }: { conversat
 
     const handleShowModal = () => {
         setShowModal(!showModal)
+        if (!showModal) {
+            const cookies = Cookies.get('user');
+            axios.post('http://localhost:3001/users', {cookies})
+            .then(res => {
+                console.log(res.data)
+            })
+        }
     }
 
     return (

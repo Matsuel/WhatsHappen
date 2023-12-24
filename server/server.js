@@ -49,10 +49,29 @@ app.post('/register', async (req,res)=>{
     }else{
         const newUser = new User({username: pseudo, mail: email, password: hashedPassword});
         await newUser.save();
+        const user = await User.findOne({$or: [{username: pseudo}, {mail: email}]});
         const token = jwt.sign({ userId: user._id,mail: user.mail, pseudo: user.username }, secretTest, { expiresIn: '1h' });
         res.send({created:true, token})
     }
 })
+
+app.post('/users', async (req,res)=>{
+    const {cookies} = req.body;
+    if(await checkToken(cookies)){
+        const users = await User.find();
+        console.log(users);
+        res.send({users: users});
+    }else{
+        res.send({users: []});
+    }
+
+})
+
+const checkToken = async (cookies) => {
+    const decoded = jwt.verify(cookies, secretTest);
+    const user = await User.findOne({$or: [{username: decoded.pseudo}, {mail: decoded.mail}]});
+    return user?true:false;
+}
 
 app.listen(3001,()=>{
     console.log('Server is running on port 3001');
