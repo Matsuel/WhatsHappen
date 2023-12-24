@@ -121,10 +121,6 @@ input[type="search-input-conv"]::placeholder{
     color: #9393C1;
 }
 
-.search-input-conv:focus{
-    border-bottom: 2px solid #035e4d;
-}
-
 .archived-conv{
     display: flex;
     flex-direction: row;
@@ -604,11 +600,42 @@ input[type="search-input-conv"]::placeholder{
 
 .createConv-input{
     width: 80%;
-    height: 10%;
+    height: 15%;
+    margin-bottom: 10px;
+    border-radius: 25px;
+    border: 1px solid #128C7E;
+    outline: none;
+    text-align: center;
+    font-family: 'Plus Jakarta Sans', sans-serif;
 }
 
 .users-modal{
     width: 80%;
     height: auto;
     overflow: auto;
+}
+.user-modal{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    width: 80%;
+    margin-bottom: 10px;
+}
+
+.user-modal:hover{
+    cursor: pointer;
+    background-color: #D1E4E8;
+}
+
+.avatar-modale{
+    margin-left: 10px;
+}
+
+.modal-details{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
 }

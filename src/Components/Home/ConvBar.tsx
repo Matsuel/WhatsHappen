@@ -1,4 +1,4 @@
-import React,{useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 //@ts-ignore
 import Profile from '../../assets/Profile.svg'
 //@ts-ignore
@@ -40,9 +40,9 @@ interface message {
 }
 
 interface user {
-    id: number,
+    _id: number,
     username: string,
-    email: string,
+    mail: string,
 }
 
 
@@ -79,11 +79,28 @@ const ConvBar = ({ conversationList, convActive, handleConvActive }: { conversat
         setShowModal(!showModal)
         if (!showModal) {
             const cookies = Cookies.get('user');
-            axios.post('http://localhost:3001/users', {cookies})
-            .then(res => {
-                setUsers(res.data.users)
-            })
+            axios.post('http://localhost:3001/users', { cookies })
+                .then(res => {
+                    setUsers(res.data.users)
+                    console.log(res.data.users)     
+                })
         }
+    }
+
+    const handleConvInput = (e: any) => {
+        const input = e.target.value
+        const userModals: NodeListOf<Element> = document.querySelectorAll('.user-modal')
+        userModals.forEach((userModal: Element) => {
+            const mail = userModal.id.split('|')[0]
+            const username = userModal.id.split('|')[1]
+            if (mail.includes(input) || username.includes(input)) {
+                // @ts-ignore
+                userModal.style.display = ''
+            } else {
+                // @ts-ignore
+                userModal.style.display = 'none'
+            }
+        })
     }
 
     return (
@@ -97,7 +114,7 @@ const ConvBar = ({ conversationList, convActive, handleConvActive }: { conversat
                         <img src={Circle} alt="Circle" className='avatar' />
                     </div>
                 </div>
-                <div onClick={()=>logout()} className="avatar-dots-wrapper-conv">
+                <div onClick={() => logout()} className="avatar-dots-wrapper-conv">
                     <img src={Expand} alt="Add" className="avatar" />
                 </div>
             </div>
@@ -165,26 +182,23 @@ const ConvBar = ({ conversationList, convActive, handleConvActive }: { conversat
                         </>
                     ))
                 )}
-                <div className="newConv-modal" style={{display: showModal ? "": "none"}}>
-                    <input type="text" name="createConv-input" id="createConv-input" className='createConv-input' />
+                <div className="newConv-modal" style={{ display: showModal ? "" : "none" }}>
+                    <input type="text" name="createConv-input" id="createConv-input" className='createConv-input' onChange={(e: any) => handleConvInput(e)} />
                     <div className="users-modal">
                         {users.map((user: user) => (
-                            <div className="user-modal">
-                                <div className="avatar-conv">
+                            <div className="user-modal" id={`${user.mail}|${user.username}`}>
+                                <div className="avatar-modale">
                                     <img src={Conv1} alt="Avatar" className="conv-logo" />
                                 </div>
-                                <div className="conv-details">
-                                    <div className="conv-top-details">
-                                        <h1 className="conv-name">{user.username}</h1>
-                                    </div>
+                                <div className="modal-details">
+                                    <h1 className="conv-name">{user.username}</h1>
+                                    <h1 className="conv-name">{user.mail}</h1>
                                 </div>
                             </div>
                         ))}
-
                     </div>
-
                 </div>
-                <button className='newConv-Button' onClick={()=>handleShowModal()}>
+                <button className='newConv-Button' onClick={() => handleShowModal()}>
                     <img src={NewConv} alt="NewConv" className="newConv" />
                 </button>
             </div>
