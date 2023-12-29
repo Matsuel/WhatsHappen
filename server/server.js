@@ -26,6 +26,13 @@ const Conversation= mongoose.model('Conversation', new mongoose.Schema({
     users_id: Array,
 }));
 
+const Message = mongoose.model('Message', new mongoose.Schema({
+    sender_id: String,
+    conversation_id: String,
+    time: String,
+    content: String,
+}));
+
 const secretTest ="84554852585915452156252015015201520152152252"
 
 app.post('/login', async (req,res)=>{
