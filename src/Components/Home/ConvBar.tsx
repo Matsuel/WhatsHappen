@@ -103,6 +103,15 @@ const ConvBar = ({ conversationList, convActive, handleConvActive }: { conversat
         })
     }
 
+    const createConv = (user : user) => {
+        const cookies = Cookies.get('user');
+        axios.post('http://localhost:3001/createConversation', { cookies, user })
+            .then(res => {
+                console.log(res.data)
+            })
+    }
+
+
     return (
         <div className="conversation">
             <div className="conv-bar">
@@ -186,7 +195,7 @@ const ConvBar = ({ conversationList, convActive, handleConvActive }: { conversat
                     <input type="text" name="createConv-input" id="createConv-input" className='createConv-input' onChange={(e: any) => handleConvInput(e)} />
                     <div className="users-modal">
                         {users.map((user: user) => (
-                            <div className="user-modal" id={`${user.mail}|${user.username}`}>
+                            <div className="user-modal" id={`${user.mail}|${user.username}`} onClick={()=>createConv(user)}>
                                 <div className="avatar-modale">
                                     <img src={Conv1} alt="Avatar" className="conv-logo" />
                                 </div>

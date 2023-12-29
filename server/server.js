@@ -22,6 +22,10 @@ const User = mongoose.model('User', new mongoose.Schema({
     password: String
 }));
 
+const Conversation= mongoose.model('Conversation', new mongoose.Schema({
+    users_id: Array,
+}));
+
 const secretTest ="84554852585915452156252015015201520152152252"
 
 app.post('/login', async (req,res)=>{
@@ -61,12 +65,34 @@ app.post('/users', async (req,res)=>{
         let users = await User.find();
         const decoded = jwt.verify(cookies, secretTest);
         users = users.filter((user)=>user.username!==decoded.pseudo);
-        console.log(users);
+        let conversations = await Conversation.find({users_id: decoded.userId});
+        conversations = conversations.map((conversation)=>conversation.users_id);
+        users = users.filter((user)=>{
+            let found = false;
+            conversations.forEach((conversation)=>{
+                if(conversation.includes(user._id)) found = true;
+            })
+            return !found;
+        })
         res.send({users: users});
     }else{
         res.send({users: []});
     }
 
+})
+
+app.post('/createConversation', async (req,res)=>{
+    const {cookies, user} = req.body;
+    if(await checkToken(cookies)){
+        let creatorId = jwt.verify(cookies, secretTest).userId;
+        if (await Conversation.findOne({users_id: [creatorId, user._id]})) return res.send({created: false});
+        if (await Conversation.findOne({users_id: [user._id, creatorId]})) return res.send({created: false});
+        let conversation = new Conversation({users_id: [creatorId, user._id]});
+        await conversation.save();
+        res.send({created: true});
+    }else{
+        res.send({created: false});
+    }
 })
 
 const checkToken = async (cookies) => {
