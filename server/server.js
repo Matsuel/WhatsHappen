@@ -37,16 +37,12 @@ const secretTest ="84554852585915452156252015015201520152152252"
 
 app.post('/login', async (req,res)=>{
     const {email, password} = req.body;
-
-    console.log(email);
-
+    
     const user = await User.findOne({$or: [{username: email}, {mail: email}]});
     if((user) && (await bcrypt.compare(password, user.password))){
-        console.log(user);
         const token = jwt.sign({ userId: user._id, mail: user.mail, pseudo: user.username }, secretTest, { expiresIn: '1h' });
         res.send({validation:true, token})
     }else{
-        console.log(user);
         res.send({validation:false})
     }
 })
