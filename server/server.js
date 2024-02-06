@@ -4,6 +4,7 @@ const cors  = require('cors');
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const uuid = require('uuid');
 
 app.use(cors());
 app.use((req,res,next)=>{
@@ -19,7 +20,8 @@ mongoose.connect('mongodb://localhost:27017/Whatsapp', {useNewUrlParser: true, u
 const User = mongoose.model('User', new mongoose.Schema({
     username: String,
     mail: String,
-    password: String
+    password: String,
+    uuids: Array,
 }));
 
 const Conversation= mongoose.model('Conversation', new mongoose.Schema({
@@ -102,6 +104,16 @@ const checkToken = async (cookies) => {
     const decoded = jwt.verify(cookies, secretTest);
     const user = await User.findOne({$or: [{username: decoded.pseudo}, {mail: decoded.mail}]});
     return user?true:false;
+}
+
+const getUuidOfUser = async (userId) => {
+    const user = await User.findById(userId);
+    return user.uuids;
+}
+
+const correctUuid = async (uuid)=>{
+    let uuids = getUuidOfUser(uuid);
+    return uuids.includes(uuid);
 }
 
 app.listen(3001,()=>{
