@@ -48,13 +48,13 @@ app.post('/login', async (req,res)=>{
 })
 
 app.post('/register', async (req,res)=>{
-    const {pseudo,email, hashedPassword} = req.body;
+    const {pseudo,email, password} = req.body;
 
     const user = await User.findOne({$or: [{username: pseudo}, {mail: email}]});
     if(user){
         res.send({created:false})
     }else{
-        const newUser = new User({username: pseudo, mail: email, password: hashedPassword});
+        const newUser = new User({username: pseudo, mail: email, password: bcrypt.hashSync(password, 10)});
         await newUser.save();
         const user = await User.findOne({$or: [{username: pseudo}, {mail: email}]});
         const token = jwt.sign({ userId: user._id,mail: user.mail, pseudo: user.username }, secretTest, { expiresIn: '1h' });

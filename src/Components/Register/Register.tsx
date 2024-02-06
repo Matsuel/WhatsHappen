@@ -3,7 +3,6 @@ import './Register.css'
 // @ts-ignore
 import WhatsApp from '../../assets/whatsapp.svg'
 import axios from 'axios'
-import bcrypt from 'bcryptjs'
 import Cookies from 'js-cookie';
 
 const Register = () => {
@@ -23,8 +22,7 @@ const Register = () => {
     if (password !== confirmPassword) {
       setError('Les mots de passe ne sont pas égaux')
     } else {
-      const hashedPassword = bcrypt.hashSync(password, 10);
-      axios.post('http://localhost:3001/register', { pseudo, email, hashedPassword })
+      axios.post('http://localhost:3001/register', { pseudo, email, password })
         .then(res => {
           if (res.data.created) {
             Cookies.set('user', res.data.token, { expires: 1 });
