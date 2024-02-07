@@ -298,8 +298,8 @@ const Home = () => {
                                                 {message.content}
                                             </p>
                                             <p className='messagetime'>
-                                                {new Date(Number(message.date)).getHours()}:
-                                                {Math.round(new Date(Number(message.date)).getMinutes() / 10)}{new Date(Number(message.date)).getMinutes() % 10}
+                                                {new Date(message.date).getHours()}:
+                                                {Math.round(new Date(message.date).getMinutes() / 10)}{new Date(message.date).getMinutes() % 10}
                                             </p>
                                         </div>
                                     </div>
