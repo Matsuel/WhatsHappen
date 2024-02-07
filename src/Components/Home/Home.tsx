@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import Cookies from 'js-cookie';
+import { decodeToken } from 'react-jwt';
 // @ts-ignore
 import Search from '../../assets/Search.svg'
 // @ts-ignore
@@ -54,6 +55,13 @@ interface conversation {
     messages: message[]
 }
 
+interface User {
+    userId: string,
+    username: string,
+    email: string,
+    password: string
+}
+
 
 
 const Home = () => {
@@ -68,8 +76,16 @@ const Home = () => {
     const [showNewConv, setShowNewConv] = useState<boolean>(false)
     const [canRotate, setCanRotate] = useState<boolean>(false)
     const [users, setUsers] = useState<UserInfos[]>([])
+    const[userId , setUserId] = useState<string>('')
 
     const cookies = Cookies.get('user')
+
+    useEffect(() => {
+        if(cookies){
+            const token: User | null = decodeToken(cookies)
+            setUserId(token?.userId as string)
+        }
+    }, [cookies])
 
     const getConversations = async () => {
         axios.post('http://localhost:3001/conversations', { cookies })
@@ -243,8 +259,9 @@ const Home = () => {
                         <div className="messagesection">
                             {conv.messages.map((message) => {
                                 return (
-                                    <div className="message" key={message._id}>
+                                    <div className={message.sender_id === userId ? 'messagesent' : 'messagereceived'} key={message._id}>
                                         <p>{message.content}</p>
+                                        <p>{new Date(Number(message.date)).getHours()}:{new Date(Number(message.date)).getMinutes()}</p>
                                     </div>
                                 )
                             })

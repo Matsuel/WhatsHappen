@@ -30,7 +30,7 @@ const Conversation= mongoose.model('Conversation', new mongoose.Schema({
 const Message = mongoose.model('Message', new mongoose.Schema({
     sender_id: String,
     conversation_id: String,
-    time: String,
+    date: String,
     content: String,
 }));
 
@@ -117,7 +117,7 @@ app.post('/newmessage', async (req,res)=>{
     const {cookies, conversation_id, content} = req.body;
     if(await checkToken(cookies)){
         const sender_id = jwt.verify(cookies, secretTest).userId;
-        let message = new Message({sender_id, conversation_id, time: new Date().toISOString(), content});
+        let message = new Message({sender_id, conversation_id, date: new Date().getTime(), content});
         await message.save();
         res.send({sent: true});
     }else{
