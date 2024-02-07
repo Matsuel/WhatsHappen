@@ -3,6 +3,8 @@ import axios from 'axios'
 import Cookies from 'js-cookie';
 // @ts-ignore
 import Search from '../../assets/Search.svg'
+// @ts-ignore
+import NewConv from '../../assets/NewConv.svg'
 import './Home.css'
 
 interface ConversationInfos {
@@ -16,6 +18,7 @@ const Home = () => {
     const [conversationActive, setConversationActive] = useState<string>('')
     const [search, setSearch] = useState<string>('')
     const [typeConv, setTypeConv] = useState<number>(1)
+    const [showNewConv, setShowNewConv] = useState<boolean>(false)
 
     const cookies = Cookies.get('user')
     
@@ -94,6 +97,16 @@ const Home = () => {
                         )
                     )
                 })} */}
+
+                {showNewConv ? (
+                    <div className="newconvmodal">
+                        <input type="text" placeholder='Nom de votre interlocuteur' className='newconvinput' />
+                    </div>
+                ) : null}
+
+                <div className="newconv-div" onClick={() => setShowNewConv(!showNewConv)}>
+                    <img src={NewConv} alt="newConv" className='newConv' />
+                </div>
             </div>
 
             <div className="messages-section">
