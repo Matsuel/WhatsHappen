@@ -21,7 +21,6 @@ const User = mongoose.model('User', new mongoose.Schema({
     username: String,
     mail: String,
     password: String,
-    uuids: Array,
 }));
 
 const Conversation= mongoose.model('Conversation', new mongoose.Schema({
@@ -39,10 +38,9 @@ const secretTest ="84554852585915452156252015015201520152152252"
 
 app.post('/login', async (req,res)=>{
     const {email, password} = req.body;
-    
     const user = await User.findOne({$or: [{username: email}, {mail: email}]});
     if((user) && (await bcrypt.compare(password, user.password))){
-        const token = jwt.sign({ userId: user._id, mail: user.mail, pseudo: user.username }, secretTest, { expiresIn: '1h' });
+        const token = jwt.sign({ userId: user._id, mail: user.mail, pseudo: user.username }, secretTest, { expiresIn: '48h' });
         res.send({validation:true, token})
     }else{
         res.send({validation:false})
@@ -51,7 +49,6 @@ app.post('/login', async (req,res)=>{
 
 app.post('/register', async (req,res)=>{
     const {pseudo,email, password} = req.body;
-
     const user = await User.findOne({$or: [{username: pseudo}, {mail: email}]});
     if(user){
         res.send({created:false})
@@ -83,7 +80,6 @@ app.post('/users', async (req,res)=>{
     }else{
         res.send({users: []});
     }
-
 })
 
 app.post('/createConversation', async (req,res)=>{
