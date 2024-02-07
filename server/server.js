@@ -4,7 +4,6 @@ const cors  = require('cors');
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const uuid = require('uuid');
 
 app.use(cors());
 app.use((req,res,next)=>{
@@ -25,6 +24,7 @@ const User = mongoose.model('User', new mongoose.Schema({
 
 const Conversation= mongoose.model('Conversation', new mongoose.Schema({
     users_id: Array,
+    type: String,
 }));
 
 const Message = mongoose.model('Message', new mongoose.Schema({
@@ -88,7 +88,7 @@ app.post('/createConversation', async (req,res)=>{
         let creatorId = jwt.verify(cookies, secretTest).userId;
         if (await Conversation.findOne({users_id: [creatorId, user._id]})) return res.send({created: false});
         if (await Conversation.findOne({users_id: [user._id, creatorId]})) return res.send({created: false});
-        let conversation = new Conversation({users_id: [creatorId, user._id]});
+        let conversation = new Conversation({users_id: [creatorId, user._id], type: 'single'});
         await conversation.save();
         res.send({created: true});
     }else{
@@ -119,11 +119,6 @@ const checkToken = async (cookies) => {
     const decoded = jwt.verify(cookies, secretTest);
     const user = await User.findOne({$or: [{username: decoded.pseudo}, {mail: decoded.mail}]});
     return user?true:false;
-}
-
-const getUuidOfUser = async (userId) => {
-    const user = await User.findById(userId);
-    return user.uuids;
 }
 
 app.listen(3001,()=>{
