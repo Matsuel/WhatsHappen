@@ -103,15 +103,25 @@ app.post('/conversations', async (req,res)=>{
         let conversations = await Conversation.find({users_id: userId});
         conversations = await Promise.all(conversations.map(async (conversation)=>{
             let otherUserId = conversation.users_id.filter((id)=>id!==userId)[0];
-
             let otherUser = await User.findById(otherUserId);
-
             return {...conversation.toObject(), name: otherUser.username};
         }))
         console.log(conversations);
         res.send({conversations: conversations});
     }else{
         res.send({conversations: []});
+    }
+})
+
+app.post('/newmessage', async (req,res)=>{
+    const {cookies, conversation_id, content} = req.body;
+    if(await checkToken(cookies)){
+        const sender_id = jwt.verify(cookies, secretTest).userId;
+        let message = new Message({sender_id, conversation_id, time: new Date().toISOString(), content});
+        await message.save();
+        res.send({sent: true});
+    }else{
+        res.send({sent: false});
     }
 })
 

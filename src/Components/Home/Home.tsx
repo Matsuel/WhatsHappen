@@ -12,11 +12,19 @@ import Online from '../../assets/Online.svg'
 // @ts-ignore
 import Phone from '../../assets/Phone.svg'
 // @ts-ignore
+import PhoneConv from '../../assets/PhoneConv.svg'
+// @ts-ignore
 import Video from '../../assets/Video.svg'
 // @ts-ignore
 import SearchConv from '../../assets/SearchConv.svg'
 // @ts-ignore
 import Expand from '../../assets/Expand.svg'
+// @ts-ignore
+import Emoji from '../../assets/Emoji.svg'
+// @ts-ignore
+import JoinFile from '../../assets/JoinFile.svg'
+// @ts-ignore
+import VoiceMessage from '../../assets/VoiceMessage.svg'
 
 import './Home.css'
 
@@ -128,7 +136,6 @@ const Home = () => {
                                 conversations.map((conversation) => {
                                     return (
                                         (
-
                                             conversation.name.toLowerCase().includes(search.toLowerCase()) ? (
                                                 <div className={`conversation ${conversation._id === conversationActive ? 'conversationActive' : ''}`} onClick={() => handleConversationActive(conversation._id)} key={conversation._id}>
                                                     <p>{conversation.name}</p>
@@ -154,8 +161,7 @@ const Home = () => {
                                         </div>
                                     ) : null
                                 )
-                            }
-                            )
+                            })
                         ) : null}
                     </div>
                 ) : null}
@@ -166,29 +172,46 @@ const Home = () => {
             </div>
 
             <div className="messages-section">
-                <div className="conversationtopbar">
-                    <div className="topbarleft">
-                        <img src={Conv1} alt="conv1" className='conv1' />
-                        <div className="topbarnamestatut">
-                            <h2 className="conversationname">
-                                Nom de la conversation
-                            </h2>
-                            <p className="conversationstatus">
-                                <img src={Online} alt="online" className='online' />
-                                Statut de la conversation
-                            </p>
+                {conversationActive !== '' ? (
+                    <>
+                        <div className="conversationtopbar">
+                            <div className="topbarleft">
+                                <img src={Conv1} alt="conv1" className='conv1' />
+                                <div className="topbarnamestatut">
+                                    <h2 className="conversationname">
+                                        Nom de la conversation
+                                    </h2>
+                                    <p className="conversationstatus">
+                                        <img src={Online} alt="online" className='online' />
+                                        Statut de la conversation
+                                    </p>
+                                </div>
+
+                            </div>
+
+                            <div className="topbarright">
+                                <img src={Phone} alt="phoneconv" className='toprightbtn' />
+                                <img src={Video} alt="video" className='toprightbtn' />
+                                <img src={SearchConv} alt="searchconv" className='toprightbtn' />
+                                <img src={Expand} alt="expand" className='toprightbtn' />
+                            </div>
+
                         </div>
-                        
-                    </div>
 
-                    <div className="topbarright">
-                        <img src={Phone} alt="phoneconv" className='toprightbtn' />
-                        <img src={Video} alt="video" className='toprightbtn' />
-                        <img src={SearchConv} alt="searchconv" className='toprightbtn' />
-                        <img src={Expand} alt="expand" className='toprightbtn' />
-                    </div>
+                        <div className="conversationbottombar">
+                            <img src={JoinFile} alt="joinfile" className='joinfile' />
+                            <input type="text" name="message-input" id="message-input" className='message-input' onKeyUp={(e) => console.log(e.code)} />
+                            <img src={VoiceMessage} alt="voicemessage" className='voicemessage' />
+                        </div>
+                    </>
+                ) : (
+                    <div className="noconvactive">
+                        <img src={PhoneConv} alt="phoneconv" className='phoneconv' />
+                        <h1 className="no-conv-title-active">Gardez votre téléphone connecté</h1>
+                        <p className="no-conv-subtitle-active">Whatsapp se connecte à votre téléphone pour synchroniser les messages. Pour réduire l’utilisation des données. connectez votre téléphone au Wi-Fi.</p>
 
-                </div>
+                    </div>
+                )}
 
             </div>
 
