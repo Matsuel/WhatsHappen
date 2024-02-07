@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { io } from 'socket.io-client'
 import './Register.css'
 // @ts-ignore
 import WhatsApp from '../../assets/whatsapp.svg'
@@ -6,6 +7,7 @@ import axios from 'axios'
 import Cookies from 'js-cookie';
 
 const Register = () => {
+  const [socket, setSocket] = useState<any>(null)
   const [pseudo, setPseudo] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -17,21 +19,36 @@ const Register = () => {
   const [passWordBorder, setPassWordBorder] = useState('1px solid #128C7E');
   const [passWordBorderConfirm, setPassWordBorderConfirm] = useState('1px solid #128C7E');
 
+  useEffect(() => {
+    const newSocket = io('http://localhost:3001')
+
+    newSocket.on('connect', () => {
+      setSocket(newSocket)
+    })
+
+    newSocket.on('register', (data) => {
+      if (data.created) {
+        Cookies.set('user', data.token, { expires: 1 });
+        window.location.href = '/';
+      } else {
+        console.log('Échec de la connexion:', data.error);
+        setError('Identifiant déjà utilisé ou mots de passe non égaux');
+      }
+    });
+
+    return () => {
+      newSocket.close()
+    }
+  }, [])
+
   const handleSubmit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
     if (password !== confirmPassword) {
       setError('Les mots de passe ne sont pas égaux')
     } else {
-      axios.post('http://localhost:3001/register', { pseudo, email, password })
-        .then(res => {
-          if (res.data.created) {
-            Cookies.set('user', res.data.token, { expires: 1 });
-            setLogged(true);
-            window.location.href = '/';
-          } else {
-            setError('Identifiant déjà utilisé ou mots de passe non égaux')
-          }
-        })
+      if (socket) {
+        socket.emit('register', { pseudo, email, password });
+      }
     }
   }
 

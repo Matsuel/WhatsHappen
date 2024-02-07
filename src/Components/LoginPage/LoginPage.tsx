@@ -1,29 +1,45 @@
-import React,{useState} from 'react'
+import React,{useEffect, useState} from 'react'
 import './LoginPage.css'
 // @ts-ignore
 import WhatsApp from '../../assets/whatsapp.svg'
 import axios from 'axios'
 import { Navigate } from 'react-router-dom'
 import Cookies from 'js-cookie';
+import { io } from 'socket.io-client'
 
 const LoginPage = () => {
-
+  const [socket, setSocket] = useState<any>(null)
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
+  useEffect(() => {
+    const newSocket = io('http://localhost:3001')
+
+    newSocket.on('connect', () => {
+      setSocket(newSocket)
+    })
+
+    newSocket.on('login', (data) => {
+      if (data.validation) {
+        Cookies.set('user', data.token, { expires: 1 });
+        window.location.href = '/';
+      } else {
+        setError('Identifiant ou mot de passe incorrect');
+      }
+    });
+
+    return () => {
+      newSocket.close()
+    }
+  }, [])
+
 
   const handleSubmit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
-    axios.post('http://localhost:3001/login', {email, password})
-    .then(res => {
-      if(res.data.validation){
-        Cookies.set('user', res.data.token, { expires: 1 });
-        window.location.href = '/';
-      }else{
-        setError('Identifiant ou mot de passe incorrect')
-      }
-    })
+    if (socket) {
+      socket.emit('login', { email, password });
+    }
   }
 
   return (

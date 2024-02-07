@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
+import { io } from 'socket.io-client';
 import Cookies from 'js-cookie';
 import { decodeToken } from 'react-jwt';
 // @ts-ignore
@@ -67,6 +68,7 @@ interface User {
 
 
 const Home = () => {
+    const [socket, setSocket] = useState<any>(null)
     const [conversations, setConversations] = useState<ConversationInfos[]>([])
     const [conversationMessages, setConversationMessages] = useState<message[]>([])
     const [conversationActive, setConversationActive] = useState<string>('')
@@ -80,6 +82,28 @@ const Home = () => {
     const [users, setUsers] = useState<UserInfos[]>([])
     const [userId, setUserId] = useState<string>('')
 
+    useEffect(() => {
+        const newSocket = io('http://localhost:3001')
+
+        newSocket.on('connect', () => {
+            setSocket(newSocket)
+        })
+
+        newSocket.emit('conversations', { cookies })
+
+        newSocket.on('conversations', (data) => {
+            if (data.conversations) {
+                setConversations(data.conversations)
+            } else {
+                console.log('Échec de la connexion:', data.error);
+            }
+        });
+
+        return () => {
+            newSocket.close()
+        }
+    }, [])
+
     const cookies = Cookies.get('user')
 
     useEffect(() => {
@@ -90,23 +114,26 @@ const Home = () => {
     }, [cookies])
 
     const getConversations = async () => {
-        axios.post('http://localhost:3001/conversations', { cookies })
-            .then(res => {
-                setConversations(res.data.conversations)
-            })
+        socket.emit('conversations', { cookies })
+        socket.on('conversations', (data: any) => {
+            if (data.conversations) {
+                setConversations(data.conversations)
+            } else {
+                console.log('Échec de la connexion:', data.error);
+            }
+        });
     }
 
     const getUsers = async () => {
-        axios.post('http://localhost:3001/users', { cookies })
-            .then(res => {
-                console.log(res.data.users)
-                setUsers(res.data.users)
-            })
+        socket.emit('users', { cookies })
+        socket.on('users', (data: any) => {
+            if (data.users) {
+                setUsers(data.users)
+            } else {
+                console.log('Échec de la connexion:', data.error);
+            }
+        });
     }
-
-    useEffect(() => {
-        getConversations()
-    }, [])
 
     const handleConversationActive = (conversationId: string) => {
         if (conversationId === conversationActive) {
@@ -128,13 +155,13 @@ const Home = () => {
     }
 
     const createConversation = async (user_id: string) => {
-        axios.post('http://localhost:3001/newconversation', { cookies, user_id })
-            .then(res => {
-                if (res.data.created) {
-                    getConversations()
-                    getUsers()
-                }
-            })
+        socket.emit('newconversation', { cookies, user_id })
+        socket.on('newconversation', (data: any) => {
+            if (data.created) {
+                getConversations()
+                getUsers()
+            }
+        })
     }
 
     const handleNewConv = () => {
@@ -151,25 +178,24 @@ const Home = () => {
     }
 
     const getConversationsMessages = async (conversation_id: string) => {
-        axios.post('http://localhost:3001/conversationmessages', { cookies, conversation_id })
-            .then(res => {
-                setConversationMessages(res.data.messages)
-                conv.messages = res.data.messages
-            })
+        socket.emit('conversationmessages', { cookies, conversation_id })
+        socket.on('conversationmessages', (data: any) => {
+            console.log(data.messages)
+            setConversationMessages(data.messages)
+            conv.messages = data.messages
+        })
     }
 
     const sendMessage = async (conversation_id: string) => {
         const content = message
         if (content.trim() === '') return
-        axios.post('http://localhost:3001/newmessage', { cookies, conversation_id, content })
-            .then(
-                res => {
-                    if (res.data.sent) {
-                        setMessage('')
-                        getConversationsMessages(conversation_id)
-                    }
-                }
-            )
+        socket.emit('newmessage', { cookies, conversation_id, content })
+        socket.on('newmessage', (data: any) => {
+            if (data.sent) {
+                setMessage('')
+                getConversationsMessages(conversation_id)
+            }
+        })
     }
 
     return (
@@ -273,7 +299,7 @@ const Home = () => {
                                             </p>
                                             <p className='messagetime'>
                                                 {new Date(Number(message.date)).getHours()}:
-                                                {Math.round(new Date(Number(message.date)).getMinutes() / 10)}{new Date(Number(message.date)).getMinutes()%10}
+                                                {Math.round(new Date(Number(message.date)).getMinutes() / 10)}{new Date(Number(message.date)).getMinutes() % 10}
                                             </p>
                                         </div>
                                     </div>
