@@ -28,6 +28,8 @@ import JoinFile from '../../assets/JoinFile.svg'
 import VoiceMessage from '../../assets/VoiceMessage.svg'
 // @ts-ignore
 import Send from '../../assets/Send.svg'
+//  @ts-ignore
+import Security from '../../assets/Security.svg'
 
 import './Home.css'
 
@@ -257,6 +259,11 @@ const Home = () => {
                         </div>
 
                         <div className="messagesection">
+                            <div className="messageprivacy">
+                                <img src={Security} alt="security" className='security' />
+                                <p className='securitymessage'>Les messages sont chiffrés de bout en bout. Personne en dehors de ce chat, pas même WhatsApp, ne peut les lire ou les écouter, cliquez pour en savoir plus.</p>
+                            </div>
+
                             {conv.messages.map((message) => {
                                 return (
                                     <div className={message.sender_id === userId ? 'messagesent' : 'messagereceived'} key={message._id}>
