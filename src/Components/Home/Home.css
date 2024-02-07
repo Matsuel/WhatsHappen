@@ -316,3 +316,24 @@
     width: 80%;
     text-align: center;
 }
+
+.messagesection {
+    width: 100%;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    overflow-y: auto;
+}
+
+.send {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #128C7E;
+    border-radius: 40px;
+    cursor: pointer;
+}

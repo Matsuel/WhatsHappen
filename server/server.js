@@ -125,6 +125,16 @@ app.post('/newmessage', async (req,res)=>{
     }
 })
 
+app.post('/conversationmessages', async (req,res)=>{
+    const {cookies, conversation_id} = req.body;
+    if(await checkToken(cookies)){
+        let messages = await Message.find({conversation_id});
+        res.send({messages});
+    }else{
+        res.send({messages: []});
+    }
+})
+
 const checkToken = async (cookies) => {
     const decoded = jwt.verify(cookies, secretTest);
     const user = await User.findOne({$or: [{username: decoded.pseudo}, {mail: decoded.mail}]});

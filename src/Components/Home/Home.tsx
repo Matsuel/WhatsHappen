@@ -25,6 +25,8 @@ import Emoji from '../../assets/Emoji.svg'
 import JoinFile from '../../assets/JoinFile.svg'
 // @ts-ignore
 import VoiceMessage from '../../assets/VoiceMessage.svg'
+// @ts-ignore
+import Send from '../../assets/Send.svg'
 
 import './Home.css'
 
@@ -39,10 +41,27 @@ interface UserInfos {
     _id: string
 }
 
+interface message {
+    _id: string,
+    conversation_id: string,
+    content: string,
+    sender_id: string,
+    date: string
+}
+
+interface conversation {
+    conversationInfos: ConversationInfos,
+    messages: message[]
+}
+
+
+
 const Home = () => {
     const [conversations, setConversations] = useState<ConversationInfos[]>([])
+    const [conversationMessages, setConversationMessages] = useState<message[]>([])
     const [conversationActive, setConversationActive] = useState<string>('')
     const [search, setSearch] = useState<string>('')
+    const [message, setMessage] = useState<string>('')
     const [searchUsers, setSearchUsers] = useState<string>('')
     const [typeConv, setTypeConv] = useState<number>(1)
     const [showNewConv, setShowNewConv] = useState<boolean>(false)
@@ -76,6 +95,7 @@ const Home = () => {
             return
         }
         setConversationActive(conversationId)
+        getConversationsMessages(conversationId)
     }
 
     const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -107,6 +127,27 @@ const Home = () => {
         setTimeout(() => {
             setCanRotate(false)
         }, 500)
+    }
+
+    const getConversationsMessages = async (conversation_id: string) => {
+        axios.post('http://localhost:3001/conversationmessages', { cookies, conversation_id })
+            .then(res => {
+                setConversationMessages(res.data.messages)
+            })
+    }
+
+    const sendMessage = async (conversation_id :string) => {
+        const content = message
+        if(content.trim() === '') return
+        axios.post('http://localhost:3001/newmessage', { cookies, conversation_id, content })
+            .then(
+                res => {
+                    if(res.data.sent){
+                        setMessage('')
+                        getConversationsMessages(conversation_id)
+                    }
+                }
+            )
     }
 
     return (
@@ -186,21 +227,30 @@ const Home = () => {
                                         Statut de la conversation
                                     </p>
                                 </div>
-
                             </div>
-
                             <div className="topbarright">
                                 <img src={Phone} alt="phoneconv" className='toprightbtn' />
                                 <img src={Video} alt="video" className='toprightbtn' />
                                 <img src={SearchConv} alt="searchconv" className='toprightbtn' />
                                 <img src={Expand} alt="expand" className='toprightbtn' />
                             </div>
+                        </div>
 
+                        <div className="messagesection">
+                            {conversationMessages.map((message) => {
+                                return (
+                                    <div className="message" key={message._id}>
+                                        <p>{message.content}</p>
+                                    </div>
+                                )
+                            })
+                            }
                         </div>
 
                         <div className="conversationbottombar">
                             <img src={JoinFile} alt="joinfile" className='joinfile' />
-                            <input type="text" name="message-input" id="message-input" className='message-input' onKeyUp={(e) => console.log(e.code)} />
+                            <input type="text" name="message-input" id="message-input" className='message-input' value={message} onChange={(e) => setMessage(e.target.value)} />
+                            <img src={Send} alt="send" className='send' onClick={() => sendMessage(conversationActive)} />
                             <img src={VoiceMessage} alt="voicemessage" className='voicemessage' />
                         </div>
                     </>
@@ -209,7 +259,6 @@ const Home = () => {
                         <img src={PhoneConv} alt="phoneconv" className='phoneconv' />
                         <h1 className="no-conv-title-active">Gardez votre téléphone connecté</h1>
                         <p className="no-conv-subtitle-active">Whatsapp se connecte à votre téléphone pour synchroniser les messages. Pour réduire l’utilisation des données. connectez votre téléphone au Wi-Fi.</p>
-
                     </div>
                 )}
 
