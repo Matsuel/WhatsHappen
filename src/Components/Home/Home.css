@@ -151,6 +151,19 @@
     cursor: pointer;
 }
 
+.newConv-rotate {
+    animation: rotation 0.5s linear;
+}
+
+@keyframes rotation {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(359deg);
+    }
+}
+
 .newconvmodal {
     position: absolute;
     top: 0;

@@ -19,6 +19,7 @@ const Home = () => {
     const [search, setSearch] = useState<string>('')
     const [typeConv, setTypeConv] = useState<number>(1)
     const [showNewConv, setShowNewConv] = useState<boolean>(false)
+    const [canRotate, setCanRotate] = useState<boolean>(false)
 
     const cookies = Cookies.get('user')
     
@@ -44,6 +45,18 @@ const Home = () => {
     const handleSearch = (e : React.ChangeEvent<HTMLInputElement>) => {
         setSearch(e.target.value)
         console.log(search)
+    }
+
+    const handleNewConv = () => {
+        setShowNewConv(!showNewConv)
+        setCanRotate(true)
+        rotateForSec()
+    }
+
+    const rotateForSec = () => {
+        setTimeout(() => {
+            setCanRotate(false)
+        }, 500)
     }
 
 
@@ -104,8 +117,10 @@ const Home = () => {
                     </div>
                 ) : null}
 
-                <div className="newconv-div" onClick={() => setShowNewConv(!showNewConv)}>
-                    <img src={NewConv} alt="newConv" className='newConv' />
+                <div className={`newconv-div ${canRotate ? 'newConv-rotate' : ''}`} 
+                onClick={() => handleNewConv()}>
+                    <img src={NewConv} alt="newconv"
+                    className='newConv' />
                 </div>
             </div>
 
