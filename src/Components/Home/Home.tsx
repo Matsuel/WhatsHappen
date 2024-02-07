@@ -60,6 +60,7 @@ const Home = () => {
     const [conversations, setConversations] = useState<ConversationInfos[]>([])
     const [conversationMessages, setConversationMessages] = useState<message[]>([])
     const [conversationActive, setConversationActive] = useState<string>('')
+    const [conv, setConv] = useState<conversation>({} as conversation)
     const [search, setSearch] = useState<string>('')
     const [message, setMessage] = useState<string>('')
     const [searchUsers, setSearchUsers] = useState<string>('')
@@ -96,6 +97,8 @@ const Home = () => {
         }
         setConversationActive(conversationId)
         getConversationsMessages(conversationId)
+        conv.messages= conversationMessages
+        conv.conversationInfos = conversations.find((conv) => conv._id === conversationId) as ConversationInfos
     }
 
     const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -133,6 +136,7 @@ const Home = () => {
         axios.post('http://localhost:3001/conversationmessages', { cookies, conversation_id })
             .then(res => {
                 setConversationMessages(res.data.messages)
+                conv.messages = res.data.messages
             })
     }
 
@@ -220,7 +224,7 @@ const Home = () => {
                                 <img src={Conv1} alt="conv1" className='conv1' />
                                 <div className="topbarnamestatut">
                                     <h2 className="conversationname">
-                                        Nom de la conversation
+                                        {conv.conversationInfos.name}
                                     </h2>
                                     <p className="conversationstatus">
                                         <img src={Online} alt="online" className='online' />
@@ -237,7 +241,7 @@ const Home = () => {
                         </div>
 
                         <div className="messagesection">
-                            {conversationMessages.map((message) => {
+                            {conv.messages.map((message) => {
                                 return (
                                     <div className="message" key={message._id}>
                                         <p>{message.content}</p>
