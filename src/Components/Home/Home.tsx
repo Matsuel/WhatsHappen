@@ -14,6 +14,7 @@ interface ConversationInfos {
 const Home = () => {
     const [conversations, setConversations] = useState<ConversationInfos[]>([])
     const [conversationActive, setConversationActive] = useState<string>('')
+    const [search, setSearch] = useState<string>('')
 
     const cookies = Cookies.get('user')
     
@@ -36,19 +37,28 @@ const Home = () => {
         setConversationActive(conversationId)
     }
 
+    const handleSearch = (e : React.ChangeEvent<HTMLInputElement>) => {
+        setSearch(e.target.value)
+        console.log(search)
+    }
+
 
     return (
         <div className="home">
             <div className="conversations-section">
                 <div className="searchBar">
                     <img src={Search} alt="search" className='searchLogo' />
-                    <input type="text" placeholder='Rechercher une conversation ici' name="search" id="search" className='convSearch' />
+                    <input type="text" placeholder='Rechercher une conversation ici' name="search" id="search" className='convSearch' onChange={handleSearch} />
                 </div>
                 {conversations.map((conversation) => {
                     return (
-                        <div className={`conversation ${conversation._id === conversationActive ? 'conversationActive' : ''}`} onClick={() => handleConversationActive(conversation._id)}>
-                            <p>{conversation.name}</p>
-                        </div>
+                        (
+                            conversation.name.toLowerCase().includes(search.toLowerCase()) ? (
+                                <div className={`conversation ${conversation._id === conversationActive ? 'conversationActive' : ''}`} onClick={() => handleConversationActive(conversation._id)} key={conversation._id}>
+                                    <p>{conversation.name}</p>
+                                </div>
+                            ) : null
+                        )
                     )
                 })}
             </div>
