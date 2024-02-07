@@ -82,13 +82,13 @@ app.post('/users', async (req,res)=>{
     }
 })
 
-app.post('/createConversation', async (req,res)=>{
-    const {cookies, user} = req.body;
+app.post('/newconversation', async (req,res)=>{
+    const {cookies, user_id} = req.body;
     if(await checkToken(cookies)){
         let creatorId = jwt.verify(cookies, secretTest).userId;
-        if (await Conversation.findOne({users_id: [creatorId, user._id]})) return res.send({created: false});
-        if (await Conversation.findOne({users_id: [user._id, creatorId]})) return res.send({created: false});
-        let conversation = new Conversation({users_id: [creatorId, user._id], type: 'single'});
+        if (await Conversation.findOne({users_id: [creatorId, user_id]})) return res.send({created: false});
+        if (await Conversation.findOne({users_id: [user_id, creatorId]})) return res.send({created: false});
+        let conversation = new Conversation({users_id: [creatorId, user_id], type: 'single'});
         await conversation.save();
         res.send({created: true});
     }else{

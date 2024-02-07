@@ -62,7 +62,17 @@ const Home = () => {
     }
 
     const handleSearchUsers = (e : React.ChangeEvent<HTMLInputElement>) => {
-        setSearchUsers(e.target.value)
+        setSearchUsers(e.target.value.trim())
+    }
+
+    const createConversation = async (user_id : string) => {
+        axios.post('http://localhost:3001/newconversation', {cookies, user_id})
+        .then(res => {
+            if (res.data.created) {
+                getConversations()
+                getUsers()
+            }
+        })
     }
 
     const handleNewConv = () => {
@@ -137,7 +147,7 @@ const Home = () => {
                             users.map((user) => {
                                 return (
                                     user.username.toLowerCase().includes(searchUsers.toLowerCase()) ? (
-                                        <div className="newconvuser" key={user._id}>
+                                        <div className="newconvuser" key={user._id} onClick={() => createConversation(user._id)}>
                                             <p>{user.username}</p>
                                         </div>
                                     ) : null
