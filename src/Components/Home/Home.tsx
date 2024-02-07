@@ -7,11 +7,13 @@ import './Home.css'
 
 interface ConversationInfos {
     _id: string,
-    users_id: string[]
+    users_id: string[],
+    name : string
 }
 
 const Home = () => {
     const [conversations, setConversations] = useState<ConversationInfos[]>([])
+    const [conversationActive, setConversationActive] = useState<string>('')
 
     const cookies = Cookies.get('user')
     
@@ -26,6 +28,14 @@ const Home = () => {
         getConversations()
     }, [])
 
+    const handleConversationActive = (conversationId : string) => {
+        if (conversationId === conversationActive) {
+            setConversationActive('')
+            return
+        }
+        setConversationActive(conversationId)
+    }
+
 
     return (
         <div className="home">
@@ -34,10 +44,10 @@ const Home = () => {
                     <img src={Search} alt="search" className='searchLogo' />
                     <input type="text" placeholder='Rechercher une conversation ici' name="search" id="search" className='convSearch' />
                 </div>
-                {conversations.map((conversation, index) => {
+                {conversations.map((conversation) => {
                     return (
-                        <div key={index} className="conversation">
-                            <p>{conversation._id}</p>
+                        <div className={`conversation ${conversation._id === conversationActive ? 'conversationActive' : ''}`} onClick={() => handleConversationActive(conversation._id)}>
+                            <p>{conversation.name}</p>
                         </div>
                     )
                 })}

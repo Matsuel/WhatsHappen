@@ -14,6 +14,24 @@
     align-items: center;
 }
 
+.conversation {
+    width: 90%;
+    height: 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 5%;
+}
+
+.conversationActive {
+    background-color: #D1E4E8;
+}
+
+.conversation:hover {
+    background-color: #D1E4E8;
+    cursor: pointer;
+}
+
 .messages-section {
     width: 70%;
     height: 100%;

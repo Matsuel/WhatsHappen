@@ -101,6 +101,14 @@ app.post('/conversations', async (req,res)=>{
     if(await checkToken(cookies)){
         let userId = jwt.verify(cookies, secretTest).userId;
         let conversations = await Conversation.find({users_id: userId});
+        conversations = await Promise.all(conversations.map(async (conversation)=>{
+            let otherUserId = conversation.users_id.filter((id)=>id!==userId)[0];
+
+            let otherUser = await User.findById(otherUserId);
+
+            return {...conversation.toObject(), name: otherUser.username};
+        }))
+        console.log(conversations);
         res.send({conversations: conversations});
     }else{
         res.send({conversations: []});
@@ -116,11 +124,6 @@ const checkToken = async (cookies) => {
 const getUuidOfUser = async (userId) => {
     const user = await User.findById(userId);
     return user.uuids;
-}
-
-const correctUuid = async (uuid)=>{
-    let uuids = getUuidOfUser(uuid);
-    return uuids.includes(uuid);
 }
 
 app.listen(3001,()=>{
