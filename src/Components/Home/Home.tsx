@@ -78,12 +78,12 @@ const Home = () => {
     const [showNewConv, setShowNewConv] = useState<boolean>(false)
     const [canRotate, setCanRotate] = useState<boolean>(false)
     const [users, setUsers] = useState<UserInfos[]>([])
-    const[userId , setUserId] = useState<string>('')
+    const [userId, setUserId] = useState<string>('')
 
     const cookies = Cookies.get('user')
 
     useEffect(() => {
-        if(cookies){
+        if (cookies) {
             const token: User | null = decodeToken(cookies)
             setUserId(token?.userId as string)
         }
@@ -115,7 +115,7 @@ const Home = () => {
         }
         setConversationActive(conversationId)
         getConversationsMessages(conversationId)
-        conv.messages= conversationMessages
+        conv.messages = conversationMessages
         conv.conversationInfos = conversations.find((conv) => conv._id === conversationId) as ConversationInfos
     }
 
@@ -158,13 +158,13 @@ const Home = () => {
             })
     }
 
-    const sendMessage = async (conversation_id :string) => {
+    const sendMessage = async (conversation_id: string) => {
         const content = message
-        if(content.trim() === '') return
+        if (content.trim() === '') return
         axios.post('http://localhost:3001/newmessage', { cookies, conversation_id, content })
             .then(
                 res => {
-                    if(res.data.sent){
+                    if (res.data.sent) {
                         setMessage('')
                         getConversationsMessages(conversation_id)
                     }
@@ -201,7 +201,7 @@ const Home = () => {
                                         (
                                             conversation.name.toLowerCase().includes(search.toLowerCase()) ? (
                                                 <div className={`conversation ${conversation._id === conversationActive ? 'conversationActive' : ''}`} onClick={() => handleConversationActive(conversation._id)} key={conversation._id}>
-                                                    <p>{conversation.name}</p>
+                                                    <p>{conversation.name.charAt(0).toUpperCase() + conversation.name.slice(1)}</p>
                                                 </div>
                                             ) : null
                                         )
@@ -242,7 +242,7 @@ const Home = () => {
                                 <img src={Conv1} alt="conv1" className='conv1' />
                                 <div className="topbarnamestatut">
                                     <h2 className="conversationname">
-                                        {conv.conversationInfos.name}
+                                        {conv.conversationInfos.name.charAt(0).toUpperCase() + conv.conversationInfos.name.slice(1)}
                                     </h2>
                                     <p className="conversationstatus">
                                         <img src={Online} alt="online" className='online' />
@@ -266,13 +266,19 @@ const Home = () => {
 
                             {conv.messages.map((message) => {
                                 return (
-                                    <div className={message.sender_id === userId ? 'messagesent' : 'messagereceived'} key={message._id}>
-                                        <p>{message.content}</p>
-                                        <p>{new Date(Number(message.date)).getHours()}:{new Date(Number(message.date)).getMinutes()}</p>
+                                    <div className="message">
+                                        <div className={message.sender_id === userId ? 'messagesent' : 'messagereceived'} key={message._id}>
+                                            <p className='messagecontent'>
+                                                {message.content}
+                                            </p>
+                                            <p className='messagetime'>
+                                                {new Date(Number(message.date)).getHours()}:
+                                                {Math.round(new Date(Number(message.date)).getMinutes() / 10)}{new Date(Number(message.date)).getMinutes()%10}
+                                            </p>
+                                        </div>
                                     </div>
                                 )
-                            })
-                            }
+                            })}
                         </div>
 
                         <div className="conversationbottombar">
