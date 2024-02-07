@@ -10,7 +10,7 @@ import './Home.css'
 interface ConversationInfos {
     _id: string,
     users_id: string[],
-    name : string
+    name: string
 }
 
 interface UserInfos {
@@ -26,30 +26,30 @@ const Home = () => {
     const [typeConv, setTypeConv] = useState<number>(1)
     const [showNewConv, setShowNewConv] = useState<boolean>(false)
     const [canRotate, setCanRotate] = useState<boolean>(false)
-    const [users , setUsers] = useState<UserInfos[]>([])
+    const [users, setUsers] = useState<UserInfos[]>([])
 
     const cookies = Cookies.get('user')
-    
+
     const getConversations = async () => {
-        axios.post('http://localhost:3001/conversations', {cookies})
-        .then(res => {
-            setConversations(res.data.conversations)
-        })
+        axios.post('http://localhost:3001/conversations', { cookies })
+            .then(res => {
+                setConversations(res.data.conversations)
+            })
     }
 
     const getUsers = async () => {
-        axios.post('http://localhost:3001/users', {cookies})
-        .then(res => {
-            console.log(res.data.users)  
-            setUsers(res.data.users)
-        })
+        axios.post('http://localhost:3001/users', { cookies })
+            .then(res => {
+                console.log(res.data.users)
+                setUsers(res.data.users)
+            })
     }
 
     useEffect(() => {
         getConversations()
     }, [])
 
-    const handleConversationActive = (conversationId : string) => {
+    const handleConversationActive = (conversationId: string) => {
         if (conversationId === conversationActive) {
             setConversationActive('')
             return
@@ -57,22 +57,22 @@ const Home = () => {
         setConversationActive(conversationId)
     }
 
-    const handleSearch = (e : React.ChangeEvent<HTMLInputElement>) => {
+    const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSearch(e.target.value)
     }
 
-    const handleSearchUsers = (e : React.ChangeEvent<HTMLInputElement>) => {
+    const handleSearchUsers = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSearchUsers(e.target.value.trim())
     }
 
-    const createConversation = async (user_id : string) => {
-        axios.post('http://localhost:3001/newconversation', {cookies, user_id})
-        .then(res => {
-            if (res.data.created) {
-                getConversations()
-                getUsers()
-            }
-        })
+    const createConversation = async (user_id: string) => {
+        axios.post('http://localhost:3001/newconversation', { cookies, user_id })
+            .then(res => {
+                if (res.data.created) {
+                    getConversations()
+                    getUsers()
+                }
+            })
     }
 
     const handleNewConv = () => {
@@ -87,7 +87,6 @@ const Home = () => {
             setCanRotate(false)
         }, 500)
     }
-
 
     return (
         <div className="home">
@@ -109,24 +108,28 @@ const Home = () => {
                     </div>
                 </div>
 
-                {
-                    typeConv === 1 ? (
-                        (
-                            conversations.map((conversation) => {
-                                return (
-                                    (
-                                        conversation.name.toLowerCase().includes(search.toLowerCase()) ? (
-                                            <div className={`conversation ${conversation._id === conversationActive ? 'conversationActive' : ''}`} onClick={() => handleConversationActive(conversation._id)} key={conversation._id}>
-                                                <p>{conversation.name}</p>
-                                            </div>
-                                        ) : null
-                                    )
-                                )
-                            })
-                        )
-                    ) : null
-                }
+                <div className="convslist">
 
+                    {
+                        typeConv === 1 ? (
+                            (
+                                conversations.map((conversation) => {
+                                    return (
+                                        (
+
+                                            conversation.name.toLowerCase().includes(search.toLowerCase()) ? (
+                                                <div className={`conversation ${conversation._id === conversationActive ? 'conversationActive' : ''}`} onClick={() => handleConversationActive(conversation._id)} key={conversation._id}>
+                                                    <p>{conversation.name}</p>
+                                                </div>
+                                            ) : null
+                                        )
+                                    )
+                                })
+                            )
+                        ) : null
+                    }
+
+                </div>
 
                 {/* {conversations.map((conversation) => {
                     return (

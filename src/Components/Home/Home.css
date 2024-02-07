@@ -122,6 +122,12 @@
     height: 20px;
 }
 
+.convslist {
+    width: 95%;
+    height: 80%;
+    overflow-y: auto;
+}
+
 .newconv-div {
     position: absolute;
     bottom: 5%;
