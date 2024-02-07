@@ -5,6 +5,19 @@ import Cookies from 'js-cookie';
 import Search from '../../assets/Search.svg'
 // @ts-ignore
 import NewConv from '../../assets/NewConv.svg'
+// @ts-ignore
+import Conv1 from '../../assets/conv1.svg'
+// @ts-ignore
+import Online from '../../assets/Online.svg'
+// @ts-ignore
+import Phone from '../../assets/Phone.svg'
+// @ts-ignore
+import Video from '../../assets/Video.svg'
+// @ts-ignore
+import SearchConv from '../../assets/SearchConv.svg'
+// @ts-ignore
+import Expand from '../../assets/Expand.svg'
+
 import './Home.css'
 
 interface ConversationInfos {
@@ -109,7 +122,6 @@ const Home = () => {
                 </div>
 
                 <div className="convslist">
-
                     {
                         typeConv === 1 ? (
                             (
@@ -128,20 +140,7 @@ const Home = () => {
                             )
                         ) : null
                     }
-
                 </div>
-
-                {/* {conversations.map((conversation) => {
-                    return (
-                        (
-                            conversation.name.toLowerCase().includes(search.toLowerCase()) ? (
-                                <div className={`conversation ${conversation._id === conversationActive ? 'conversationActive' : ''}`} onClick={() => handleConversationActive(conversation._id)} key={conversation._id}>
-                                    <p>{conversation.name}</p>
-                                </div>
-                            ) : null
-                        )
-                    )
-                })} */}
 
                 {showNewConv ? (
                     <div className="newconvmodal">
@@ -167,6 +166,29 @@ const Home = () => {
             </div>
 
             <div className="messages-section">
+                <div className="conversationtopbar">
+                    <div className="topbarleft">
+                        <img src={Conv1} alt="conv1" className='conv1' />
+                        <div className="topbarnamestatut">
+                            <h2 className="conversationname">
+                                Nom de la conversation
+                            </h2>
+                            <p className="conversationstatus">
+                                <img src={Online} alt="online" className='online' />
+                                Statut de la conversation
+                            </p>
+                        </div>
+                        
+                    </div>
+
+                    <div className="topbarright">
+                        <img src={Phone} alt="phoneconv" className='toprightbtn' />
+                        <img src={Video} alt="video" className='toprightbtn' />
+                        <img src={SearchConv} alt="searchconv" className='toprightbtn' />
+                        <img src={Expand} alt="expand" className='toprightbtn' />
+                    </div>
+
+                </div>
 
             </div>
 
