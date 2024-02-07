@@ -1,0 +1,53 @@
+.home {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    background-color: #F7F7FC;
+}
+
+.conversations-section {
+    width: 30%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.messages-section {
+    width: 70%;
+    height: 100%;
+    background-color: white;
+}
+
+.searchBar {
+    position: relative;
+    width: 80%;
+    height: 50px;
+    margin-top: 8%;
+}
+
+.convSearch {
+    border-radius: 24px;
+    width: 100%;
+    height: 100%;
+    font-size: 16px;
+    text-indent: 50px;
+    border: none;
+}
+
+.convSearch:focus {
+    outline: none;
+}
+
+.convSearch::placeholder {
+    color: #9393C1;
+}
+
+.searchLogo {
+    position: absolute;
+    top: 30%;
+    left: 5%;
+    width: 20px;
+    height: 20px;
+}
