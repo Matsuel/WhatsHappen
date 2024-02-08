@@ -1,15 +1,7 @@
 const express = require('express');
 const http = require('http');
 const socketIo = require('socket.io');
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
 const cors = require('cors');
-const mongoose = require('mongoose');
-const secretTest = "84554852585915452156252015015201520152152252"
-const User = require('./Models/User');
-const Message = require('./Models/Message');
-const Conversation = require('./Models/Conversation');
-const checkToken = require('./Functions/CheckToken');
 const connectMongo = require('./Functions/ConnectMongo');
 const login = require('./Sockets/Login');
 const register = require('./Sockets/Register');
@@ -32,7 +24,6 @@ const io = socketIo(server, {
 connectMongo();
 
 io.on('connection', (socket) => {
-
     login(socket);
     register(socket);
     getConversations(socket);
