@@ -16,4 +16,4 @@ function login(socket){
     });
 }
 
-module.exports = Login;
+module.exports = login;

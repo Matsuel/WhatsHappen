@@ -19,4 +19,4 @@ function register(socket) {
     });
 }
 
-module.exports = Register;
+module.exports = register;
