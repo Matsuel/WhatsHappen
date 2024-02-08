@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import axios from 'axios'
 import { io } from 'socket.io-client';
 import { decodeToken } from 'react-jwt';
@@ -80,6 +80,7 @@ const Home = () => {
     const [canRotate, setCanRotate] = useState<boolean>(false)
     const [users, setUsers] = useState<UserInfos[]>([])
     const [userId, setUserId] = useState<string>('')
+    const scrollBottomRef = useRef<HTMLDivElement>(null)
 
     const cookies = localStorage.getItem('user')
 
@@ -186,6 +187,12 @@ const Home = () => {
             setCanRotate(false)
         }, 500)
     }
+
+    useEffect(() => {
+        if (scrollBottomRef.current) {
+            scrollBottomRef.current.scrollIntoView()
+        }
+    }, [conversationMessages])
 
     const getConversationsMessages = async (conversation_id: string) => {
         socket.emit('conversationmessages', { cookies, conversation_id })
@@ -299,9 +306,9 @@ const Home = () => {
                                 <p className='securitymessage'>Les messages sont chiffrés de bout en bout. Personne en dehors de ce chat, pas même WhatsApp, ne peut les lire ou les écouter, cliquez pour en savoir plus.</p>
                             </div>
 
-                            {conv.messages.map((message) => {
+                            {conv.messages.map((message, i) => {
                                 return (
-                                    <div className="message">
+                                    <div className="message" ref={i === conv.messages.length - 1 ? scrollBottomRef : null} >
                                         <div className={message.sender_id === userId ? 'messagesent' : 'messagereceived'} key={message._id}>
                                             <p className='messagecontent'>
                                                 {message.content}
