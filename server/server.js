@@ -9,6 +9,8 @@ const secretTest = "84554852585915452156252015015201520152152252"
 const User = require('./Models/User');
 const Message = require('./Models/Message');
 const Conversation = require('./Models/Conversation');
+const checkToken = require('./Functions/CheckToken');
+const connectMongo = require('./Functions/ConnectMongo');
 
 
 const app = express();
@@ -23,28 +25,14 @@ const io = socketIo(server, {
     }
 });
 
-mongoose.connect('mongodb://localhost:27017/Whatsapp', { useNewUrlParser: true, useUnifiedTopology: true })
-    .then(() => console.log('Connected to the database'))
-    .catch((err) => console.log(err));
-
-const connectedUsers = [];
+connectMongo();
 
 io.on('connection', (socket) => {
-
-    connectedUsers.push(socket);
-
-    socket.on('disconnect', () => {
-        const index = connectedUsers.indexOf(socket);
-        if (index !== -1) {
-            connectedUsers.splice(index, 1);
-        }
-    });
 
     socket.on('login', async (data) => {
         const { email, password } = data;
         const user = await User.findOne({ $or: [{ username: email }, { mail: email }] });
         if ((user) && (await bcrypt.compare(password, user.password))) {
-            console.log('Connexion réussie');
             const token = jwt.sign({ userId: user._id, mail: user.mail, pseudo: user.username }, secretTest, { expiresIn: '48h' });
             socket.emit('login', { validation: true, token });
         } else {
@@ -76,7 +64,6 @@ io.on('connection', (socket) => {
                 let otherUser = await User.findById(otherUserId);
                 return { ...conversation.toObject(), name: otherUser.username };
             }))
-            console.log(conversations);
             socket.emit('conversations', { conversations: conversations });
         } else {
             socket.emit('conversations', { conversations: [] });
@@ -92,7 +79,7 @@ io.on('connection', (socket) => {
             let conversation = new Conversation({ users_id: [creatorId, user_id], type: 'single' });
             await conversation.save();
             socket.emit('newconversation', { created: true });
-        }else{
+        } else {
             socket.emit('newconversation', { created: false });
         }
     })
@@ -135,20 +122,15 @@ io.on('connection', (socket) => {
             let message = new Message({ sender_id, conversation_id, date: new Date().toISOString(), content });
             await message.save();
             socket.emit('newmessage', { sent: true });
-        }else{
+        } else {
             socket.emit('newmessage', { sent: false });
-        
+
         }
     })
 });
 
+server.listen(3001, () => {
+    console.log('Server is running on port 3001');
+});
 
-    const checkToken = async (cookies) => {
-        const decoded = jwt.verify(cookies, secretTest);
-        const user = await User.findOne({ $or: [{ username: decoded.pseudo }, { mail: decoded.mail }] });
-        return user ? true : false;
-    }
-
-    server.listen(3001, () => {
-        console.log('Server is running on port 3001');
-    });
+module.exports = server;
