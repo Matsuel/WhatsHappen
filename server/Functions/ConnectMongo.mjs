@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 function connectMongo() {
     mongoose.connect('mongodb://localhost:27017/Whatsapp', { useNewUrlParser: true, useUnifiedTopology: true })
@@ -6,4 +6,4 @@ function connectMongo() {
     .catch((err) => console.log(err));
 }
 
-module.exports = connectMongo;
+export {connectMongo};

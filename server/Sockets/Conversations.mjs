@@ -1,9 +1,9 @@
-const Conversation = require('../Models/Conversation');
-const User = require('../Models/User');
-const jwt = require('jsonwebtoken');
 const secretTest = "84554852585915452156252015015201520152152252"
-const Message = require('../Models/Message');
-const checkToken = require('../Functions/CheckToken');
+import {Conversation} from '../Models/Conversation.mjs';
+import {User} from '../Models/User.mjs';
+import jwt from 'jsonwebtoken';
+import {Message} from '../Models/Message.mjs';
+import checkToken from '../Functions/CheckToken.mjs';
 
 function getConversations(socket) {
     socket.on('conversations', async (data) => {
@@ -66,4 +66,4 @@ function newMessage(socket) {
     })
 }
 
-module.exports = { getConversations, createConversation, getMessages, newMessage }
+export { getConversations, createConversation, getMessages, newMessage };

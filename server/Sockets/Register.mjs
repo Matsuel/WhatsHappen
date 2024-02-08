@@ -1,6 +1,6 @@
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
-const User = require('../Models/User');
+import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
+import {User} from '../Models/User.mjs';
 const secretTest = "84554852585915452156252015015201520152152252"
 
 function register(socket) {
@@ -19,4 +19,4 @@ function register(socket) {
     });
 }
 
-module.exports = register;
+export { register}

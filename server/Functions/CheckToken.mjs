@@ -1,5 +1,5 @@
-const jwt = require('jsonwebtoken');
-const User = require('../Models/User');
+import jwt from 'jsonwebtoken';
+import {User} from '../Models/User.mjs';
 const secretTest = "84554852585915452156252015015201520152152252"
 
 const checkToken = async (cookies) => {
@@ -8,4 +8,4 @@ const checkToken = async (cookies) => {
     return user ? true : false;
 }
 
-module.exports = checkToken;
+export default checkToken;
