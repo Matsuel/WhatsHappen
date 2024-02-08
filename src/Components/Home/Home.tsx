@@ -81,12 +81,25 @@ const Home = () => {
     const [users, setUsers] = useState<UserInfos[]>([])
     const [userId, setUserId] = useState<string>('')
 
+    const cookies = localStorage.getItem('user')
+
+    useEffect(() => {
+        if (cookies) {
+            const token: User | null = decodeToken(cookies)
+            setUserId(token?.userId as string)
+        }
+    }, [cookies])
+
     useEffect(() => {
         const newSocket = io('http://localhost:3001')
 
         newSocket.on('connect', () => {
+            const cookies = localStorage.getItem('user')
+            const token: User | null = decodeToken(cookies as string)
+            const userId = token?.userId as string
             setSocket(newSocket)
         })
+        newSocket.emit('connection', { userId: userId })
 
         newSocket.emit('conversations', { cookies })
 
@@ -102,15 +115,6 @@ const Home = () => {
             newSocket.close()
         }
     }, [])
-
-    const cookies = localStorage.getItem('user')
-
-    useEffect(() => {
-        if (cookies) {
-            const token: User | null = decodeToken(cookies)
-            setUserId(token?.userId as string)
-        }
-    }, [cookies])
 
     const getConversations = async () => {
         socket.emit('conversations', { cookies })
