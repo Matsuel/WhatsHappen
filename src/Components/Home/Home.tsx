@@ -91,15 +91,17 @@ const Home = () => {
     }, [cookies])
 
     useEffect(() => {
+        const cookies = localStorage.getItem('user')
+        const token: User | null = decodeToken(cookies as string)
+        const userId = token?.userId as string
+        setUserId(userId)
         const newSocket = io('http://localhost:3001')
 
         newSocket.on('connect', () => {
-            const cookies = localStorage.getItem('user')
-            const token: User | null = decodeToken(cookies as string)
-            const userId = token?.userId as string
+
             setSocket(newSocket)
         })
-        newSocket.emit('connection', { userId: userId })
+        newSocket.emit('synchro', { userId: userId })
 
         newSocket.emit('conversations', { cookies })
 
@@ -110,6 +112,11 @@ const Home = () => {
                 console.log('Échec de la connexion:', data.error);
             }
         });
+
+        newSocket.on('syncmessages', (data) => {
+            setConversationMessages(data.messages)
+            conv.messages = data.messages
+        })
 
         return () => {
             newSocket.close()
@@ -183,7 +190,6 @@ const Home = () => {
     const getConversationsMessages = async (conversation_id: string) => {
         socket.emit('conversationmessages', { cookies, conversation_id })
         socket.on('conversationmessages', (data: any) => {
-            console.log(data.messages)
             setConversationMessages(data.messages)
             conv.messages = data.messages
         })

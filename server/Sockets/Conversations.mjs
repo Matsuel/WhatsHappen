@@ -61,7 +61,6 @@ function newMessage(socket) {
             socket.emit('newmessage', { sent: true });
         } else {
             socket.emit('newmessage', { sent: false });
-
         }
     })
 }
