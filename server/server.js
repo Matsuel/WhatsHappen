@@ -6,6 +6,10 @@ const jwt = require('jsonwebtoken');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const secretTest = "84554852585915452156252015015201520152152252"
+const User = require('./Models/User');
+const Message = require('./Models/Message');
+const Conversation = require('./Models/Conversation');
+
 
 const app = express();
 app.use(cors())
@@ -22,24 +26,6 @@ const io = socketIo(server, {
 mongoose.connect('mongodb://localhost:27017/Whatsapp', { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => console.log('Connected to the database'))
     .catch((err) => console.log(err));
-
-const User = mongoose.model('User', new mongoose.Schema({
-    username: String,
-    mail: String,
-    password: String,
-}));
-
-const Conversation = mongoose.model('Conversation', new mongoose.Schema({
-    users_id: Array,
-    type: String,
-}));
-
-const Message = mongoose.model('Message', new mongoose.Schema({
-    sender_id: String,
-    conversation_id: String,
-    date: String,
-    content: String,
-}));
 
 const connectedUsers = [];
 
