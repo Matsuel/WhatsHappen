@@ -2,9 +2,6 @@ import React,{useEffect, useState} from 'react'
 import './LoginPage.css'
 // @ts-ignore
 import WhatsApp from '../../assets/whatsapp.svg'
-import axios from 'axios'
-import { Navigate } from 'react-router-dom'
-import Cookies from 'js-cookie';
 import { io } from 'socket.io-client'
 
 const LoginPage = () => {
@@ -22,7 +19,7 @@ const LoginPage = () => {
 
     newSocket.on('login', (data) => {
       if (data.validation) {
-        Cookies.set('user', data.token, { expires: 1 });
+        localStorage.setItem('user', data.token);
         window.location.href = '/';
       } else {
         setError('Identifiant ou mot de passe incorrect');

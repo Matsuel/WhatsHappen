@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { io } from 'socket.io-client';
-import Cookies from 'js-cookie';
 import { decodeToken } from 'react-jwt';
 // @ts-ignore
 import Search from '../../assets/Search.svg'
@@ -104,7 +103,7 @@ const Home = () => {
         }
     }, [])
 
-    const cookies = Cookies.get('user')
+    const cookies = localStorage.getItem('user')
 
     useEffect(() => {
         if (cookies) {

@@ -3,8 +3,6 @@ import { io } from 'socket.io-client'
 import './Register.css'
 // @ts-ignore
 import WhatsApp from '../../assets/whatsapp.svg'
-import axios from 'axios'
-import Cookies from 'js-cookie';
 
 const Register = () => {
   const [socket, setSocket] = useState<any>(null)
@@ -28,7 +26,7 @@ const Register = () => {
 
     newSocket.on('register', (data) => {
       if (data.created) {
-        Cookies.set('user', data.token, { expires: 1 });
+        localStorage.setItem('user', data.token);
         window.location.href = '/';
       } else {
         console.log('Échec de la connexion:', data.error);

@@ -41,20 +41,13 @@ const Message = mongoose.model('Message', new mongoose.Schema({
     content: String,
 }));
 
-// Tableau pour stocker les informations sur les utilisateurs connectés
 const connectedUsers = [];
 
-// Route de connexion WebSocket
 io.on('connection', (socket) => {
-    console.log('Nouvelle connexion WebSocket établie');
 
-    // Ajouter le socket à la liste des utilisateurs connectés
     connectedUsers.push(socket);
 
-    // Gérer l'événement 'disconnect'
     socket.on('disconnect', () => {
-        console.log('Déconnexion WebSocket');
-        // Supprimer le socket de la liste des utilisateurs connectés
         const index = connectedUsers.indexOf(socket);
         if (index !== -1) {
             connectedUsers.splice(index, 1);
