@@ -6,7 +6,7 @@ import Send from '../../assets/Send.svg'
 // @ts-ignore
 import VoiceMessage from '../../assets/VoiceMessage.svg'
 
-const BottomBar = ({ conversationActive, message, setMessage, sendMessage }:any) => {
+const BottomBar = ({ conversationActive , message, setMessage, sendMessage }: BottomBarProps) => {
     return (
         <div className="conversationbottombar">
             <img src={JoinFile} alt="joinfile" className='joinfile' />

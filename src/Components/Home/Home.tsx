@@ -8,64 +8,11 @@ import BottomBar from '../BottomBar/BottomBar'
 import Search from '../../assets/Search.svg'
 // @ts-ignore
 import NewConv from '../../assets/NewConv.svg'
-// @ts-ignore
-import Conv1 from '../../assets/conv1.svg'
-// @ts-ignore
-import Online from '../../assets/Online.svg'
-// @ts-ignore
-import Phone from '../../assets/Phone.svg'
-// @ts-ignore
-import PhoneConv from '../../assets/PhoneConv.svg'
-// @ts-ignore
-import Video from '../../assets/Video.svg'
-// @ts-ignore
-import SearchConv from '../../assets/SearchConv.svg'
-// @ts-ignore
-import Expand from '../../assets/Expand.svg'
-// @ts-ignore
-import Emoji from '../../assets/Emoji.svg'
-// @ts-ignore
-import JoinFile from '../../assets/JoinFile.svg'
-// @ts-ignore
-import VoiceMessage from '../../assets/VoiceMessage.svg'
-// @ts-ignore
-import Send from '../../assets/Send.svg'
 //  @ts-ignore
 import Security from '../../assets/Security.svg'
 
 import './Home.css'
 import NoConvActive from '../NoConvActive/NoConvActive';
-
-interface ConversationInfos {
-    _id: string,
-    users_id: string[],
-    name: string
-}
-
-interface UserInfos {
-    username: string,
-    _id: string
-}
-
-interface message {
-    _id: string,
-    conversation_id: string,
-    content: string,
-    sender_id: string,
-    date: string
-}
-
-interface conversation {
-    conversationInfos: ConversationInfos,
-    messages: message[]
-}
-
-interface User {
-    userId: string,
-    username: string,
-    email: string,
-    password: string
-}
 
 
 
@@ -282,7 +229,9 @@ const Home = () => {
             <div className="messages-section">
                 {conversationActive !== '' ? (
                     <>
-                        <TopBar conv={conv} />
+                        <TopBar 
+                            conversation={conv} 
+                        />
 
                         <div className="messagesection">
                             <div className="messageprivacy">
@@ -307,7 +256,12 @@ const Home = () => {
                             })}
                         </div>
 
-                        <BottomBar conversationActive={conversationActive} message={message} setMessage={setMessage} sendMessage={sendMessage} />
+                        <BottomBar
+                            conversationActive={conversationActive}
+                            message={message}
+                            setMessage={setMessage}
+                            sendMessage={sendMessage}
+                        />
                     </>
                 ) : (
                     <NoConvActive />

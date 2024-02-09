@@ -12,7 +12,8 @@ import SearchConv from '../../assets/SearchConv.svg'
 // @ts-ignore
 import Expand from '../../assets/Expand.svg'
 
-const TopBar = ({conv}: any) => {
+
+const TopBar = ({ conversation: conv }: { conversation: conversation }) => {
     return (
         <div className="conversationtopbar">
             <div className="topbarleft">
