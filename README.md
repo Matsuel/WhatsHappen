@@ -11,7 +11,7 @@ npm start
 
 And now go on http://localhost:3000/ for test app
 
-
+Destructurer les objets envoyes en arguments
 Redesign de la bar de top et de la slide bar + ajouter menu à droite
 Créer une table de messages par conversation et limiter le nombre de messages chargés à 100 voir plus tard pour ne pas buguer
 Faire statut "est en train d'écrire"
