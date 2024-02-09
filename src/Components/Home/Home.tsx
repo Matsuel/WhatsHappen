@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from 'react'
 import axios from 'axios'
 import { io } from 'socket.io-client';
 import { decodeToken } from 'react-jwt';
+import TopBar from './TopBar/TopBar'
 // @ts-ignore
 import Search from '../../assets/Search.svg'
 // @ts-ignore
@@ -279,7 +280,7 @@ const Home = () => {
             <div className="messages-section">
                 {conversationActive !== '' ? (
                     <>
-                        <div className="conversationtopbar">
+                        {/* <div className="conversationtopbar">
                             <div className="topbarleft">
                                 <img src={Conv1} alt="conv1" className='conv1' />
                                 <div className="topbarnamestatut">
@@ -298,7 +299,9 @@ const Home = () => {
                                 <img src={SearchConv} alt="searchconv" className='toprightbtn' />
                                 <img src={Expand} alt="expand" className='toprightbtn' />
                             </div>
-                        </div>
+                        </div> */}
+
+                        <TopBar conv={conv} />
 
                         <div className="messagesection">
                             <div className="messageprivacy">

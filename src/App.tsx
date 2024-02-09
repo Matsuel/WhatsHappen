@@ -1,9 +1,9 @@
 import './App.css';
-import WelcomePage from './Components/WelcomePage/WelcomePage.tsx';
-import Profil from './Components/Profil/Profil.tsx';
-import Register from './Components/Register/Register.tsx';
-import LoginPage from './Components/LoginPage/LoginPage.tsx';
-import Home from './Components/Home/Home.tsx';
+import WelcomePage from './Components/WelcomePage/WelcomePage';
+import Profil from './Components/Profil/Profil';
+import Register from './Components/Register/Register';
+import LoginPage from './Components/LoginPage/LoginPage';
+import Home from './Components/Home/Home';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 function App() {

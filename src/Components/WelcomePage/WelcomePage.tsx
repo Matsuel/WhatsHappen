@@ -1,5 +1,6 @@
 import React from 'react'
 import './WelcomePage.css'
+// @ts-ignore
 import WhatsappGif from '../../assets/whatsapp.gif'
 
 const WelcomePage = () => {
