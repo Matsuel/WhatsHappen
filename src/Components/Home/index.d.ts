@@ -36,3 +36,17 @@ interface BottomBarProps {
     setMessage: Function,
     sendMessage: Function,
 }
+
+interface MessagesAreaProps {
+    conv: conversation,
+    userId: string,
+    scrollBottomRef: any
+}
+
+interface MessageProps {
+    message: message,
+    userId: string,
+    conv: conversation,
+    i: number,
+    scrollBottomRef: any
+}

@@ -8,12 +8,10 @@ import BottomBar from './BottomBar/BottomBar'
 import Search from '../../assets/Search.svg'
 // @ts-ignore
 import NewConv from '../../assets/NewConv.svg'
-//  @ts-ignore
-import Security from '../../assets/Security.svg'
 
 import './Home.css'
 import NoConvActive from './NoConvActive/NoConvActive';
-import MessagePrivacy from './MessagePrivacy/MessagePrivacy';
+import MessagesArea from './MessagesArea/MessagesArea';
 
 
 
@@ -234,25 +232,7 @@ const Home = () => {
                             conversation={conv} 
                         />
 
-                        <div className="messagesection">
-                            <MessagePrivacy />
-
-                            {conv.messages.map((message, i) => {
-                                return (
-                                    <div className="message" ref={i === conv.messages.length - 1 ? scrollBottomRef : null} >
-                                        <div className={message.sender_id === userId ? 'messagesent' : 'messagereceived'} key={message._id}>
-                                            <p className='messagecontent'>
-                                                {message.content}
-                                            </p>
-                                            <p className='messagetime'>
-                                                {new Date(message.date).getHours()}:
-                                                {Math.round(new Date(message.date).getMinutes() / 10)}{new Date(message.date).getMinutes() % 10}
-                                            </p>
-                                        </div>
-                                    </div>
-                                )
-                            })}
-                        </div>
+                        <MessagesArea conv={conv} userId={userId} scrollBottomRef={scrollBottomRef} />
 
                         <BottomBar
                             conversationActive={conversationActive}
