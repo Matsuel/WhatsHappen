@@ -2,7 +2,8 @@ import React, { useEffect, useState, useRef } from 'react'
 import axios from 'axios'
 import { io } from 'socket.io-client';
 import { decodeToken } from 'react-jwt';
-import TopBar from './TopBar/TopBar'
+import TopBar from '../TopBar/TopBar'
+import BottomBar from '../BottomBar/BottomBar'
 // @ts-ignore
 import Search from '../../assets/Search.svg'
 // @ts-ignore
@@ -33,6 +34,7 @@ import Send from '../../assets/Send.svg'
 import Security from '../../assets/Security.svg'
 
 import './Home.css'
+import NoConvActive from '../NoConvActive/NoConvActive';
 
 interface ConversationInfos {
     _id: string,
@@ -280,27 +282,6 @@ const Home = () => {
             <div className="messages-section">
                 {conversationActive !== '' ? (
                     <>
-                        {/* <div className="conversationtopbar">
-                            <div className="topbarleft">
-                                <img src={Conv1} alt="conv1" className='conv1' />
-                                <div className="topbarnamestatut">
-                                    <h2 className="conversationname">
-                                        {conv.conversationInfos.name.charAt(0).toUpperCase() + conv.conversationInfos.name.slice(1)}
-                                    </h2>
-                                    <p className="conversationstatus">
-                                        <img src={Online} alt="online" className='online' />
-                                        Statut de la conversation
-                                    </p>
-                                </div>
-                            </div>
-                            <div className="topbarright">
-                                <img src={Phone} alt="phoneconv" className='toprightbtn' />
-                                <img src={Video} alt="video" className='toprightbtn' />
-                                <img src={SearchConv} alt="searchconv" className='toprightbtn' />
-                                <img src={Expand} alt="expand" className='toprightbtn' />
-                            </div>
-                        </div> */}
-
                         <TopBar conv={conv} />
 
                         <div className="messagesection">
@@ -326,19 +307,10 @@ const Home = () => {
                             })}
                         </div>
 
-                        <div className="conversationbottombar">
-                            <img src={JoinFile} alt="joinfile" className='joinfile' />
-                            <input type="text" name="message-input" id="message-input" className='message-input' value={message} onChange={(e) => setMessage(e.target.value)} />
-                            <img src={Send} alt="send" className='send' onClick={() => sendMessage(conversationActive)} />
-                            <img src={VoiceMessage} alt="voicemessage" className='voicemessage' />
-                        </div>
+                        <BottomBar conversationActive={conversationActive} message={message} setMessage={setMessage} sendMessage={sendMessage} />
                     </>
                 ) : (
-                    <div className="noconvactive">
-                        <img src={PhoneConv} alt="phoneconv" className='phoneconv' />
-                        <h1 className="no-conv-title-active">Gardez votre téléphone connecté</h1>
-                        <p className="no-conv-subtitle-active">Whatsapp se connecte à votre téléphone pour synchroniser les messages. Pour réduire l’utilisation des données. connectez votre téléphone au Wi-Fi.</p>
-                    </div>
+                    <NoConvActive />
                 )}
 
             </div>
