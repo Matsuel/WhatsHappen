@@ -8,6 +8,10 @@ import BottomBar from './BottomBar/BottomBar'
 import Search from '../../assets/Search.svg'
 // @ts-ignore
 import NewConv from '../../assets/NewConv.svg'
+// @ts-ignore
+import Conv1 from '../../assets/conv1.svg'
+// @ts-ignore
+import Online from '../../assets/Online.svg'
 
 import './Home.css'
 import NoConvActive from './NoConvActive/NoConvActive';
@@ -203,8 +207,14 @@ const Home = () => {
                                         (
                                             conversation.name.toLowerCase().includes(search.toLowerCase()) ? (
                                                 <div className={`conversation ${conversation._id === conversationActive ? 'conversationActive' : ''}`} onClick={() => handleConversationActive(conversation._id)} key={conversation._id}>
-                                                    <p>{conversation.name.charAt(0).toUpperCase() + conversation.name.slice(1)}</p>
-                                                    <p>{isTyping? "Est en train d'écrire":""}</p>
+                                                    <div className="convimagestatus">
+                                                        <img src={Conv1} alt="conv1" className='conversationimage' />
+                                                        <img src={Online} alt="online" className='speakerstatus' />
+                                                    </div>
+                                                    <div className="conversationinfos">
+                                                        <div>{conversation.name.charAt(0).toUpperCase() + conversation.name.slice(1)}</div>
+                                                        <div>{isTyping? "Est en train d'écrire":""}</div>
+                                                    </div>
                                                 </div>
                                             ) : null
                                         )

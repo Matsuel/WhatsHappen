@@ -74,13 +74,48 @@
 
 .conversation {
     width: 90%;
-    height: 9%;
+    height: 11%;
     border-radius: 12px;
     display: flex;
+    flex-direction: row;
     align-items: center;
-    /* justify-content: space-between; */
-    justify-content: center;
+    justify-content: space-around;
     margin-top: 5%;
+}
+
+.convimagestatus {
+    justify-self: center;
+    position: relative;
+    width: auto;
+    height: 100%;
+    margin-top: 15px;
+}
+
+.speakerstatus {
+    position: absolute;
+    bottom: 15px;
+    right: 0;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #fff;
+    border: 2px solid #F6F6F6;
+}
+
+.conversationimage {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+
+}
+
+.conversationinfos {
+    width: 60%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-evenly;
 }
 
 .conversationActive {
