@@ -29,6 +29,7 @@ const io = new Server(server, {
 });
 
 let connectedUsers = {};
+let typingTimeouts = {};
 
 connectMongo();
 
@@ -38,6 +39,32 @@ io.on('connection', (socket) => {
         if (!connectedUsers[data.userId]) {
             connectedUsers[data.userId] = socket;
             console.log(Object.keys(connectedUsers));
+        }
+    })
+
+    socket.on('disconnect', () => {
+        for (let [key, value] of Object.entries(connectedUsers)) {
+            if (value === socket) {
+                delete connectedUsers[key];
+            }
+        }
+    })
+
+    socket.on('typing', async (data) => {
+        const { cookies, conversation_id } = data;
+        if (checkToken(cookies)) {
+            const sender_id = jwt.verify(cookies, secretTest).userId;
+            const conversation = await Conversation.findById(conversation_id);
+            const otherId = conversation.users_id.filter((id) => id !== sender_id)[0];
+            
+            if (typingTimeouts[otherId]) {
+                clearTimeout(typingTimeouts[otherId]);
+            }
+
+            typingTimeouts[otherId] = setTimeout(() => {
+                if (connectedUsers[otherId]) connectedUsers[otherId].emit('typing', { typing: false });
+            }, 2000);
+            if (connectedUsers[otherId]) connectedUsers[otherId].emit('typing', { typing: true });
         }
     })
 

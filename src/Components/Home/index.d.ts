@@ -33,7 +33,7 @@ interface User {
 interface BottomBarProps {
     conversationActive: string,
     message: string,
-    setMessage: Function,
+    handleMessageChange: Function,
     sendMessage: Function,
 }
 

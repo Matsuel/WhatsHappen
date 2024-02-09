@@ -16,6 +16,7 @@ import MessagesArea from './MessagesArea/MessagesArea';
 
 
 const Home = () => {
+    const [isTyping, setIsTyping] = useState<boolean>(false)
     const [socket, setSocket] = useState<any>(null)
     const [conversations, setConversations] = useState<ConversationInfos[]>([])
     const [conversationMessages, setConversationMessages] = useState<message[]>([])
@@ -62,6 +63,11 @@ const Home = () => {
                 console.log('Échec de la connexion:', data.error);
             }
         });
+
+        newSocket.on('typing', (data) => {
+            setIsTyping(data.typing)
+            console.log(data)
+        })
 
         newSocket.on('syncmessages', (data) => {
             setConversationMessages(data.messages)
@@ -131,6 +137,11 @@ const Home = () => {
         rotateForSec()
     }
 
+    const handleMessageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        socket.emit('typing', { cookies, conversation_id: conversationActive })
+        setMessage(e.target.value)
+    }
+
     const rotateForSec = () => {
         setTimeout(() => {
             setCanRotate(false)
@@ -193,6 +204,7 @@ const Home = () => {
                                             conversation.name.toLowerCase().includes(search.toLowerCase()) ? (
                                                 <div className={`conversation ${conversation._id === conversationActive ? 'conversationActive' : ''}`} onClick={() => handleConversationActive(conversation._id)} key={conversation._id}>
                                                     <p>{conversation.name.charAt(0).toUpperCase() + conversation.name.slice(1)}</p>
+                                                    <p>{isTyping? "Est en train d'écrire":""}</p>
                                                 </div>
                                             ) : null
                                         )
@@ -237,7 +249,8 @@ const Home = () => {
                         <BottomBar
                             conversationActive={conversationActive}
                             message={message}
-                            setMessage={setMessage}
+                            // setMessage={setMessage}
+                            handleMessageChange={handleMessageChange}
                             sendMessage={sendMessage}
                         />
                     </>
