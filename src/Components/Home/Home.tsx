@@ -2,8 +2,8 @@ import React, { useEffect, useState, useRef } from 'react'
 import axios from 'axios'
 import { io } from 'socket.io-client';
 import { decodeToken } from 'react-jwt';
-import TopBar from '../TopBar/TopBar'
-import BottomBar from '../BottomBar/BottomBar'
+import TopBar from './TopBar/TopBar'
+import BottomBar from './BottomBar/BottomBar'
 // @ts-ignore
 import Search from '../../assets/Search.svg'
 // @ts-ignore
@@ -12,7 +12,8 @@ import NewConv from '../../assets/NewConv.svg'
 import Security from '../../assets/Security.svg'
 
 import './Home.css'
-import NoConvActive from '../NoConvActive/NoConvActive';
+import NoConvActive from './NoConvActive/NoConvActive';
+import MessagePrivacy from './MessagePrivacy/MessagePrivacy';
 
 
 
@@ -234,10 +235,7 @@ const Home = () => {
                         />
 
                         <div className="messagesection">
-                            <div className="messageprivacy">
-                                <img src={Security} alt="security" className='security' />
-                                <p className='securitymessage'>Les messages sont chiffrés de bout en bout. Personne en dehors de ce chat, pas même WhatsApp, ne peut les lire ou les écouter, cliquez pour en savoir plus.</p>
-                            </div>
+                            <MessagePrivacy />
 
                             {conv.messages.map((message, i) => {
                                 return (
