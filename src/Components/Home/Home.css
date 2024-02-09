@@ -348,6 +348,8 @@
     width: 80%;
     height: auto;
     align-self: flex-start;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    overflow-wrap: break-word;
     margin-left: 20px;
 }
 
