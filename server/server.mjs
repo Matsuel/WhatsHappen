@@ -62,9 +62,9 @@ io.on('connection', (socket) => {
             }
 
             typingTimeouts[otherId] = setTimeout(() => {
-                if (connectedUsers[otherId]) connectedUsers[otherId].emit('typing', { typing: false });
+                if (connectedUsers[otherId]) connectedUsers[otherId].emit('typing', { typing: false, conversationId : conversation_id });
             }, 2000);
-            if (connectedUsers[otherId]) connectedUsers[otherId].emit('typing', { typing: true });
+            if (connectedUsers[otherId]) connectedUsers[otherId].emit('typing', { typing: true, conversationId : conversation_id });
         }
     })
 
