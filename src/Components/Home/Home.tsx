@@ -20,7 +20,7 @@ import MessagesArea from './MessagesArea/MessagesArea';
 
 
 const Home = () => {
-    const [isTyping, setIsTyping] = useState<boolean>(false)
+    const [typingStatus, setTypingStatus] = useState<{}>({})
     const [socket, setSocket] = useState<any>(null)
     const [conversations, setConversations] = useState<ConversationInfos[]>([])
     const [conversationMessages, setConversationMessages] = useState<message[]>([])
@@ -69,8 +69,10 @@ const Home = () => {
         });
 
         newSocket.on('typing', (data) => {
-            setIsTyping(data.typing)
-            console.log(data)
+            setTypingStatus((prev) => ({
+                ...prev,
+                [data.conversationId]: data.typing
+            }))
         })
 
         newSocket.on('syncmessages', (data) => {
@@ -202,7 +204,7 @@ const Home = () => {
                     {
                         typeConv === 1 ? (
                             (
-                                conversations.map((conversation) => {
+                                conversations.map((conversation, index) => {
                                     return (
                                         (
                                             conversation.name.toLowerCase().includes(search.toLowerCase()) ? (
@@ -213,7 +215,7 @@ const Home = () => {
                                                     </div>
                                                     <div className="conversationinfos">
                                                         <div>{conversation.name.charAt(0).toUpperCase() + conversation.name.slice(1)}</div>
-                                                        <div>{isTyping? "Est en train d'écrire":""}</div>
+                                                        <div>{typingStatus[conversation._id as keyof typeof typingStatus] ? "Est en train d'écrire" : ""}</div>
                                                     </div>
                                                 </div>
                                             ) : null
