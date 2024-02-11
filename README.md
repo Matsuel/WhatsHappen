@@ -11,17 +11,19 @@ npm start
 
 And now go on http://localhost:3000/ for test app
 
-Créer une table de messages par conversation et limiter le nombre de messages chargés à 100 voir plus tard pour ne pas buguer
-Destructurer les objets envoyes en arguments
-Redesign de la bar de top et de la slide bar + ajouter menu à droite
-Faire statut en ligne ou non
-Recherche de messages dans la conversation
-Permettre de mettre des noms custom aux personnes, et des réactions
-Faire du chiffrement de bout en bout avec des clés publiques et privées différentes pour chaque conversation
-Faire envoie de fichier
-Images du compte à afficher
-Permettre les groupes
-Edition du profil
-Afficher les conversations dans le sens du message le + récent, pin une conversation et l'afficher au début
-Custom clique droit message dans message area pour pouvoir changer de thème donc créer un ensemble de thèmes
-Appel
+<ol>
+<li>Créer une table de messages par conversation et limiter le nombre de messages chargés à 100 voir plus tard pour ne pas buguer</li>
+<li>Destructurer les objets envoyes en arguments</li>
+<li>Redesign de la bar de top et de la slide bar + ajouter menu à droite</li>
+<li>Faire statut en ligne ou non</li>
+<li>Recherche de messages dans la conversation</li>
+<li>Permettre de mettre des noms custom aux personnes, et des réactions</li>
+<li>Faire du chiffrement de bout en bout avec des clés publiques et privées différentes pour chaque conversation</li>
+<li>Faire envoie de fichier</li>
+<li>Images du compte à afficher</li>
+<li>Permettre les groupes</li>
+<li>Edition du profil</li>
+<li>Afficher les conversations dans le sens du message le + récent, pin une conversation et l'afficher au début</li>
+<li>Custom clique droit message dans message area pour pouvoir changer de thème donc créer un ensemble de thèmes</li>
+<li>Appel</li>
+</ol>
