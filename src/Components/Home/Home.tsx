@@ -204,7 +204,7 @@ const Home = () => {
                     {
                         typeConv === 1 ? (
                             (
-                                conversations.map((conversation, index) => {
+                                conversations.map((conversation) => {
                                     return (
                                         (
                                             conversation.name.toLowerCase().includes(search.toLowerCase()) ? (
@@ -264,6 +264,8 @@ const Home = () => {
                             // setMessage={setMessage}
                             handleMessageChange={handleMessageChange}
                             sendMessage={sendMessage}
+                            typingStatus={typingStatus}
+                            conversation={conv}
                         />
                     </>
                 ) : (

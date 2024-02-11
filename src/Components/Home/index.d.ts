@@ -35,6 +35,8 @@ interface BottomBarProps {
     message: string,
     handleMessageChange: Function,
     sendMessage: Function,
+    typingStatus: Object,
+    conversation: conversation
 }
 
 interface MessagesAreaProps {
