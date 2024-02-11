@@ -1,6 +1,5 @@
 import React,{useEffect, useState} from 'react'
 import './LoginPage.css'
-// @ts-ignore
 import WhatsApp from '../../assets/whatsapp.svg'
 import { io } from 'socket.io-client'
 

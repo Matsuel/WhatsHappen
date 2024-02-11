@@ -1,8 +1,6 @@
 import React from 'react'
 import './Profil.css'
-// @ts-ignore
 import BackArrow from '../../assets/BackArrow.svg'
-// @ts-ignore
 import Camera from '../../assets/Camera.svg'
 
 const Profil = () => {

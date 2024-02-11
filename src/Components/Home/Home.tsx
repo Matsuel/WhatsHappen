@@ -4,13 +4,9 @@ import { io } from 'socket.io-client';
 import { decodeToken } from 'react-jwt';
 import TopBar from './TopBar/TopBar'
 import BottomBar from './BottomBar/BottomBar'
-// @ts-ignore
 import Search from '../../assets/Search.svg'
-// @ts-ignore
 import NewConv from '../../assets/NewConv.svg'
-// @ts-ignore
 import Conv1 from '../../assets/conv1.svg'
-// @ts-ignore
 import Online from '../../assets/Online.svg'
 
 import './Home.css'

@@ -1,5 +1,4 @@
 import React from 'react'
-// @ts-ignore
 import PhoneConv from '../../../assets/PhoneConv.svg'
 
 const NoConvActive = () => {

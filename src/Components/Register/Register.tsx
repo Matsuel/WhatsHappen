@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { io } from 'socket.io-client'
 import './Register.css'
-// @ts-ignore
 import WhatsApp from '../../assets/whatsapp.svg'
 
 const Register = () => {

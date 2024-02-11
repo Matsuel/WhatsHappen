@@ -1,15 +1,9 @@
 import React from 'react'
-// @ts-ignore
 import Conv1 from '../../../assets/conv1.svg'
-// @ts-ignore
 import Online from '../../../assets/Online.svg'
-// @ts-ignore
 import Phone from '../../../assets/Phone.svg'
-// @ts-ignore
 import Video from '../../../assets/Video.svg'
-// @ts-ignore
 import SearchConv from '../../../assets/SearchConv.svg'
-// @ts-ignore
 import Expand from '../../../assets/Expand.svg'
 
 

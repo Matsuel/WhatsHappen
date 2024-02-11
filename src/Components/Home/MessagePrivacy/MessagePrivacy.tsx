@@ -1,5 +1,4 @@
 import React from 'react'
-// @ts-ignore
 import Security from '../../../assets/Security.svg'
 
 const MessagePrivacy = () => {

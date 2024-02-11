@@ -1,9 +1,6 @@
 import React from 'react'
-// @ts-ignore
 import JoinFile from '../../../assets/JoinFile.svg'
-// @ts-ignore
 import Send from '../../../assets/Send.svg'
-// @ts-ignore
 import VoiceMessage from '../../../assets/VoiceMessage.svg'
 
 const BottomBar = ({ conversationActive , message, handleMessageChange, sendMessage, typingStatus, conversation }: BottomBarProps) => {
