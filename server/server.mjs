@@ -7,10 +7,11 @@ import {login} from './Sockets/Login.mjs';
 import {register} from './Sockets/Register.mjs';
 import { getConversations, createConversation, getMessages, newMessage } from './Sockets/Conversations.mjs';
 import {getUsers} from './Sockets/Users.mjs';
-import {Message} from './Models/Message.mjs';
+import {Message, MessageSchema} from './Models/Message.mjs';
 import {Conversation} from './Models/Conversation.mjs';
 import jwt from 'jsonwebtoken';
 import checkToken from './Functions/CheckToken.mjs';
+import mongoose from 'mongoose';
 const secretTest = "84554852585915452156252015015201520152152252"
 
 
@@ -72,8 +73,9 @@ io.on('connection', (socket) => {
         const { cookies, conversation_id, content } = data;
         if (await checkToken(cookies)) {
             const sender_id = jwt.verify(cookies, secretTest).userId;
-            let message = new Message({ sender_id, conversation_id, date: new Date().toISOString(), content });
-            await message.save();
+            let MessageModel = mongoose.model('Messages'+conversation_id);
+            let message ={ sender_id, conversation_id, date: new Date().toISOString(), content };
+            await MessageModel.create(message);
             socket.emit('newmessage', { sent: true });
             otherSynchroMessage(cookies, conversation_id);
         } else {
@@ -85,7 +87,8 @@ io.on('connection', (socket) => {
         const sender_id = jwt.verify(cookies, secretTest).userId;
         const conversation = await Conversation.findById(conversation_id);
         const otherId = conversation.users_id.filter((id) => id !== sender_id)[0];
-        if (connectedUsers[otherId]) connectedUsers[otherId].emit('syncmessages', {messages : await Message.find({ conversation_id })});
+        const M = mongoose.model('Messages'+conversation_id);
+        if (connectedUsers[otherId]) connectedUsers[otherId].emit('syncmessages', {messages : await M.find()});
     }
 
 

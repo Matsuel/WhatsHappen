@@ -7,4 +7,11 @@ const Message = mongoose.model('Message', new mongoose.Schema({
     content: String,
 }));
 
-export {Message};
+const MessageSchema = new mongoose.Schema({
+    sender_id: { type: String, required: true },
+    conversation_id: { type: String, required: true },
+    date: { type: String, required: true },
+    content: { type: String, required: true }
+});
+
+export {Message, MessageSchema};

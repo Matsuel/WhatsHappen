@@ -2,8 +2,11 @@ const secretTest = "84554852585915452156252015015201520152152252"
 import {Conversation} from '../Models/Conversation.mjs';
 import {User} from '../Models/User.mjs';
 import jwt from 'jsonwebtoken';
-import {Message} from '../Models/Message.mjs';
+import {Message, MessageSchema} from '../Models/Message.mjs';
 import checkToken from '../Functions/CheckToken.mjs';
+import mongoose from 'mongoose';
+
+
 
 function getConversations(socket) {
     socket.on('conversations', async (data) => {
@@ -32,6 +35,8 @@ function createConversation(socket) {
             if (await Conversation.findOne({ users_id: [user_id, creatorId] })) return socket.emit('newconversation', { created: false });
             let conversation = new Conversation({ users_id: [creatorId, user_id], type: 'single' });
             await conversation.save();
+            let conv = mongoose.model('Messages'+conversation._id, MessageSchema);
+            conv.createCollection();
             socket.emit('newconversation', { created: true });
         } else {
             socket.emit('newconversation', { created: false });
@@ -43,7 +48,8 @@ function getMessages(socket) {
     socket.on('conversationmessages', async (data) => {
         const { cookies, conversation_id } = data;
         if (await checkToken(cookies)) {
-            let messages = await Message.find({ conversation_id });
+            const MessageModel = mongoose.model('Messages'+conversation_id, MessageSchema);
+            let messages = await MessageModel.find();
             socket.emit('conversationmessages', { messages: messages });
         } else {
             socket.emit('conversationmessages', { messages: [] });
