@@ -21,7 +21,7 @@ And now go on http://localhost:3000/ for test app
 <li>Faire envoie de fichier</li>
 <li>Permettre les groupes</li>
 <li>Edition du profil</li>
-<li>Afficher les conversations dans le sens du message le + récent, pin une conversation et l'afficher au début</li>
+<li>Afficher les conversations  pin une conversation et l'afficher au début</li>
 <li>Custom clique droit message dans message area pour pouvoir changer de thème donc créer un ensemble de thèmes</li>
 <li>Appel</li>
 </ol>
