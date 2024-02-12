@@ -50,7 +50,6 @@ const Home = () => {
         const newSocket = io('http://localhost:3001')
 
         newSocket.on('connect', () => {
-
             setSocket(newSocket)
         })
         newSocket.emit('synchro', { userId: userId })
@@ -59,12 +58,17 @@ const Home = () => {
 
         newSocket.on('conversations', (data) => {
             if (data.conversations) {
-                console.log(data.conversations)
                 setConversations(data.conversations)
             } else {
                 console.log('Échec de la connexion:', data.error);
             }
         });
+
+        setInterval(() => {
+            if (newSocket!==null) {
+                newSocket.emit('conversations', { cookies })
+            }
+        }, 60000)
 
         newSocket.on('typing', (data) => {
             setTypingStatus((prev) => ({
