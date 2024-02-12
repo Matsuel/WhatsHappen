@@ -58,6 +58,7 @@ const Home = () => {
 
         newSocket.on('conversations', (data) => {
             if (data.conversations) {
+                console.log(data.conversations)
                 setConversations(data.conversations)
             } else {
                 console.log('Échec de la connexion:', data.error);
@@ -206,7 +207,7 @@ const Home = () => {
                                             conversation.name.toLowerCase().includes(search.toLowerCase()) ? (
                                                 <div className={`conversation ${conversation._id === conversationActive ? 'conversationActive' : ''}`} onClick={() => handleConversationActive(conversation._id)} key={conversation._id}>
                                                     <div className="convimagestatus">
-                                                        <img src={Conv1} alt="conv1" className='conversationimage' />
+                                                        <img src={conversation.pic? `data:image/jpeg;base64,${conversation.pic}`: Conv1} alt="conv1" className='conversationimage' />
                                                         <img src={Online} alt="online" className='speakerstatus' />
                                                     </div>
                                                     <div className="conversationinfos">

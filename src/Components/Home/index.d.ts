@@ -2,7 +2,8 @@
 interface ConversationInfos {
     _id: string,
     users_id: string[],
-    name: string
+    name: string,
+    pic: string
 }
 
 interface UserInfos {

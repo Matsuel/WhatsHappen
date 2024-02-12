@@ -17,7 +17,7 @@ function getConversations(socket) {
             conversations = await Promise.all(conversations.map(async (conversation) => {
                 let otherUserId = conversation.users_id.filter((id) => id !== userId)[0];
                 let otherUser = await User.findById(otherUserId);
-                return { ...conversation.toObject(), name: otherUser.username };
+                return { ...conversation.toObject(), name: otherUser.username, pic: otherUser.pic };
             }))
             socket.emit('conversations', { conversations: conversations });
         } else {

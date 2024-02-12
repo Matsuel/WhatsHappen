@@ -11,7 +11,7 @@ const TopBar = ({ conversation: conv }: { conversation: conversation }) => {
     return (
         <div className="conversationtopbar">
             <div className="topbarleft">
-                <img src={Conv1} alt="conv1" className='conv1' />
+                <img src={conv.conversationInfos.pic? `data:image/jpeg;base64,${conv.conversationInfos.pic}`: Conv1} alt="conv1" className='topbarimage' />
                 <div className="topbarnamestatut">
                     <h2 className="conversationname">
                         {conv.conversationInfos.name.charAt(0).toUpperCase() + conv.conversationInfos.name.slice(1)}

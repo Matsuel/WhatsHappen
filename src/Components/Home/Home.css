@@ -466,3 +466,10 @@
     height: 80px;
     border-radius: 50%;
 }
+
+.topbarimage {
+    width: 60px;
+    height: 60px;
+    align-self: center;
+    border-radius: 12px;
+}
