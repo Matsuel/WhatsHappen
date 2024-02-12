@@ -12,7 +12,6 @@ npm start
 And now go on http://localhost:3000/ for test app
 
 <ol>
-<li>Créer une table de messages par conversation et limiter le nombre de messages chargés à 100 voir plus tard pour ne pas buguer</li>
 <li>Destructurer les objets envoyes en arguments</li>
 <li>Redesign de la bar de top et de la slide bar + ajouter menu à droite</li>
 <li>Faire statut en ligne ou non</li>
