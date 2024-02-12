@@ -1,6 +1,7 @@
 import React from 'react'
 import Conv1 from '../../../assets/conv1.svg'
 import Online from '../../../assets/Online.svg'
+import Offline from '../../../assets/Offline.svg'
 import Phone from '../../../assets/Phone.svg'
 import Video from '../../../assets/Video.svg'
 import SearchConv from '../../../assets/SearchConv.svg'
@@ -17,8 +18,8 @@ const TopBar = ({ conversation: conv }: { conversation: conversation }) => {
                         {conv.conversationInfos.name.charAt(0).toUpperCase() + conv.conversationInfos.name.slice(1)}
                     </h2>
                     <p className="conversationstatus">
-                        <img src={Online} alt="online" className='online' />
-                        Statut de la conversation
+                        <img src={conv.conversationInfos.status ? Online : Offline} alt="online" className='online' />
+                        {conv.conversationInfos.status ? 'En ligne' : 'Hors ligne'}
                     </p>
                 </div>
             </div>

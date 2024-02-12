@@ -5,6 +5,7 @@ import jwt from 'jsonwebtoken';
 import {Message, MessageSchema} from '../Models/Message.mjs';
 import checkToken from '../Functions/CheckToken.mjs';
 import mongoose from 'mongoose';
+import {connectedUsers} from '../server.mjs';
 
 
 
@@ -17,7 +18,8 @@ function getConversations(socket) {
             conversations = await Promise.all(conversations.map(async (conversation) => {
                 let otherUserId = conversation.users_id.filter((id) => id !== userId)[0];
                 let otherUser = await User.findById(otherUserId);
-                return { ...conversation.toObject(), name: otherUser.username, pic: otherUser.pic };
+                let status = connectedUsers[otherUserId] ? true : false;
+                return { ...conversation.toObject(), name: otherUser.username, pic: otherUser.pic, status };
             }))
             socket.emit('conversations', { conversations: conversations });
         } else {

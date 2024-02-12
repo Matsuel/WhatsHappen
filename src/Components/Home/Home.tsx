@@ -8,6 +8,7 @@ import Search from '../../assets/Search.svg'
 import NewConv from '../../assets/NewConv.svg'
 import Conv1 from '../../assets/conv1.svg'
 import Online from '../../assets/Online.svg'
+import Offline from '../../assets/Offline.svg'
 
 import './Home.css'
 import NoConvActive from './NoConvActive/NoConvActive';
@@ -85,6 +86,7 @@ const Home = () => {
     const getConversations = async () => {
         socket.emit('conversations', { cookies })
         socket.on('conversations', (data: any) => {
+            console.log(data.conversations)
             if (data.conversations) {
                 setConversations(data.conversations)
             } else {
@@ -208,7 +210,7 @@ const Home = () => {
                                                 <div className={`conversation ${conversation._id === conversationActive ? 'conversationActive' : ''}`} onClick={() => handleConversationActive(conversation._id)} key={conversation._id}>
                                                     <div className="convimagestatus">
                                                         <img src={conversation.pic? `data:image/jpeg;base64,${conversation.pic}`: Conv1} alt="conv1" className='conversationimage' />
-                                                        <img src={Online} alt="online" className='speakerstatus' />
+                                                        <img src={conversation.status? Online: Offline} alt="online" className='speakerstatus' />
                                                     </div>
                                                     <div className="conversationinfos">
                                                         <div>{conversation.name.charAt(0).toUpperCase() + conversation.name.slice(1)}</div>
