@@ -76,6 +76,9 @@ io.on('connection', (socket) => {
             let MessageModel = mongoose.model('Messages'+conversation_id);
             let message ={ sender_id, conversation_id, date: new Date().toISOString(), content };
             await MessageModel.create(message);
+            let conversation = await Conversation.findById(conversation_id);
+            conversation.last_message_date = new Date().toISOString();
+            await conversation.save();
             socket.emit('newmessage', { sent: true });
             otherSynchroMessage(cookies, conversation_id);
         } else {

@@ -14,7 +14,7 @@ function getConversations(socket) {
         const { cookies } = data
         if (await checkToken(cookies)) {
             let userId = jwt.verify(cookies, secretTest).userId;
-            let conversations = await Conversation.find({ users_id: userId });
+            let conversations = await Conversation.find({ users_id: userId }).sort({ last_message_date: -1 });
             conversations = await Promise.all(conversations.map(async (conversation) => {
                 let otherUserId = conversation.users_id.filter((id) => id !== userId)[0];
                 let otherUser = await User.findById(otherUserId);

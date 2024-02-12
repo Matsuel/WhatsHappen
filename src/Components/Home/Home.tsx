@@ -179,6 +179,7 @@ const Home = () => {
             if (data.sent) {
                 setMessage('')
                 getConversationsMessages(conversation_id)
+                getConversations()
             }
         })
     }
