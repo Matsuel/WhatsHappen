@@ -4,13 +4,14 @@ interface ConversationInfos {
     users_id: string[],
     name: string,
     pic: string,
-    status:boolean
+    status:boolean,
+    pinnedBy: Array<string>,
 }
 
 interface UserInfos {
     pic: string,
     username: string,
-    _id: string
+    _id: string,
 }
 
 interface message {

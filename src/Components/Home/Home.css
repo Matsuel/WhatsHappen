@@ -473,3 +473,7 @@
     align-self: center;
     border-radius: 12px;
 }
+
+.pinned {
+    transition: all 1s ease;
+}

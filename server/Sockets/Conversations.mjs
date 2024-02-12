@@ -7,25 +7,45 @@ import checkToken from '../Functions/CheckToken.mjs';
 import mongoose from 'mongoose';
 import {connectedUsers} from '../server.mjs';
 
-
-
 function getConversations(socket) {
     socket.on('conversations', async (data) => {
         const { cookies } = data
         if (await checkToken(cookies)) {
             let userId = jwt.verify(cookies, secretTest).userId;
             let conversations = await Conversation.find({ users_id: userId }).sort({ last_message_date: -1 });
-            conversations = await Promise.all(conversations.map(async (conversation) => {
-                let otherUserId = conversation.users_id.filter((id) => id !== userId)[0];
-                let otherUser = await User.findById(otherUserId);
-                let status = connectedUsers[otherUserId] ? true : false;
-                return { ...conversation.toObject(), name: otherUser.username, pic: otherUser.pic, status };
-            }))
+            conversations = await getConversationsInfos(conversations, userId);
+            conversations = sortConversations(conversations, userId);           
             socket.emit('conversations', { conversations: conversations });
         } else {
             socket.emit('conversations', { conversations: [] });
         }
     })
+}
+
+async function getConversationsInfos(conversations, userId) {
+    conversations = await Promise.all(conversations.map(async (conversation) => {
+        let otherUserId = conversation.users_id.filter((id) => id !== userId)[0];
+        let otherUser = await User.findById(otherUserId);
+        let status = connectedUsers[otherUserId] ? true : false;
+        return { ...conversation.toObject(), name: otherUser.username, pic: otherUser.pic, status };
+    }))
+    return conversations;
+}
+
+
+function sortConversations(conversations, userId) {
+    conversations = conversations.sort((a, b) => {
+        // si a est épinglé et pas b
+        if (a.pinnedBy.includes(userId) && !b.pinnedBy.includes(userId)) return -1;
+        // si b est épinglé et pas a
+        if (!a.pinnedBy.includes(userId) && b.pinnedBy.includes(userId)) return 1;
+        // si a est plus récent que b
+        if (a.last_message_date > b.last_message_date) return -1;
+        // si b est plus récent que a
+        if (a.last_message_date < b.last_message_date) return 1;
+        return 0;
+    })
+    return conversations;
 }
 
 function createConversation(socket) {
@@ -73,4 +93,21 @@ function newMessage(socket) {
     })
 }
 
-export { getConversations, createConversation, getMessages, newMessage };
+function pinConversation(socket) {
+    socket.on('pinconversation', async (data) => {
+        const { cookies, conversation_id } = data;
+        if (await checkToken(cookies)) {
+            let conversation = await Conversation.findById(conversation_id);
+            let userId = jwt.verify(cookies, secretTest).userId;
+            if (conversation.pinnedBy.includes(userId)) {
+                conversation.pinnedBy = conversation.pinnedBy.filter((id) => id !== userId);
+            } else {
+                conversation.pinnedBy.push(userId);
+            }
+            await conversation.save();
+            socket.emit('pinconversation', { pinned: true });
+        }
+    })
+}
+
+export { getConversations, createConversation, getMessages, newMessage, pinConversation }

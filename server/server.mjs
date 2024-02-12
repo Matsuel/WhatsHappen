@@ -5,7 +5,7 @@ import cors from 'cors';
 import {connectMongo} from './Functions/ConnectMongo.mjs';
 import {login} from './Sockets/Login.mjs';
 import {register} from './Sockets/Register.mjs';
-import { getConversations, createConversation, getMessages, newMessage } from './Sockets/Conversations.mjs';
+import { getConversations, createConversation, getMessages, newMessage, pinConversation } from './Sockets/Conversations.mjs';
 import {getUsers} from './Sockets/Users.mjs';
 import {Message, MessageSchema} from './Models/Message.mjs';
 import {Conversation} from './Models/Conversation.mjs';
@@ -101,6 +101,7 @@ io.on('connection', (socket) => {
     getConversations(socket);
     createConversation(socket);
     getMessages(socket);
+    pinConversation(socket);
     // newMessage(socket); 
 
     getUsers(socket);

@@ -9,6 +9,8 @@ import NewConv from '../../assets/NewConv.svg'
 import Conv1 from '../../assets/conv1.svg'
 import Online from '../../assets/Online.svg'
 import Offline from '../../assets/Offline.svg'
+import Pin from '../../assets/Pin.svg'
+import Pinned from '../../assets/Pinned.svg'
 
 import './Home.css'
 import NoConvActive from './NoConvActive/NoConvActive';
@@ -90,7 +92,6 @@ const Home = () => {
     const getConversations = async () => {
         socket.emit('conversations', { cookies })
         socket.on('conversations', (data: any) => {
-            console.log(data.conversations)
             if (data.conversations) {
                 setConversations(data.conversations)
             } else {
@@ -184,6 +185,15 @@ const Home = () => {
         })
     }
 
+    const handlePinnedConversation = (conversation_id: string) => {
+        socket.emit('pinconversation', { cookies, conversation_id })
+        socket.on('pinconversation', (data: any) => {
+            if(data.pinned) {
+                getConversations()
+            }
+        })
+    }
+
     return (
         <div className="home">
             <div className="conversations-section">
@@ -212,15 +222,16 @@ const Home = () => {
                                     return (
                                         (
                                             conversation.name.toLowerCase().includes(search.toLowerCase()) ? (
-                                                <div className={`conversation ${conversation._id === conversationActive ? 'conversationActive' : ''}`} onClick={() => handleConversationActive(conversation._id)} key={conversation._id}>
-                                                    <div className="convimagestatus">
+                                                <div className={`conversation ${conversation._id === conversationActive ? 'conversationActive' : ''}`} key={conversation._id}>
+                                                    <div className="convimagestatus" onClick={() => handleConversationActive(conversation._id)}>
                                                         <img src={conversation.pic? `data:image/jpeg;base64,${conversation.pic}`: Conv1} alt="conv1" className='conversationimage' />
                                                         <img src={conversation.status? Online: Offline} alt="online" className='speakerstatus' />
                                                     </div>
-                                                    <div className="conversationinfos">
+                                                    <div className="conversationinfos" onClick={() => handleConversationActive(conversation._id)}>
                                                         <div>{conversation.name.charAt(0).toUpperCase() + conversation.name.slice(1)}</div>
                                                         <div>{typingStatus[conversation._id as keyof typeof typingStatus] ? "Est en train d'écrire" : ""}</div>
                                                     </div>
+                                                    <img src={conversation.pinnedBy.includes(userId) ? Pinned: Pin} alt="pinned" className='pinned' onClick={() => handlePinnedConversation(conversation._id)} />
                                                 </div>
                                             ) : null
                                         )
