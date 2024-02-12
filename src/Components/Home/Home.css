@@ -105,8 +105,9 @@
 .conversationimage {
     width: 60px;
     height: 60px;
+    object-fit: cover;
+    object-position: center;
     border-radius: 50%;
-
 }
 
 .conversationinfos {
@@ -471,6 +472,8 @@
     width: 60px;
     height: 60px;
     align-self: center;
+    object-fit: cover;
+    object-position: center;
     border-radius: 12px;
 }
 
