@@ -1,5 +1,9 @@
 # WhatsappClone Using ReactJs
 
+# Aperçu du jour :
+
+![Preview](./src/assets/preview.png)
+
 # How to install project
 
 ```bash
