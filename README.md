@@ -19,7 +19,6 @@ And now go on http://localhost:3000/ for test app
 <li>Permettre de mettre des noms custom aux personnes, et des réactions</li>
 <li>Faire du chiffrement de bout en bout avec des clés publiques et privées différentes pour chaque conversation</li>
 <li>Faire envoie de fichier</li>
-<li>Images du compte à afficher</li>
 <li>Permettre les groupes</li>
 <li>Edition du profil</li>
 <li>Afficher les conversations dans le sens du message le + récent, pin une conversation et l'afficher au début</li>
