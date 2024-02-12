@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Conv1 from '../../../assets/conv1.svg'
 import Online from '../../../assets/Online.svg'
 import Offline from '../../../assets/Offline.svg'
@@ -9,6 +9,12 @@ import Expand from '../../../assets/Expand.svg'
 
 
 const TopBar = ({ conversation: conv }: { conversation: conversation }) => {
+    const [showSearch, setShowSearch] = useState<boolean>(false)
+
+    const handleSearch = () => {
+        setShowSearch(!showSearch)
+    }
+
     return (
         <div className="conversationtopbar">
             <div className="topbarleft">
@@ -26,7 +32,8 @@ const TopBar = ({ conversation: conv }: { conversation: conversation }) => {
             <div className="topbarright">
                 <img src={Phone} alt="phoneconv" className='toprightbtn' />
                 <img src={Video} alt="video" className='toprightbtn' />
-                <img src={SearchConv} alt="searchconv" className='toprightbtn' />
+                {showSearch?<input type="text" name="" id="" placeholder="Rechercher dans la conversation" className={`searchconv searchconvShow`} />:null}
+                <img src={SearchConv} alt="searchconv" className='toprightbtn' onClick={handleSearch} />
                 <img src={Expand} alt="expand" className='toprightbtn' />
             </div>
         </div>
