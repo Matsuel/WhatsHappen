@@ -1,16 +1,22 @@
 import bcrypt from 'bcrypt';
+import fs from 'fs';
 import jwt from 'jsonwebtoken';
 import {User} from '../Models/User.mjs';
 const secretTest = "84554852585915452156252015015201520152152252"
 
 function register(socket) {
     socket.on('register', async (data) => {
-        const { pseudo, email, password } = data;
+        const { pseudo, email, password, selectedFile } = data;
         const user = await User.findOne({ $or: [{ username: pseudo }, { mail: email }] });
         if (user) {
             socket.emit('register', { created: false });
         } else {
-            const newUser = new User({ username: pseudo, mail: email, password: bcrypt.hashSync(password, 10) });
+            let filedata="";
+            if(selectedFile){
+                filedata= selectedFile.toString('base64')
+                console.log(filedata)
+            }
+            const newUser = new User({pic:filedata, username: pseudo, mail: email, password: bcrypt.hashSync(password, 10) });
             await newUser.save();
             const user = await User.findOne({ $or: [{ username: pseudo }, { mail: email }] });
             const token = jwt.sign({ userId: user._id, mail: user.mail, pseudo: user.username }, secretTest, { expiresIn: '1h' });

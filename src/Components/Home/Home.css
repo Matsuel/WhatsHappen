@@ -460,3 +460,9 @@
     flex-direction: row;
     align-items: center;
 }
+
+.userpic {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+}

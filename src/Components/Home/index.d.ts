@@ -6,6 +6,7 @@ interface ConversationInfos {
 }
 
 interface UserInfos {
+    pic: string,
     username: string,
     _id: string
 }
@@ -24,6 +25,7 @@ interface conversation {
 }
 
 interface User {
+    pic:string,
     userId: string,
     username: string,
     email: string,

@@ -231,6 +231,7 @@ const Home = () => {
                                 return (
                                     user.username.toLowerCase().includes(searchUsers.toLowerCase()) ? (
                                         <div className="newconvuser" key={user._id} onClick={() => createConversation(user._id)}>
+                                            <img src={`data:image/jpeg;base64,${user.pic}`} className='userpic' />
                                             <p>{user.username}</p>
                                         </div>
                                     ) : null
@@ -257,7 +258,6 @@ const Home = () => {
                         <BottomBar
                             conversationActive={conversationActive}
                             message={message}
-                            // setMessage={setMessage}
                             handleMessageChange={handleMessageChange}
                             sendMessage={sendMessage}
                             typingStatus={typingStatus}
