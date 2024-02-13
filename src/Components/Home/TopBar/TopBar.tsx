@@ -8,19 +8,19 @@ import SearchConv from '../../../assets/SearchConv.svg'
 import Expand from '../../../assets/Expand.svg'
 
 
-const TopBar = ({ conversation: conv, handleSearchConv, showSearchConv }: TopBarProps) => {
+const TopBar = ({ name, pic, status, handleSearchConv, showSearchConv }: TopBarProps) => {
 
     return (
         <div className="conversationtopbar">
             <div className="topbarleft">
-                <img src={conv.conversationInfos.pic ? `data:image/jpeg;base64,${conv.conversationInfos.pic}` : Conv1} alt="conv1" className='topbarimage' />
+                <img src={pic ? `data:image/jpeg;base64,${pic}` : Conv1} alt="conv1" className='topbarimage' />
                 <div className="topbarnamestatut">
                     <h2 className="conversationname">
-                        {conv.conversationInfos.name.charAt(0).toUpperCase() + conv.conversationInfos.name.slice(1)}
+                        {name.charAt(0).toUpperCase() + name.slice(1)}
                     </h2>
                     <p className="conversationstatus">
-                        <img src={conv.conversationInfos.status ? Online : Offline} alt="online" className='online' />
-                        {conv.conversationInfos.status ? 'En ligne' : 'Hors ligne'}
+                        <img src={status ? Online : Offline} alt="online" className='online' />
+                        {status ? 'En ligne' : 'Hors ligne'}
                     </p>
                 </div>
             </div>

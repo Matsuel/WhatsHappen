@@ -80,7 +80,6 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
-    margin-top: 5%;
 }
 
 .convimagestatus {
@@ -161,6 +160,7 @@
 }
 
 .convslist {
+    margin-top: 5%;
     width: 95%;
     height: 80%;
     overflow-y: auto;

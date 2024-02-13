@@ -41,11 +41,14 @@ interface BottomBarProps {
     handleMessageChange: Function,
     sendMessage: Function,
     typingStatus: Object,
-    conversation: conversation
+    conversation: conversation,
+    name: string
 }
 
 interface TopBarProps {
-    conversation: conversation,
+    name: string,
+    pic: string,
+    status: boolean,
     handleSearchConv: Function,
     showSearchConv: boolean
 }

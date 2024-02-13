@@ -282,8 +282,10 @@ const Home = () => {
                 {conversationActive !== '' ? (
                     <>
                         <TopBar 
-                            conversation={conv} 
-                            handleSearchConv={handleSearchConv}
+                            name={conv.conversationInfos.name} 
+                            pic={conv.conversationInfos.pic} 
+                            status={conv.conversationInfos.status} 
+                            handleSearchConv={handleSearchConv} 
                             showSearchConv={showSearchConv}
                         />
 
@@ -296,6 +298,7 @@ const Home = () => {
                             sendMessage={sendMessage}
                             typingStatus={typingStatus}
                             conversation={conv}
+                            name={conv.conversationInfos.name}
                         />
                     </>
                 ) : (
