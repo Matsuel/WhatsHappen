@@ -35,6 +35,7 @@ const Home = () => {
     const [users, setUsers] = useState<UserInfos[]>([])
     const [userId, setUserId] = useState<string>('')
     const scrollBottomRef = useRef<HTMLDivElement>(null)
+    const [hasMatchingConversations, setHasMatchingConversations] = useState<boolean>(true)
 
     const cookies = localStorage.getItem('user')
 
@@ -124,7 +125,9 @@ const Home = () => {
     }
 
     const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setSearch(e.target.value)
+        setSearch(e.target.value.trim())
+        e.target.value.trim() === "" ? setHasMatchingConversations(true) :
+        setHasMatchingConversations(conversations.some((conv) => conv.name.toLowerCase().includes(e.target.value.toLowerCase())))
     }
 
     const handleSearchUsers = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -221,7 +224,7 @@ const Home = () => {
 
                 <div className="convslist">
                     {
-                        typeConv === 1 ? (
+                        typeConv === 1 && hasMatchingConversations ? (
                             (
                                 conversations.map((conversation) => {
                                     return (
@@ -243,7 +246,16 @@ const Home = () => {
                                     )
                                 })
                             )
-                        ) : null
+                        ) : (
+                            <div className="conversation">
+                                <div className="convimagestatus">
+                                    <img src="https://api.dicebear.com/7.x/fun-emoji/svg?seed=Abby" alt="conv1" className='conversationimage' />
+                                </div>
+                                <div className="conversationinfos">
+                                    <div>Aucune conversation trouvée</div>
+                                </div>
+                            </div>
+                        )
                     }
                 </div>
 
