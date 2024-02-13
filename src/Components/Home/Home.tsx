@@ -118,6 +118,8 @@ const Home = () => {
         getConversationsMessages(conversationId)
         conv.messages = conversationMessages
         conv.conversationInfos = conversations.find((conv) => conv._id === conversationId) as ConversationInfos
+        conv.conversationInfos.bottomRounded = true
+        conv.conversationInfos.topRounded = true
     }
 
     const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -211,7 +213,6 @@ const Home = () => {
         if(conversationActive && conversation_id !== conversationActive) {
             const handleConvIndex = conversations.indexOf(handleConv as ConversationInfos)
             const activeConvIndex = conversations.indexOf(activeConv as ConversationInfos)
-            console.log(handleConvIndex, activeConvIndex)
 
             if(handleConvIndex - activeConvIndex === 1) {
                 console.log('here a')
@@ -222,7 +223,6 @@ const Home = () => {
                 conversations[handleConvIndex].bottomRounded = false
                 conversations[activeConvIndex].topRounded = false
             }
-            console.log(conversations)
             setConversations([...conversations])
         }
     }
@@ -264,12 +264,12 @@ const Home = () => {
                                     const classActive = conversation._id === conversationActive ? 'conversationActive' : ''
                                     const topRound = conversation.topRounded === true ? 'convtoprounded' : ''
                                     const bottomRound = conversation.bottomRounded === true ? 'convbottomrounded' : ''
-                                    console.log(conversation.topRounded, conversation.bottomRounded)
+                                    const noConvActiveClass = conversationActive === "" ? 'noActiveClass' : ''
 
                                     return (
                                         (
                                             conversation.name.toLowerCase().includes(search.toLowerCase()) ? (
-                                                <div className={`conversation ${classActive} ${topRound} ${bottomRound}`} key={conversation._id} onMouseEnter={() => handleHoverConv(conversation._id)} onMouseLeave={handleHoverConvReset}>
+                                                <div className={`conversation ${classActive} ${topRound} ${bottomRound} ${noConvActiveClass}`} key={conversation._id} onMouseEnter={() => handleHoverConv(conversation._id)} onMouseLeave={handleHoverConvReset}>
                                                     <div className="convimagestatus" onClick={() => handleConversationActive(conversation._id)}>
                                                         <img src={conversation.pic? `data:image/jpeg;base64,${conversation.pic}`: Conv1} alt="conv1" className='conversationimage' />
                                                         <img src={conversation.status? Online: Offline} alt="online" className='speakerstatus' />

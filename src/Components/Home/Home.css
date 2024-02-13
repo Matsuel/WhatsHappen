@@ -90,7 +90,6 @@
 .convtoprounded:hover {
     border-top-left-radius: 12px;
     border-top-right-radius: 12px;
-    /* background-color: ; */
 }
 
 .convbottomrounded {
@@ -146,6 +145,10 @@
 .conversation:hover {
     background-color: #D1E4E8;
     cursor: pointer;
+}
+
+.noActiveClass:hover {
+    border-radius: 12px;
 }
 
 .searchBar {
