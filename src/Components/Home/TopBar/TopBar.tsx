@@ -13,7 +13,7 @@ const TopBar = ({ conversation: conv, handleSearchConv, showSearchConv }: TopBar
     return (
         <div className="conversationtopbar">
             <div className="topbarleft">
-                <img src={conv.conversationInfos.pic? `data:image/jpeg;base64,${conv.conversationInfos.pic}`: Conv1} alt="conv1" className='topbarimage' />
+                <img src={conv.conversationInfos.pic ? `data:image/jpeg;base64,${conv.conversationInfos.pic}` : Conv1} alt="conv1" className='topbarimage' />
                 <div className="topbarnamestatut">
                     <h2 className="conversationname">
                         {conv.conversationInfos.name.charAt(0).toUpperCase() + conv.conversationInfos.name.slice(1)}
@@ -27,7 +27,11 @@ const TopBar = ({ conversation: conv, handleSearchConv, showSearchConv }: TopBar
             <div className="topbarright">
                 <img src={Phone} alt="phoneconv" className='toprightbtn' />
                 <img src={Video} alt="video" className='toprightbtn' />
-                {showSearchConv?<input type="text" name="" id="" placeholder="Rechercher dans la conversation" className={`searchconv searchconvShow`} />:null}
+                {showSearchConv ?
+                    <input type="text" name="" id="" placeholder="Rechercher dans la conversation" className={`searchconv searchconvShow`} />
+                    :
+                    null
+                }
                 <img src={SearchConv} alt="searchconv" className='toprightbtn' onClick={handleSearchConv as any} />
                 <img src={Expand} alt="expand" className='toprightbtn' />
             </div>
