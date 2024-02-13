@@ -44,10 +44,17 @@ interface BottomBarProps {
     conversation: conversation
 }
 
+interface TopBarProps {
+    conversation: conversation,
+    handleSearchConv: Function,
+    showSearchConv: boolean
+}
+
 interface MessagesAreaProps {
     conv: conversation,
     userId: string,
-    scrollBottomRef: any
+    scrollBottomRef: any,
+    showSearchConv: boolean
 }
 
 interface MessageProps {

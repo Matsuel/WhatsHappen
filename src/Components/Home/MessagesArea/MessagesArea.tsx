@@ -2,9 +2,9 @@ import React from 'react'
 import MessagePrivacy from '../MessagePrivacy/MessagePrivacy'
 import Message from './Message/Message'
 
-const MessagesArea = ({ conv, userId, scrollBottomRef }: MessagesAreaProps) => {
+const MessagesArea = ({ conv, userId, scrollBottomRef, showSearchConv }: MessagesAreaProps) => {
     return (
-        <div className="messagesection">
+        <div className={`messagesection ${showSearchConv ? "messagesectionmedium": "messagesectionfull"}`}>
             <MessagePrivacy />
 
             {conv.messages.map((message, i) => {

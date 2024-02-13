@@ -25,6 +25,7 @@ const Home = () => {
     const [conversationMessages, setConversationMessages] = useState<message[]>([])
     const [conversationActive, setConversationActive] = useState<string>('')
     const [conv, setConv] = useState<conversation>({} as conversation)
+    const [showSearchConv, setShowSearchConv] = useState<boolean>(false)
     const [search, setSearch] = useState<string>('')
     const [message, setMessage] = useState<string>('')
     const [searchUsers, setSearchUsers] = useState<string>('')
@@ -194,6 +195,10 @@ const Home = () => {
         })
     }
 
+    const handleSearchConv = () => {
+        setShowSearchConv(!showSearchConv)
+    }
+
     return (
         <div className="home">
             <div className="conversations-section">
@@ -270,9 +275,11 @@ const Home = () => {
                     <>
                         <TopBar 
                             conversation={conv} 
+                            handleSearchConv={handleSearchConv}
+                            showSearchConv={showSearchConv}
                         />
 
-                        <MessagesArea conv={conv} userId={userId} scrollBottomRef={scrollBottomRef} />
+                        <MessagesArea conv={conv} userId={userId} scrollBottomRef={scrollBottomRef} showSearchConv={showSearchConv} />
 
                         <BottomBar
                             conversationActive={conversationActive}

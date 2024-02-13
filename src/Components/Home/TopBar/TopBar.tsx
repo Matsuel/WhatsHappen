@@ -8,12 +8,7 @@ import SearchConv from '../../../assets/SearchConv.svg'
 import Expand from '../../../assets/Expand.svg'
 
 
-const TopBar = ({ conversation: conv }: { conversation: conversation }) => {
-    const [showSearch, setShowSearch] = useState<boolean>(false)
-
-    const handleSearch = () => {
-        setShowSearch(!showSearch)
-    }
+const TopBar = ({ conversation: conv, handleSearchConv, showSearchConv }: TopBarProps) => {
 
     return (
         <div className="conversationtopbar">
@@ -32,8 +27,8 @@ const TopBar = ({ conversation: conv }: { conversation: conversation }) => {
             <div className="topbarright">
                 <img src={Phone} alt="phoneconv" className='toprightbtn' />
                 <img src={Video} alt="video" className='toprightbtn' />
-                {showSearch?<input type="text" name="" id="" placeholder="Rechercher dans la conversation" className={`searchconv searchconvShow`} />:null}
-                <img src={SearchConv} alt="searchconv" className='toprightbtn' onClick={handleSearch} />
+                {showSearchConv?<input type="text" name="" id="" placeholder="Rechercher dans la conversation" className={`searchconv searchconvShow`} />:null}
+                <img src={SearchConv} alt="searchconv" className='toprightbtn' onClick={handleSearchConv as any} />
                 <img src={Expand} alt="expand" className='toprightbtn' />
             </div>
         </div>
