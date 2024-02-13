@@ -37,7 +37,7 @@ const Home = () => {
     const [userId, setUserId] = useState<string>('')
     const scrollBottomRef = useRef<HTMLDivElement>(null)
     const [hasMatchingConversations, setHasMatchingConversations] = useState<boolean>(true)
-    const conversationsNoResult = ["Aucune conversation trouvée", "Aucun groupe n'a été trouvé", "Aucun contact n'a été trouvé"]
+    const conversationsNoResult: string[] = ["Aucune conversation trouvée", "Aucun groupe n'a été trouvé", "Aucun contact n'a été trouvé"]
 
     const cookies = localStorage.getItem('user')
 
