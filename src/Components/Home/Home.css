@@ -75,11 +75,32 @@
 .conversation {
     width: 90%;
     height: 11%;
-    border-radius: 12px;
+    /* border-radius: 12px; */
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
+}
+
+.convtoprounded {
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+}
+
+.convtoprounded:hover {
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    /* background-color: ; */
+}
+
+.convbottomrounded {
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+}
+
+.convbottomrounded:hover {
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
 }
 
 .convimagestatus {

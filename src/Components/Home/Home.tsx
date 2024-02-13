@@ -70,12 +70,6 @@ const Home = () => {
             }
         });
 
-        setInterval(() => {
-            if (newSocket!==null) {
-                newSocket.emit('conversations', { cookies })
-            }
-        }, 5000)
-
         newSocket.on('typing', (data) => {
             setTypingStatus((prev) => ({
                 ...prev,
@@ -204,6 +198,44 @@ const Home = () => {
         setShowSearchConv(!showSearchConv)
     }
 
+    const handleHoverConv = (conversation_id: string) => {
+
+        const activeConv = conversations.find((conv) => conv._id === conversationActive)
+        const handleConv = conversations.find((conv) => conv._id === conversation_id)
+
+        conversations.forEach((conv) => {
+            conv.topRounded = true
+            conv.bottomRounded = true
+        })
+
+        if(conversationActive && conversation_id !== conversationActive) {
+            const handleConvIndex = conversations.indexOf(handleConv as ConversationInfos)
+            const activeConvIndex = conversations.indexOf(activeConv as ConversationInfos)
+            console.log(handleConvIndex, activeConvIndex)
+
+            if(handleConvIndex - activeConvIndex === 1) {
+                console.log('here a')
+                conversations[handleConvIndex].topRounded = false
+                conversations[activeConvIndex].bottomRounded = false
+            }else if(handleConvIndex - activeConvIndex === -1) {
+                console.log('here b')
+                conversations[handleConvIndex].bottomRounded = false
+                conversations[activeConvIndex].topRounded = false
+            }
+            console.log(conversations)
+            setConversations([...conversations])
+        }
+    }
+
+    const handleHoverConvReset = () => {
+        conversations.forEach((conv) => {
+            conv.topRounded = true
+            conv.bottomRounded = true
+        })
+        setConversations([...conversations])
+        console.log(conversations)
+    }
+
     return (
         <div className="home">
             <div className="conversations-section">
@@ -229,10 +261,15 @@ const Home = () => {
                         typeConv === 1 && hasMatchingConversations ? (
                             (
                                 conversations.map((conversation) => {
+                                    const classActive = conversation._id === conversationActive ? 'conversationActive' : ''
+                                    const topRound = conversation.topRounded === true ? 'convtoprounded' : ''
+                                    const bottomRound = conversation.bottomRounded === true ? 'convbottomrounded' : ''
+                                    console.log(conversation.topRounded, conversation.bottomRounded)
+
                                     return (
                                         (
                                             conversation.name.toLowerCase().includes(search.toLowerCase()) ? (
-                                                <div className={`conversation ${conversation._id === conversationActive ? 'conversationActive' : ''}`} key={conversation._id}>
+                                                <div className={`conversation ${classActive} ${topRound} ${bottomRound}`} key={conversation._id} onMouseEnter={() => handleHoverConv(conversation._id)} onMouseLeave={handleHoverConvReset}>
                                                     <div className="convimagestatus" onClick={() => handleConversationActive(conversation._id)}>
                                                         <img src={conversation.pic? `data:image/jpeg;base64,${conversation.pic}`: Conv1} alt="conv1" className='conversationimage' />
                                                         <img src={conversation.status? Online: Offline} alt="online" className='speakerstatus' />

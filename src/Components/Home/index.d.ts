@@ -6,6 +6,8 @@ interface ConversationInfos {
     pic: string,
     status:boolean,
     pinnedBy: Array<string>,
+    topRounded: boolean,
+    bottomRounded: boolean,
 }
 
 interface UserInfos {

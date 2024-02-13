@@ -8,8 +8,6 @@ const Message = ({ message, userId, conv, i, scrollBottomRef ,bottomRounded ,top
     const topClass = isReceived ? (topRounded ? 'messagereceivedtop' : 'messagereceivedmiddle') : (topRounded ? 'messagesenttop' : 'messagesentmiddle');
     const bottomClass = isReceived ? (bottomRounded ? 'messagereceivedbottom' : '') : (bottomRounded ? 'messagesentbottom' : '');
 
-    console.log(messageClass, topClass, bottomClass)
-
     return (
         <div className="message" ref={i === conv.messages.length - 1 ? scrollBottomRef : null} >
             <div className={`${messageClass} ${topClass} ${bottomClass}`} key={message._id}>
