@@ -37,6 +37,7 @@ const Home = () => {
     const [userId, setUserId] = useState<string>('')
     const scrollBottomRef = useRef<HTMLDivElement>(null)
     const [hasMatchingConversations, setHasMatchingConversations] = useState<boolean>(true)
+    const conversationsNoResult = ["Aucune conversation trouvée", "Aucun groupe n'a été trouvé", "Aucun contact n'a été trouvé"]
 
     const cookies = localStorage.getItem('user')
 
@@ -247,12 +248,8 @@ const Home = () => {
                                     )
                                 })
                             )
-                        ) : typeConv === 2 ? (
-                            <NoResult content="Aucun groupe n'a été trouvé" />
-                        ) : typeConv === 3 ? (
-                            <NoResult content="Aucun contact n'a été trouvé" />
                         ) : (
-                            <NoResult content="Aucune conversation trouvée" />
+                            <NoResult content={conversationsNoResult[typeConv - 1]} />
                         )
 
                     }
