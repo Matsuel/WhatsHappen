@@ -74,7 +74,7 @@ const Home = () => {
             if (newSocket!==null) {
                 newSocket.emit('conversations', { cookies })
             }
-        }, 60000)
+        }, 5000)
 
         newSocket.on('typing', (data) => {
             setTypingStatus((prev) => ({
