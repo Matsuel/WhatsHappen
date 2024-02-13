@@ -11,6 +11,7 @@ import Online from '../../assets/Online.svg'
 import Offline from '../../assets/Offline.svg'
 import Pin from '../../assets/Pin.svg'
 import Pinned from '../../assets/Pinned.svg'
+import NoResult from './NoResult/NoResult';
 
 import './Home.css'
 import NoConvActive from './NoConvActive/NoConvActive';
@@ -246,16 +247,14 @@ const Home = () => {
                                     )
                                 })
                             )
+                        ) : typeConv === 2 ? (
+                            <NoResult content="Aucun groupe n'a été trouvé" />
+                        ) : typeConv === 3 ? (
+                            <NoResult content="Aucun contact n'a été trouvé" />
                         ) : (
-                            <div className="conversation">
-                                <div className="convimagestatus">
-                                    <img src="https://api.dicebear.com/7.x/fun-emoji/svg?seed=Abby" alt="conv1" className='conversationimage' />
-                                </div>
-                                <div className="conversationinfos">
-                                    <div>Aucune conversation trouvée</div>
-                                </div>
-                            </div>
+                            <NoResult content="Aucune conversation trouvée" />
                         )
+
                     }
                 </div>
 
