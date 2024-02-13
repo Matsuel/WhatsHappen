@@ -415,7 +415,8 @@
 
 .messagesent {
     align-self: flex-end;
-    width: 30%;
+    min-width: 15%;
+    max-width: 30%;
     height: auto;
     display: flex;
     flex-direction: column;
@@ -443,7 +444,8 @@
 
 .messagereceived {
     align-self: flex-start;
-    width: 30%;
+    min-width: 15%;
+    max-width: 30%;
     height: auto;
     display: flex;
     flex-direction: column;
