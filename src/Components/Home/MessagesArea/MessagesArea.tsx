@@ -8,6 +8,21 @@ const MessagesArea = ({ conv, userId, scrollBottomRef, showSearchConv }: Message
             <MessagePrivacy />
 
             {conv.messages.map((message, i) => {
+                const nextMessage = i < conv.messages.length - 1 ? conv.messages[i + 1] : null
+                const previousMessage = i > 0 ? conv.messages[i - 1] : null
+
+                let topRounded = true
+                let bottomRounded = true
+
+                if (nextMessage && message.sender_id === nextMessage.sender_id) {
+                    bottomRounded = false
+                }
+
+                if (previousMessage && message.sender_id === previousMessage.sender_id) {
+                    topRounded = false
+                }
+
+
                 return (
                     <Message 
                         message={message} 
@@ -16,6 +31,8 @@ const MessagesArea = ({ conv, userId, scrollBottomRef, showSearchConv }: Message
                         i={i} 
                         scrollBottomRef={scrollBottomRef} 
                         key={message._id}
+                        topRounded={topRounded}
+                        bottomRounded={bottomRounded}
                     />
                 )
             })}

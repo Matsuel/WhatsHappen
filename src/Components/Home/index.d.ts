@@ -65,7 +65,9 @@ interface MessageProps {
     userId: string,
     conv: conversation,
     i: number,
-    scrollBottomRef: any
+    scrollBottomRef: any,
+    topRounded: boolean,
+    bottomRounded: boolean
 }
 
 declare module '*.svg' {

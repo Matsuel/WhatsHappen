@@ -421,8 +421,25 @@
     flex-direction: column;
     align-items: flex-end;
     background-color: #D7F8F4;
-    border-radius: 18px;
 }
+
+.messagesenttop {
+    border-top-right-radius: 18px;
+    border-top-left-radius: 18px;
+    border-bottom-left-radius: 18px;
+}
+
+.messagesentbottom {
+    border-bottom-right-radius: 18px;
+    border-top-left-radius: 18px;
+    border-bottom-left-radius: 18px;
+}
+
+.messagesentmiddle {
+    border-top-left-radius: 18px;
+    border-bottom-left-radius: 18px;
+}
+
 
 .messagereceived {
     align-self: flex-start;
@@ -432,7 +449,23 @@
     flex-direction: column;
     align-items: flex-end;
     background-color: #fff;
-    border-radius: 18px;
+}
+
+.messagereceivedtop {
+    border-top-right-radius: 18px;
+    border-top-left-radius: 18px;
+    border-bottom-right-radius: 18px;
+}
+
+.messagereceivedbottom {
+    border-bottom-right-radius: 18px;
+    border-top-right-radius: 18px;
+    border-bottom-left-radius: 18px;
+}
+
+.messagereceivedmiddle {
+    border-top-right-radius: 18px;
+    border-bottom-right-radius: 18px;
 }
 
 
