@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useRef } from 'react'
-import axios from 'axios'
 import { io } from 'socket.io-client';
 import { decodeToken } from 'react-jwt';
 import TopBar from './TopBar/TopBar'
