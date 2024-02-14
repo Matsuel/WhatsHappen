@@ -18,14 +18,12 @@ And now go on http://localhost:3000/ for test app
 <ol>
 <li>Faire réactions sur un message</li>
 <li></li>
-<li>Redesign de la bar de top et de la slide bar + ajouter menu à droite</li>
-<li>Modifier temps d'actualisation online offline</li>
-<li>Recherche de messages dans la conversation</li>
-<li>Permettre de mettre des noms custom aux personnes, et des réactions</li>
-<li>Faire du chiffrement de bout en bout avec des clés publiques et privées différentes pour chaque conversation</li>
+<li>Ajouter menu à droite pour la Recherche de messages dans la conversation</li>
 <li>Faire envoie de fichier</li>
-<li>Permettre les groupes</li>
+<li>Custom clique droit message dans message area pour pouvoir changer de thème donc créer un ensemble de thèmes et au dessus d'un message quand on clique droit on peut le supprimer</li>
 <li>Edition du profil</li>
-<li>Custom clique droit message dans message area pour pouvoir changer de thème donc créer un ensemble de thèmes</li>
 <li>Appel</li>
+<li>Faire du chiffrement de bout en bout avec des clés publiques et privées différentes pour chaque conversation</li>
+<li>Permettre les groupes</li>
+<li>Permettre de mettre des noms custom aux personnes, et des réactions</li>
 </ol>
