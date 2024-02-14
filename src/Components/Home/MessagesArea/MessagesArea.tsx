@@ -2,6 +2,8 @@ import React from 'react'
 import MessagePrivacy from '../MessagePrivacy/MessagePrivacy'
 import Message from './Message/Message'
 
+import './MessagesArea.css'
+
 const MessagesArea = ({  userId, scrollBottomRef, showSearchConv, messages, messagesCount }: MessagesAreaProps) => {
     return (
         <div className={`messagesection ${showSearchConv ? "messagesectionmedium": "messagesectionfull"}`}>

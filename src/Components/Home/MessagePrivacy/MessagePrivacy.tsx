@@ -1,6 +1,8 @@
 import React from 'react'
 import Security from '../../../assets/Security.svg'
 
+import './MessagePrivacy.css'
+
 const MessagePrivacy = () => {
     return (
         <div className="messageprivacy">

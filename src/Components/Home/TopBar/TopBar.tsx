@@ -7,6 +7,8 @@ import Video from '../../../assets/Video.svg'
 import SearchConv from '../../../assets/SearchConv.svg'
 import Expand from '../../../assets/Expand.svg'
 
+import './TopBar.css'
+
 
 const TopBar = ({ name, pic, status, handleSearchConv, showSearchConv }: TopBarProps) => {
 
@@ -27,12 +29,12 @@ const TopBar = ({ name, pic, status, handleSearchConv, showSearchConv }: TopBarP
             <div className="topbarright">
                 <img src={Phone} alt="phoneconv" className='toprightbtn' />
                 <img src={Video} alt="video" className='toprightbtn' />
+                <img src={SearchConv} alt="searchconv" className='toprightbtn' onClick={handleSearchConv as any} />
                 {showSearchConv ?
                     <input type="text" name="" id="" placeholder="Rechercher dans la conversation" className={`searchconv searchconvShow`} />
                     :
                     null
                 }
-                <img src={SearchConv} alt="searchconv" className='toprightbtn' onClick={handleSearchConv as any} />
                 <img src={Expand} alt="expand" className='toprightbtn' />
             </div>
         </div>

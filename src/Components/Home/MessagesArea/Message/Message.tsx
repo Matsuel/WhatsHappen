@@ -1,5 +1,7 @@
 import React from 'react'
 
+import './Message.css'
+
 const Message = ({ message, userId, i, scrollBottomRef ,bottomRounded ,topRounded, messagesCount }: MessageProps) => {
 
     const isReceived = message.sender_id !== userId

@@ -3,6 +3,8 @@ import JoinFile from '../../../assets/JoinFile.svg'
 import Send from '../../../assets/Send.svg'
 import VoiceMessage from '../../../assets/VoiceMessage.svg'
 
+import './BottomBar.css'
+
 const BottomBar = ({ conversationActive , message, handleMessageChange, sendMessage, typingStatus, name }: BottomBarProps) => {
     return (
         <div className='bottombar'>

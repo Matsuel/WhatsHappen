@@ -16,6 +16,9 @@ npm start
 And now go on http://localhost:3000/ for test app
 
 <ol>
+<li>Faire réactions sur un message</li>
+<li>Mettre jour quand le jour du message n'est pas le meme</li>
+<li></li>
 <li>Redesign de la bar de top et de la slide bar + ajouter menu à droite</li>
 <li>Modifier temps d'actualisation online offline</li>
 <li>Recherche de messages dans la conversation</li>
