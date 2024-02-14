@@ -72,6 +72,10 @@ interface MessageProps {
     messagesCount: number,
 }
 
+interface MessageDateProps {
+    message: message
+}
+
 declare module '*.svg' {
     const content: any;
     export default content;

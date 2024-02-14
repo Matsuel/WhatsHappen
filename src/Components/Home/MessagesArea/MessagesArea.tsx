@@ -1,13 +1,22 @@
-import React from 'react'
+import React, {useState} from 'react'
 import MessagePrivacy from '../MessagePrivacy/MessagePrivacy'
 import Message from './Message/Message'
 
 import './MessagesArea.css'
+import MessageDate from './MessageDate/MessageDate'
 
 const MessagesArea = ({  userId, scrollBottomRef, showSearchConv, messages, messagesCount }: MessagesAreaProps) => {
+    const [messageDay, setMessageDay] = useState<Number>(0)
+
     return (
         <div className={`messagesection ${showSearchConv ? "messagesectionmedium": "messagesectionfull"}`}>
             <MessagePrivacy />
+
+            {
+                messageDay === 0 && messages.length > 0 ?
+                <MessageDate message={messages[0]} />
+                : null
+            }
 
             {messages.map((message, i) => {
                 const nextMessage = i < messagesCount - 1 ? messages[i + 1] : null
@@ -26,6 +35,14 @@ const MessagesArea = ({  userId, scrollBottomRef, showSearchConv, messages, mess
 
 
                 return (
+                    <>
+                    {
+                        previousMessage && new Date(message.date).toDateString() !== new Date(previousMessage?.date).toDateString() ?
+                        (
+                            <MessageDate message={message} />
+                        ) : null
+                        
+                    }
                     <Message 
                         message={message} 
                         userId={userId} 
@@ -37,6 +54,7 @@ const MessagesArea = ({  userId, scrollBottomRef, showSearchConv, messages, mess
                         bottomRounded={bottomRounded}
                         messagesCount={messagesCount}
                     />
+                    </>
                 )
             })}
         </div>
