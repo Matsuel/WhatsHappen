@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Message = ({ message, userId, conv, i, scrollBottomRef ,bottomRounded ,topRounded }: MessageProps) => {
+const Message = ({ message, userId, i, scrollBottomRef ,bottomRounded ,topRounded, messagesCount }: MessageProps) => {
 
     const isReceived = message.sender_id !== userId
 
@@ -9,7 +9,7 @@ const Message = ({ message, userId, conv, i, scrollBottomRef ,bottomRounded ,top
     const bottomClass = isReceived ? (bottomRounded ? 'messagereceivedbottom' : '') : (bottomRounded ? 'messagesentbottom' : '');
 
     return (
-        <div className="message" ref={i === conv.messages.length - 1 ? scrollBottomRef : null} >
+        <div className="message" ref={i === messagesCount - 1 ? scrollBottomRef : null} >
             <div className={`${messageClass} ${topClass} ${bottomClass}`} key={message._id}>
                 <p className='messagecontent'>
                     {message.content}

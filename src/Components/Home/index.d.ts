@@ -43,7 +43,6 @@ interface BottomBarProps {
     handleMessageChange: Function,
     sendMessage: Function,
     typingStatus: Object,
-    conversation: conversation,
     name: string
 }
 
@@ -56,20 +55,21 @@ interface TopBarProps {
 }
 
 interface MessagesAreaProps {
-    conv: conversation,
     userId: string,
     scrollBottomRef: any,
-    showSearchConv: boolean
+    showSearchConv: boolean,
+    messagesCount: number,
+    messages: message[]
 }
 
 interface MessageProps {
     message: message,
     userId: string,
-    conv: conversation,
     i: number,
     scrollBottomRef: any,
     topRounded: boolean,
-    bottomRounded: boolean
+    bottomRounded: boolean,
+    messagesCount: number,
 }
 
 declare module '*.svg' {

@@ -215,11 +215,9 @@ const Home = () => {
             const activeConvIndex = conversations.indexOf(activeConv as ConversationInfos)
 
             if(handleConvIndex - activeConvIndex === 1) {
-                console.log('here a')
                 conversations[handleConvIndex].topRounded = false
                 conversations[activeConvIndex].bottomRounded = false
             }else if(handleConvIndex - activeConvIndex === -1) {
-                console.log('here b')
                 conversations[handleConvIndex].bottomRounded = false
                 conversations[activeConvIndex].topRounded = false
             }
@@ -233,7 +231,6 @@ const Home = () => {
             conv.bottomRounded = true
         })
         setConversations([...conversations])
-        console.log(conversations)
     }
 
     return (
@@ -326,7 +323,13 @@ const Home = () => {
                             showSearchConv={showSearchConv}
                         />
 
-                        <MessagesArea conv={conv} userId={userId} scrollBottomRef={scrollBottomRef} showSearchConv={showSearchConv} />
+                        <MessagesArea
+                            userId={userId} 
+                            scrollBottomRef={scrollBottomRef} 
+                            showSearchConv={showSearchConv}
+                            messages={conv.messages}
+                            messagesCount={conv.messages.length}
+                        />
 
                         <BottomBar
                             conversationActive={conversationActive}
@@ -334,7 +337,6 @@ const Home = () => {
                             handleMessageChange={handleMessageChange}
                             sendMessage={sendMessage}
                             typingStatus={typingStatus}
-                            conversation={conv}
                             name={conv.conversationInfos.name}
                         />
                     </>

@@ -3,13 +3,13 @@ import JoinFile from '../../../assets/JoinFile.svg'
 import Send from '../../../assets/Send.svg'
 import VoiceMessage from '../../../assets/VoiceMessage.svg'
 
-const BottomBar = ({ conversationActive , message, handleMessageChange, sendMessage, typingStatus, conversation }: BottomBarProps) => {
+const BottomBar = ({ conversationActive , message, handleMessageChange, sendMessage, typingStatus, name }: BottomBarProps) => {
     return (
         <div className='bottombar'>
         {
             typingStatus[conversationActive as keyof typeof typingStatus] ? (
                 <div className="typingstatus">
-                    <p>{conversation.conversationInfos.name.charAt(0).toUpperCase() + conversation.conversationInfos.name.slice(1)} est en train d'écrire</p>
+                    <p>{name.charAt(0).toUpperCase() + name.slice(1)} est en train d'écrire</p>
                 </div>
             ) : (
                 null
