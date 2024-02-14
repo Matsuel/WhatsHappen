@@ -88,11 +88,6 @@ const Home = () => {
                     return { ...conv, status: statusOther[conv._id] }
                 })
             })
-            if (conversationActive !== "") {
-                setConv((prevConv) => {
-                    return { ...prevConv, conversationInfos: { ...prevConv.conversationInfos, status: statusOther[prevConv.conversationInfos._id] } }
-                })
-            }
 
         })
 

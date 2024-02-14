@@ -20,10 +20,6 @@ const TopBar = ({ name, pic, status, handleSearchConv, showSearchConv }: TopBarP
                     <h2 className="conversationname">
                         {name.charAt(0).toUpperCase() + name.slice(1)}
                     </h2>
-                    <p className="conversationstatus">
-                        <img src={status ? Online : Offline} alt="online" className='online' />
-                        {status ? 'En ligne' : 'Hors ligne'}
-                    </p>
                 </div>
             </div>
             <div className="topbarright">

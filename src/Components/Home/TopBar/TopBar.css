@@ -31,14 +31,6 @@
     font-weight: 800;
 }
 
-.conversationstatus {
-    display: flex;
-    gap: 5px;
-    font-size: 16px;
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    color: #6E7FA9;
-}
-
 .topbarright {
     margin-right: 5%;
     display: flex;
