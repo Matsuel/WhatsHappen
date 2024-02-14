@@ -81,6 +81,25 @@ const Home = () => {
             conv.messages = data.messages
         })
 
+        newSocket.on('synchrostatus', (data) => {
+            const statusOther = data.status
+            setConversations((prevConversations) => {
+                return prevConversations.map((conv) => {
+                    return { ...conv, status: statusOther[conv._id] }
+                })
+            })
+            if (conversationActive !== "") {
+                setConv((prevConv) => {
+                    return { ...prevConv, conversationInfos: { ...prevConv.conversationInfos, status: statusOther[prevConv.conversationInfos._id] } }
+                })
+            }
+
+        })
+
+        setInterval(() => {
+            newSocket.emit('synchrostatus', { userId: userId })
+        }, 5000)
+
         return () => {
             newSocket.close()
         }
@@ -124,7 +143,7 @@ const Home = () => {
     const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSearch(e.target.value.trim())
         e.target.value.trim() === "" ? setHasMatchingConversations(true) :
-        setHasMatchingConversations(conversations.some((conv) => conv.name.toLowerCase().includes(e.target.value.toLowerCase())))
+            setHasMatchingConversations(conversations.some((conv) => conv.name.toLowerCase().includes(e.target.value.toLowerCase())))
     }
 
     const handleSearchUsers = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -189,7 +208,7 @@ const Home = () => {
     const handlePinnedConversation = (conversation_id: string) => {
         socket.emit('pinconversation', { cookies, conversation_id })
         socket.on('pinconversation', (data: any) => {
-            if(data.pinned) {
+            if (data.pinned) {
                 getConversations()
             }
         })
@@ -209,14 +228,14 @@ const Home = () => {
             conv.bottomRounded = true
         })
 
-        if(conversationActive && conversation_id !== conversationActive) {
+        if (conversationActive && conversation_id !== conversationActive) {
             const handleConvIndex = conversations.indexOf(handleConv as ConversationInfos)
             const activeConvIndex = conversations.indexOf(activeConv as ConversationInfos)
 
-            if(handleConvIndex - activeConvIndex === 1) {
+            if (handleConvIndex - activeConvIndex === 1) {
                 conversations[handleConvIndex].topRounded = false
                 conversations[activeConvIndex].bottomRounded = false
-            }else if(handleConvIndex - activeConvIndex === -1) {
+            } else if (handleConvIndex - activeConvIndex === -1) {
                 conversations[handleConvIndex].bottomRounded = false
                 conversations[activeConvIndex].topRounded = false
             }
@@ -267,14 +286,14 @@ const Home = () => {
                                             conversation.name.toLowerCase().includes(search.toLowerCase()) ? (
                                                 <div className={`conversation ${classActive} ${topRound} ${bottomRound} ${noConvActiveClass}`} key={conversation._id} onMouseEnter={() => handleHoverConv(conversation._id)} onMouseLeave={handleHoverConvReset}>
                                                     <div className="convimagestatus" onClick={() => handleConversationActive(conversation._id)}>
-                                                        <img src={conversation.pic? `data:image/jpeg;base64,${conversation.pic}`: Conv1} alt="conv1" className='conversationimage' />
-                                                        <img src={conversation.status? Online: Offline} alt="online" className='speakerstatus' />
+                                                        <img src={conversation.pic ? `data:image/jpeg;base64,${conversation.pic}` : Conv1} alt="conv1" className='conversationimage' />
+                                                        <img src={conversation.status ? Online : Offline} alt="online" className='speakerstatus' />
                                                     </div>
                                                     <div className="conversationinfos" onClick={() => handleConversationActive(conversation._id)}>
                                                         <div>{conversation.name.charAt(0).toUpperCase() + conversation.name.slice(1)}</div>
                                                         <div>{typingStatus[conversation._id as keyof typeof typingStatus] ? "Est en train d'écrire" : ""}</div>
                                                     </div>
-                                                    <img src={conversation.pinnedBy.includes(userId) ? Pinned: Pin} alt="pinned" className='pinned' onClick={() => handlePinnedConversation(conversation._id)} />
+                                                    <img src={conversation.pinnedBy.includes(userId) ? Pinned : Pin} alt="pinned" className='pinned' onClick={() => handlePinnedConversation(conversation._id)} />
                                                 </div>
                                             ) : null
                                         )
@@ -291,12 +310,12 @@ const Home = () => {
                 {showNewConv ? (
                     <div className="newconvmodal">
                         <input type="text" placeholder='Nom de votre interlocuteur' className='newconvinput' onChange={handleSearchUsers} />
-                        {users.length > 0 && searchUsers !== "" ?  (
+                        {users.length > 0 && searchUsers !== "" ? (
                             users.map((user) => {
                                 return (
                                     user.username.toLowerCase().includes(searchUsers.toLowerCase()) ? (
                                         <div className="newconvuser" key={user._id} onClick={() => createConversation(user._id)}>
-                                            <img src={user.pic !=="" ? `data:image/jpeg;base64,${user.pic}` : Conv1} className='userpic' />
+                                            <img src={user.pic !== "" ? `data:image/jpeg;base64,${user.pic}` : Conv1} className='userpic' />
                                             <p>{user.username}</p>
                                         </div>
                                     ) : null
@@ -314,17 +333,17 @@ const Home = () => {
             <div className="messages-section">
                 {conversationActive !== '' ? (
                     <>
-                        <TopBar 
-                            name={conv.conversationInfos.name} 
-                            pic={conv.conversationInfos.pic} 
-                            status={conv.conversationInfos.status} 
-                            handleSearchConv={handleSearchConv} 
+                        <TopBar
+                            name={conv.conversationInfos.name}
+                            pic={conv.conversationInfos.pic}
+                            status={conv.conversationInfos.status}
+                            handleSearchConv={handleSearchConv}
                             showSearchConv={showSearchConv}
                         />
 
                         <MessagesArea
-                            userId={userId} 
-                            scrollBottomRef={scrollBottomRef} 
+                            userId={userId}
+                            scrollBottomRef={scrollBottomRef}
                             showSearchConv={showSearchConv}
                             messages={conv.messages}
                             messagesCount={conv.messages.length}

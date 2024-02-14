@@ -94,6 +94,20 @@ io.on('connection', (socket) => {
         if (connectedUsers[otherId]) connectedUsers[otherId].emit('syncmessages', {messages : await M.find()});
     }
 
+    socket.on('synchrostatus', async (data) => {
+        let status = {};
+        const conversationList = await Conversation.find({users_id: data.userId});
+        for (const conversation of conversationList) {
+            const otherId = conversation.users_id.filter((id) => id !== data.userId)[0];
+            if (connectedUsers[otherId]) {
+                status[conversation._id] = true;
+            } else {
+                status[conversation._id] = false;
+            }
+        }
+        socket.emit('synchrostatus', {status});
+    })
+
 
 
     login(socket);
