@@ -8,6 +8,9 @@ interface ConversationInfos {
     pinnedBy: Array<string>,
     topRounded: boolean,
     bottomRounded: boolean,
+    last_message_date: string,
+    last_message_content: string,
+    last_message_sender: string
 }
 
 interface UserInfos {

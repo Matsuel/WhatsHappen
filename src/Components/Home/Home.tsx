@@ -11,6 +11,7 @@ import Offline from '../../assets/Offline.svg'
 import Pin from '../../assets/Pin.svg'
 import Pinned from '../../assets/Pinned.svg'
 import NoResult from './NoResult/NoResult';
+import DoubleChevrons from '../../assets/DoubleChevrons.svg'
 
 import './Home.css'
 import NoConvActive from './NoConvActive/NoConvActive';
@@ -286,8 +287,30 @@ const Home = () => {
                                                     </div>
                                                     <div className="conversationinfos" onClick={() => handleConversationActive(conversation._id)}>
                                                         <div>{conversation.name.charAt(0).toUpperCase() + conversation.name.slice(1)}</div>
-                                                        <div>{typingStatus[conversation._id as keyof typeof typingStatus] ? "Est en train d'écrire" : ""}</div>
+                                                        <div>
+                                                            {
+                                                                typingStatus[conversation._id as keyof typeof typingStatus] ?
+                                                                    "Est en train d'écrire" :
+                                                                    <>
+                                                                    {
+                                                                        conversation.last_message_sender !== userId && 
+                                                                        <img src={DoubleChevrons} alt="doublechevrons" />
+                                                                    }
+                                                                    {
+                                                                    conversation.last_message_content.length > 20 ?
+                                                                        conversation.last_message_content.slice(0, 20) + "..." :
+                                                                        conversation.last_message_content
+                                                                    }
+                                                                    </>
+                                                            }
+                                                        </div>
                                                     </div>
+                                                    <p>
+                                                        {
+                                                            new Date(conversation.last_message_date).getHours() + ":" +
+                                                            Math.round(new Date(conversation.last_message_date).getMinutes())
+                                                        }
+                                                    </p>
                                                     <img src={conversation.pinnedBy.includes(userId) ? Pinned : Pin} alt="pinned" className='pinned' onClick={() => handlePinnedConversation(conversation._id)} />
                                                 </div>
                                             ) : null

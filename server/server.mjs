@@ -78,6 +78,8 @@ io.on('connection', (socket) => {
             await MessageModel.create(message);
             let conversation = await Conversation.findById(conversation_id);
             conversation.last_message_date = new Date().toISOString();
+            conversation.last_message_content = content;
+            conversation.last_message_sender = sender_id;
             await conversation.save();
             socket.emit('newmessage', { sent: true });
             otherSynchroMessage(cookies, conversation_id);
