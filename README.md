@@ -15,6 +15,17 @@ npm start
 
 And now go on http://localhost:3000/ for test app
 
+# Clique droit
+
+*Faire ressortir le message avec une transition et blur le fond de la conversation*
+*Afficher un menu custom avec copier, supprimer*
+*Sur le haut du message ajouter une div où l'on mettra les réactions plus tard*
+
+# Clique droit sur une conversation 
+
+*Supprimer un message*
+
+
 <ol>
 <li>Faire réactions sur un message</li>
 <li></li>
