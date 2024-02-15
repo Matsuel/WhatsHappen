@@ -23,7 +23,13 @@ And now go on http://localhost:3000/ for test app
 
 # Clique droit sur une conversation 
 
-*Supprimer un message*
+*Supprimer une conversation*
+*Changer le nom mais pour plus tard*
+
+# Clique dans une conversation
+
+*Changer de thème donc faut les mettre en place*
+
 
 
 <ol>
