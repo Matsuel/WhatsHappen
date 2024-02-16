@@ -55,6 +55,7 @@
 }
 
 .file {
+    position: relative;
     margin-left: 3%;
     width: 100px;
     height: 90%;
@@ -76,4 +77,18 @@
 .fileicon {
     width: 70px;
     height: 70px;
+}
+
+.trashfile {
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    cursor: pointer;
+}
+
+.trashfile:hover {
+    transform: scale(1.2);
+    transition: transform 0.2s ease-in-out;
 }

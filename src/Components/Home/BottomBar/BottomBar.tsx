@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import JoinFile from '../../../assets/JoinFile.svg'
 import VoiceMessage from '../../../assets/VoiceMessage.svg'
+import Trash from '../../../assets/Trash.svg'
 import Dropzone from 'react-dropzone'
 import { FileIcon, defaultStyles } from 'react-file-icon'
 
@@ -22,6 +23,12 @@ const BottomBar = ({ conversationActive, message, handleMessageChange, sendMessa
                 setFilesContent(prevFilesContent => [...prevFilesContent, reader.result as ArrayBuffer])
             }
         })
+    }
+
+    const deleteFile = (index: number) => {
+        setFilesContent(prevFilesContent => prevFilesContent.filter((_, i) => i !== index))
+        setFilesInfos(prevFilesInfos => prevFilesInfos.filter((_, i) => i !== index))
+        setFilesExtensions(prevFilesExensions => prevFilesExensions.filter((_, i) => i !== index))
     }
 
     const handleEnterPressed = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -49,10 +56,11 @@ const BottomBar = ({ conversationActive, message, handleMessageChange, sendMessa
                         filesInfos.map((file, index) => {
                             return (
                                 <div key={index} className="file">
-                                    <p className='filename'>{file.name}</p>
+                                    <p className='filename'>{file.name.length > 10 ? file.name.slice(0, 10) + '...' : file.name}</p>
                                     <div className="fileicon">
                                         <FileIcon extension={filesExensions[index]} {...defaultStyles[filesExensions[index] as keyof typeof defaultStyles]} />
                                     </div>
+                                    <img src={Trash} alt="trash" className='trashfile' onClick={() => deleteFile(index)} />
                                 </div>
                             )
                         })
@@ -69,9 +77,6 @@ const BottomBar = ({ conversationActive, message, handleMessageChange, sendMessa
                         </div>
                     )}
                 </Dropzone>
-                <p>{filesContent.length}</p>
-                <p>{filesInfos.length}</p>
-                {/* <img src={JoinFile} alt="joinfile" className='joinfile' /> */}
                 <input type="text" name="message-input" id="message-input" className='message-input' value={message} onChange={(e) => handleMessageChange(e)} onKeyDown={(e) => handleEnterPressed(e)} />
                 <img src={VoiceMessage} alt="voicemessage" className='voicemessage' />
             </div>
