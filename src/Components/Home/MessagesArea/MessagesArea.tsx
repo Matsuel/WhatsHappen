@@ -5,11 +5,11 @@ import Message from './Message/Message'
 import './MessagesArea.css'
 import MessageDate from './MessageDate/MessageDate'
 
-const MessagesArea = ({  userId, scrollBottomRef, showSearchConv, messages, messagesCount }: MessagesAreaProps) => {
+const MessagesArea = ({  userId, scrollBottomRef, showSearchConv, messages, messagesCount, filesEmpty }: MessagesAreaProps) => {
     const [messageDay, setMessageDay] = useState<Number>(0)
 
     return (
-        <div className={`messagesection ${showSearchConv ? "messagesectionmedium": "messagesectionfull"}`}>
+        <div className={`messagesection ${showSearchConv ? "messagesectionmedium": "messagesectionfull"} ${filesEmpty? "messagesectionheightMax": "messagesectionheightMin"} `}>
             <MessagePrivacy />
 
             {

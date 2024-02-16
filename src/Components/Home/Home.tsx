@@ -20,6 +20,7 @@ import MessagesArea from './MessagesArea/MessagesArea';
 
 
 const Home = () => {
+    const [filesEmpty, setFilesEmpty] = useState<boolean>(true)
     const [typingStatus, setTypingStatus] = useState<{}>({})
     const [socket, setSocket] = useState<any>(null)
     const [conversations, setConversations] = useState<ConversationInfos[]>([])
@@ -374,6 +375,7 @@ const Home = () => {
                             showSearchConv={showSearchConv}
                             messages={conv.messages}
                             messagesCount={conv.messages.length}
+                            filesEmpty={filesEmpty}
                         />
 
                         <BottomBar
@@ -383,6 +385,8 @@ const Home = () => {
                             sendMessage={sendMessage}
                             typingStatus={typingStatus}
                             name={conv.conversationInfos.name}
+                            filesEmpty={filesEmpty}
+                            setFilesEmpty={setFilesEmpty}
                         />
                     </>
                 ) : (

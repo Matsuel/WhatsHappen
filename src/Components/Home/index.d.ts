@@ -46,7 +46,9 @@ interface BottomBarProps {
     handleMessageChange: Function,
     sendMessage: Function,
     typingStatus: Object,
-    name: string
+    name: string,
+    filesEmpty: boolean,
+    setFilesEmpty: Function,
 }
 
 interface TopBarProps {
@@ -54,7 +56,7 @@ interface TopBarProps {
     pic: string,
     status: boolean,
     handleSearchConv: Function,
-    showSearchConv: boolean
+    showSearchConv: boolean,
 }
 
 interface MessagesAreaProps {
@@ -62,7 +64,8 @@ interface MessagesAreaProps {
     scrollBottomRef: any,
     showSearchConv: boolean,
     messagesCount: number,
-    messages: message[]
+    messages: message[],
+    filesEmpty: boolean,
 }
 
 interface MessageProps {

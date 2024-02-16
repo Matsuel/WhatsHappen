@@ -7,13 +7,14 @@ import { FileIcon, defaultStyles } from 'react-file-icon'
 
 import './BottomBar.css'
 
-const BottomBar = ({ conversationActive, message, handleMessageChange, sendMessage, typingStatus, name }: BottomBarProps) => {
+const BottomBar = ({ conversationActive, message, handleMessageChange, sendMessage, typingStatus, name, filesEmpty, setFilesEmpty }: BottomBarProps) => {
 
     const [filesInfos, setFilesInfos] = useState<File[]>([])
     const [filesContent, setFilesContent] = useState<ArrayBuffer[]>([])
     const [filesExensions, setFilesExtensions] = useState<string[]>([])
 
     const onDrop = (acceptedFiles: File[]) => {
+        setFilesEmpty(false)
         setFilesInfos(prevFilesInfos => [...prevFilesInfos, ...acceptedFiles])
         acceptedFiles.forEach((file: File) => {
             setFilesExtensions(prevFilesExtensions => [...prevFilesExtensions, file.name.split('.').pop() as string])
@@ -29,6 +30,7 @@ const BottomBar = ({ conversationActive, message, handleMessageChange, sendMessa
         setFilesContent(prevFilesContent => prevFilesContent.filter((_, i) => i !== index))
         setFilesInfos(prevFilesInfos => prevFilesInfos.filter((_, i) => i !== index))
         setFilesExtensions(prevFilesExensions => prevFilesExensions.filter((_, i) => i !== index))
+        filesContent.length === 1 && setFilesEmpty(true)
     }
 
     const handleEnterPressed = (e: React.KeyboardEvent<HTMLInputElement>) => {
