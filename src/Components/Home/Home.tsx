@@ -307,7 +307,7 @@ const Home = () => {
                                                                             <img src={DoubleChevrons} alt="doublechevrons" />
                                                                         }
                                                                         {
-                                                                            conversation.last_message_content.length > 20 ?
+                                                                            conversation.last_message_content && conversation.last_message_content.length > 20 ?
                                                                                 conversation.last_message_content.slice(0, 20) + "..." :
                                                                                 conversation.last_message_content
                                                                         }
