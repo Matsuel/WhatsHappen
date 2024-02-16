@@ -79,7 +79,15 @@ const Home = () => {
 
         newSocket.on('syncmessages', (data) => {
             setConversationMessages(data.messages)
-            conv.messages = data.messages
+            // voir si on peut pas faire autrement
+            conversations.forEach((conversation) => {
+                if (conversation._id === data.conversations[0]._id) {
+                    conversation.last_message_content = data.conversations[0].last_message_content
+                    conversation.last_message_date = data.conversations[0].last_message_date
+                    conversation.last_message_sender = data.conversations[0].last_message_sender
+                }
+            })
+            setConversations([...conversations])
         })
 
         newSocket.on('synchrostatus', (data) => {
@@ -193,6 +201,7 @@ const Home = () => {
         if (content.trim() === '') return
         socket.emit('newmessage', { cookies, conversation_id, content })
         socket.on('newmessage', (data: any) => {
+            console.log(data)
             if (data.sent) {
                 setMessage('')
                 getConversationsMessages(conversation_id)
@@ -292,15 +301,15 @@ const Home = () => {
                                                                 typingStatus[conversation._id as keyof typeof typingStatus] ?
                                                                     "Est en train d'écrire" :
                                                                     <>
-                                                                    {
-                                                                        conversation.last_message_sender !== userId && 
-                                                                        <img src={DoubleChevrons} alt="doublechevrons" />
-                                                                    }
-                                                                    {
-                                                                    conversation.last_message_content.length > 20 ?
-                                                                        conversation.last_message_content.slice(0, 20) + "..." :
-                                                                        conversation.last_message_content
-                                                                    }
+                                                                        {
+                                                                            conversation.last_message_sender !== userId &&
+                                                                            <img src={DoubleChevrons} alt="doublechevrons" />
+                                                                        }
+                                                                        {
+                                                                            conversation.last_message_content.length > 20 ?
+                                                                                conversation.last_message_content.slice(0, 20) + "..." :
+                                                                                conversation.last_message_content
+                                                                        }
                                                                     </>
                                                             }
                                                         </div>
@@ -308,7 +317,7 @@ const Home = () => {
                                                     <p>
                                                         {
                                                             new Date(conversation.last_message_date).getHours() + ":" +
-                                                            Math.round(new Date(conversation.last_message_date).getMinutes())
+                                                            (new Date(conversation.last_message_date).getMinutes().toString().padStart(2, '0'))
                                                         }
                                                     </p>
                                                     <img src={conversation.pinnedBy.includes(userId) ? Pinned : Pin} alt="pinned" className='pinned' onClick={() => handlePinnedConversation(conversation._id)} />

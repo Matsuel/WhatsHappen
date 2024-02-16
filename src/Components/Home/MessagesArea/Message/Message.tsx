@@ -18,7 +18,7 @@ const Message = ({ message, userId, i, scrollBottomRef ,bottomRounded ,topRounde
                 </p>
                 <p className='messagetime'>
                     {new Date(message.date).getHours()}:
-                    {Math.round(new Date(message.date).getMinutes() / 10)}{new Date(message.date).getMinutes() % 10}
+                    {new Date(message.date).getMinutes().toString().padStart(2, '0')}
                 </p>
             </div>
         </div>

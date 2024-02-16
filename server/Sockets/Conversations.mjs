@@ -110,4 +110,4 @@ function pinConversation(socket) {
     })
 }
 
-export { getConversations, createConversation, getMessages, newMessage, pinConversation }
+export { getConversations, createConversation, getMessages, newMessage, pinConversation, getConversationsInfos, sortConversations };

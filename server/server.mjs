@@ -1,14 +1,14 @@
 import express from 'express';
 import { createServer } from 'http';
-import {Server} from 'socket.io';
+import { Server } from 'socket.io';
 import cors from 'cors';
-import {connectMongo} from './Functions/ConnectMongo.mjs';
-import {login} from './Sockets/Login.mjs';
-import {register} from './Sockets/Register.mjs';
-import { getConversations, createConversation, getMessages, newMessage, pinConversation } from './Sockets/Conversations.mjs';
-import {getUsers} from './Sockets/Users.mjs';
-import {Message, MessageSchema} from './Models/Message.mjs';
-import {Conversation} from './Models/Conversation.mjs';
+import { connectMongo } from './Functions/ConnectMongo.mjs';
+import { login } from './Sockets/Login.mjs';
+import { register } from './Sockets/Register.mjs';
+import { getConversations, createConversation, getMessages, newMessage, pinConversation, getConversationsInfos, sortConversations } from './Sockets/Conversations.mjs';
+import { getUsers } from './Sockets/Users.mjs';
+import { Message, MessageSchema } from './Models/Message.mjs';
+import { Conversation } from './Models/Conversation.mjs';
 import jwt from 'jsonwebtoken';
 import checkToken from './Functions/CheckToken.mjs';
 import mongoose from 'mongoose';
@@ -57,15 +57,15 @@ io.on('connection', (socket) => {
             const sender_id = jwt.verify(cookies, secretTest).userId;
             const conversation = await Conversation.findById(conversation_id);
             const otherId = conversation.users_id.filter((id) => id !== sender_id)[0];
-            
+
             if (typingTimeouts[otherId]) {
                 clearTimeout(typingTimeouts[otherId]);
             }
 
             typingTimeouts[otherId] = setTimeout(() => {
-                if (connectedUsers[otherId]) connectedUsers[otherId].emit('typing', { typing: false, conversationId : conversation_id });
+                if (connectedUsers[otherId]) connectedUsers[otherId].emit('typing', { typing: false, conversationId: conversation_id });
             }, 2000);
-            if (connectedUsers[otherId]) connectedUsers[otherId].emit('typing', { typing: true, conversationId : conversation_id });
+            if (connectedUsers[otherId]) connectedUsers[otherId].emit('typing', { typing: true, conversationId: conversation_id });
         }
     })
 
@@ -73,8 +73,8 @@ io.on('connection', (socket) => {
         const { cookies, conversation_id, content } = data;
         if (await checkToken(cookies)) {
             const sender_id = jwt.verify(cookies, secretTest).userId;
-            let MessageModel = mongoose.model('Messages'+conversation_id);
-            let message ={ sender_id, conversation_id, date: new Date().toISOString(), content };
+            let MessageModel = mongoose.model('Messages' + conversation_id);
+            let message = { sender_id, conversation_id, date: new Date().toISOString(), content };
             await MessageModel.create(message);
             let conversation = await Conversation.findById(conversation_id);
             conversation.last_message_date = new Date().toISOString();
@@ -88,17 +88,20 @@ io.on('connection', (socket) => {
         }
     })
 
-    async function otherSynchroMessage (cookies, conversation_id) {
+    async function otherSynchroMessage(cookies, conversation_id) {
         const sender_id = jwt.verify(cookies, secretTest).userId;
         const conversation = await Conversation.findById(conversation_id);
         const otherId = conversation.users_id.filter((id) => id !== sender_id)[0];
-        const M = mongoose.model('Messages'+conversation_id);
-        if (connectedUsers[otherId]) connectedUsers[otherId].emit('syncmessages', {messages : await M.find()});
+        const M = mongoose.model('Messages' + conversation_id);
+        let conversations = await Conversation.find({ users_id: sender_id }).sort({ last_message_date: -1 });
+        conversations = await getConversationsInfos(conversations, sender_id);
+        conversations = sortConversations(conversations, sender_id);
+        if (connectedUsers[otherId]) connectedUsers[otherId].emit('syncmessages', { messages: await M.find() , conversations: conversations });
     }
 
     socket.on('synchrostatus', async (data) => {
         let status = {};
-        const conversationList = await Conversation.find({users_id: data.userId});
+        const conversationList = await Conversation.find({ users_id: data.userId });
         for (const conversation of conversationList) {
             const otherId = conversation.users_id.filter((id) => id !== data.userId)[0];
             if (connectedUsers[otherId]) {
@@ -107,7 +110,7 @@ io.on('connection', (socket) => {
                 status[conversation._id] = false;
             }
         }
-        socket.emit('synchrostatus', {status});
+        socket.emit('synchrostatus', { status });
     })
 
 
@@ -127,4 +130,4 @@ server.listen(3001, () => {
     console.log('Server is running on port 3001');
 });
 
-export {server, connectedUsers}
+export { server, connectedUsers }
