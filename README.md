@@ -15,6 +15,18 @@ npm start
 
 And now go on http://localhost:3000/ for test app
 
+# Features availables
+
+<ol>
+    <li>Send messages</li>
+    <li>Create conversation</li>
+    <li>Show status</li>
+    <li>Search conv</li>
+    <li>Join files but not send for the moment</li>
+</ol>
+
+---
+
 # Clique droit
 
 *Faire ressortir le message avec une transition et blur le fond de la conversation*
@@ -30,7 +42,7 @@ And now go on http://localhost:3000/ for test app
 
 *Changer de thème donc faut les mettre en place*
 
-
+---
 
 <ol>
 <li>Faire réactions sur un message</li>
