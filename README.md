@@ -27,6 +27,15 @@ And now go on http://localhost:3000/ for test app
 
 ---
 
+# Finals features
+
+<ol>
+    <li>Call video and voice</li>
+    <li>Send files</li>
+    <li>Search messages to conv</li>
+    <li>Delete/react and edit message</li>
+</ol>
+
 # Clique droit
 
 *Faire ressortir le message avec une transition et blur le fond de la conversation*
