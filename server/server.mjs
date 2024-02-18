@@ -70,6 +70,7 @@ io.on('connection', (socket) => {
     })
 
     socket.on('newmessage', async (data) => {
+        console.log(data);
         const { cookies, conversation_id, content } = data;
         if (await checkToken(cookies)) {
             const sender_id = jwt.verify(cookies, secretTest).userId;

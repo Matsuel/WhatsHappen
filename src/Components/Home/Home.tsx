@@ -197,10 +197,10 @@ const Home = () => {
         })
     }
 
-    const sendMessage = async (conversation_id: string) => {
+    const sendMessage = async (conversation_id: string, files: FileInfos[]) => {
         const content = message
         if (content.trim() === '') return
-        socket.emit('newmessage', { cookies, conversation_id, content })
+        socket.emit('newmessage', { cookies, conversation_id, content, files })
         socket.on('newmessage', (data: any) => {
             console.log(data)
             if (data.sent) {

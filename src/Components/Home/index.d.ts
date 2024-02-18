@@ -82,6 +82,14 @@ interface MessageDateProps {
     message: message
 }
 
+interface FileInfos {
+    name: string,
+    content: ArrayBuffer,
+    type: string,
+    lastModified: number,
+    extension: string
+}
+
 declare module '*.svg' {
     const content: any;
     export default content;

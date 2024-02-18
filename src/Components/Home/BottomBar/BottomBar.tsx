@@ -13,29 +13,38 @@ const BottomBar = ({ conversationActive, message, handleMessageChange, sendMessa
     const [filesContent, setFilesContent] = useState<ArrayBuffer[]>([])
     const [filesExensions, setFilesExtensions] = useState<string[]>([])
 
+    const [files, setFiles] = useState<FileInfos[]>([])
+
     const onDrop = (acceptedFiles: File[]) => {
+
         setFilesEmpty(false)
-        setFilesInfos(prevFilesInfos => [...prevFilesInfos, ...acceptedFiles])
-        acceptedFiles.forEach((file: File) => {
-            setFilesExtensions(prevFilesExtensions => [...prevFilesExtensions, file.name.split('.').pop() as string])
+        acceptedFiles.forEach((file: File, index: number) => {
             const reader = new FileReader()
             reader.readAsArrayBuffer(file)
             reader.onload = () => {
-                setFilesContent(prevFilesContent => [...prevFilesContent, reader.result as ArrayBuffer])
+                setFiles(prevFiles => {
+                    const newFiles = [...prevFiles]
+                    newFiles[index] = {
+                        name: file.name,
+                        content: reader.result as ArrayBuffer,
+                        type: file.type,
+                        lastModified: file.lastModified,
+                        extension: file.name.split('.').pop() as string
+                    } 
+                    return newFiles
+                })
             }
         })
     }
 
     const deleteFile = (index: number) => {
-        setFilesContent(prevFilesContent => prevFilesContent.filter((_, i) => i !== index))
-        setFilesInfos(prevFilesInfos => prevFilesInfos.filter((_, i) => i !== index))
-        setFilesExtensions(prevFilesExensions => prevFilesExensions.filter((_, i) => i !== index))
-        filesContent.length === 1 && setFilesEmpty(true)
+        setFiles(prevFiles => prevFiles.filter((_, i) => i !== index))
+        files.length === 1 && setFilesEmpty(true)
     }
 
     const handleEnterPressed = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter') {
-            sendMessage(conversationActive)
+            sendMessage(conversationActive, files)
         }
     }
 
@@ -52,15 +61,15 @@ const BottomBar = ({ conversationActive, message, handleMessageChange, sendMessa
 
             }
 
-            {filesInfos.length > 0 ? (
+            {files.length > 0 ? (
                 <div className="fileslist">
                     {
-                        filesInfos.map((file, index) => {
+                        files.map((file, index) => {
                             return (
                                 <div key={index} className="file">
                                     <p className='filename'>{file.name.length > 10 ? file.name.slice(0, 10) + '...' : file.name}</p>
                                     <div className="fileicon">
-                                        <FileIcon extension={filesExensions[index]} {...defaultStyles[filesExensions[index] as keyof typeof defaultStyles]} />
+                                        <FileIcon extension={file.extension} {...defaultStyles[file.extension as keyof typeof defaultStyles]} />
                                     </div>
                                     <img src={Trash} alt="trash" className='trashfile' onClick={() => deleteFile(index)} />
                                 </div>
