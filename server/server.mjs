@@ -74,20 +74,25 @@ io.on('connection', (socket) => {
         const { cookies, conversation_id, content } = data;
         if (await checkToken(cookies)) {
             const sender_id = jwt.verify(cookies, secretTest).userId;
-            let MessageModel = mongoose.model('Messages' + conversation_id);
-            let message = { sender_id, conversation_id, date: new Date().toISOString(), content };
-            await MessageModel.create(message);
-            let conversation = await Conversation.findById(conversation_id);
-            conversation.last_message_date = new Date().toISOString();
-            conversation.last_message_content = content;
-            conversation.last_message_sender = sender_id;
-            await conversation.save();
+            content !== "" ? await saveMessage(cookies, conversation_id, content, sender_id) : null;
             socket.emit('newmessage', { sent: true });
             otherSynchroMessage(cookies, conversation_id);
         } else {
             socket.emit('newmessage', { sent: false });
         }
     })
+
+    async function saveMessage(cookies, conversation_id, content, sender_id) {
+        let MessageModel = mongoose.model('Messages' + conversation_id);
+        let message = { sender_id, conversation_id, date: new Date().toISOString(), content };
+        await MessageModel.create(message);
+        let conversation = await Conversation.findById(conversation_id);
+        conversation.last_message_date = new Date().toISOString();
+        conversation.last_message_content = content;
+        conversation.last_message_sender = sender_id;
+        await conversation.save();
+    }
+
 
     async function otherSynchroMessage(cookies, conversation_id) {
         const sender_id = jwt.verify(cookies, secretTest).userId;
