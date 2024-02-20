@@ -28,7 +28,8 @@ interface message {
     type: string,
     fileName: string,
     fileExtension: string,
-    fileContent: Buffer | ArrayBuffer
+    fileContent: Buffer | ArrayBuffer,
+    fileType: string
 }
 
 interface conversation {

@@ -95,9 +95,20 @@ io.on('connection', (socket) => {
     }
 
     async function saveFiles(conversation_id, sender_id, files) {
+        console.log(files);
         let MessageModel = mongoose.model('Messages' + conversation_id);
         for (const file of files) {
-            let message = { sender_id, conversation_id, date: new Date().toISOString(), content: "", type: "file", fileName: file.name, fileContent: file.content, fileExtension: file.extension };
+            let message = {
+                sender_id,
+                conversation_id,
+                date: new Date().toISOString(),
+                content: "",
+                type: "file",
+                fileName: file.name,
+                fileContent: file.content,
+                fileExtension: file.extension,
+                fileType: file.type
+            };
             await MessageModel.create(message);
             let conversation = await Conversation.findById(conversation_id);
             conversation.last_message_date = new Date().toISOString();
@@ -116,7 +127,7 @@ io.on('connection', (socket) => {
         let conversations = await Conversation.find({ users_id: sender_id }).sort({ last_message_date: -1 });
         conversations = await getConversationsInfos(conversations, sender_id);
         conversations = sortConversations(conversations, sender_id);
-        if (connectedUsers[otherId]) connectedUsers[otherId].emit('syncmessages', { messages: await M.find() , conversations: conversations });
+        if (connectedUsers[otherId]) connectedUsers[otherId].emit('syncmessages', { messages: await M.find(), conversations: conversations });
     }
 
     socket.on('synchrostatus', async (data) => {

@@ -1,13 +1,23 @@
 import React, { useState } from 'react'
 import MessagePrivacy from '../MessagePrivacy/MessagePrivacy'
 import Message from './Message/Message'
-
+import Download from '../../../assets/download.svg'
 import './MessagesArea.css'
 import MessageDate from './MessageDate/MessageDate'
 import { FileIcon, defaultStyles } from 'react-file-icon'
+import MessageFile from './MessageFile/MessageFile'
 
 const MessagesArea = ({ userId, scrollBottomRef, showSearchConv, messages, messagesCount, filesEmpty }: MessagesAreaProps) => {
     const [messageDay, setMessageDay] = useState<Number>(0)
+
+    const downloadFile = (message : message) => {
+        console.log(message)
+        const fileUrl = URL.createObjectURL(new Blob([new Uint8Array(message.fileContent)], { type: message.fileType }))
+        const a = document.createElement("a")
+        a.href = fileUrl
+        a.download = message.fileName
+        a.click()
+    }
 
     return (
         <div className={`messagesection ${showSearchConv ? "messagesectionmedium" : "messagesectionfull"} ${filesEmpty ? "messagesectionheightMax" : "messagesectionheightMin"} `}>
@@ -56,12 +66,16 @@ const MessagesArea = ({ userId, scrollBottomRef, showSearchConv, messages, messa
                                     bottomRounded={bottomRounded}
                                     messagesCount={messagesCount}
                                 /> :
-                                <div className="file">
-                                    <p className="filename">{message.fileName}</p>
-                                    <div className="fileicon">
-                                        <FileIcon extension={message.fileExtension} {...defaultStyles[message.fileExtension as keyof typeof defaultStyles]} />
-                                    </div>
-                                </div>
+                                <MessageFile
+                                    message={message}
+                                    userId={userId}
+                                    i={i}
+                                    scrollBottomRef={scrollBottomRef}
+                                    key={message._id}
+                                    topRounded={topRounded}
+                                    bottomRounded={bottomRounded}
+                                    messagesCount={messagesCount}
+                                />
                         }
                     </>
                 )
