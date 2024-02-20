@@ -71,10 +71,11 @@ io.on('connection', (socket) => {
 
     socket.on('newmessage', async (data) => {
         console.log(data);
-        const { cookies, conversation_id, content } = data;
+        const { cookies, conversation_id, content, files } = data;
         if (await checkToken(cookies)) {
             const sender_id = jwt.verify(cookies, secretTest).userId;
-            content !== "" ? await saveMessage(cookies, conversation_id, content, sender_id) : null;
+            content !== "" ? await saveMessage(conversation_id, content, sender_id) : null;
+            files.length > 0 ? await saveFiles(conversation_id, sender_id, files) : null;
             socket.emit('newmessage', { sent: true });
             otherSynchroMessage(cookies, conversation_id);
         } else {
@@ -82,15 +83,28 @@ io.on('connection', (socket) => {
         }
     })
 
-    async function saveMessage(cookies, conversation_id, content, sender_id) {
+    async function saveMessage(conversation_id, content, sender_id) {
         let MessageModel = mongoose.model('Messages' + conversation_id);
-        let message = { sender_id, conversation_id, date: new Date().toISOString(), content };
+        let message = { sender_id, conversation_id, date: new Date().toISOString(), content, type: "text" };
         await MessageModel.create(message);
         let conversation = await Conversation.findById(conversation_id);
         conversation.last_message_date = new Date().toISOString();
         conversation.last_message_content = content;
         conversation.last_message_sender = sender_id;
         await conversation.save();
+    }
+
+    async function saveFiles(conversation_id, sender_id, files) {
+        let MessageModel = mongoose.model('Messages' + conversation_id);
+        for (const file of files) {
+            let message = { sender_id, conversation_id, date: new Date().toISOString(), content: "", type: "file", fileName: file.name, fileContent: file.content, fileExtension: file.extension };
+            await MessageModel.create(message);
+            let conversation = await Conversation.findById(conversation_id);
+            conversation.last_message_date = new Date().toISOString();
+            conversation.last_message_content = "File";
+            conversation.last_message_sender = sender_id;
+            await conversation.save();
+        }
     }
 
 

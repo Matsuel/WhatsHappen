@@ -192,6 +192,7 @@ const Home = () => {
     const getConversationsMessages = async (conversation_id: string) => {
         socket.emit('conversationmessages', { cookies, conversation_id })
         socket.on('conversationmessages', (data: any) => {
+            console.log(data)
             setConversationMessages(data.messages)
             conv.messages = data.messages
         })

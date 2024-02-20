@@ -24,7 +24,10 @@ interface message {
     conversation_id: string,
     content: string,
     sender_id: string,
-    date: string
+    date: string,
+    type: string,
+    fileName: string,
+    fileExtension: string,
 }
 
 interface conversation {
