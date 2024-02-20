@@ -28,6 +28,7 @@ interface message {
     type: string,
     fileName: string,
     fileExtension: string,
+    fileContent: Buffer | ArrayBuffer
 }
 
 interface conversation {
