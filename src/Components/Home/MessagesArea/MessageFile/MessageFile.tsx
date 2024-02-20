@@ -12,8 +12,6 @@ const MessageFile = ({ message, userId, i, scrollBottomRef, bottomRounded, topRo
     const bottomClass = isReceived ? (bottomRounded ? 'messagereceivedbottom' : '') : (bottomRounded ? 'messagesentbottom' : '');
 
     const downloadFile = (message : message) => {
-        console.log(message.fileContent)
-        console.log(typeof message.fileContent)
         const arrayBuffer = new Blob([message.fileContent], { type: message.fileType })
         const fileUrl = URL.createObjectURL(arrayBuffer)
         const a = document.createElement("a")
