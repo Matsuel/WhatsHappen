@@ -7,13 +7,8 @@ import { FileIcon, defaultStyles } from 'react-file-icon'
 
 import './BottomBar.css'
 
-const BottomBar = ({ conversationActive, message, handleMessageChange, sendMessage, typingStatus, name, filesEmpty, setFilesEmpty }: BottomBarProps) => {
-
-    const [filesInfos, setFilesInfos] = useState<File[]>([])
-    const [filesContent, setFilesContent] = useState<ArrayBuffer[]>([])
-    const [filesExensions, setFilesExtensions] = useState<string[]>([])
-
-    const [files, setFiles] = useState<FileInfos[]>([])
+const BottomBar = ({ conversationActive, message, handleMessageChange, sendMessage, typingStatus, name, filesEmpty, setFilesEmpty, files, setFiles }: BottomBarProps) => {
+    
 
     const onDrop = (acceptedFiles: File[]) => {
 
@@ -22,7 +17,7 @@ const BottomBar = ({ conversationActive, message, handleMessageChange, sendMessa
             const reader = new FileReader()
             reader.readAsArrayBuffer(file)
             reader.onload = () => {
-                setFiles(prevFiles => {
+                setFiles((prevFiles: FileInfos[]) => {
                     const newFiles = [...prevFiles]
                     newFiles[index] = {
                         name: file.name,
@@ -38,7 +33,7 @@ const BottomBar = ({ conversationActive, message, handleMessageChange, sendMessa
     }
 
     const deleteFile = (index: number) => {
-        setFiles(prevFiles => prevFiles.filter((_, i) => i !== index))
+        setFiles((prevFiles: FileInfos[]) => prevFiles.filter((_, i) => i !== index))
         files.length === 1 && setFilesEmpty(true)
     }
 

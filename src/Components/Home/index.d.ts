@@ -54,6 +54,8 @@ interface BottomBarProps {
     name: string,
     filesEmpty: boolean,
     setFilesEmpty: Function,
+    files: FileInfos[],
+    setFiles: Function,
 }
 
 interface TopBarProps {

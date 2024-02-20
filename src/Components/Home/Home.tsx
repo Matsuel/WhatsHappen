@@ -30,6 +30,7 @@ const Home = () => {
     const [showSearchConv, setShowSearchConv] = useState<boolean>(false)
     const [search, setSearch] = useState<string>('')
     const [message, setMessage] = useState<string>('')
+    const [files, setFiles] = useState<FileInfos[]>([])
     const [searchUsers, setSearchUsers] = useState<string>('')
     const [typeConv, setTypeConv] = useState<number>(1)
     const [showNewConv, setShowNewConv] = useState<boolean>(false)
@@ -200,12 +201,14 @@ const Home = () => {
 
     const sendMessage = async (conversation_id: string, files: FileInfos[]) => {
         const content = message
-        if (content.trim() === '') return
+        if (content.trim() === '' && files.length===0) return
         socket.emit('newmessage', { cookies, conversation_id, content, files })
         socket.on('newmessage', (data: any) => {
             console.log(data)
             if (data.sent) {
                 setMessage('')
+                setFilesEmpty(true)
+                setFiles([])
                 getConversationsMessages(conversation_id)
                 getConversations()
             }
@@ -388,6 +391,8 @@ const Home = () => {
                             name={conv.conversationInfos.name}
                             filesEmpty={filesEmpty}
                             setFilesEmpty={setFilesEmpty}
+                            files={files}
+                            setFiles={setFiles}
                         />
                     </>
                 ) : (
