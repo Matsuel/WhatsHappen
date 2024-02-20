@@ -81,7 +81,7 @@ const Home = () => {
 
         newSocket.on('syncmessages', (data) => {
             setConversationMessages(data.messages)
-            // voir si on peut pas faire autrement
+            // voir si on peut pas faire autrement voir pk cpt, ça reçoit plus de messages
             conversations.forEach((conversation) => {
                 if (conversation._id === data.conversations[0]._id) {
                     conversation.last_message_content = data.conversations[0].last_message_content
