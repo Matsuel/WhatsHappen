@@ -194,7 +194,6 @@ const Home = () => {
     const getConversationsMessages = async (conversation_id: string) => {
         socket.emit('conversationmessages', { cookies, conversation_id })
         socket.on('conversationmessages', (data: any) => {
-            console.log(data)
             setConversationMessages(data.messages)
             conv.messages = data.messages
         })
@@ -205,7 +204,6 @@ const Home = () => {
         if (content.trim() === '' && files.length===0) return
         socket.emit('newmessage', { cookies, conversation_id, content, files })
         socket.on('newmessage', (data: any) => {
-            console.log(data)
             if (data.sent) {
                 setMessage('')
                 setFilesEmpty(true)
