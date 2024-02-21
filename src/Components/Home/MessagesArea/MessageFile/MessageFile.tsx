@@ -49,7 +49,7 @@ const MessageFile = ({ message, userId, i, scrollBottomRef, bottomRounded, topRo
 
                 </div>
                 {rightClick &&
-                    <ContextMenuMessageButton message={message} userId={userId} copyContentToClipboard={() => { }} deleteMessage={deleteMessage} isReceived={isReceived} />
+                    <ContextMenuMessageButton message={message} userId={userId} deleteMessage={deleteMessage} isReceived={isReceived} />
                 }
 
             </div>

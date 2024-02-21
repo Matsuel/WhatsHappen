@@ -12,9 +12,7 @@ const Message = ({ message, userId, i, scrollBottomRef, bottomRounded, topRounde
         setRightClick(true)
     }
 
-    const copyContentToClipboard = (content: string) => {
-        navigator.clipboard.writeText(content)
-    }
+    
 
     const isReceived = message.sender_id !== userId
 
@@ -36,7 +34,7 @@ const Message = ({ message, userId, i, scrollBottomRef, bottomRounded, topRounde
                         {new Date(message.date).getMinutes().toString().padStart(2, '0')}
                     </p>
                 </div>
-                {rightClick && <ContextMenuMessageButton message={message} userId={userId} copyContentToClipboard={copyContentToClipboard} deleteMessage={deleteMessage} isReceived={isReceived} />}
+                {rightClick && <ContextMenuMessageButton message={message} userId={userId} deleteMessage={deleteMessage} isReceived={isReceived} />}
             </div>
         </>
     )
