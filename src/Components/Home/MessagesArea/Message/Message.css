@@ -97,7 +97,7 @@
 }
 
 .messagefirstplan {
-    z-index: 2;
+    z-index: 3;
 }
 
 .cross {
@@ -112,7 +112,6 @@
     z-index: 2;
     width: 15%;
     height: auto;
-    background-color: #D7F8F4;
     margin-top: 2%;
     border-radius: 12px;
     display: flex;
@@ -122,10 +121,12 @@
 
 .messagecontextmenusent {
     align-self: flex-end;
+    background-color: #D7F8F4;
 }
 
 .messagecontextmenureceived {
     align-self: flex-start;
+    background-color: #fff;
 }
 
 .messagecontextitem {

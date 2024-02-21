@@ -32,8 +32,8 @@ const Message = ({ message, userId, i, scrollBottomRef, bottomRounded, topRounde
 
                 </div>
             }
-            <div className="message" ref={i === messagesCount - 1 ? scrollBottomRef : null} onContextMenu={(e) => handleContextMenu(e)}>
-                <div className={`${messageClass} ${topClass} ${bottomClass} ${firstPlan}`} key={message._id}>
+            <div className={`message ${firstPlan}`} ref={i === messagesCount - 1 ? scrollBottomRef : null} onContextMenu={(e) => handleContextMenu(e)}>
+                <div className={`${messageClass} ${topClass} ${bottomClass}`} key={message._id}>
                     <p className='messagecontent'>
                         {message.content}
                     </p>
