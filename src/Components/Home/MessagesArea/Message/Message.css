@@ -85,7 +85,7 @@
 
 .messagecontextblur {
     position: absolute;
-    width: 100%;
+    width: 98.7%;
     height: 100%;
     background-color: rgba(255, 255, 255, 0.5);
     z-index: 1;
@@ -105,4 +105,11 @@
     position: absolute;
     top: 10px;
     right: 10px;
+}
+
+.messagecontextmenu {
+    z-index: 2;
+    width: 150px;
+    height: 100px;
+    background-color: black;
 }
