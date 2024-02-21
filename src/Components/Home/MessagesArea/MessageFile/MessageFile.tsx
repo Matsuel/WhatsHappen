@@ -4,7 +4,7 @@ import { FileIcon, defaultStyles } from 'react-file-icon'
 import Download from '../../../../assets/Download.svg'
 import Cross from '../../../../assets/cross.svg'
 
-const MessageFile = ({ message, userId, i, scrollBottomRef, bottomRounded, topRounded, messagesCount, deleteMessage }: any) => {
+const MessageFile = ({ message, userId, i, scrollBottomRef, bottomRounded, topRounded, messagesCount, deleteMessage }: MessageFileProps) => {
 
     const [rightClick, setRightClick] = useState<boolean>(false)
 

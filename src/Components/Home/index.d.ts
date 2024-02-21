@@ -99,6 +99,17 @@ interface FileInfos {
     extension: string
 }
 
+interface MessageFileProps {
+    message: message,
+    userId: string,
+    i: number,
+    scrollBottomRef: any,
+    topRounded: boolean,
+    bottomRounded: boolean,
+    messagesCount: number,
+    deleteMessage: Function,
+}
+
 declare module '*.svg' {
     const content: any;
     export default content;
