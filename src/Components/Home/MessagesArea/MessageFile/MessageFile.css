@@ -1,4 +1,5 @@
 .filereceived {
+    position: relative;
     align-self: flex-start;
     width: 15%;
     height: 130px;
@@ -26,6 +27,7 @@
 }
 
 .filesent {
+    position: relative;
     align-self: flex-end;
     align-items: center;
     width: 15%;
@@ -53,7 +55,6 @@
 }
 
 .fileelement {
-    position: relative;
     width: 80%;
     height: auto;
     display: flex;
