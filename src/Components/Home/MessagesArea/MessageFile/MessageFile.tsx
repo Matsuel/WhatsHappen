@@ -3,6 +3,7 @@ import "./MessageFile.css"
 import { FileIcon, defaultStyles } from 'react-file-icon'
 import Download from '../../../../assets/Download.svg'
 import Cross from '../../../../assets/cross.svg'
+import { ContextMenuMessage, ContextMenuMessageButton } from '../ContextMenuMessage/ContextMenuMessage'
 
 const MessageFile = ({ message, userId, i, scrollBottomRef, bottomRounded, topRounded, messagesCount, deleteMessage }: MessageFileProps) => {
 
@@ -35,9 +36,7 @@ const MessageFile = ({ message, userId, i, scrollBottomRef, bottomRounded, topRo
     return (
         <>
             {rightClick &&
-                <div className="messagecontextblur">
-                    <img src={Cross} alt="cross" className="cross" onClick={() => setRightClick(false)} />
-                </div>
+                <ContextMenuMessage setRightClick={setRightClick} />
             }
             <div className={`fileelement ${firstPlan}`} ref={i === messagesCount - 1 ? scrollBottomRef : null} onContextMenu={(e) => handleContextMenu(e)}>
 
@@ -50,13 +49,7 @@ const MessageFile = ({ message, userId, i, scrollBottomRef, bottomRounded, topRo
 
                 </div>
                 {rightClick &&
-                    <div className={`messagecontextmenu ${isReceived ? "messagecontextmenureceived" : "messagecontextmenusent"}`}>
-                        {message.sender_id === userId &&
-                            <div className="messagecontextitem" onClick={() => deleteMessage(message._id)}>
-                                Supprimer le message
-                            </div>
-                        }
-                    </div>
+                    <ContextMenuMessageButton message={message} userId={userId} copyContentToClipboard={() => { }} deleteMessage={deleteMessage} isReceived={isReceived} />
                 }
 
             </div>
