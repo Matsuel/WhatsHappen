@@ -24,14 +24,7 @@ const Message = ({ message, userId, i, scrollBottomRef, bottomRounded, topRounde
             {rightClick &&
                 <div className="messagecontextblur">
                     <img src={Cross} alt="cross" className="cross" onClick={() => setRightClick(false)} />
-                    <div className={`messagecontextmenu ${isReceived ? "contextreveived" : "contextsent"}`}>
-                        <div className="messagecontextitem">
-                            Copy
-                        </div>
-                        <div className="messagecontextitem">
-                            Delete
-                        </div>
-                    </div>
+
 
                 </div>
             }
@@ -45,6 +38,15 @@ const Message = ({ message, userId, i, scrollBottomRef, bottomRounded, topRounde
                         {new Date(message.date).getMinutes().toString().padStart(2, '0')}
                     </p>
                 </div>
+                {rightClick &&
+                    <div className={`messagecontextmenu ${isReceived ? "messagecontextmenureceived" : "messagecontextmenusent"}`}>
+                        <div className="messagecontextitem">
+                            Copy
+                        </div>
+                        <div className="messagecontextitem">
+                            Delete
+                        </div>
+                    </div>}
             </div>
         </>
     )

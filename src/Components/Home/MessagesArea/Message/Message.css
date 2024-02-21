@@ -113,3 +113,11 @@
     height: 100px;
     background-color: black;
 }
+
+.messagecontextmenusent {
+    align-self: flex-end;   
+}
+
+.messagecontextmenureceived {
+    align-self: flex-start;
+}
