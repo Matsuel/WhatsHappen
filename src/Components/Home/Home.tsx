@@ -80,7 +80,6 @@ const Home = () => {
         })
 
         newSocket.on('syncmessages', (data) => {
-            console.log(data.messages)
             setConversationMessages(data.messages)
             setConv({ ...conv, messages: data.messages })
             // voir si on peut pas faire autrement voir pk cpt, ça reçoit plus de messages
