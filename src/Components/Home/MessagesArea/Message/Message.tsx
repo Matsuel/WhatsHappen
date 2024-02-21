@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import Cross from '../../../../assets/cross.svg'
 
 import './Message.css'
+import { ContextMenuMessage, ContextMenuMessageButton } from '../ContextMenuMessage/ContextMenuMessage'
 
 const Message = ({ message, userId, i, scrollBottomRef, bottomRounded, topRounded, messagesCount, deleteMessage }: MessageProps) => {
 
@@ -26,9 +26,7 @@ const Message = ({ message, userId, i, scrollBottomRef, bottomRounded, topRounde
     return (
         <>
             {rightClick &&
-                <div className="messagecontextblur">
-                    <img src={Cross} alt="cross" className="cross" onClick={() => setRightClick(false)} />
-                </div>
+                <ContextMenuMessage setRightClick={setRightClick} />
             }
             <div className={`message ${firstPlan}`} ref={i === messagesCount - 1 ? scrollBottomRef : null} onContextMenu={(e) => handleContextMenu(e)}>
                 <div className={`${messageClass} ${topClass} ${bottomClass}`} key={message._id}>
@@ -41,16 +39,7 @@ const Message = ({ message, userId, i, scrollBottomRef, bottomRounded, topRounde
                     </p>
                 </div>
                 {rightClick &&
-                    <div className={`messagecontextmenu ${isReceived ? "messagecontextmenureceived" : "messagecontextmenusent"}`}>
-                        <div className="messagecontextitem" onClick={() => copyContentToClipboard(message.content)}>
-                            Copier
-                        </div>
-                        {message.sender_id === userId &&
-                        <div className="messagecontextitem" onClick={() => deleteMessage(message._id)}>
-                            Supprimer le message
-                        </div>
-                        }
-                    </div>
+                    <ContextMenuMessageButton message={message} userId={userId} copyContentToClipboard={copyContentToClipboard} deleteMessage={deleteMessage} isReceived={isReceived} />
                 }
             </div>
         </>
