@@ -5,7 +5,7 @@ import './Message.css'
 
 const Message = ({ message, userId, i, scrollBottomRef, bottomRounded, topRounded, messagesCount, deleteMessage }: MessageProps) => {
 
-    const [rightClick, setRightClick] = useState(false)
+    const [rightClick, setRightClick] = useState<boolean>(false)
 
     const handleContextMenu = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
         e.preventDefault()
@@ -28,8 +28,6 @@ const Message = ({ message, userId, i, scrollBottomRef, bottomRounded, topRounde
             {rightClick &&
                 <div className="messagecontextblur">
                     <img src={Cross} alt="cross" className="cross" onClick={() => setRightClick(false)} />
-
-
                 </div>
             }
             <div className={`message ${firstPlan}`} ref={i === messagesCount - 1 ? scrollBottomRef : null} onContextMenu={(e) => handleContextMenu(e)}>

@@ -76,6 +76,7 @@ const MessagesArea = ({ userId, scrollBottomRef, showSearchConv, messages, messa
                                     topRounded={topRounded}
                                     bottomRounded={bottomRounded}
                                     messagesCount={messagesCount}
+                                    deleteMessage={deleteMessage}
                                 />
                         }
                     </>
