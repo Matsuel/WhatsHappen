@@ -230,6 +230,13 @@ const Home = () => {
     const deleteMessage = (message_id: string) => {
         console.log(message_id)
         socket.emit('deletemessage', { cookies, message_id, conversationActive })
+        socket.on('deletemessage', (data: any) => {
+            if(data.deleted){
+                conv.messages = conv.messages.filter((message) => message._id !== message_id)
+                setConv({...conv})
+                setConversationMessages(conv.messages)  
+            }
+        })
     }
 
     const handleHoverConv = (conversation_id: string) => {
