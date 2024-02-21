@@ -12,6 +12,10 @@ const Message = ({ message, userId, i, scrollBottomRef, bottomRounded, topRounde
         setRightClick(true)
     }
 
+    const copyContentToClipboard = (content : string) => {
+        navigator.clipboard.writeText(content)
+    }
+
     const isReceived = message.sender_id !== userId
 
     const messageClass = isReceived ? 'messagereceived' : 'messagesent'
@@ -40,13 +44,14 @@ const Message = ({ message, userId, i, scrollBottomRef, bottomRounded, topRounde
                 </div>
                 {rightClick &&
                     <div className={`messagecontextmenu ${isReceived ? "messagecontextmenureceived" : "messagecontextmenusent"}`}>
-                        <div className="messagecontextitem">
+                        <div className="messagecontextitem" onClick={() => copyContentToClipboard(message.content)}>
                             Copy
                         </div>
                         <div className="messagecontextitem">
                             Delete
                         </div>
-                    </div>}
+                    </div>
+                }
             </div>
         </>
     )
