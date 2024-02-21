@@ -85,6 +85,7 @@ interface MessageProps {
     bottomRounded: boolean,
     messagesCount: number,
     deleteMessage: Function,
+    showSearchConv: boolean,
 }
 
 interface MessageDateProps {
@@ -108,6 +109,7 @@ interface MessageFileProps {
     bottomRounded: boolean,
     messagesCount: number,
     deleteMessage: Function,
+    showSearchConv: boolean,
 }
 
 declare module '*.svg' {

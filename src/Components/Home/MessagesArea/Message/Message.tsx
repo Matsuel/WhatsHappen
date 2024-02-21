@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import './Message.css'
 import { ContextMenuMessage, ContextMenuMessageButton } from '../ContextMenuMessage/ContextMenuMessage'
 
-const Message = ({ message, userId, i, scrollBottomRef, bottomRounded, topRounded, messagesCount, deleteMessage }: MessageProps) => {
+const Message = ({ message, userId, i, scrollBottomRef, bottomRounded, topRounded, messagesCount, deleteMessage, showSearchConv }: MessageProps) => {
 
     const [rightClick, setRightClick] = useState<boolean>(false)
 
@@ -12,7 +12,7 @@ const Message = ({ message, userId, i, scrollBottomRef, bottomRounded, topRounde
         setRightClick(true)
     }
 
-    const copyContentToClipboard = (content : string) => {
+    const copyContentToClipboard = (content: string) => {
         navigator.clipboard.writeText(content)
     }
 
@@ -25,9 +25,7 @@ const Message = ({ message, userId, i, scrollBottomRef, bottomRounded, topRounde
 
     return (
         <>
-            {rightClick &&
-                <ContextMenuMessage setRightClick={setRightClick} />
-            }
+            {rightClick && <ContextMenuMessage setRightClick={setRightClick} showSearchConv={showSearchConv} />}
             <div className={`message ${firstPlan}`} ref={i === messagesCount - 1 ? scrollBottomRef : null} onContextMenu={(e) => handleContextMenu(e)}>
                 <div className={`${messageClass} ${topClass} ${bottomClass}`} key={message._id}>
                     <p className='messagecontent'>
@@ -38,9 +36,7 @@ const Message = ({ message, userId, i, scrollBottomRef, bottomRounded, topRounde
                         {new Date(message.date).getMinutes().toString().padStart(2, '0')}
                     </p>
                 </div>
-                {rightClick &&
-                    <ContextMenuMessageButton message={message} userId={userId} copyContentToClipboard={copyContentToClipboard} deleteMessage={deleteMessage} isReceived={isReceived} />
-                }
+                {rightClick && <ContextMenuMessageButton message={message} userId={userId} copyContentToClipboard={copyContentToClipboard} deleteMessage={deleteMessage} isReceived={isReceived} />}
             </div>
         </>
     )

@@ -96,6 +96,14 @@
     align-items: center;
 }
 
+.messagecontextblurmedium {
+    width: 58.7%;
+}
+
+.messagecontextblurfull {
+    width: 98.7%;
+}
+
 .messagefirstplan {
     z-index: 3;
 }

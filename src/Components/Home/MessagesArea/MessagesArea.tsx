@@ -66,6 +66,7 @@ const MessagesArea = ({ userId, scrollBottomRef, showSearchConv, messages, messa
                                     bottomRounded={bottomRounded}
                                     messagesCount={messagesCount}
                                     deleteMessage={deleteMessage}
+                                    showSearchConv={showSearchConv}
                                 /> :
                                 <MessageFile
                                     message={message}
@@ -77,6 +78,7 @@ const MessagesArea = ({ userId, scrollBottomRef, showSearchConv, messages, messa
                                     bottomRounded={bottomRounded}
                                     messagesCount={messagesCount}
                                     deleteMessage={deleteMessage}
+                                    showSearchConv={showSearchConv}
                                 />
                         }
                     </>

@@ -2,9 +2,9 @@ import React from 'react'
 import './ContextMenuMessage.css'
 import Cross from '../../../../assets/cross.svg'
 
-const ContextMenuMessage = ({ setRightClick }: { setRightClick: Function }) => {
+const ContextMenuMessage = ({ setRightClick, showSearchConv }: { setRightClick: Function, showSearchConv: boolean }) => {
     return (
-        <div className="messagecontextblur">
+        <div className={`messagecontextblur ${showSearchConv ? "messagecontextblurmedium" : "messagecontextblurfull"}`}>
             <img src={Cross} alt="cross" className="cross" onClick={() => setRightClick(false)} />
         </div>
     )

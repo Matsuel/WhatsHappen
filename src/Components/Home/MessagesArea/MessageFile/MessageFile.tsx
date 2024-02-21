@@ -5,7 +5,7 @@ import Download from '../../../../assets/Download.svg'
 import Cross from '../../../../assets/cross.svg'
 import { ContextMenuMessage, ContextMenuMessageButton } from '../ContextMenuMessage/ContextMenuMessage'
 
-const MessageFile = ({ message, userId, i, scrollBottomRef, bottomRounded, topRounded, messagesCount, deleteMessage }: MessageFileProps) => {
+const MessageFile = ({ message, userId, i, scrollBottomRef, bottomRounded, topRounded, messagesCount, deleteMessage, showSearchConv }: MessageFileProps) => {
 
     const [rightClick, setRightClick] = useState<boolean>(false)
 
@@ -36,7 +36,7 @@ const MessageFile = ({ message, userId, i, scrollBottomRef, bottomRounded, topRo
     return (
         <>
             {rightClick &&
-                <ContextMenuMessage setRightClick={setRightClick} />
+                <ContextMenuMessage setRightClick={setRightClick} showSearchConv={showSearchConv} />
             }
             <div className={`fileelement ${firstPlan}`} ref={i === messagesCount - 1 ? scrollBottomRef : null} onContextMenu={(e) => handleContextMenu(e)}>
 
