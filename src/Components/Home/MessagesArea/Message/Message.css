@@ -116,6 +116,12 @@
     right: 10px;
 }
 
+.cross:hover {
+    cursor: pointer;
+    background-color: #8F94A3;
+    border-radius: 12px;
+}
+
 .messagecontextmenu {
     z-index: 2;
     width: 15%;
