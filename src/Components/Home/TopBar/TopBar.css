@@ -1,4 +1,5 @@
 .conversationtopbar {
+    z-index: 1;
     position: absolute;
     width: 98.7%;
     height: 10%;
