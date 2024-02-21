@@ -150,7 +150,8 @@ io.on('connection', (socket) => {
         if (await checkToken(cookies)) {
             const sender_id = jwt.verify(cookies, secretTest).userId;
             let MessageModel = mongoose.model('Messages' + conversationActive);
-            await MessageModel.deleteOne({ _id: message_id });
+            const messageToDelete = await MessageModel.findById(message_id);
+            messageToDelete.sender_id === sender_id ? await MessageModel.deleteOne({ _id: message_id }) : null;
             let lastMessage = await MessageModel.findOne().sort({ date: -1 });
             let conversation = await Conversation.findById(conversationActive);
             conversation.last_message_date = lastMessage ? lastMessage.date : null;

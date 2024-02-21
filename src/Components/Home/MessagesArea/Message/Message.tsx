@@ -47,9 +47,11 @@ const Message = ({ message, userId, i, scrollBottomRef, bottomRounded, topRounde
                         <div className="messagecontextitem" onClick={() => copyContentToClipboard(message.content)}>
                             Copier
                         </div>
+                        {message.sender_id === userId &&
                         <div className="messagecontextitem" onClick={() => deleteMessage(message._id)}>
                             Supprimer le message
                         </div>
+                        }
                     </div>
                 }
             </div>
