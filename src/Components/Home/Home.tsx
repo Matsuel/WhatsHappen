@@ -227,6 +227,11 @@ const Home = () => {
         setShowSearchConv(!showSearchConv)
     }
 
+    const deleteMessage = (message_id: string) => {
+        console.log(message_id)
+        socket.emit('deletemessage', { cookies, message_id, conversationActive })
+    }
+
     const handleHoverConv = (conversation_id: string) => {
 
         const activeConv = conversations.find((conv) => conv._id === conversationActive)
@@ -379,6 +384,7 @@ const Home = () => {
                             messages={conv.messages}
                             messagesCount={conv.messages.length}
                             filesEmpty={filesEmpty}
+                            deleteMessage={deleteMessage}
                         />
 
                         <BottomBar

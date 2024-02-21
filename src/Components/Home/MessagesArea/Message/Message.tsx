@@ -3,7 +3,7 @@ import Cross from '../../../../assets/cross.svg'
 
 import './Message.css'
 
-const Message = ({ message, userId, i, scrollBottomRef, bottomRounded, topRounded, messagesCount }: MessageProps) => {
+const Message = ({ message, userId, i, scrollBottomRef, bottomRounded, topRounded, messagesCount, deleteMessage }: MessageProps) => {
 
     const [rightClick, setRightClick] = useState(false)
 
@@ -45,10 +45,10 @@ const Message = ({ message, userId, i, scrollBottomRef, bottomRounded, topRounde
                 {rightClick &&
                     <div className={`messagecontextmenu ${isReceived ? "messagecontextmenureceived" : "messagecontextmenusent"}`}>
                         <div className="messagecontextitem" onClick={() => copyContentToClipboard(message.content)}>
-                            Copy
+                            Copier
                         </div>
-                        <div className="messagecontextitem">
-                            Delete
+                        <div className="messagecontextitem" onClick={() => deleteMessage(message._id)}>
+                            Supprimer le message
                         </div>
                     </div>
                 }

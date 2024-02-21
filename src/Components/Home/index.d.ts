@@ -73,6 +73,7 @@ interface MessagesAreaProps {
     messagesCount: number,
     messages: message[],
     filesEmpty: boolean,
+    deleteMessage: Function,
 }
 
 interface MessageProps {
@@ -83,6 +84,7 @@ interface MessageProps {
     topRounded: boolean,
     bottomRounded: boolean,
     messagesCount: number,
+    deleteMessage: Function,
 }
 
 interface MessageDateProps {

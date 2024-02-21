@@ -7,7 +7,7 @@ import MessageDate from './MessageDate/MessageDate'
 import { FileIcon, defaultStyles } from 'react-file-icon'
 import MessageFile from './MessageFile/MessageFile'
 
-const MessagesArea = ({ userId, scrollBottomRef, showSearchConv, messages, messagesCount, filesEmpty }: MessagesAreaProps) => {
+const MessagesArea = ({ userId, scrollBottomRef, showSearchConv, messages, messagesCount, filesEmpty, deleteMessage }: MessagesAreaProps) => {
     const [messageDay, setMessageDay] = useState<Number>(0)
 
     const downloadFile = (message : message) => {
@@ -65,6 +65,7 @@ const MessagesArea = ({ userId, scrollBottomRef, showSearchConv, messages, messa
                                     topRounded={topRounded}
                                     bottomRounded={bottomRounded}
                                     messagesCount={messagesCount}
+                                    deleteMessage={deleteMessage}
                                 /> :
                                 <MessageFile
                                     message={message}
