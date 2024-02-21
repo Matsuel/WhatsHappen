@@ -1,15 +1,15 @@
 import React from 'react'
 import "./MessageFile.css"
 import { FileIcon, defaultStyles } from 'react-file-icon'
-import Download from '../../../../assets/download.svg'
+import Download from '../../../../assets/Download.svg'
 
 const MessageFile = ({ message, userId, i, scrollBottomRef, bottomRounded, topRounded, messagesCount }: any) => {
 
     const isReceived = message.sender_id !== userId
 
-    const messageClass = isReceived ? 'messagereceived' : 'messagesent'
-    const topClass = isReceived ? (topRounded ? 'messagereceivedtop' : 'messagereceivedmiddle') : (topRounded ? 'messagesenttop' : 'messagesentmiddle');
-    const bottomClass = isReceived ? (bottomRounded ? 'messagereceivedbottom' : '') : (bottomRounded ? 'messagesentbottom' : '');
+    const fileClass = isReceived ? 'filereceived' : 'filesent'
+    const topClass = isReceived ? (topRounded ? 'filereceivedtop' : 'filereceivedmiddle') : (topRounded ? 'filesenttop' : 'filesentmiddle');
+    const bottomClass = isReceived ? (bottomRounded ? 'filereceivedbottom' : '') : (bottomRounded ? 'filesentbottom' : '');
 
     const downloadFile = (message : message) => {
         const arrayBuffer = new Blob([message.fileContent], { type: message.fileType })
@@ -24,14 +24,14 @@ const MessageFile = ({ message, userId, i, scrollBottomRef, bottomRounded, topRo
 
     
     return (
-        <div className={`message ${messageClass}`} ref={i === messagesCount - 1 ? scrollBottomRef : null} >
+        <div className={`fileelement`} ref={i === messagesCount - 1 ? scrollBottomRef : null} >
 
-            <div className={`${messageClass} ${topClass} ${bottomClass}`} key={message._id}>
+            <div className={`${fileClass} ${topClass} ${bottomClass}`} key={message._id}>
+                <img src={Download} alt="Download" className="download" onClick={() => downloadFile(message)} />
                 <p className="filename">{message.fileName}</p>
                 <div className="fileicon">
                     <FileIcon extension={message.fileExtension} {...defaultStyles[message.fileExtension as keyof typeof defaultStyles]} />
                 </div>
-                <img src={Download} alt="" className="trashfile" onClick={() => downloadFile(message)} />
 
             </div>
 

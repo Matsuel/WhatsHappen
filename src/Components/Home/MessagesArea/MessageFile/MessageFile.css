@@ -1,0 +1,79 @@
+.filereceived {
+    align-self: flex-start;
+    width: 15%;
+    height: 130px;
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    align-items: center;
+}
+
+.filereceivedtop {
+    border-top-right-radius: 18px;
+    border-top-left-radius: 18px;
+    border-bottom-right-radius: 18px;
+}
+
+.filereceivedbottom {
+    border-bottom-right-radius: 18px;
+    border-top-right-radius: 18px;
+    border-bottom-left-radius: 18px;
+}
+
+.filereceivedmiddle {
+    border-top-right-radius: 18px;
+    border-bottom-right-radius: 18px;
+}
+
+.filesent {
+    align-self: flex-end;
+    align-items: center;
+    width: 15%;
+    height: 130px;
+    display: flex;
+    flex-direction: column;
+    background-color: #D7F8F4;
+}
+
+.filesenttop {
+    border-top-right-radius: 18px;
+    border-top-left-radius: 18px;
+    border-bottom-left-radius: 18px;
+}
+
+.filesentbottom {
+    border-bottom-right-radius: 18px;
+    border-top-left-radius: 18px;
+    border-bottom-left-radius: 18px;
+}
+
+.filesentmiddle {
+    border-top-left-radius: 18px;
+    border-bottom-left-radius: 18px;
+}
+
+.fileelement {
+    position: relative;
+    width: 80%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px;
+    background-color: transparent;
+    margin-left: 0;
+}
+
+.download {
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    cursor: pointer;
+}
+
+.download:hover {
+    transform: scale(1.2);
+    transition: transform 0.2s ease-in-out;
+}
