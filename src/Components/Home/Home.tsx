@@ -82,7 +82,7 @@ const Home = () => {
         newSocket.on('syncmessages', (data) => {
             console.log(data.messages)
             setConversationMessages(data.messages)
-            conv.messages = data.messages
+            setConv({ ...conv, messages: data.messages })
             // voir si on peut pas faire autrement voir pk cpt, ça reçoit plus de messages
             conversations.forEach((conversation) => {
                 if (conversation._id === data.conversations[0]._id) {
