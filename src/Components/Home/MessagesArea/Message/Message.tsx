@@ -12,7 +12,7 @@ const Message = ({ message, userId, i, scrollBottomRef, bottomRounded, topRounde
         setRightClick(true)
     }
 
-    
+
 
     const isReceived = message.sender_id !== userId
 
@@ -25,6 +25,11 @@ const Message = ({ message, userId, i, scrollBottomRef, bottomRounded, topRounde
         <>
             {rightClick && <ContextMenuMessage setRightClick={setRightClick} showSearchConv={showSearchConv} />}
             <div className={`message ${firstPlan}`} ref={i === messagesCount - 1 ? scrollBottomRef : null} onContextMenu={(e) => handleContextMenu(e)}>
+                {rightClick &&
+                    <div className={`reactiondiv ${isReceived ? "messagecontextmenureceived" : "messagecontextmenusent"}`}>
+                        Emojis ici pour ajouter plus tard des réactions
+                    </div>
+                }
                 <div className={`${messageClass} ${topClass} ${bottomClass}`} key={message._id}>
                     <p className='messagecontent'>
                         {message.content}
