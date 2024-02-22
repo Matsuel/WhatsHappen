@@ -19,7 +19,7 @@ function register(socket) {
             const newUser = new User({pic:filedata, username: pseudo, mail: email, password: bcrypt.hashSync(password, 10) });
             await newUser.save();
             const user = await User.findOne({ $or: [{ username: pseudo }, { mail: email }] });
-            const token = jwt.sign({ userId: user._id, mail: user.mail, pseudo: user.username }, secretTest, { expiresIn: '1h' });
+            const token = jwt.sign({ userId: user._id, mail: user.mail, pseudo: user.username }, secretTest, { expiresIn: '720h' });
             socket.emit('register', { created: true, token });
         }
     });
