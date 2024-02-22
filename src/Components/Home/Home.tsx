@@ -43,6 +43,10 @@ const Home = () => {
 
     const cookies = localStorage.getItem('user')
 
+    if (!cookies) {
+        window.location.href = '/login'
+    }
+
     useEffect(() => {
         if (cookies) {
             const token: User | null = decodeToken(cookies)
