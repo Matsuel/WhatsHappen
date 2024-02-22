@@ -23,6 +23,7 @@ And now go on http://localhost:3000/ for test app
     <li>Show status</li>
     <li>Search conv</li>
     <li>Join files but not send for the moment</li>
+    <li>Delete/react message</li>
 </ol>
 
 ---
@@ -33,14 +34,8 @@ And now go on http://localhost:3000/ for test app
     <li>Call video and voice</li>
     <li>Send files</li>
     <li>Search messages to conv</li>
-    <li>Delete/react and edit message</li>
+    <li>Edit message</li>
 </ol>
-
-# Clique droit
-
-*Faire ressortir le message avec une transition et blur le fond de la conversation*
-*Afficher un menu custom avec copier, supprimer*
-*Sur le haut du message ajouter une div où l'on mettra les réactions plus tard*
 
 # Clique droit sur une conversation 
 
