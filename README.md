@@ -1,62 +1,46 @@
-# WhatsappClone Using ReactJs
+# Getting Started with Create React App
 
-# Aperçu du jour :
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-![Preview](./src/assets/preview.png)
+## Available Scripts
 
-# How to install project
+In the project directory, you can run:
 
-```bash
-git clone https://github.com/Matsuel/Whastapp-Clone.git
-cd Whatsapp-Clone
-npm i
-npm start 
-```
+### `npm start`
 
-And now go on http://localhost:3000/ for test app
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-# Features availables
+The page will reload if you make edits.\
+You will also see any lint errors in the console.
 
-<ol>
-    <li>Send messages</li>
-    <li>Create conversation</li>
-    <li>Show status</li>
-    <li>Search conv</li>
-    <li>Join files but not send for the moment</li>
-    <li>Delete/react message</li>
-</ol>
+### `npm test`
 
----
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-# Finals features
+### `npm run build`
 
-<ol>
-    <li>Call video and voice</li>
-    <li>Send files</li>
-    <li>Search messages to conv</li>
-    <li>Edit message</li>
-</ol>
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-# Clique droit sur une conversation 
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
 
-*Supprimer une conversation*
-*Changer le nom mais pour plus tard*
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-# Clique dans une conversation
+### `npm run eject`
 
-*Changer de thème donc faut les mettre en place*
+**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
----
+If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-<ol>
-<li>Faire réactions sur un message</li>
-<li></li>
-<li>Ajouter menu à droite pour la Recherche de messages dans la conversation</li>
-<li>Patch problème envoie de fichiers qui sont modifiés et inutilisables après réception</li>
-<li>Custom clique droit message dans message area pour pouvoir changer de thème donc créer un ensemble de thèmes</li>
-<li>Edition du profil</li>
-<li>Appel</li>
-<li>Faire du chiffrement de bout en bout avec des clés publiques et privées différentes pour chaque conversation</li>
-<li>Permettre les groupes</li>
-<li>Permettre de mettre des noms custom aux personnes, et des réactions</li>
-</ol>
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+
+You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+
+## Learn More
+
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+
+To learn React, check out the [React documentation](https://reactjs.org/).
