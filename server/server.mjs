@@ -163,6 +163,30 @@ io.on('connection', (socket) => {
         }
     })
 
+    socket.on('reaction', async (data) => {
+        console.log(data);
+        const { cookies, message_id, reaction_id, conversationActive } = data;
+        if (await checkToken(cookies)) {
+            const sender_id = jwt.verify(cookies, secretTest).userId;
+            let MessageModel = mongoose.model('Messages' + conversationActive);
+            let message = await MessageModel.findById(message_id);
+            if (message.reactions) {
+                if (message.reactions.get(sender_id) === reaction_id) {
+                    message.reactions.delete(sender_id);
+                } else {
+                    message.reactions.set(sender_id, reaction_id)
+                }
+            } else {
+                message.reactions = new Map();
+                message.reactions.set(sender_id, reaction_id)
+            }
+            await message.save();
+            socket.emit('reaction', { reacted: true });
+            otherSynchroMessage(cookies, conversationActive);
+        }
+        socket.emit('reaction', { reacted: false });
+    })
+
 
 
     login(socket);

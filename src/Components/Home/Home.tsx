@@ -276,6 +276,17 @@ const Home = () => {
         setConversations([...conversations])
     }
 
+    const handleReaction = (message_id: string, reaction_id: string) => {
+        socket.emit('reaction', { cookies, message_id, reaction_id, conversationActive })
+        socket.on('reaction', (data: any) => {
+            if(data.reacted){
+                getConversationsMessages(conversationActive)
+                conv.messages = conversationMessages
+                setConv({...conv})
+            }
+        })
+    }
+
     return (
         <div className="home">
             <div className="conversations-section">
@@ -396,6 +407,7 @@ const Home = () => {
                             messagesCount={conv.messages.length}
                             filesEmpty={filesEmpty}
                             deleteMessage={deleteMessage}
+                            handleReaction={handleReaction}
                         />
 
                         <BottomBar

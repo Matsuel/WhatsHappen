@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
-import Picker from 'emoji-picker-react'
+import Picker, { Emoji } from 'emoji-picker-react'
 
 import './Message.css'
 import { ContextMenuMessage, ContextMenuMessageButton } from '../ContextMenuMessage/ContextMenuMessage'
 
-const Message = ({ message, userId, i, scrollBottomRef, bottomRounded, topRounded, messagesCount, deleteMessage, showSearchConv }: MessageProps) => {
+const Message = ({ message, userId, i, scrollBottomRef, bottomRounded, topRounded, messagesCount, deleteMessage, showSearchConv, handleReaction }: MessageProps) => {
 
     const [rightClick, setRightClick] = useState<boolean>(false)
 
@@ -17,6 +17,8 @@ const Message = ({ message, userId, i, scrollBottomRef, bottomRounded, topRounde
 
     const isReceived = message.sender_id !== userId
 
+    // console.log(message.reactions)
+
     const messageClass = isReceived ? 'messagereceived' : 'messagesent'
     const firstPlan = rightClick ? 'messagefirstplan' : ''
     const topClass = isReceived ? (topRounded ? 'messagereceivedtop' : 'messagereceivedmiddle') : (topRounded ? 'messagesenttop' : 'messagesentmiddle');
@@ -27,7 +29,7 @@ const Message = ({ message, userId, i, scrollBottomRef, bottomRounded, topRounde
             {rightClick && <ContextMenuMessage setRightClick={setRightClick} showSearchConv={showSearchConv} />}
             <div className={`message ${firstPlan}`} ref={i === messagesCount - 1 ? scrollBottomRef : null} onContextMenu={(e) => handleContextMenu(e)}>
                 {rightClick &&
-                    <Picker reactionsDefaultOpen={true} className={`reactiondiv ${isReceived ? "messagecontextmenureceived" : "messagecontextmenusent"}`} onReactionClick={(emoji) => console.log(emoji)} />
+                    <Picker reactionsDefaultOpen={true} className={`reactiondiv ${isReceived ? "messagecontextmenureceived" : "messagecontextmenusent"}`}  onEmojiClick={(emoji: EmojiPickerProps) => handleReaction(message._id, emoji.unified)} />
                 }
                 <div className={`${messageClass} ${topClass} ${bottomClass}`} key={message._id}>
                     <p className='messagecontent'>

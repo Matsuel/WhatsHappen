@@ -29,7 +29,7 @@ interface message {
     fileName: string,
     fileExtension: string,
     fileContent: Buffer | ArrayBuffer,
-    fileType: string
+    fileType: string,
 }
 
 interface conversation {
@@ -74,6 +74,7 @@ interface MessagesAreaProps {
     messages: message[],
     filesEmpty: boolean,
     deleteMessage: Function,
+    handleReaction: Function,
 }
 
 interface MessageProps {
@@ -86,6 +87,7 @@ interface MessageProps {
     messagesCount: number,
     deleteMessage: Function,
     showSearchConv: boolean,
+    handleReaction: Function,
 }
 
 interface MessageDateProps {
@@ -111,6 +113,11 @@ interface MessageFileProps {
     deleteMessage: Function,
     showSearchConv: boolean,
 }
+
+interface EmojiPickerProps {
+    unified: string,
+}
+
 
 declare module '*.svg' {
     const content: any;
