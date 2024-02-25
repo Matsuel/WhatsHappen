@@ -109,14 +109,6 @@
 }
 
 .reactiondiv {
-    width: 30%;
-    height: 40px;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    background-color: #000;
-    z-index: 2;
-    border-radius: 12px;
     margin-bottom: 2%;
 }
 

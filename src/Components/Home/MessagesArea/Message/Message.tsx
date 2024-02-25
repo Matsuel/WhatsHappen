@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import Picker from 'emoji-picker-react'
 
 import './Message.css'
 import { ContextMenuMessage, ContextMenuMessageButton } from '../ContextMenuMessage/ContextMenuMessage'
@@ -26,9 +27,7 @@ const Message = ({ message, userId, i, scrollBottomRef, bottomRounded, topRounde
             {rightClick && <ContextMenuMessage setRightClick={setRightClick} showSearchConv={showSearchConv} />}
             <div className={`message ${firstPlan}`} ref={i === messagesCount - 1 ? scrollBottomRef : null} onContextMenu={(e) => handleContextMenu(e)}>
                 {rightClick &&
-                    <div className={`reactiondiv ${isReceived ? "messagecontextmenureceived" : "messagecontextmenusent"}`}>
-                        Emojis ici pour ajouter plus tard des réactions
-                    </div>
+                    <Picker reactionsDefaultOpen={true} className={`reactiondiv ${isReceived ? "messagecontextmenureceived" : "messagecontextmenusent"}`} onReactionClick={(emoji) => console.log(emoji)} />
                 }
                 <div className={`${messageClass} ${topClass} ${bottomClass}`} key={message._id}>
                     <p className='messagecontent'>
