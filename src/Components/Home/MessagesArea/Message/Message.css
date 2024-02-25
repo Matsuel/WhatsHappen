@@ -170,3 +170,21 @@
     bottom: 5px;
     left: 15px;
 }
+
+.reaction {
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.myReaction {
+    background-color: #fff;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.myReaction:hover {
+    background-color: #D7F8F4;
+}

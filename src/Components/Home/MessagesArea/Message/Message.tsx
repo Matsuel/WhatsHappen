@@ -41,8 +41,14 @@ const Message = ({ message, userId, i, scrollBottomRef, bottomRounded, topRounde
                         message.reactions && message.reactions.length > 0 &&
                         <div className="reactions">
                             {message.reactions.map((reaction, i) => {
+                                const myReaction = reaction.user_id === userId
+
+                                console.log(myReaction)
+
                                 return (
-                                    <Emoji key={i} unified={reaction.reaction} size={14 } />
+                                    <div className={`reaction ${myReaction ? "myReaction": ""}`} key={i} onClick={() => { handleReaction(message._id, reaction.reaction) }}>
+                                        <Emoji unified={reaction.reaction} size={13} />
+                                    </div>
                                 )
                             })}
                         </div>
