@@ -281,8 +281,8 @@ const Home = () => {
         socket.on('reaction', (data: any) => {
             if(data.reacted){
                 getConversationsMessages(conversationActive)
-                conv.messages = conversationMessages
-                setConv({...conv})
+                // conv.messages = conversationMessages
+                // setConv({...conv})
             }
         })
     }

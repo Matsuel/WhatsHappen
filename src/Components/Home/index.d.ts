@@ -30,6 +30,10 @@ interface message {
     fileExtension: string,
     fileContent: Buffer | ArrayBuffer,
     fileType: string,
+    reactions: Array<{ 
+        user_id: string,
+        reaction: string
+    }>
 }
 
 interface conversation {

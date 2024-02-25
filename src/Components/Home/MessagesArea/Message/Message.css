@@ -1,4 +1,5 @@
 .messagereceived {
+    position: relative;
     align-self: flex-start;
     min-width: 15%;
     max-width: 30%;
@@ -27,6 +28,7 @@
 }
 
 .messagesent {
+    position: relative;
     align-self: flex-end;
     min-width: 15%;
     max-width: 30%;
@@ -161,4 +163,10 @@
 
 .messagecontextitem:hover {
     background-color: #fff;
+}
+
+.reactions {
+    position: absolute;
+    bottom: 5px;
+    left: 15px;
 }

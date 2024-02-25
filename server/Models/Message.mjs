@@ -17,7 +17,10 @@ const MessageSchema = new mongoose.Schema({
     fileContent : { type: Buffer, required: false },
     fileExtension : { type: String, required: false },
     fileType : { type: String, required: false },
-    reactions: { type: Map, of: String, required: false }
+    reactions: [{
+        user_id: { type: String, required: true },
+        reaction: { type: String, required: true }
+    }]
 });
 
 export {Message, MessageSchema};

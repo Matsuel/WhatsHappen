@@ -171,14 +171,14 @@ io.on('connection', (socket) => {
             let MessageModel = mongoose.model('Messages' + conversationActive);
             let message = await MessageModel.findById(message_id);
             if (message.reactions) {
-                if (message.reactions.get(sender_id) === reaction_id) {
-                    message.reactions.delete(sender_id);
+                const reactionIndex = message.reactions.findIndex((reaction) => reaction.user_id === sender_id);
+                if (reactionIndex === -1) {
+                    message.reactions.push({ user_id: sender_id, reaction: reaction_id });
                 } else {
-                    message.reactions.set(sender_id, reaction_id)
+                    message.reactions[reactionIndex].reaction = reaction_id;
                 }
-            } else {
-                message.reactions = new Map();
-                message.reactions.set(sender_id, reaction_id)
+            }else {
+                message.reactions = [{ user_id: sender_id, reaction: reaction_id }];
             }
             await message.save();
             socket.emit('reaction', { reacted: true });
