@@ -169,6 +169,11 @@
     position: absolute;
     bottom: 5px;
     left: 15px;
+    width: 80%;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
 }
 
 .reaction {
