@@ -129,7 +129,15 @@ io.on('connection', (socket) => {
                 fs.mkdirSync('files');
             }
 
-            fs.writeFile(path.join('files', file.name), buffer, (err) => {
+            const extension = path.extname(file.name);
+
+            const fileName = path.basename(file.name, extension);
+
+            const timestamp = Date.now();
+
+            const newFileName = `${fileName}-${timestamp}${extension}`;
+
+            fs.writeFile(path.join('files', newFileName), buffer, (err) => {
                 if (err) throw err;
                 console.log('The file has been saved!');
             });
