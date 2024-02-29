@@ -100,7 +100,7 @@ interface MessageDateProps {
 
 interface FileInfos {
     name: string,
-    content: ArrayBuffer,
+    content: string | ArrayBuffer | null,
     type: string,
     lastModified: number,
     extension: string

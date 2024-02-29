@@ -11,21 +11,24 @@ const BottomBar = ({ conversationActive, message, handleMessageChange, sendMessa
     
 
     const onDrop = (acceptedFiles: File[]) => {
+        console.log(acceptedFiles)
 
         setFilesEmpty(false)
         acceptedFiles.forEach((file: File, index: number) => {
             const reader = new FileReader()
-            reader.readAsArrayBuffer(file)
+            // reader.readAsArrayBuffer(file)
+            reader.readAsDataURL(file)
             reader.onload = () => {
                 setFiles((prevFiles: FileInfos[]) => {
                     const newFiles = [...prevFiles]
                     newFiles[index] = {
                         name: file.name,
-                        content: reader.result as ArrayBuffer,
+                        content: reader.result as string,
                         type: file.type,
                         lastModified: file.lastModified,
                         extension: file.name.split('.').pop() as string
                     } 
+                    console.log(reader.result as ArrayBuffer)
                     return newFiles
                 })
             }

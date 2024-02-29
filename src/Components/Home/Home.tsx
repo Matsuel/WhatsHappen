@@ -213,7 +213,7 @@ const Home = () => {
                 setFilesEmpty(true)
                 setFiles([])
                 getConversationsMessages(conversation_id)
-                getConversations()
+                // getConversations()
             }
         })
     }

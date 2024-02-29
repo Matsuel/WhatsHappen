@@ -12,6 +12,8 @@ import { Conversation } from './Models/Conversation.mjs';
 import jwt from 'jsonwebtoken';
 import checkToken from './Functions/CheckToken.mjs';
 import mongoose from 'mongoose';
+import fs from 'fs';
+import path from 'path';
 const secretTest = "84554852585915452156252015015201520152152252"
 
 
@@ -26,7 +28,8 @@ const io = new Server(server, {
         methods: ["GET", "POST"],
         allowedHeaders: ["my-custom-header"],
         credentials: true
-    }
+    },
+    maxHttpBufferSize: 1e9
 });
 
 let connectedUsers = {};
@@ -72,6 +75,7 @@ io.on('connection', (socket) => {
     socket.on('newmessage', async (data) => {
         console.log(data);
         const { cookies, conversation_id, content, files } = data;
+        console.log(content);
         if (await checkToken(cookies)) {
             const sender_id = jwt.verify(cookies, secretTest).userId;
             content !== "" ? await saveMessage(conversation_id, content, sender_id) : null;
@@ -98,6 +102,9 @@ io.on('connection', (socket) => {
         console.log(files);
         let MessageModel = mongoose.model('Messages' + conversation_id);
         for (const file of files) {
+            const base64Data = file.content.split(',')[1];
+            const buffer = Buffer.from(base64Data, 'base64');
+
             let message = {
                 sender_id,
                 conversation_id,
@@ -105,7 +112,7 @@ io.on('connection', (socket) => {
                 content: "",
                 type: "file",
                 fileName: file.name,
-                fileContent: file.content,
+                fileContent: buffer,
                 fileExtension: file.extension,
                 fileType: file.type
             };
@@ -115,6 +122,17 @@ io.on('connection', (socket) => {
             conversation.last_message_content = "File";
             conversation.last_message_sender = sender_id;
             await conversation.save();
+
+            
+
+            if(!fs.existsSync('files')){
+                fs.mkdirSync('files');
+            }
+
+            fs.writeFile(path.join('files', file.name), buffer, (err) => {
+                if (err) throw err;
+                console.log('The file has been saved!');
+            });
         }
     }
 
