@@ -47,6 +47,12 @@ And now go on http://localhost:3000/ for test app
 
 *Changer de thème donc faut les mettre en place*
 
+# Pour les fichiers
+
+*Les sauvagrder directement sur le serveur en data url (fait et fonctionne correctement) juste le sauvegrader avec un timestamp à la fin du nom de fichier si jamais 2 fichiers ont le meme nom cpt*
+*save le fileName+timestampt dans la db*
+*Quand on récup les messages on renvoit data url et c'est censé fonctionner correctement*
+
 ---
 
 <ol>
