@@ -29,14 +29,18 @@ const ContextMenuMessageButton = ({ message, userId, deleteMessage, isReceived }
         <div className={`messagecontextmenu ${isReceived ? "messagecontextmenureceived" : "messagecontextmenusent"}`}>
             {message.type === "text" &&
             <div className="messagecontextitem" onClick={() => copyContentToClipboard(message.content)}>
-                Copier
-                <img src={copyDone ? CopyDone : Copy} alt="copy" className="copy" />
+                <div className="contexttitle">
+                    Copier
+                </div>
+                <img src={copyDone ? CopyDone : Copy} alt="copy" className="contexticon" />
             </div>
             }
             {message.sender_id === userId &&
                 <div className="messagecontextitem" onClick={() => deleteMessage(message._id)}>
-                    Supprimer le message
-                    <img src={Trash} alt="trash" className="trash" />
+                    <div className="contexttitle">
+                        Supprimer
+                    </div>
+                    <img src={Trash} alt="trash" className="contexticon" />
                 </div>
             }
         </div>

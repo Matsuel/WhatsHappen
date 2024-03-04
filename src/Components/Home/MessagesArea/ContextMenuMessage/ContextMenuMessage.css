@@ -1,0 +1,47 @@
+.messagecontextmenu {
+    z-index: 2;
+    width: 15%;
+    height: auto;
+    margin-top: 2%;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.messagecontextmenusent {
+    align-self: flex-end;
+    background-color: #D7F8F4;
+}
+
+.messagecontextmenureceived {
+    align-self: flex-start;
+    background-color: #fff;
+}
+
+.messagecontextitem {
+    width: 100%;
+    height: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 14px;
+    color: #000;
+    cursor: pointer;
+}
+
+.messagecontextitem:hover {
+    background-color: #fff;
+}
+
+.contexttitle {
+    width: 50%;
+    margin-left: 15%;
+}
+
+.contexticon {
+    width: 20px;
+    height: 20px;
+    margin-right: 15%;
+}
