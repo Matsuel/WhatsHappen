@@ -42,6 +42,8 @@ And now go on http://localhost:3000/ for test app
     <li>Edit message</li>
 </ol>
 
+# Faire des composants comme sur le site ATPE
+
 # Clique droit sur une conversation 
 *Changer le nom mais pour plus tard*
 
