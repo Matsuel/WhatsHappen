@@ -1,5 +1,7 @@
 # WhatsappClone Using ReactJs
 
+# Actual code is not really clean for testing
+
 # Aperçu du jour :
 
 ![Preview](./src/assets/preview.png)
