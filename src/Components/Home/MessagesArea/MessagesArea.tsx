@@ -10,15 +10,6 @@ import MessageFile from './MessageFile/MessageFile'
 const MessagesArea = ({ userId, scrollBottomRef, showSearchConv, messages, messagesCount, filesEmpty, deleteMessage, handleReaction }: MessagesAreaProps) => {
     const [messageDay, setMessageDay] = useState<Number>(0)
 
-    const downloadFile = (message : message) => {
-        console.log(message)
-        const fileUrl = URL.createObjectURL(new Blob([new Uint8Array(message.fileContent)], { type: message.fileType }))
-        const a = document.createElement("a")
-        a.href = fileUrl
-        a.download = message.fileName
-        a.click()
-    }
-
     return (
         <div className={`messagesection ${showSearchConv ? "messagesectionmedium" : "messagesectionfull"} ${filesEmpty ? "messagesectionheightMax" : "messagesectionheightMin"} `}>
             <MessagePrivacy />
