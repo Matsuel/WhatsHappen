@@ -142,6 +142,16 @@ interface FileProps {
     setFilesEmpty: Function,
 }
 
+interface BottombarProps {
+    conversationActive: string,
+    message: string,
+    handleMessageChange: Function,
+    sendMessage: Function,
+    files: FileInfos[],
+    setFiles: Function,
+    setFilesEmpty: Function,
+}
+
 
 declare module '*.svg' {
     const content: any;
