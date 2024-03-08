@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { io } from 'socket.io-client';
 import { decodeToken } from 'react-jwt';
-import TopBar from './TopBar/TopBar'
+import TopBar from '../TopBar/TopBar'
 import BottomBar from '../BottomArea/BottomArea'
 import Search from '../../assets/Search.svg'
 import NewConv from '../../assets/NewConv.svg'
@@ -10,11 +10,11 @@ import Online from '../../assets/Online.svg'
 import Offline from '../../assets/Offline.svg'
 import Pin from '../../assets/Pin.svg'
 import Pinned from '../../assets/Pinned.svg'
-import NoResult from './NoResult/NoResult';
+import NoResult from '../NoResult/NoResult';
 import DoubleChevrons from '../../assets/DoubleChevrons.svg'
 
 import './Home.css'
-import NoConvActive from './NoConvActive/NoConvActive';
+import NoConvActive from '../NoConvActive/NoConvActive';
 import MessagesArea from './MessagesArea/MessagesArea';
 
 

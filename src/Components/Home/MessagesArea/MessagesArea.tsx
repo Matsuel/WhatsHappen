@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import MessagePrivacy from '../MessagePrivacy/MessagePrivacy'
+import MessagePrivacy from '../../MessagePrivacy/MessagePrivacy'
 import Message from './Message/Message'
 import Download from '../../../assets/download.svg'
 import './MessagesArea.css'
