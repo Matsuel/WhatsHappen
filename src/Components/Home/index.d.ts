@@ -128,6 +128,20 @@ interface IsTypingProps {
     name: string,
 }
 
+interface FilesListProps {
+    files: FileInfos[],
+    setFiles: Function,
+    setFilesEmpty: Function,
+}
+
+interface FileProps {
+    file: FileInfos,
+    index: number,
+    setFiles: Function,
+    files: FileInfos[],
+    setFilesEmpty: Function,
+}
+
 
 declare module '*.svg' {
     const content: any;

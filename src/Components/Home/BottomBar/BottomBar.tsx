@@ -8,6 +8,7 @@ import { onDrop, deleteFile, handleEnterPressed } from '../../../Functions/Botto
 
 import './BottomBar.css'
 import IsTyping from '../../IsTyping/IsTyping'
+import FilesList from '../../FilesList/FilesList'
 
 const BottomBar = ({ conversationActive, message, handleMessageChange, sendMessage, typingStatus, name, filesEmpty, setFilesEmpty, files, setFiles }: BottomBarProps) => {
 
@@ -15,25 +16,7 @@ const BottomBar = ({ conversationActive, message, handleMessageChange, sendMessa
         <div className='bottombar'>
             <IsTyping conversationActive={conversationActive} typingStatus={typingStatus} name={name} />
 
-            {/* Composant pour liser les fichiers */}
-            {files.length > 0 ? (
-                <div className="fileslist">
-                    {
-                        files.map((file, index) => {
-                            return (
-                                // Composant pour fichier dans le chat
-                                <div key={index} className="file">
-                                    <p className='filename'>{file.name.length > 10 ? file.name.slice(0, 10) + '...' : file.name}</p>
-                                    <div className="fileicon">
-                                        <FileIcon extension={file.extension} {...defaultStyles[file.extension as keyof typeof defaultStyles]} />
-                                    </div>
-                                    <img src={Trash} alt="trash" className='trashfile' onClick={() => deleteFile(index, setFiles, files, setFilesEmpty)} />
-                                </div>
-                            )
-                        })
-                    }
-                </div>
-            ) : null}
+            <FilesList files={files} setFiles={setFiles} setFilesEmpty={setFilesEmpty} />
 
             {/* Ca c'est le composant BottomBar */}
             <div className="conversationbottombar">

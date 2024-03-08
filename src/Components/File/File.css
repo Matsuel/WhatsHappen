@@ -1,0 +1,24 @@
+.file {
+    position: relative;
+    margin-left: 3%;
+    width: 100px;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 12px;
+    background-color: #D1E4E8;
+}
+
+.filename {
+    font-size: 12px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    color: #000;
+    margin-top: 5px;
+}
+
+
+.fileicon {
+    width: 70px;
+    height: 70px;
+}

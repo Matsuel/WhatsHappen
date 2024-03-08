@@ -1,0 +1,7 @@
+.typingstatus {
+    position: absolute;
+    bottom: 60px;
+    left: 10px;
+    color: #000;
+    z-index: 9999;
+}
