@@ -331,7 +331,7 @@ const Home = () => {
                                                         <img src={conversation.status ? Online : Offline} alt="online" className='speakerstatus' />
                                                     </div>
 
-                                                    Créer composant pour afficher les infos de la conversation
+                                                    {/* Créer composant pour afficher les infos de la conversation */}
                                                     <div className="conversationinfos" onClick={() => handleConversationActive(conversation._id)}>
                                                         {/* Voir si j'ai pas besoin de créer un composant pour afficher le nom ailleurs */}
                                                         <div>{conversation.name.charAt(0).toUpperCase() + conversation.name.slice(1)}</div>
