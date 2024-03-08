@@ -7,22 +7,13 @@ import { FileIcon, defaultStyles } from 'react-file-icon'
 import { onDrop, deleteFile, handleEnterPressed } from '../../../Functions/BottomBar/BottomBar'
 
 import './BottomBar.css'
+import IsTyping from '../../IsTyping/IsTyping'
 
 const BottomBar = ({ conversationActive, message, handleMessageChange, sendMessage, typingStatus, name, filesEmpty, setFilesEmpty, files, setFiles }: BottomBarProps) => {
 
     return (
         <div className='bottombar'>
-            {/* Composant est en train d'écrire */}
-            {
-                typingStatus[conversationActive as keyof typeof typingStatus] ? (
-                    <div className="typingstatus">
-                        <p>{name.charAt(0).toUpperCase() + name.slice(1)} est en train d'écrire</p>
-                    </div>
-                ) : (
-                    null
-                )
-
-            }
+            <IsTyping conversationActive={conversationActive} typingStatus={typingStatus} name={name} />
 
             {/* Composant pour liser les fichiers */}
             {files.length > 0 ? (

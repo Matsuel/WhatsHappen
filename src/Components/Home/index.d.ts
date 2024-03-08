@@ -122,6 +122,12 @@ interface EmojiPickerProps {
     unified: string,
 }
 
+interface IsTypingProps {
+    conversationActive: string,
+    typingStatus: Object,
+    name: string,
+}
+
 
 declare module '*.svg' {
     const content: any;
