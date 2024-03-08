@@ -4,6 +4,7 @@ import Cross from '../../../../assets/cross.svg'
 import Trash from '../../../../assets/Trash.svg'
 import Copy from '../../../../assets/Copy.svg'
 import CopyDone from '../../../../assets/CopyDone.svg'
+import { copyContentToClipboard } from '../../../../Functions/ContextMenu/ContextMenu'
 
 const ContextMenuMessage = ({ setRightClick, showSearchConv }: { setRightClick: Function, showSearchConv: boolean }) => {
     return (
@@ -16,20 +17,12 @@ const ContextMenuMessage = ({ setRightClick, showSearchConv }: { setRightClick: 
 const ContextMenuMessageButton = ({ message, userId, deleteMessage, isReceived }: { message: message, userId: string, deleteMessage: Function, isReceived: boolean }) => {
     const [copyDone, setCopyDone] = useState<boolean>(false)
 
-    const copyContentToClipboard = (content: string) => {
-        setCopyDone(true)
-        navigator.clipboard.writeText(content)
-        setTimeout(() => {
-            setCopyDone(false)
-        }, 1500)
-    }
-
 
     return (
         <div className={`messagecontextmenu ${isReceived ? "messagecontextmenureceived" : "messagecontextmenusent"}`}>
             {/* Voir pour créer un composant ContextMenuMessageButton qui prend en paramètre message, userId, deleteMessage, isReceived, une couleur et une taille, une fonction on click s'il ya besoin */}
             {message.type === "text" &&
-            <div className="messagecontextitem" onClick={() => copyContentToClipboard(message.content)}>
+            <div className="messagecontextitem" onClick={() => copyContentToClipboard(message.content, setCopyDone)}>
                 <div className="contexttitle">
                     Copier
                 </div>
