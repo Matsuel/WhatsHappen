@@ -152,6 +152,16 @@ interface BottombarProps {
     setFilesEmpty: Function,
 }
 
+interface MessagesListProps {
+    userId: string,
+    scrollBottomRef: any,
+    showSearchConv: boolean,
+    messages: message[],
+    messagesCount: number,
+    deleteMessage: Function,
+    handleReaction: Function,
+}
+
 
 declare module '*.svg' {
     const content: any;

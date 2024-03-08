@@ -1,42 +1,17 @@
-import React, { useState } from 'react'
-import MessagePrivacy from '../../MessagePrivacy/MessagePrivacy'
-import Message from './Message/Message'
-import './MessagesArea.css'
-import MessageDate from './MessageDate/MessageDate'
-import MessageFile from './MessageFile/MessageFile'
+import React from 'react'
+import Message from '../Home/MessagesArea/Message/Message'
+import MessageDate from '../Home/MessagesArea/MessageDate/MessageDate'
+import MessageFile from '../Home/MessagesArea/MessageFile/MessageFile'
+import { isBottomRounded, isTopRounded } from '../../Functions/MessagesList/MessagesList'
 
-const MessagesArea = ({ userId, scrollBottomRef, showSearchConv, messages, messagesCount, filesEmpty, deleteMessage, handleReaction }: MessagesAreaProps) => {
-    const [messageDay, setMessageDay] = useState<Number>(0)
 
+const MessagesList = ({ userId, scrollBottomRef, showSearchConv, messages, messagesCount, deleteMessage, handleReaction }: MessagesListProps) => {
     return (
-        <div className={`messagesection ${showSearchConv ? "messagesectionmedium" : "messagesectionfull"} ${filesEmpty ? "messagesectionheightMax" : "messagesectionheightMin"} `}>
-            <MessagePrivacy />
-
-
-            {/* Composant MessageDate  ajouter la condition dans le composant  */}
-            {
-                messageDay === 0 && messages.length > 0 ?
-                    <MessageDate message={messages[0]} />
-                    : null
-            }
-
-            {/* Composant MessagesList  */}
+        <>
             {messages.map((message, i) => {
                 const nextMessage = i < messagesCount - 1 ? messages[i + 1] : null
                 const previousMessage = i > 0 ? messages[i - 1] : null
 
-                let topRounded = true
-                let bottomRounded = true
-
-                // Mettre fonctions dans un dossier fonctions/MessagesList 
-
-                if (nextMessage && message.sender_id === nextMessage.sender_id) {
-                    bottomRounded = false
-                }
-
-                if (previousMessage && message.sender_id === previousMessage.sender_id) {
-                    topRounded = false
-                }
                 return (
                     <>
                         {
@@ -55,8 +30,8 @@ const MessagesArea = ({ userId, scrollBottomRef, showSearchConv, messages, messa
                                     i={i}
                                     scrollBottomRef={scrollBottomRef}
                                     key={message._id}
-                                    topRounded={topRounded}
-                                    bottomRounded={bottomRounded}
+                                    topRounded={isTopRounded(previousMessage, message.sender_id)}
+                                    bottomRounded={isBottomRounded(nextMessage, message.sender_id)}
                                     messagesCount={messagesCount}
                                     deleteMessage={deleteMessage}
                                     showSearchConv={showSearchConv}
@@ -68,8 +43,8 @@ const MessagesArea = ({ userId, scrollBottomRef, showSearchConv, messages, messa
                                     i={i}
                                     scrollBottomRef={scrollBottomRef}
                                     key={message._id}
-                                    topRounded={topRounded}
-                                    bottomRounded={bottomRounded}
+                                    topRounded={isTopRounded(previousMessage, message.sender_id)}
+                                    bottomRounded={isBottomRounded(nextMessage, message.sender_id)}
                                     messagesCount={messagesCount}
                                     deleteMessage={deleteMessage}
                                     showSearchConv={showSearchConv}
@@ -78,8 +53,8 @@ const MessagesArea = ({ userId, scrollBottomRef, showSearchConv, messages, messa
                     </>
                 )
             })}
-        </div>
+        </>
     )
 }
 
-export default MessagesArea
+export default MessagesList
