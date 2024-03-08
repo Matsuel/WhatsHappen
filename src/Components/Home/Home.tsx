@@ -290,12 +290,15 @@ const Home = () => {
     return (
         <div className="home">
             <div className="conversations-section">
+                {/* Créer un comoposant pour la barre de recherche */}
                 <div className="searchBar">
                     <img src={Search} alt="search" className='searchLogo' />
                     <input type="text" placeholder='Rechercher une conversation ici' name="search" id="search" className='convSearch' onChange={handleSearch} />
                 </div>
 
+                {/* Créer un comoposant pour les types de conversations */}
                 <div className="convstype">
+                    {/* Split ça dans un composant et faire un map en enregistrant les datas dans un dossier datas / conversationsTypes.ts */}
                     <div className={`convtype ${typeConv === 1 ? 'convtypeActive' : ''}`} onClick={() => setTypeConv(1)}>
                         Conversations
                     </div>
@@ -320,13 +323,19 @@ const Home = () => {
                                     return (
                                         (
                                             conversation.name.toLowerCase().includes(search.toLowerCase()) ? (
+                                                // Créer composant pour afficher une conversation
                                                 <div className={`conversation ${classActive} ${topRound} ${bottomRound} ${noConvActiveClass}`} key={conversation._id} onMouseEnter={() => handleHoverConv(conversation._id)} onMouseLeave={handleHoverConvReset}>
+                                                    {/* Créer un composant pour afficher une image et un status */}
                                                     <div className="convimagestatus" onClick={() => handleConversationActive(conversation._id)}>
                                                         <img src={conversation.pic ? `data:image/jpeg;base64,${conversation.pic}` : Conv1} alt="conv1" className='conversationimage' />
                                                         <img src={conversation.status ? Online : Offline} alt="online" className='speakerstatus' />
                                                     </div>
+
+                                                    Créer composant pour afficher les infos de la conversation
                                                     <div className="conversationinfos" onClick={() => handleConversationActive(conversation._id)}>
+                                                        {/* Voir si j'ai pas besoin de créer un composant pour afficher le nom ailleurs */}
                                                         <div>{conversation.name.charAt(0).toUpperCase() + conversation.name.slice(1)}</div>
+                                                            {/* Composant pour afficher le dernier message ou le statut de la conversation */}
                                                         <div>
                                                             {
                                                                 typingStatus[conversation._id as keyof typeof typingStatus] ?
@@ -345,6 +354,8 @@ const Home = () => {
                                                             }
                                                         </div>
                                                     </div>
+
+                                                    {/* Créer un composant pour afficher une date et une heure */}
                                                     <p>
                                                         {
                                                             new Date(conversation.last_message_date).getHours() + ":" +
@@ -365,6 +376,7 @@ const Home = () => {
                     }
                 </div>
 
+                    {/* Créer un composant pour créer une nouvelle conversation */}
                 {showNewConv ? (
                     <div className="newconvmodal">
                         <input type="text" placeholder='Nom de votre interlocuteur' className='newconvinput' onChange={handleSearchUsers} />
@@ -372,6 +384,7 @@ const Home = () => {
                             users.map((user) => {
                                 return (
                                     user.username.toLowerCase().includes(searchUsers.toLowerCase()) ? (
+                                        // Composant userDatas
                                         <div className="newconvuser" key={user._id} onClick={() => createConversation(user._id)}>
                                             <img src={user.pic !== "" ? `data:image/jpeg;base64,${user.pic}` : Conv1} className='userpic' />
                                             <p>{user.username}</p>
@@ -382,12 +395,14 @@ const Home = () => {
                         ) : null}
                     </div>
                 ) : null}
-
+                
+                {/* Créer un composant bouton pour créer une nouvelle conversation */}
                 <div className={`newconv-div ${canRotate ? 'newConv-rotate' : ''}`} onClick={() => handleNewConv()}>
                     <img src={NewConv} alt="newconv" className='newConv' />
                 </div>
             </div>
 
+            {/* Créer un composant coneversation dans lequel on mettra tout*/}
             <div className="messages-section">
                 {conversationActive !== '' ? (
                     <>

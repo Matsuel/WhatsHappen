@@ -23,6 +23,7 @@ const TopBar = ({ name, pic, status, handleSearchConv, showSearchConv }: TopBarP
                 </div>
             </div>
             <div className="topbarright">
+                {/* Composant TopBarBtn prenant en paramètre une image, une fonction onClick */}
                 <img src={Phone} alt="phoneconv" className='toprightbtn' />
                 <img src={Video} alt="video" className='toprightbtn' />
                 <img src={SearchConv} alt="searchconv" className='toprightbtn' onClick={handleSearchConv as any} />
@@ -31,6 +32,7 @@ const TopBar = ({ name, pic, status, handleSearchConv, showSearchConv }: TopBarP
                     :
                     null
                 }
+                {/* Composant TopBarBtn prenant en paramètre une image, une fonction onClick */}
                 <img src={Expand} alt="expand" className='toprightbtn' />
             </div>
         </div>

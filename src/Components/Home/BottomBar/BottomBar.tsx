@@ -35,6 +35,7 @@ const BottomBar = ({ conversationActive, message, handleMessageChange, sendMessa
         })
     }
 
+    // Mettre fonctions dans un dossier fonctions
     const deleteFile = (index: number) => {
         setFiles((prevFiles: FileInfos[]) => prevFiles.filter((_, i) => i !== index))
         files.length === 1 && setFilesEmpty(true)
@@ -48,6 +49,7 @@ const BottomBar = ({ conversationActive, message, handleMessageChange, sendMessa
 
     return (
         <div className='bottombar'>
+            {/* Composant est en train d'écrire */}
             {
                 typingStatus[conversationActive as keyof typeof typingStatus] ? (
                     <div className="typingstatus">
@@ -59,11 +61,13 @@ const BottomBar = ({ conversationActive, message, handleMessageChange, sendMessa
 
             }
 
+            {/* Composant pour liser les fichiers */}
             {files.length > 0 ? (
                 <div className="fileslist">
                     {
                         files.map((file, index) => {
                             return (
+                                // Composant pour fichier dans le chat
                                 <div key={index} className="file">
                                     <p className='filename'>{file.name.length > 10 ? file.name.slice(0, 10) + '...' : file.name}</p>
                                     <div className="fileicon">
@@ -77,6 +81,7 @@ const BottomBar = ({ conversationActive, message, handleMessageChange, sendMessa
                 </div>
             ) : null}
 
+            {/* Ca c'est le composant BottomBar */}
             <div className="conversationbottombar">
                 <Dropzone onDrop={(acceptedFiles) => onDrop(acceptedFiles)}>
                     {({ getRootProps, getInputProps }) => (

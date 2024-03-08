@@ -9,6 +9,8 @@ const MessageFile = ({ message, userId, i, scrollBottomRef, bottomRounded, topRo
 
     const [rightClick, setRightClick] = useState<boolean>(false)
 
+
+    // Mettre fonctions dans un dossier fonctions/MessagesFiles 
     const handleContextMenu = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
         e.preventDefault()
         setRightClick(true)
@@ -21,6 +23,7 @@ const MessageFile = ({ message, userId, i, scrollBottomRef, bottomRounded, topRo
     const topClass = isReceived ? (topRounded ? 'filereceivedtop' : 'filereceivedmiddle') : (topRounded ? 'filesenttop' : 'filesentmiddle');
     const bottomClass = isReceived ? (bottomRounded ? 'filereceivedbottom' : '') : (bottomRounded ? 'filesentbottom' : '');
 
+    // Mettre fonctions dans un dossier fonctions/MessagesFiles
     const downloadFile = (message: message) => {
         const arrayBuffer = new Blob([message.fileContent], { type: message.fileType })
         const fileUrl = URL.createObjectURL(arrayBuffer)
@@ -35,9 +38,12 @@ const MessageFile = ({ message, userId, i, scrollBottomRef, bottomRounded, topRo
 
     return (
         <>
+        {/* Voir si je peux pas gérer la condition directement dans le composant */}
             {rightClick &&
                 <ContextMenuMessage setRightClick={setRightClick} showSearchConv={showSearchConv} />
             }
+
+            {/* Composant message file */}
             <div className={`fileelement ${firstPlan}`} ref={i === messagesCount - 1 ? scrollBottomRef : null} onContextMenu={(e) => handleContextMenu(e)}>
 
                 <div className={`${fileClass} ${topClass} ${bottomClass}`} key={message._id}>
@@ -48,6 +54,8 @@ const MessageFile = ({ message, userId, i, scrollBottomRef, bottomRounded, topRo
                     </div>
 
                 </div>
+
+                {/* Voir si je peux pas gérer la condition directement dans le composant */}
                 {rightClick &&
                     <ContextMenuMessageButton message={message} userId={userId} deleteMessage={deleteMessage} isReceived={isReceived} />
                 }

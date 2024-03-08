@@ -27,6 +27,7 @@ const ContextMenuMessageButton = ({ message, userId, deleteMessage, isReceived }
 
     return (
         <div className={`messagecontextmenu ${isReceived ? "messagecontextmenureceived" : "messagecontextmenusent"}`}>
+            {/* Voir pour créer un composant ContextMenuMessageButton qui prend en paramètre message, userId, deleteMessage, isReceived, une couleur et une taille, une fonction on click s'il ya besoin */}
             {message.type === "text" &&
             <div className="messagecontextitem" onClick={() => copyContentToClipboard(message.content)}>
                 <div className="contexttitle">

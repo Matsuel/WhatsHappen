@@ -29,12 +29,15 @@ const MessagesArea = ({ userId, scrollBottomRef, showSearchConv, messages, messa
                     : null
             }
 
+            {/* Composant MessagesList  */}
             {messages.map((message, i) => {
                 const nextMessage = i < messagesCount - 1 ? messages[i + 1] : null
                 const previousMessage = i > 0 ? messages[i - 1] : null
 
                 let topRounded = true
                 let bottomRounded = true
+
+                // Mettre fonctions dans un dossier fonctions/MessagesList 
 
                 if (nextMessage && message.sender_id === nextMessage.sender_id) {
                     bottomRounded = false
@@ -52,6 +55,7 @@ const MessagesArea = ({ userId, scrollBottomRef, showSearchConv, messages, messa
                                 ) : null
 
                         }
+
                         {
                             message.type === "text" ?
                                 <Message
