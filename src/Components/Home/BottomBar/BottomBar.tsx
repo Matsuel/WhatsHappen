@@ -4,48 +4,11 @@ import VoiceMessage from '../../../assets/VoiceMessage.svg'
 import Trash from '../../../assets/Trash.svg'
 import Dropzone from 'react-dropzone'
 import { FileIcon, defaultStyles } from 'react-file-icon'
+import { onDrop, deleteFile, handleEnterPressed } from '../../../Functions/BottomBar/BottomBar'
 
 import './BottomBar.css'
 
 const BottomBar = ({ conversationActive, message, handleMessageChange, sendMessage, typingStatus, name, filesEmpty, setFilesEmpty, files, setFiles }: BottomBarProps) => {
-    
-
-    const onDrop = (acceptedFiles: File[]) => {
-        console.log(acceptedFiles)
-
-        setFilesEmpty(false)
-        acceptedFiles.forEach((file: File, index: number) => {
-            const reader = new FileReader()
-            // reader.readAsArrayBuffer(file)
-            reader.readAsDataURL(file)
-            reader.onload = () => {
-                setFiles((prevFiles: FileInfos[]) => {
-                    const newFiles = [...prevFiles]
-                    newFiles[index] = {
-                        name: file.name,
-                        content: reader.result as string,
-                        type: file.type,
-                        lastModified: file.lastModified,
-                        extension: file.name.split('.').pop() as string
-                    } 
-                    console.log(reader.result as ArrayBuffer)
-                    return newFiles
-                })
-            }
-        })
-    }
-
-    // Mettre fonctions dans un dossier fonctions
-    const deleteFile = (index: number) => {
-        setFiles((prevFiles: FileInfos[]) => prevFiles.filter((_, i) => i !== index))
-        files.length === 1 && setFilesEmpty(true)
-    }
-
-    const handleEnterPressed = (e: React.KeyboardEvent<HTMLInputElement>) => {
-        if (e.key === 'Enter') {
-            sendMessage(conversationActive, files)
-        }
-    }
 
     return (
         <div className='bottombar'>
@@ -73,7 +36,7 @@ const BottomBar = ({ conversationActive, message, handleMessageChange, sendMessa
                                     <div className="fileicon">
                                         <FileIcon extension={file.extension} {...defaultStyles[file.extension as keyof typeof defaultStyles]} />
                                     </div>
-                                    <img src={Trash} alt="trash" className='trashfile' onClick={() => deleteFile(index)} />
+                                    <img src={Trash} alt="trash" className='trashfile' onClick={() => deleteFile(index, setFiles, files, setFilesEmpty)} />
                                 </div>
                             )
                         })
@@ -83,7 +46,7 @@ const BottomBar = ({ conversationActive, message, handleMessageChange, sendMessa
 
             {/* Ca c'est le composant BottomBar */}
             <div className="conversationbottombar">
-                <Dropzone onDrop={(acceptedFiles) => onDrop(acceptedFiles)}>
+                <Dropzone onDrop={(acceptedFiles) => onDrop(acceptedFiles, setFiles, setFilesEmpty)}>
                     {({ getRootProps, getInputProps }) => (
                         <div className="joinfile" {...getRootProps()}>
                             <input {...getInputProps()} />
@@ -91,7 +54,7 @@ const BottomBar = ({ conversationActive, message, handleMessageChange, sendMessa
                         </div>
                     )}
                 </Dropzone>
-                <input type="text" name="message-input" id="message-input" className='message-input' value={message} onChange={(e) => handleMessageChange(e)} onKeyDown={(e) => handleEnterPressed(e)} />
+                <input type="text" name="message-input" id="message-input" className='message-input' value={message} onChange={(e) => handleMessageChange(e)} onKeyDown={(e) => handleEnterPressed(e, sendMessage, conversationActive, files)} />
                 <img src={VoiceMessage} alt="voicemessage" className='voicemessage' />
             </div>
         </div>
