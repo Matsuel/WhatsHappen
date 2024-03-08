@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react'
 import { io } from 'socket.io-client';
 import { decodeToken } from 'react-jwt';
 import TopBar from './TopBar/TopBar'
-import BottomBar from './BottomBar/BottomBar'
+import BottomBar from '../BottomArea/BottomArea'
 import Search from '../../assets/Search.svg'
 import NewConv from '../../assets/NewConv.svg'
 import Conv1 from '../../assets/conv1.svg'
