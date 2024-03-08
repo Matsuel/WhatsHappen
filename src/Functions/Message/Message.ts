@@ -18,8 +18,20 @@ const handleMouseUp = (longPress: number | null, setLongPress: Function) => {
     }
 }
 
+const downloadFile = (message: message) => {
+    const arrayBuffer = new Blob([message.fileContent], { type: message.fileType })
+    const fileUrl = URL.createObjectURL(arrayBuffer)
+    const a = document.createElement("a")
+    a.href = fileUrl
+    a.download = message.fileName
+    a.click()
+
+    URL.revokeObjectURL(fileUrl)
+}
+
 export {
     handleContextMenu,
     handleMouseDown,
-    handleMouseUp
+    handleMouseUp,
+    downloadFile
 }

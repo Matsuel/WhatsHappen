@@ -4,17 +4,11 @@ import { FileIcon, defaultStyles } from 'react-file-icon'
 import Download from '../../../../assets/Download.svg'
 import Cross from '../../../../assets/cross.svg'
 import { ContextMenuMessage, ContextMenuMessageButton } from '../ContextMenuMessage/ContextMenuMessage'
+import { handleContextMenu, downloadFile  } from '../../../../Functions/Message/Message'
 
 const MessageFile = ({ message, userId, i, scrollBottomRef, bottomRounded, topRounded, messagesCount, deleteMessage, showSearchConv }: MessageFileProps) => {
 
     const [rightClick, setRightClick] = useState<boolean>(false)
-
-
-    // Mettre fonctions dans un dossier fonctions/MessagesFiles 
-    const handleContextMenu = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-        e.preventDefault()
-        setRightClick(true)
-    }
 
     const isReceived = message.sender_id !== userId
 
@@ -22,19 +16,6 @@ const MessageFile = ({ message, userId, i, scrollBottomRef, bottomRounded, topRo
     const firstPlan = rightClick ? 'messagefirstplan' : ''
     const topClass = isReceived ? (topRounded ? 'filereceivedtop' : 'filereceivedmiddle') : (topRounded ? 'filesenttop' : 'filesentmiddle');
     const bottomClass = isReceived ? (bottomRounded ? 'filereceivedbottom' : '') : (bottomRounded ? 'filesentbottom' : '');
-
-    // Mettre fonctions dans un dossier fonctions/MessagesFiles
-    const downloadFile = (message: message) => {
-        const arrayBuffer = new Blob([message.fileContent], { type: message.fileType })
-        const fileUrl = URL.createObjectURL(arrayBuffer)
-        const a = document.createElement("a")
-        a.href = fileUrl
-        a.download = message.fileName
-        a.click()
-
-        URL.revokeObjectURL(fileUrl)
-    }
-
 
     return (
         <>
@@ -44,7 +25,7 @@ const MessageFile = ({ message, userId, i, scrollBottomRef, bottomRounded, topRo
             }
 
             {/* Composant message file */}
-            <div className={`fileelement ${firstPlan}`} ref={i === messagesCount - 1 ? scrollBottomRef : null} onContextMenu={(e) => handleContextMenu(e)}>
+            <div className={`fileelement ${firstPlan}`} ref={i === messagesCount - 1 ? scrollBottomRef : null} onContextMenu={(e) => handleContextMenu(e, setRightClick)}>
 
                 <div className={`${fileClass} ${topClass} ${bottomClass}`} key={message._id}>
                     <img src={Download} alt="Download" className="download" onClick={() => downloadFile(message)} />
