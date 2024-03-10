@@ -13,6 +13,15 @@ const IsTyping = ({ conversationActive, typingStatus, name }: IsTypingProps) => 
             null
         )
 
+        // <div className="typingstatusmessage">
+        //     <div className="typingstatus">
+        //         <div className="dot-typing"></div>
+        //         <div className="dot-typing"></div>
+        //         <div className="dot-typing"></div>
+
+        //     </div>
+        //     </div>
+
     }
     </>
   )

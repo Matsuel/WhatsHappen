@@ -5,3 +5,53 @@
     color: #000;
     z-index: 9999;
 }
+
+/* .typingstatusmessage {
+    width: 50%;
+    height: 50px;
+    position: absolute;
+    bottom: 60px;
+    left: 7%;
+    display: flex;
+    align-items: center;
+}
+
+.typingstatus {
+    margin-left: 5%;
+    display: flex;
+    flex-direction: row;
+
+}
+
+.dot-typing {
+    width: 10px;
+    height: 10px;
+    background-color: #000;
+    border-radius: 50%;
+    margin: 0 5px;
+    animation: dot-typing 1s infinite;
+}
+
+.dot-typing:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.dot-typing:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.dot-typing:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes dot-typing {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.5);
+    }
+    100% {
+        transform: scale(1);
+    }
+} */
