@@ -4,6 +4,7 @@ import Message from './Message/Message'
 import './MessagesArea.css'
 import MessageDate from './MessageDate/MessageDate'
 import MessageFile from './MessageFile/MessageFile'
+import MessagesList from '../../MessagesList/MessagesList'
 
 const MessagesArea = ({ userId, scrollBottomRef, showSearchConv, messages, messagesCount, filesEmpty, deleteMessage, handleReaction }: MessagesAreaProps) => {
     const [messageDay, setMessageDay] = useState<Number>(0)
@@ -20,64 +21,15 @@ const MessagesArea = ({ userId, scrollBottomRef, showSearchConv, messages, messa
                     : null
             }
 
-            {/* Composant MessagesList  */}
-            {messages.map((message, i) => {
-                const nextMessage = i < messagesCount - 1 ? messages[i + 1] : null
-                const previousMessage = i > 0 ? messages[i - 1] : null
-
-                let topRounded = true
-                let bottomRounded = true
-
-                // Mettre fonctions dans un dossier fonctions/MessagesList 
-
-                if (nextMessage && message.sender_id === nextMessage.sender_id) {
-                    bottomRounded = false
-                }
-
-                if (previousMessage && message.sender_id === previousMessage.sender_id) {
-                    topRounded = false
-                }
-                return (
-                    <>
-                        {
-                            previousMessage && new Date(message.date).toDateString() !== new Date(previousMessage?.date).toDateString() ?
-                                (
-                                    <MessageDate message={message} />
-                                ) : null
-
-                        }
-
-                        {
-                            message.type === "text" ?
-                                <Message
-                                    message={message}
-                                    userId={userId}
-                                    i={i}
-                                    scrollBottomRef={scrollBottomRef}
-                                    key={message._id}
-                                    topRounded={topRounded}
-                                    bottomRounded={bottomRounded}
-                                    messagesCount={messagesCount}
-                                    deleteMessage={deleteMessage}
-                                    showSearchConv={showSearchConv}
-                                    handleReaction={handleReaction}
-                                /> :
-                                <MessageFile
-                                    message={message}
-                                    userId={userId}
-                                    i={i}
-                                    scrollBottomRef={scrollBottomRef}
-                                    key={message._id}
-                                    topRounded={topRounded}
-                                    bottomRounded={bottomRounded}
-                                    messagesCount={messagesCount}
-                                    deleteMessage={deleteMessage}
-                                    showSearchConv={showSearchConv}
-                                />
-                        }
-                    </>
-                )
-            })}
+            <MessagesList
+                userId={userId}
+                scrollBottomRef={scrollBottomRef}
+                showSearchConv={showSearchConv}
+                messagesCount={messagesCount}
+                messages={messages}
+                deleteMessage={deleteMessage}
+                handleReaction={handleReaction}
+            />
         </div>
     )
 }
