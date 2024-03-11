@@ -59,14 +59,16 @@ And now go on http://localhost:3000/ for test app
 
 ---
 
-<ol>
-<li></li>
-<li>Ajouter menu à droite pour la Recherche de messages dans la conversation</li>
-<li>Patch problème envoie de fichiers qui sont modifiés et inutilisables après réception</li>
-<li>Custom clique droit message dans message area pour pouvoir changer de thème donc créer un ensemble de thèmes</li>
-<li>Edition du profil</li>
-<li>Appel</li>
-<li>Faire du chiffrement de bout en bout avec des clés publiques et privées différentes pour chaque conversation</li>
-<li>Permettre les groupes</li>
-<li>Permettre de mettre des noms custom aux personnes, et des réactions</li>
-</ol>
+# Clean code
+## const socket dans index et export
+## voir pour regler problème de la conversation list qui s'efface quand actualisation (pb de synchro du dernier message dans la liste)
+# voir click ailleurs que sur le message pour setRightlick(false)
+## voir pour mettre chat dans une route /chat/{id}
+## bout en bout
+## fichiers problèmes
+## thèmes
+## appels
+## groupes
+## noms custom + contact
+## recherche de messages
+## profil
