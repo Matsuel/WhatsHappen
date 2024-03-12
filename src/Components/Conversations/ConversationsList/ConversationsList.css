@@ -1,0 +1,88 @@
+.convslist {
+    margin-top: 5%;
+    width: 95%;
+    height: 80%;
+    overflow-y: auto;
+}
+
+.conversationActive {
+    background-color: #D1E4E8;
+}
+
+.convtoprounded {
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+}
+
+.convtoprounded:hover {
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+}
+
+.convbottomrounded {
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+}
+
+.convbottomrounded:hover {
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+}
+
+.noActiveClass:hover {
+    border-radius: 12px;
+}
+
+.conversation {
+    width: 90%;
+    height: 11%;
+    /* border-radius: 12px; */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.conversation:hover {
+    background-color: #D1E4E8;
+    cursor: pointer;
+}
+
+.convimagestatus {
+    justify-self: center;
+    position: relative;
+    width: auto;
+    height: 100%;
+    margin-top: 15px;
+}
+
+.speakerstatus {
+    position: absolute;
+    bottom: 15px;
+    right: 0;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #fff;
+    border: 2px solid #F6F6F6;
+}
+
+.conversationimage {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 50%;
+}
+
+.conversationinfos {
+    width: 60%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-evenly;
+}
+
+
+
