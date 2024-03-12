@@ -4,6 +4,7 @@ import { handleContextMenu, handleMouseDown, handleMouseUp } from '../../../../F
 
 import './Message.css'
 import { ContextMenuMessage, ContextMenuMessageButton } from '../ContextMenuMessage/ContextMenuMessage'
+import ShowDate from '../../ShowDate/ShowDate'
 
 const Message = ({ message, userId, i, scrollBottomRef, bottomRounded, topRounded, messagesCount, deleteMessage, showSearchConv, handleReaction }: MessageProps) => {
 
@@ -51,11 +52,7 @@ const Message = ({ message, userId, i, scrollBottomRef, bottomRounded, topRounde
                             })}
                         </div>
                     }
-                    {/* Composant afficher date */}
-                    <p className='messagetime'>
-                        {new Date(message.date).getHours()}:
-                        {new Date(message.date).getMinutes().toString().padStart(2, '0')}
-                    </p>
+                    <ShowDate date={message.date} className='messagetime' />
                 </div>
                 {/* Voir si je peux pas gérer la condition directement dans le composant */}
                 {rightClick && <ContextMenuMessageButton message={message} userId={userId} deleteMessage={deleteMessage} isReceived={isReceived} />}

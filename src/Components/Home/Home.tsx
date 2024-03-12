@@ -18,6 +18,7 @@ import './Home.css'
 import NoConvActive from '../NoConvActive/NoConvActive';
 import MessagesArea from './MessagesArea/MessagesArea';
 import ConversationsTypes from './ConversationsTypes/ConversationsTypes';
+import ShowDate from './ShowDate/ShowDate';
 
 
 
@@ -335,14 +336,8 @@ const Home = () => {
                                                             }
                                                         </div>
                                                     </div>
-
-                                                    {/* Créer un composant pour afficher une date et une heure */}
-                                                    <p>
-                                                        {
-                                                            new Date(conversation.last_message_date).getHours() + ":" +
-                                                            (new Date(conversation.last_message_date).getMinutes().toString().padStart(2, '0'))
-                                                        }
-                                                    </p>
+                                                    
+                                                    <ShowDate date={conversation.last_message_date} />
                                                     <img src={conversation.pinnedBy.includes(userId) ? Pinned : Pin} alt="pinned" className='pinned' onClick={() => handlePinnedConversation(conversation._id)} />
                                                 </div>
                                             ) : null
