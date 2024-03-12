@@ -186,6 +186,21 @@ interface ChatProps {
     setFilesEmpty: (filesEmpty: boolean) => void
 }
 
+interface ConversationListProps {
+    conversations: ConversationInfos[],
+    conversationActive: string,
+    handleConversationActive: Function,
+    handleHoverConv: Function,
+    handleHoverConvReset: MouseEventHandler<HTMLDivElement>,
+    search: string,
+    typingStatus: {},
+    handlePinnedConversation: Function,
+    userId: string,
+    typeConv: number,
+    hasMatchingConversations: boolean,
+    conversationsNoResult: string[]
+}
+
 
 declare module '*.svg' {
     const content: any;
