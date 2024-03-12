@@ -30,6 +30,10 @@
     justify-content: space-around;
 }
 
+.noresult:hover {
+    border-radius: 12px;
+}
+
 .convtoprounded {
     border-top-left-radius: 12px;
     border-top-right-radius: 12px;
