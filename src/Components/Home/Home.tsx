@@ -10,14 +10,14 @@ import Online from '../../assets/Online.svg'
 import Offline from '../../assets/Offline.svg'
 import Pin from '../../assets/Pin.svg'
 import Pinned from '../../assets/Pinned.svg'
-import NoResult from '../NoResult/NoResult';
+import NoResult from '../Conversations/NoResult/NoResult';
 import DoubleChevrons from '../../assets/DoubleChevrons.svg'
-import SearchbarConv from './SearchbarConv/SearchbarConv';
+import SearchbarConv from '../Conversations/SearchbarConv/SearchbarConv';
 
 import './Home.css'
-import NoConvActive from '../NoConvActive/NoConvActive';
+import NoConvActive from '../Conversations/NoConvActive/NoConvActive';
 import MessagesArea from './MessagesArea/MessagesArea';
-import ConversationsTypes from './ConversationsTypes/ConversationsTypes';
+import ConversationsTypes from '../Conversations/ConversationsTypes/ConversationsTypes';
 import ShowDate from './ShowDate/ShowDate';
 
 
