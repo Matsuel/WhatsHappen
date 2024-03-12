@@ -12,10 +12,12 @@ import Pin from '../../assets/Pin.svg'
 import Pinned from '../../assets/Pinned.svg'
 import NoResult from '../NoResult/NoResult';
 import DoubleChevrons from '../../assets/DoubleChevrons.svg'
+import SearchbarConv from './SearchbarConv/SearchbarConv';
 
 import './Home.css'
 import NoConvActive from '../NoConvActive/NoConvActive';
 import MessagesArea from './MessagesArea/MessagesArea';
+import ConversationsTypes from './ConversationsTypes/ConversationsTypes';
 
 
 
@@ -151,12 +153,6 @@ const Home = () => {
         conv.conversationInfos.topRounded = true
     }
 
-    const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setSearch(e.target.value.trim())
-        e.target.value.trim() === "" ? setHasMatchingConversations(true) :
-            setHasMatchingConversations(conversations.some((conv) => conv.name.toLowerCase().includes(e.target.value.toLowerCase())))
-    }
-
     const handleSearchUsers = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSearchUsers(e.target.value.trim())
     }
@@ -290,25 +286,10 @@ const Home = () => {
     return (
         <div className="home">
             <div className="conversations-section">
-                {/* Créer un comoposant pour la barre de recherche */}
-                <div className="searchBar">
-                    <img src={Search} alt="search" className='searchLogo' />
-                    <input type="text" placeholder='Rechercher une conversation ici' name="search" id="search" className='convSearch' onChange={handleSearch} />
-                </div>
 
-                {/* Créer un comoposant pour les types de conversations */}
-                <div className="convstype">
-                    {/* Split ça dans un composant et faire un map en enregistrant les datas dans un dossier datas / conversationsTypes.ts */}
-                    <div className={`convtype ${typeConv === 1 ? 'convtypeActive' : ''}`} onClick={() => setTypeConv(1)}>
-                        Conversations
-                    </div>
-                    <div className={`convtype ${typeConv === 2 ? 'convtypeActive' : ''}`} onClick={() => setTypeConv(2)}>
-                        Groupes
-                    </div>
-                    <div className={`convtype ${typeConv === 3 ? 'convtypeActive' : ''}`} onClick={() => setTypeConv(3)}>
-                        Contacts
-                    </div>
-                </div>
+                <SearchbarConv setSearch={setSearch} setHasMatchingConversations={setHasMatchingConversations} conversations={conversations} />
+
+                <ConversationsTypes setTypeConv={setTypeConv} typeConv={typeConv} />
 
                 <div className="convslist">
                     {
