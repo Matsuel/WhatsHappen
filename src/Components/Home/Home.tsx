@@ -1,9 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { io } from 'socket.io-client';
 import { decodeToken } from 'react-jwt';
-import TopBar from '../TopBar/TopBar'
-import BottomBar from '../BottomArea/BottomArea'
-import Search from '../../assets/Search.svg'
 import NewConv from '../../assets/NewConv.svg'
 import Conv1 from '../../assets/conv1.svg'
 import Online from '../../assets/Online.svg'
@@ -15,11 +12,10 @@ import DoubleChevrons from '../../assets/DoubleChevrons.svg'
 import SearchbarConv from '../Conversations/SearchbarConv/SearchbarConv';
 
 import './Home.css'
-import NoConvActive from '../Conversations/NoConvActive/NoConvActive';
-import MessagesArea from './MessagesArea/MessagesArea';
 import ConversationsTypes from '../Conversations/ConversationsTypes/ConversationsTypes';
 import ShowDate from './ShowDate/ShowDate';
 import Chat from '../Chat/Chat';
+import NewConversation from '../Conversations/NewConversation/NewConversation';
 
 
 
@@ -373,10 +369,7 @@ const Home = () => {
                     </div>
                 ) : null}
                 
-                {/* Créer un composant bouton pour créer une nouvelle conversation */}
-                <div className={`newconv-div ${canRotate ? 'newConv-rotate' : ''}`} onClick={() => handleNewConv()}>
-                    <img src={NewConv} alt="newconv" className='newConv' />
-                </div>
+                <NewConversation canRotate={canRotate} handleNewConv={handleNewConv} />
             </div>
 
             <Chat
