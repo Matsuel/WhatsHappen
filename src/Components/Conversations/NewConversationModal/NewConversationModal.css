@@ -1,0 +1,56 @@
+.newconvmodal {
+    z-index: 499;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    backdrop-filter: blur(15px);
+}
+
+.newconvinput {
+    width: 30%;
+    height: 5%;
+    margin-top: 2%;
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 24px;
+    border: 0.5px solid #128C7E;
+    font-size: 16px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    text-indent: 50px;
+}
+
+.newconvinput::placeholder {
+    color: #9393C1;
+}
+
+.newconvinput:focus {
+    outline: none;
+}
+
+.newconvuser {
+    width: 30%;
+    height: 10%;
+    margin-top: 2%;
+    background-color: #fff;
+    border-radius: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 0 10px;
+}
+
+.newconvuser:hover {
+    cursor: pointer;
+    background-color: #D1E4E8;
+}
+
+.userpic {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+}
