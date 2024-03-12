@@ -19,6 +19,7 @@ import NoConvActive from '../Conversations/NoConvActive/NoConvActive';
 import MessagesArea from './MessagesArea/MessagesArea';
 import ConversationsTypes from '../Conversations/ConversationsTypes/ConversationsTypes';
 import ShowDate from './ShowDate/ShowDate';
+import Chat from '../Chat/Chat';
 
 
 
@@ -378,47 +379,25 @@ const Home = () => {
                 </div>
             </div>
 
-            {/* Créer un composant coneversation dans lequel on mettra tout*/}
-            <div className="messages-section">
-                {conversationActive !== '' ? (
-                    <>
-                        <TopBar
-                            name={conv.conversationInfos.name}
-                            pic={conv.conversationInfos.pic}
-                            status={conv.conversationInfos.status}
-                            handleSearchConv={handleSearchConv}
-                            showSearchConv={showSearchConv}
-                        />
-
-                        <MessagesArea
-                            userId={userId}
-                            scrollBottomRef={scrollBottomRef}
-                            showSearchConv={showSearchConv}
-                            messages={conv.messages}
-                            messagesCount={conv.messages.length}
-                            filesEmpty={filesEmpty}
-                            deleteMessage={deleteMessage}
-                            handleReaction={handleReaction}
-                        />
-
-                        <BottomBar
-                            conversationActive={conversationActive}
-                            message={message}
-                            handleMessageChange={handleMessageChange}
-                            sendMessage={sendMessage}
-                            typingStatus={typingStatus}
-                            name={conv.conversationInfos.name}
-                            filesEmpty={filesEmpty}
-                            setFilesEmpty={setFilesEmpty}
-                            files={files}
-                            setFiles={setFiles}
-                        />
-                    </>
-                ) : (
-                    <NoConvActive />
-                )}
-
-            </div>
+            <Chat
+                conversationActive={conversationActive}
+                conversationInfos={conv.conversationInfos}
+                messages={conv.messages}
+                userId={userId}
+                scrollBottomRef={scrollBottomRef}
+                showSearchConv={showSearchConv}
+                handleSearchConv={handleSearchConv}
+                message={message}
+                handleMessageChange={handleMessageChange}
+                sendMessage={sendMessage}
+                typingStatus={typingStatus}
+                filesEmpty={filesEmpty}
+                deleteMessage={deleteMessage}
+                handleReaction={handleReaction}
+                files={files}
+                setFiles={setFiles}
+                setFilesEmpty={setFilesEmpty}
+            />
 
         </div>
     )

@@ -162,6 +162,30 @@ interface MessagesListProps {
     handleReaction: Function,
 }
 
+interface ChatProps {
+    conversationActive: string,
+    conversationInfos: {
+        name: string,
+        pic: string,
+        status: boolean
+    },
+    messages: any[],
+    userId: string,
+    scrollBottomRef: any,
+    showSearchConv: boolean,
+    handleSearchConv: (e: React.ChangeEvent<HTMLInputElement>) => void,
+    message: string,
+    handleMessageChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
+    sendMessage: Function,
+    typingStatus: {},
+    filesEmpty: boolean,
+    deleteMessage: Function,
+    handleReaction: Function,
+    files: any[],
+    setFiles: (files: any[]) => void,
+    setFilesEmpty: (filesEmpty: boolean) => void
+}
+
 
 declare module '*.svg' {
     const content: any;
