@@ -1,8 +1,8 @@
 import React from 'react'
 import './Chat.css'
-import TopBar from '../TopBar/TopBar'
-import MessagesArea from '../Home/MessagesArea/MessagesArea'
-import BottomBar from '../BottomArea/BottomArea'
+import TopBar from './TopBar/TopBar'
+import MessagesArea from './MessagesArea/MessagesArea'
+import BottomBar from './BottomArea/BottomArea'
 import NoConvActive from '../Conversations/NoConvActive/NoConvActive'
 
 const Chat = ({ conversationActive, conversationInfos, messages, userId, scrollBottomRef, showSearchConv, handleSearchConv, message, handleMessageChange, sendMessage, typingStatus, filesEmpty, deleteMessage, handleReaction, files, setFiles, setFilesEmpty }: ChatProps) => {

@@ -1,11 +1,9 @@
 import React, { useState } from 'react'
-import Conv1 from '../../assets/conv1.svg'
-import Online from '../../assets/Online.svg'
-import Offline from '../../assets/Offline.svg'
-import Phone from '../../assets/Phone.svg'
-import Video from '../../assets/Video.svg'
-import SearchConv from '../../assets/SearchConv.svg'
-import Expand from '../../assets/Expand.svg'
+import Conv1 from '../../../assets/conv1.svg'
+import Phone from '../../../assets/Phone.svg'
+import Video from '../../../assets/Video.svg'
+import SearchConv from '../../../assets/SearchConv.svg'
+import Expand from '../../../assets/Expand.svg'
 
 import './TopBar.css'
 

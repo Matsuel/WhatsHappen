@@ -1,8 +1,8 @@
 import React from 'react'
-import Message from '../Home/MessagesArea/Message/Message'
-import MessageDate from '../Home/MessagesArea/MessageDate/MessageDate'
-import MessageFile from '../Home/MessagesArea/MessageFile/MessageFile'
-import { isBottomRounded, isTopRounded } from '../../Functions/MessagesList/MessagesList'
+import Message from './Message/Message'
+import MessageFile from './MessageFile/MessageFile'
+import MessageDate from './MessageDate/MessageDate'
+import { isBottomRounded, isTopRounded } from '../../../../Functions/MessagesList/MessagesList'
 
 
 const MessagesList = ({ userId, scrollBottomRef, showSearchConv, messages, messagesCount, deleteMessage, handleReaction }: MessagesListProps) => {

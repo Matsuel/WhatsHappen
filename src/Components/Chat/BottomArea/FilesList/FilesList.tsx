@@ -2,8 +2,8 @@ import React from 'react'
 import './FilesList.css'
 import Trash from '../../assets/Trash.svg'
 import { FileIcon, defaultStyles } from 'react-file-icon'
-import { deleteFile } from '../../Functions/BottomBar/BottomBar'
-import File from '../File/File'
+import { deleteFile } from '../../../../Functions/BottomBar/BottomBar'
+import File from './File/File'
 
 const FilesList = ({ files, setFiles, setFilesEmpty }: FilesListProps) => {
   return (

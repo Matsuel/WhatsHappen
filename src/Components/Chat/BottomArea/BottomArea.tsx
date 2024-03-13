@@ -1,8 +1,8 @@
 import React from 'react'
 
 import './BottomArea.css'
-import IsTyping from '../IsTyping/IsTyping'
-import FilesList from '../FilesList/FilesList'
+import IsTyping from '../../IsTyping/IsTyping'
+import FilesList from './FilesList/FilesList'
 import Bottombar from '../Bottombar/Bottombar'
 
 const BottomArea = ({ conversationActive, message, handleMessageChange, sendMessage, typingStatus, name, filesEmpty, setFilesEmpty, files, setFiles }: BottomBarProps) => {

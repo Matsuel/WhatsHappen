@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import Picker, { Emoji } from 'emoji-picker-react'
-import { handleContextMenu, handleMouseDown, handleMouseUp } from '../../../../Functions/Message/Message'
+import { handleContextMenu, handleMouseDown, handleMouseUp } from '../../../../../Functions/Message/Message'
 
 import './Message.css'
 import { ContextMenuMessage, ContextMenuMessageButton } from '../ContextMenuMessage/ContextMenuMessage'
-import ShowDate from '../../ShowDate/ShowDate'
+import ShowDate from '../../../../Home/ShowDate/ShowDate'
 
 const Message = ({ message, userId, i, scrollBottomRef, bottomRounded, topRounded, messagesCount, deleteMessage, showSearchConv, handleReaction }: MessageProps) => {
 

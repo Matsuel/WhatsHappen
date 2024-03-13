@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import './ContextMenuMessage.css'
-import Cross from '../../../../assets/cross.svg'
-import Trash from '../../../../assets/Trash.svg'
-import Copy from '../../../../assets/Copy.svg'
-import CopyDone from '../../../../assets/CopyDone.svg'
-import { copyContentToClipboard } from '../../../../Functions/ContextMenu/ContextMenu'
+import Cross from '../../../../../assets/cross.svg'
+import Trash from '../../../../../assets/Trash.svg'
+import Copy from '../../../../../assets/Copy.svg'
+import CopyDone from '../../../../../assets/CopyDone.svg'
+import { copyContentToClipboard } from '../../../../../Functions/ContextMenu/ContextMenu'
 
 const ContextMenuMessage = ({ setRightClick, showSearchConv }: { setRightClick: Function, showSearchConv: boolean }) => {
     return (

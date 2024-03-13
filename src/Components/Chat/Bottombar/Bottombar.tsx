@@ -1,9 +1,9 @@
 import React from 'react'
 import './Bottombar.css'
-import JoinFile from '../../assets/JoinFile.svg'
-import VoiceMessage from '../../assets/VoiceMessage.svg'
+import JoinFile from '../../../assets/JoinFile.svg'
+import VoiceMessage from '../../../assets/VoiceMessage.svg'
 import Dropzone from 'react-dropzone'
-import { onDrop, handleEnterPressed } from '../../Functions/BottomBar/BottomBar'
+import { onDrop, handleEnterPressed } from '../../../Functions/BottomBar/BottomBar'
 
 const Bottombar = ({ conversationActive, message, handleMessageChange, sendMessage, files, setFiles, setFilesEmpty }: BottombarProps) => {
     return (

@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import "./MessageFile.css"
 import { FileIcon, defaultStyles } from 'react-file-icon'
-import Download from '../../../../assets/Download.svg'
-import Cross from '../../../../assets/cross.svg'
+import Download from '../../../../../assets/Download.svg'
+import Cross from '../../../../../assets/cross.svg'
 import { ContextMenuMessage, ContextMenuMessageButton } from '../ContextMenuMessage/ContextMenuMessage'
-import { handleContextMenu, downloadFile  } from '../../../../Functions/Message/Message'
+import { handleContextMenu, downloadFile  } from '../../../../../Functions/Message/Message'
 
 const MessageFile = ({ message, userId, i, scrollBottomRef, bottomRounded, topRounded, messagesCount, deleteMessage, showSearchConv }: MessageFileProps) => {
 

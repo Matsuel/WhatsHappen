@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
-import MessagePrivacy from '../../MessagePrivacy/MessagePrivacy'
-import Message from './Message/Message'
+import MessagePrivacy from './MessagePrivacy/MessagePrivacy'
+import Message from './MessagesList/Message/Message'
 import './MessagesArea.css'
-import MessageDate from './MessageDate/MessageDate'
-import MessageFile from './MessageFile/MessageFile'
-import MessagesList from '../../MessagesList/MessagesList'
+import MessageDate from './MessagesList/MessageDate/MessageDate'
+import MessageFile from './MessagesList/MessageFile/MessageFile'
+import MessagesList from './MessagesList/MessagesList'
 
 const MessagesArea = ({ userId, scrollBottomRef, showSearchConv, messages, messagesCount, filesEmpty, deleteMessage, handleReaction }: MessagesAreaProps) => {
     const [messageDay, setMessageDay] = useState<Number>(0)
