@@ -201,6 +201,37 @@ interface ConversationListProps {
     conversationsNoResult: string[]
 }
 
+interface ConversationProps {
+    conversation: ConversationInfos,
+    handleConversationActive: Function,
+    handleHoverConv: Function,
+    handleHoverConvReset: MouseEventHandler<HTMLDivElement>,
+    typingStatus: {},
+    handlePinnedConversation: Function,
+    userId: string
+    classActive: string,
+    topRound: string,
+    bottomRound: string,
+    noConvActiveClass: string
+}
+
+interface ConversationStatusProps {
+    _id: string,
+    pic: string,
+    status: boolean,
+    handleConversationActive: Function
+}
+
+interface ConversationInfosProps {
+    _id: string,
+    name: string,
+    last_message_sender: string,
+    last_message_content: string,
+    typingStatus: {},
+    userId: string,
+    handleConversationActive: Function
+}
+
 
 declare module '*.svg' {
     const content: any;
