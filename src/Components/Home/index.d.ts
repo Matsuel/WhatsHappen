@@ -198,7 +198,6 @@ interface ConversationListProps {
     userId: string,
     typeConv: number,
     hasMatchingConversations: boolean,
-    conversationsNoResult: string[]
 }
 
 interface ConversationProps {

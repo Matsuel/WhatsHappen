@@ -3,7 +3,10 @@ import "./ConversationsList.css"
 import NoResult from '../NoResult/NoResult'
 import Conversation from '../Conversation/Conversation'
 
-const ConversationsList = ({ conversations, conversationActive, handleConversationActive, handleHoverConv, handleHoverConvReset, search, typingStatus, handlePinnedConversation, userId, typeConv, hasMatchingConversations, conversationsNoResult }: ConversationListProps) => {
+const ConversationsList = ({ conversations, conversationActive, handleConversationActive, handleHoverConv, handleHoverConvReset, search, typingStatus, handlePinnedConversation, userId, typeConv, hasMatchingConversations }: ConversationListProps) => {
+
+    const conversationsNoResult: string[] = ["Aucune conversation trouvée", "Aucun groupe n'a été trouvé", "Aucun contact n'a été trouvé"]
+
     return (
         <div className="convslist">
             {

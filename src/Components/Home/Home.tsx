@@ -41,7 +41,6 @@ const Home = () => {
     const [userId, setUserId] = useState<string>('')
     const scrollBottomRef = useRef<HTMLDivElement>(null)
     const [hasMatchingConversations, setHasMatchingConversations] = useState<boolean>(true)
-    const conversationsNoResult: string[] = ["Aucune conversation trouvée", "Aucun groupe n'a été trouvé", "Aucun contact n'a été trouvé"]
 
     const cookies = localStorage.getItem('user')
 
@@ -303,9 +302,9 @@ const Home = () => {
                     userId={userId}
                     typeConv={typeConv}
                     hasMatchingConversations={hasMatchingConversations}
-                    conversationsNoResult={conversationsNoResult}
                 />
 
+                {/* modal next ui center  */}
                 <NewConversationModal showNewConv={showNewConv} users={users} searchUsers={searchUsers} handleSearchUsers={handleSearchUsers} createConversation={createConversation} />
                 
                 <NewConversation canRotate={canRotate} handleNewConv={handleNewConv} />
