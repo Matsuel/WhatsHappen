@@ -46,40 +46,6 @@
     margin-right: 15%;
 }
 
-.messagecontextblur {
-    position: absolute;
-    width: 98.7%;
-    height: 100%;
-    background-color: rgba(255, 255, 255, 0.5);
-    z-index: 1;
-    backdrop-filter: blur(5px);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.messagecontextblurmedium {
-    width: 58.7%;
-}
-
-.messagecontextblurfull {
-    width: 98.7%;
-}
-
 .reactiondiv {
     margin-bottom: 2%;
-}
-
-.cross {
-    width: 40px;
-    height: 40px;
-    position: absolute;
-    top: 10px;
-    right: 10px;
-}
-
-.cross:hover {
-    cursor: pointer;
-    background-color: #8F94A3;
-    border-radius: 12px;
 }

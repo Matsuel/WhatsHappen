@@ -1,20 +1,10 @@
 import React, { useState } from 'react'
 import styles from './ContextMenuMessage.module.css'
-import Cross from '@/assets/cross.svg'
 import Trash from '@/assets/Trash.svg'
 import Copy from '@/assets/Copy.svg'
 import CopyDone from '@/assets/CopyDone.svg'
 import { copyContentToClipboard } from '../../../../../Functions/ContextMenu/ContextMenu'
 import Image from 'next/image'
-
-const ContextMenuMessage = ({ setRightClick, showSearchConv }: { setRightClick: Function, showSearchConv: boolean }) => {
-    return (
-        // <div className={`messagecontextblur ${showSearchConv ? "messagecontextblurmedium" : "messagecontextblurfull"}`}>
-        <div className={styles.messagecontextblur + " " + (showSearchConv ? styles.messagecontextmenumedium : styles.messagecontextmenufull)}>
-            <Image src={Cross} alt="cross" className={styles.cross} onClick={() => setRightClick(false)} />
-        </div>
-    )
-}
 
 const ContextMenuMessageButton = ({ message, userId, deleteMessage, isReceived }: { message: message, userId: string, deleteMessage: Function, isReceived: boolean }) => {
     const [copyDone, setCopyDone] = useState<boolean>(false)
@@ -44,4 +34,4 @@ const ContextMenuMessageButton = ({ message, userId, deleteMessage, isReceived }
     )
 }
 
-export { ContextMenuMessageButton,ContextMenuMessage }
+export { ContextMenuMessageButton }
