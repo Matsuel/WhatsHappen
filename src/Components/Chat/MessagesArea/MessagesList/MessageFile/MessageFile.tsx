@@ -12,14 +12,10 @@ const MessageFile = ({ message, userId, i, scrollBottomRef, bottomRounded, topRo
 
     const isReceived = message.sender_id !== userId
 
-    // const fileClass = isReceived ? 'filereceived' : 'filesent'
     const fileClass = isReceived ? styles.filereceived : styles.filesent
     const firstPlan = rightClick ? styles.messagefirstplan : ''
-    // const firstPlan = rightClick ? 'messagefirstplan' : ''
     const topClass = isReceived ? (topRounded ? styles.filereceivedtop : styles.filereceivedmiddle) : (topRounded ? styles.filesenttop : styles.filesentmiddle)
-    // const topClass = isReceived ? (topRounded ? 'filereceivedtop' : 'filereceivedmiddle') : (topRounded ? 'filesenttop' : 'filesentmiddle');
     const bottomClass = isReceived ? (bottomRounded ? styles.filereceivedbottom : '') : (bottomRounded ? styles.filesentbottom : '');
-    // const bottomClass = isReceived ? (bottomRounded ? 'filereceivedbottom' : '') : (bottomRounded ? 'filesentbottom' : '');
 
     return (
         <>
@@ -28,11 +24,8 @@ const MessageFile = ({ message, userId, i, scrollBottomRef, bottomRounded, topRo
                 <ContextMenuMessage setRightClick={setRightClick} showSearchConv={showSearchConv} />
             }
 
-            {/* Composant message file */}
             <div className={styles.fileelement + " " + firstPlan} ref={i === messagesCount - 1 ? scrollBottomRef : null} onContextMenu={(e) => handleContextMenu(e, setRightClick)}>
-            {/* <div className={`fileelement ${firstPlan}`} ref={i === messagesCount - 1 ? scrollBottomRef : null} onContextMenu={(e) => handleContextMenu(e, setRightClick)}> */}
 
-                {/* <div className={`${fileClass} ${topClass} ${bottomClass}`} key={message._id}> */}
                 <div className={fileClass + " " + topClass + " " + bottomClass} key={message._id}>
                     <Image src={Download} alt="Download" className={styles.download} onClick={() => downloadFile(message)} />
                     <p className={styles.filename}>{message.fileName}</p>

@@ -78,3 +78,16 @@
     transform: scale(1.2);
     transition: transform 0.2s ease-in-out;
 }
+
+.fileicon {
+    width: 70px;
+    height: 70px;
+}
+
+.filename {
+    font-size: 12px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    color: #000;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
