@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import MessagePrivacy from './MessagePrivacy/MessagePrivacy'
 import Message from './MessagesList/Message/Message'
-import './MessagesArea.css'
+import styles from './MessagesArea.module.css'
 import MessageDate from './MessagesList/MessageDate/MessageDate'
 import MessageFile from './MessagesList/MessageFile/MessageFile'
 import MessagesList from './MessagesList/MessagesList'
@@ -10,7 +10,8 @@ const MessagesArea = ({ userId, scrollBottomRef, showSearchConv, messages, messa
     const [messageDay, setMessageDay] = useState<Number>(0)
 
     return (
-        <div className={`messagesection ${showSearchConv ? "messagesectionmedium" : "messagesectionfull"} ${filesEmpty ? "messagesectionheightMax" : "messagesectionheightMin"} `}>
+        // <div className={`messagesection ${showSearchConv ? "messagesectionmedium" : "messagesectionfull"} ${filesEmpty ? "messagesectionheightMax" : "messagesectionheightMin"} `}>
+        <div className={styles.messagesection + " " + (showSearchConv ? styles.messagesectionmedium : styles.messagesectionfull) + " " + (filesEmpty ? styles.messagesectionheightMax : styles.messagesectionheightMin)}>
             <MessagePrivacy />
 
 

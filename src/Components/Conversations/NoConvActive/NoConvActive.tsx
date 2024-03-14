@@ -1,12 +1,14 @@
 import React from 'react'
-import PhoneConv from '../../../assets/PhoneConv.svg'
+import PhoneConv from '@/assets/PhoneConv.svg'
+import Image from 'next/image'
+import styles from './NoConvActive.module.css'
 
 const NoConvActive = () => {
     return (
-        <div className="noconvactive">
-            <img src={PhoneConv} alt="phoneconv" className='phoneconv' />
-            <h1 className="no-conv-title-active">Gardez votre téléphone connecté</h1>
-            <p className="no-conv-subtitle-active">Whatsapp se connecte à votre téléphone pour synchroniser les messages. Pour réduire l’utilisation des données. connectez votre téléphone au Wi-Fi.</p>
+        <div className={styles.noconvactive}>
+            <Image src={PhoneConv} alt="phoneconv" className='phoneconv' />
+            <h1 className={styles.noconvtitleactive}>Gardez votre téléphone connecté</h1>
+            <p className={styles.noconvsubtitleactive}>Whatsapp se connecte à votre téléphone pour synchroniser les messages. Pour réduire l’utilisation des données. connectez votre téléphone au Wi-Fi.</p>
         </div>
     )
 }

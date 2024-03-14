@@ -1,5 +1,5 @@
 import React from 'react'
-import "./ConversationsList.css"
+import styles from './ConversationsList.module.css'
 import NoResult from '../NoResult/NoResult'
 import Conversation from '../Conversation/Conversation'
 
@@ -8,15 +8,19 @@ const ConversationsList = ({ conversations, conversationActive, handleConversati
     const conversationsNoResult: string[] = ["Aucune conversation trouvée", "Aucun groupe n'a été trouvé", "Aucun contact n'a été trouvé"]
 
     return (
-        <div className="convslist">
+        <div className={styles.convslist}>
             {
                 typeConv === 1 && hasMatchingConversations ? (
                     (
                         conversations.map((conversation) => {
-                            const classActive = conversation._id === conversationActive ? 'conversationActive' : ''
-                            const topRound = conversation.topRounded === true ? 'convtoprounded' : ''
-                            const bottomRound = conversation.bottomRounded === true ? 'convbottomrounded' : ''
-                            const noConvActiveClass = conversationActive === "" ? 'noActiveClass' : ''
+                            // const classActive = conversation._id === conversationActive ? 'conversationActive' : ''
+                            const classActive = conversation._id === conversationActive ? styles.conversationActive : ''
+                            // const topRound = conversation.topRounded === true ? 'convtoprounded' : ''
+                            const topRound = conversation.topRounded === true ? styles.convtoprounded : ''
+                            // const bottomRound = conversation.bottomRounded === true ? 'convbottomrounded' : ''
+                            const bottomRound = conversation.bottomRounded === true ? styles.convbottomrounded : ''
+                            // const noConvActiveClass = conversationActive === "" ? 'noActiveClass' : ''
+                            const noConvActiveClass = conversationActive === "" ? styles.noActiveClass : ''
 
                             return (
                                 (

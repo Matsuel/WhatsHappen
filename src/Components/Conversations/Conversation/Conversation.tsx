@@ -1,19 +1,17 @@
 import React from 'react'
-import "./Conversation.css"
-import Conv1 from '../../../assets/conv1.svg'
-import Online from '../../../assets/Online.svg'
-import Offline from '../../../assets/Offline.svg'
-import DoubleChevrons from '../../../assets/DoubleChevrons.svg'
-import Pinned from '../../../assets/Pinned.svg'
-import Pin from '../../../assets/Pin.svg'
+import styles from './Conversation.module.css'
+import Pinned from '@/assets/Pinned.svg'
+import Pin from '@/assets/Pin.svg'
 import ShowDate from '../../Home/ShowDate/ShowDate'
 import ConversationStatus from '../ConversationStatus/ConversationStatus'
 import ConversationInfos from '../ConversationInfos/ConversationInfos'
+import Image from 'next/image'
 
 
 const Conversation = ({ conversation, handleConversationActive, handleHoverConv, handleHoverConvReset, typingStatus, handlePinnedConversation, userId, classActive, topRound, bottomRound, noConvActiveClass }: ConversationProps) => {
     return (
-        <div className={`conversation ${classActive} ${topRound} ${bottomRound} ${noConvActiveClass}`} key={conversation._id} onMouseEnter={() => handleHoverConv(conversation._id)} onMouseLeave={handleHoverConvReset}>
+        <div className={styles.conversation + " " + classActive + " " + topRound + " " + bottomRound + " " + noConvActiveClass} key={conversation._id} onMouseEnter={() => handleHoverConv(conversation._id)} onMouseLeave={handleHoverConvReset}>
+        {/* <div className={`conversation ${classActive} ${topRound} ${bottomRound} ${noConvActiveClass}`} key={conversation._id} onMouseEnter={() => handleHoverConv(conversation._id)} onMouseLeave={handleHoverConvReset}> */}
 
             <ConversationStatus _id={conversation._id} pic={conversation.pic} status={conversation.status} handleConversationActive={handleConversationActive} />
 
@@ -28,7 +26,7 @@ const Conversation = ({ conversation, handleConversationActive, handleHoverConv,
             />
 
             <ShowDate date={conversation.last_message_date} />
-            <img src={conversation.pinnedBy.includes(userId) ? Pinned : Pin} alt="pinned" className='pinned' onClick={() => handlePinnedConversation(conversation._id)} />
+            <Image src={conversation.pinnedBy.includes(userId) ? Pinned : Pin} alt="pinned" className={styles.pinned} onClick={() => handlePinnedConversation(conversation._id)} />
         </div>
     )
 }

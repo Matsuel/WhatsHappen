@@ -1,0 +1,26 @@
+.convimagestatus {
+    justify-self: center;
+    position: relative;
+    width: auto;
+    height: 100%;
+    margin-top: 15px;
+}
+
+.conversationimage {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 50%;
+}
+
+.speakerstatus {
+    position: absolute;
+    bottom: 15px;
+    right: 0;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #fff;
+    border: 2px solid #F6F6F6;
+}

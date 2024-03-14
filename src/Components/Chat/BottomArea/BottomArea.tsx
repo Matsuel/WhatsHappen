@@ -1,6 +1,6 @@
 import React from 'react'
 
-import './BottomArea.css'
+import styles from './BottomArea.module.css'
 import IsTyping from '../../IsTyping/IsTyping'
 import FilesList from './FilesList/FilesList'
 import Bottombar from '../Bottombar/Bottombar'
@@ -8,7 +8,7 @@ import Bottombar from '../Bottombar/Bottombar'
 const BottomArea = ({ conversationActive, message, handleMessageChange, sendMessage, typingStatus, name, filesEmpty, setFilesEmpty, files, setFiles }: BottomBarProps) => {
 
     return (
-        <div className='bottomArea'>
+        <div className={styles.bottomArea}>
             <IsTyping conversationActive={conversationActive} typingStatus={typingStatus} name={name} />
 
             <FilesList files={files} setFiles={setFiles} setFilesEmpty={setFilesEmpty} />

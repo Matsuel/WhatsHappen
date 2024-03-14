@@ -1,0 +1,20 @@
+.messageprivacy {
+    margin-top: 100px;
+    width: 64%;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    background-color: #FEECDC;
+    border-radius: 18px;
+    padding-top: 1%;
+    padding-bottom: 1%;
+}
+
+.securitymessage {
+    width: 80%;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 16px;
+    color: #000;
+}

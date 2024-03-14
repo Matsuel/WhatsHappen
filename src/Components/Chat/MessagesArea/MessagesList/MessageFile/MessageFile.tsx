@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
-import "./MessageFile.css"
+import styles from './MessageFile.module.css'
 import { FileIcon, defaultStyles } from 'react-file-icon'
 import Download from '../../../../../assets/Download.svg'
-import Cross from '../../../../../assets/cross.svg'
 import { ContextMenuMessage, ContextMenuMessageButton } from '../ContextMenuMessage/ContextMenuMessage'
 import { handleContextMenu, downloadFile  } from '../../../../../Functions/Message/Message'
+import Image from 'next/image'
 
 const MessageFile = ({ message, userId, i, scrollBottomRef, bottomRounded, topRounded, messagesCount, deleteMessage, showSearchConv }: MessageFileProps) => {
 
@@ -12,10 +12,14 @@ const MessageFile = ({ message, userId, i, scrollBottomRef, bottomRounded, topRo
 
     const isReceived = message.sender_id !== userId
 
-    const fileClass = isReceived ? 'filereceived' : 'filesent'
-    const firstPlan = rightClick ? 'messagefirstplan' : ''
-    const topClass = isReceived ? (topRounded ? 'filereceivedtop' : 'filereceivedmiddle') : (topRounded ? 'filesenttop' : 'filesentmiddle');
-    const bottomClass = isReceived ? (bottomRounded ? 'filereceivedbottom' : '') : (bottomRounded ? 'filesentbottom' : '');
+    // const fileClass = isReceived ? 'filereceived' : 'filesent'
+    const fileClass = isReceived ? styles.filereceived : styles.filesent
+    const firstPlan = rightClick ? styles.messagefirstplan : ''
+    // const firstPlan = rightClick ? 'messagefirstplan' : ''
+    const topClass = isReceived ? (topRounded ? styles.filereceivedtop : styles.filereceivedmiddle) : (topRounded ? styles.filesenttop : styles.filesentmiddle)
+    // const topClass = isReceived ? (topRounded ? 'filereceivedtop' : 'filereceivedmiddle') : (topRounded ? 'filesenttop' : 'filesentmiddle');
+    const bottomClass = isReceived ? (bottomRounded ? styles.filereceivedbottom : '') : (bottomRounded ? styles.filesentbottom : '');
+    // const bottomClass = isReceived ? (bottomRounded ? 'filereceivedbottom' : '') : (bottomRounded ? 'filesentbottom' : '');
 
     return (
         <>
@@ -25,12 +29,14 @@ const MessageFile = ({ message, userId, i, scrollBottomRef, bottomRounded, topRo
             }
 
             {/* Composant message file */}
-            <div className={`fileelement ${firstPlan}`} ref={i === messagesCount - 1 ? scrollBottomRef : null} onContextMenu={(e) => handleContextMenu(e, setRightClick)}>
+            <div className={styles.fileelement + " " + firstPlan} ref={i === messagesCount - 1 ? scrollBottomRef : null} onContextMenu={(e) => handleContextMenu(e, setRightClick)}>
+            {/* <div className={`fileelement ${firstPlan}`} ref={i === messagesCount - 1 ? scrollBottomRef : null} onContextMenu={(e) => handleContextMenu(e, setRightClick)}> */}
 
-                <div className={`${fileClass} ${topClass} ${bottomClass}`} key={message._id}>
-                    <img src={Download} alt="Download" className="download" onClick={() => downloadFile(message)} />
-                    <p className="filename">{message.fileName}</p>
-                    <div className="fileicon">
+                {/* <div className={`${fileClass} ${topClass} ${bottomClass}`} key={message._id}> */}
+                <div className={fileClass + " " + topClass + " " + bottomClass} key={message._id}>
+                    <Image src={Download} alt="Download" className={styles.download} onClick={() => downloadFile(message)} />
+                    <p className={styles.filename}>{message.fileName}</p>
+                    <div className={styles.fileicon}>
                         <FileIcon extension={message.fileExtension} {...defaultStyles[message.fileExtension as keyof typeof defaultStyles]} />
                     </div>
 

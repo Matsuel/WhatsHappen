@@ -1,5 +1,5 @@
 import React from 'react'
-import './Chat.css'
+import styles from './Chat.module.css'
 import TopBar from './TopBar/TopBar'
 import MessagesArea from './MessagesArea/MessagesArea'
 import BottomBar from './BottomArea/BottomArea'
@@ -7,7 +7,7 @@ import NoConvActive from '../Conversations/NoConvActive/NoConvActive'
 
 const Chat = ({ conversationActive, conversationInfos, messages, userId, scrollBottomRef, showSearchConv, handleSearchConv, message, handleMessageChange, sendMessage, typingStatus, filesEmpty, deleteMessage, handleReaction, files, setFiles, setFilesEmpty }: ChatProps) => {
     return (
-        <div className="messages-section">
+        <div className={styles.messagessection}>
             {conversationActive !== '' ? (
                 <>
                     <TopBar

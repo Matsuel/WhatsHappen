@@ -1,0 +1,42 @@
+.convslist {
+    margin-top: 5%;
+    width: 95%;
+    height: 80%;
+    overflow-y: auto;
+}
+
+.conversationActive {
+    background-color: #D1E4E8;
+}
+
+.convtoprounded {
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+}
+
+.convtoprounded:hover {
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+}
+
+.convbottomrounded {
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+}
+
+.convbottomrounded:hover {
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+}
+
+.noActiveClass:hover {
+    border-radius: 12px;
+}
+
+
+
+
+
+
+
+

@@ -1,37 +1,39 @@
 import React, { useState } from 'react'
-import Conv1 from '../../../assets/conv1.svg'
-import Phone from '../../../assets/Phone.svg'
-import Video from '../../../assets/Video.svg'
-import SearchConv from '../../../assets/SearchConv.svg'
-import Expand from '../../../assets/Expand.svg'
+import Conv1 from '@/assets/conv1.svg'
+import Phone from '@/assets/Phone.svg'
+import Video from '@/assets/Video.svg'
+import SearchConv from '@/assets/SearchConv.svg'
+import Expand from '@/assets/Expand.svg'
 
-import './TopBar.css'
+import styles from './TopBar.module.css'
+import Image from 'next/image'
 
 
 const TopBar = ({ name, pic, status, handleSearchConv, showSearchConv }: TopBarProps) => {
 
     return (
-        <div className="conversationtopbar">
-            <div className="topbarleft">
-                <img src={pic ? `data:image/jpeg;base64,${pic}` : Conv1} alt="conv1" className='topbarimage' />
-                <div className="topbarnamestatut">
-                    <h2 className="conversationname">
+        <div className={styles.conversationtopbar}>
+            <div className={styles.topbarleft}>
+                <Image src={pic ? `data:image/jpeg;base64,${pic}` : Conv1} alt="conv1" className={styles.topbarimage} width={0} height={0} />
+                <div className={styles.topbarnamestatut}>
+                    <h2 className={styles.conversationname}>
                         {name.charAt(0).toUpperCase() + name.slice(1)}
                     </h2>
                 </div>
             </div>
-            <div className="topbarright">
+            <div className={styles.topbarright}>
                 {/* Composant TopBarBtn prenant en paramètre une image, une fonction onClick */}
-                <img src={Phone} alt="phoneconv" className='toprightbtn' />
-                <img src={Video} alt="video" className='toprightbtn' />
-                <img src={SearchConv} alt="searchconv" className='toprightbtn' onClick={handleSearchConv as any} />
+                <Image src={Phone} alt="phoneconv" className={styles.toprightbtn} />
+                <Image src={Video} alt="video" className={styles.toprightbtn} />
+                <Image src={SearchConv} alt="searchconv" className={styles.toprightbtn} onClick={handleSearchConv as any} />
                 {showSearchConv ?
-                    <input type="text" name="" id="" placeholder="Rechercher dans la conversation" className={`searchconv searchconvShow`} />
+                    // <input type="text" name="" id="" placeholder="Rechercher dans la conversation" className={`searchconv searchconvShow`} />
+                    <input type="text" name="" id="" placeholder="Rechercher dans la conversation" className={styles.searchconv + " " + styles.searchconvShow} />
                     :
                     null
                 }
                 {/* Composant TopBarBtn prenant en paramètre une image, une fonction onClick */}
-                <img src={Expand} alt="expand" className='toprightbtn' />
+                <Image src={Expand} alt="expand" className={styles.toprightbtn} />
             </div>
         </div>
     )

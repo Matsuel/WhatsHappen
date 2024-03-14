@@ -1,5 +1,5 @@
 import React from 'react'
-import "./ConversationsTypes.css"
+import styles from './ConversationsTypes.module.css'
 
 interface ConversationsTypesProps {
     setTypeConv: Function,
@@ -22,7 +22,7 @@ const ConversationsTypes = ({ setTypeConv, typeConv }: ConversationsTypesProps) 
     ]
 
     return (
-        <div className="convstype">
+        <div className={styles.convstype}>
             {conversationsTypes.map((convType, index) => (
                 <ConversationsType key={index} setTypeConv={setTypeConv} typeConv={typeConv} name={convType.name} type={convType.type} />
             ))}
@@ -32,7 +32,8 @@ const ConversationsTypes = ({ setTypeConv, typeConv }: ConversationsTypesProps) 
 
 const ConversationsType = ({ setTypeConv, typeConv, name, type }: ConversationsTypeProps) => {
     return (
-        <div className={`convtype ${typeConv === type ? 'convtypeActive' : ''}`} onClick={() => setTypeConv(type)}>
+        <div className={styles.convtype + ` ${typeConv === type ? styles.convtypeActive : ''}`} onClick={() => setTypeConv(type)}>
+        {/* <div className={`convtype ${typeConv === type ? 'convtypeActive' : ''}`} onClick={() => setTypeConv(type)}> */}
             {name}
         </div>
     )

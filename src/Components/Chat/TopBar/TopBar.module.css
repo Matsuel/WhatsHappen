@@ -1,0 +1,70 @@
+.conversationtopbar {
+    z-index: 1;
+    position: absolute;
+    width: 98.7%;
+    height: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* background-color: #fff; */
+    backdrop-filter: blur(10px);
+}
+
+.topbarleft {
+    margin-left: 5%;
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+}
+
+.topbarimage {
+    width: 60px;
+    height: 60px;
+    align-self: center;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 12px;
+}
+
+.conversationname {
+    font-size: 24px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 800;
+    color: #000;
+}
+
+.topbarright {
+    margin-right: 5%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 36px;
+}
+
+.toprightbtn {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+
+.searchconv {
+    width: 350px;
+    height: 50px;
+    background-color: #f9f9f9;
+    border-radius: 24px;
+    text-indent: 30px;
+    outline: none;
+    border: none;
+    font-size: 16px;
+    transform: translateX(100%);
+    transition: transform 1.5s ease-in-out;
+}
+
+.searchconvShow {
+    transform: translateX(0%);
+
+}
+
+.searchconv::placeholder {
+    color: #9393C1;
+}

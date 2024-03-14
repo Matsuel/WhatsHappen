@@ -1,6 +1,6 @@
 import React from 'react'
 
-import './MessageDate.css'
+import styles from './MessageDate.module.css'
 
 const MessageDate = ({ message }: MessageDateProps) => {
     const today = new Date(message.date).toDateString() === new Date().toDateString()
@@ -8,7 +8,7 @@ const MessageDate = ({ message }: MessageDateProps) => {
     const formatedDate = new Date(message.date).toLocaleDateString('fr-FR',{ weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'}).split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')
 
     return (
-        <div className="message-day">
+        <div className={styles.messageday}>
             <p>{
                 today ?
                 "Aujourd'hui" :

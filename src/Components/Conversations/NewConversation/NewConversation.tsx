@@ -1,11 +1,13 @@
 import React from 'react'
-import './NewConversation.css'
-import NewConv from '../../../assets/NewConv.svg'
+import styles from './NewConversation.module.css'
+import NewConv from '@/assets/NewConv.svg'
+import Image from 'next/image'
 
 const NewConversation = ({ canRotate, handleNewConv }: { canRotate: boolean, handleNewConv: Function }) => {
     return (
-        <div className={`newconv-div ${canRotate ? 'newConv-rotate' : ''}`} onClick={() => handleNewConv()}>
-            <img src={NewConv} alt="newconv" className='newConv' />
+        <div className={styles.newconvdiv + " " + (canRotate ? styles.newConvRotate : '')} onClick={() => handleNewConv()}>
+        {/* <div className={`newconv-div ${canRotate ? 'newConv-rotate' : ''}`} onClick={() => handleNewConv()}> */}
+            <Image src={NewConv} alt="newconv" className={styles.newConv} />
         </div>
     )
 }

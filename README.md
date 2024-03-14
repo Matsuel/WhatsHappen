@@ -1,74 +1,40 @@
-# WhatsappClone Using ReactJs
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-# Actual code is not really clean for testing
+## Getting Started
 
-# Aperçu du jour :
-
-![Preview](./src/assets/preview.png)
-
-# How to install project
+First, run the development server:
 
 ```bash
-git clone https://github.com/Matsuel/Whastapp-Clone.git
-cd Whatsapp-Clone
-npm i
-npm start 
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
 ```
 
-And now go on http://localhost:3000/ for test app
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-# Features availables
+You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
 
-<ol>
-    <li>Send messages</li>
-    <li>Create conversation</li>
-    <li>Show status</li>
-    <li>Search conv</li>
-    <li>Join files but not send for the moment</li>
-    <li>Delete/react message</li>
-    <li>React message</li>
-    <li>Double click on message add like</li>
-    <li>Long click open context menu</li>
-</ol>
+[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
 
----
+The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
 
-# Finals features
+This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-<ol>
-    <li>Call video and voice</li>
-    <li>Send files without broken them</li>
-    <li>Search messages to conv</li>
-    <li>Edit message</li>
-</ol>
+## Learn More
 
-# Faire des composants comme sur le site ATPE
+To learn more about Next.js, take a look at the following resources:
 
-# Clique droit sur une conversation 
-*Changer le nom mais pour plus tard*
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-# Clique dans une conversation
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
-*Changer de thème donc faut les mettre en place*
+## Deploy on Vercel
 
-# Pour les fichiers
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-*Les sauvagrder directement sur le serveur en data url (fait et fonctionne correctement) juste le sauvegrader avec un timestamp à la fin du nom de fichier si jamais 2 fichiers ont le meme nom cpt*
-*save le fileName+timestampt dans la db*
-*Quand on récup les messages on renvoit data url et c'est censé fonctionner correctement*
-
----
-
-# Clean code
-## const socket dans index et export
-## voir pour regler problème de la conversation list qui s'efface quand actualisation (pb de synchro du dernier message dans la liste)
-# voir click ailleurs que sur le message pour setRightlick(false)
-## voir pour mettre chat dans une route /chat/{id}
-## bout en bout
-## fichiers problèmes
-## thèmes
-## appels
-## groupes
-## noms custom + contact
-## recherche de messages
-## profil
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
