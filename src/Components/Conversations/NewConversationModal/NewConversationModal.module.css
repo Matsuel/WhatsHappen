@@ -1,35 +1,23 @@
 .newconvmodal {
-    z-index: 499;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    backdrop-filter: blur(15px);
+    z-index: 5;
+    position: fixed;
+    top: 30%;
+    left: 30%;
+    width: auto;
+    height: 30vh;
 }
 
 .newconvinput {
-    width: 30%;
-    height: 5%;
+    width: 30vw;
+    height: 5vh;
     margin-top: 2%;
-    background-color: rgba(255, 255, 255, 0.3);
+    background-color: white;
     border-radius: 24px;
     border: 0.5px solid #128C7E;
     font-size: 16px;
     font-family: 'Plus Jakarta Sans', sans-serif;
     text-indent: 50px;
     color: #000;
-}
-
-.username {
-    font-size: 16px;
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    color: #000;
-
 }
 
 .newconvinput::placeholder {
@@ -40,9 +28,19 @@
     outline: none;
 }
 
+.users {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+}
+
 .newconvuser {
-    width: 30%;
-    height: 10%;
+    width: 29vw;
+    height: 10vh;
     margin-top: 2%;
     background-color: #fff;
     border-radius: 24px;
@@ -53,7 +51,6 @@
 }
 
 .newconvuser:hover {
-    cursor: pointer;
     background-color: #D1E4E8;
 }
 
@@ -63,16 +60,48 @@
     border-radius: 50%;
 }
 
-.cross {
-    position: absolute;
-    top: 2%;
-    right:2%;
-    width: 40px;
-    height: 40px;
+.username {
+    font-size: 20px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    color: #000;
 }
 
-.cross:hover {
-    cursor: pointer;
-    background-color: #8F94A3;
+.actions {
+    height: 50%;
+    width: 20%;
+    background-color: #f5fafc;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
     border-radius: 12px;
+}
+
+.actionDiv {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.actionDiv:nth-child(1):hover {
+    background-color: #D1E4E8;
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
+}
+
+.actionDiv:nth-child(2):hover {
+    background-color: #D1E4E8;
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+}
+
+.action {
+    width: 24px;
+    height: 24px;
+}
+
+.action:hover {
+    cursor: pointer;
+    transform: scale(1.2);
 }
