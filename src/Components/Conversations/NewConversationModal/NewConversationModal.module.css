@@ -22,6 +22,14 @@
     font-size: 16px;
     font-family: 'Plus Jakarta Sans', sans-serif;
     text-indent: 50px;
+    color: #000;
+}
+
+.username {
+    font-size: 16px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    color: #000;
+
 }
 
 .newconvinput::placeholder {
@@ -53,4 +61,18 @@
     width: 80px;
     height: 80px;
     border-radius: 50%;
+}
+
+.cross {
+    position: absolute;
+    top: 2%;
+    right:2%;
+    width: 40px;
+    height: 40px;
+}
+
+.cross:hover {
+    cursor: pointer;
+    background-color: #8F94A3;
+    border-radius: 12px;
 }

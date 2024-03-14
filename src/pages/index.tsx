@@ -309,7 +309,7 @@ const Home = () => {
                 />
 
                 {/* modal next ui center  */}
-                <NewConversationModal showNewConv={showNewConv} users={users} searchUsers={searchUsers} handleSearchUsers={handleSearchUsers} createConversation={createConversation} />
+                <NewConversationModal showNewConv={showNewConv} setShowNewConv={setShowNewConv} users={users} searchUsers={searchUsers} handleSearchUsers={handleSearchUsers} createConversation={createConversation} />
 
                 <NewConversation canRotate={canRotate} handleNewConv={handleNewConv} />
             </div>

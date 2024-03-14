@@ -1,4 +1,4 @@
-.newconv-div {
+.newconvdiv {
     z-index: 500;
     position: absolute;
     bottom: 5%;
@@ -24,7 +24,7 @@
     cursor: pointer;
 }
 
-.newConv-rotate {
+.newConvRotate {
     animation: rotation 0.5s linear;
 }
 
