@@ -4,7 +4,8 @@
     top: 30%;
     left: 30%;
     width: auto;
-    height: 30vh;
+    height: auto;
+    max-height: 30vh;
 }
 
 .newconvinput {
@@ -34,7 +35,8 @@
     align-items: center;
     justify-content: flex-start;
     width: 100%;
-    height: 100%;
+    height: auto;
+    max-height: 100%;
     overflow-y: auto;
 }
 
