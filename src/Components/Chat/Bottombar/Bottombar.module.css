@@ -25,16 +25,3 @@
     height: 24px;
 }
 
-.trashfile {
-    width: 24px;
-    height: 24px;
-    position: absolute;
-    right: 5px;
-    top: 5px;
-    cursor: pointer;
-}
-
-.trashfile:hover {
-    transform: scale(1.2);
-    transition: transform 0.2s ease-in-out;
-}
