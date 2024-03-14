@@ -31,7 +31,7 @@ const Message = ({ message, userId, i, scrollBottomRef, bottomRounded, topRounde
             onMouseLeave={() => handleMouseUp(longPress, setLongPress)}>
                 {rightClick &&
                     [
-                        <Picker reactionsDefaultOpen={true} className={`${styles.reactiondiv} ${isReceived ? styles.messagecontextmenureceived : styles.messagecontextmenusent}`} onEmojiClick={(emoji: EmojiPickerProps) => { handleReaction(message._id, emoji.unified); setRightClick(false); }} />,
+                        <Picker reactionsDefaultOpen={true} className={styles.reactiondiv + " " + (isReceived ? styles.messagecontextmenureceived : styles.messagecontextmenusent)} onEmojiClick={(emoji: EmojiPickerProps) => { handleReaction(message._id, emoji.unified); setRightClick(false); }} />,
                         // <Picker reactionsDefaultOpen={true} className={`reactiondiv ${isReceived ? "messagecontextmenureceived" : "messagecontextmenusent"}`} onEmojiClick={(emoji: EmojiPickerProps) => { handleReaction(message._id, emoji.unified); setRightClick(false); }} />,
                     ]
                 }

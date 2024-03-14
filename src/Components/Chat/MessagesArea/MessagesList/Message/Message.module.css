@@ -121,3 +121,17 @@
 .myReaction:hover {
     background-color: #D7F8F4;
 }
+
+.messagecontextmenusent {
+    align-self: flex-end;
+    background-color: #D7F8F4;
+}
+
+.messagecontextmenureceived {
+    align-self: flex-start;
+    background-color: #fff;
+}
+
+.reactiondiv {
+    margin-bottom: 2%;
+}
