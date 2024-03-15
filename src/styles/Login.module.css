@@ -50,10 +50,39 @@
     outline: none;
 }
 
+.fileWrapper {
+    position: relative;
+    width: 60%;
+    height: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 15px;
+    background-color: #f0f2f5;
+    padding-left: 1.5rem;
+}
+
+.inputfile {
+    display: none;
+}
+
+.fileInputText {
+    color: #000;
+    font-size: 1rem;
+    position: absolute;
+    left: 1.5rem;
+}
+
+.fileInputTextNoFile {
+    color: #d1d3d5;
+    font-size: 1rem;
+    position: absolute;
+    left: 1.5rem;
+}
+
 .inputlogin{
     width: 60%;
     height: 10%;
-    /* margin-bottom: 1rem; */
     border: none;
     border-radius: 15px;
     padding-left: 1.5rem;
@@ -73,7 +102,6 @@
 .inputpassword {
     width: 100%;
     height: 100%;
-    /* margin-bottom: 1rem; */
     border: none;
     border-radius: 15px;
     padding-left: 1.5rem;

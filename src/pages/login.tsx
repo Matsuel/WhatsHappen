@@ -5,6 +5,8 @@ import { io } from 'socket.io-client'
 import Image from 'next/image'
 import Eye from '@/assets/Eye.svg'
 import EyeSlash from '@/assets/EyeSlash.svg'
+import Trash from '@/assets/Trash.svg'
+import JoinFile from '@/assets/JoinFile.svg'
 
 const LoginPage = () => {
   const [socket, setSocket] = useState<any>(null)
@@ -17,6 +19,8 @@ const LoginPage = () => {
 
   const [passwordShown, setPasswordShown] = useState<boolean[]>([false, false, false]);
   const [login, setLogin] = useState<boolean>(true);
+
+  const [fileName, setFileName] = useState<string>('');
 
   const togglePasswordVisiblity = (index: number) => {
     const updatedPasswordShown = passwordShown
@@ -77,6 +81,12 @@ const LoginPage = () => {
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files && e.target.files[0];
     setSelectedFile(file);
+    setFileName(file?.name || '');
+  }
+
+  const deleteFile = () => {
+    setFileName('');
+    setSelectedFile(null);
   }
 
   return (
@@ -88,7 +98,13 @@ const LoginPage = () => {
             <>
               <Image alt='whatsapp' src={WhatsApp} width={50} height={50} className={styles.whatsappLogo} />
               <h2 className={styles.title}>S'inscrire sur Whatsapp</h2>
-              <input className={styles.inputlogin} type="file" onChange={handleFileChange} />
+              <div className={styles.fileWrapper}>
+                <p className={selectedFile ? styles.fileInputText : styles.fileInputTextNoFile}>
+                  {fileName.charAt(0).toUpperCase() + fileName.slice(1).toLowerCase() || 'Choisissez un fichier'}
+                </p>
+                {fileName ? (<Image alt='trash' src={Trash} width={20} onClick={deleteFile} className={styles.eye} />) : (<label htmlFor="fileInput" className={styles.eye}> <Image alt='trash' src={JoinFile} width={20} /> </label>)}
+                <input onChange={handleFileChange} className={styles.inputfile} type="file" id="fileInput" />
+              </div>
               <input onChange={(e) => setPseudo(e.target.value)} placeholder='Entrez votre pseudo' className={styles.inputlogin} type="text" maxLength={20} />
               <input onChange={(e) => setEmail(e.target.value)} placeholder='Entrez votre adresse mail' className={styles.inputlogin} type="text" maxLength={20} />
               <div className={styles.passwordWrapper}>
