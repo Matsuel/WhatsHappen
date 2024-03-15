@@ -19,10 +19,6 @@ const Bottombar = ({ conversationActive, message, handleMessageChange, sendMessa
         setEmojiIndex(Math.floor(Math.random() * RandomEmojis.length))
     }
 
-    const addEmojiToInput = (emoji: string) => {
-        handleMessageChange({ target: { value: message + emoji } });
-    }
-
     return (
         <div className={styles.conversationbottombar}>
             <Dropzone onDrop={(acceptedFiles) => onDrop(acceptedFiles, setFiles, setFilesEmpty)}>
@@ -41,7 +37,7 @@ const Bottombar = ({ conversationActive, message, handleMessageChange, sendMessa
 
             {openPicker &&
                 <div className={styles.emojiPickerContainer}>
-                    <EmojiPicker onEmojiClick={(emoji: EmojiPickerProps) => addEmojiToInput(emoji.unified)} />
+                    <EmojiPicker />
                 </div>
             }
         </div>
