@@ -26,3 +26,16 @@
     height: 24px;
 }
 
+.emojiPicker {
+    filter: grayscale(100%);
+    width: 24px;
+    height: 24px;
+    transition: all 0.2s ease-in-out;
+}
+
+.emojiPicker:hover {
+    filter: grayscale(0%);
+    cursor: pointer;
+    transform: scale(1.2);
+    transition: all 0.2s ease-in-out;
+}
