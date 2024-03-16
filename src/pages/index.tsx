@@ -33,6 +33,8 @@ const Home = () => {
     const scrollBottomRef = useRef<HTMLDivElement>(null)
     const [hasMatchingConversations, setHasMatchingConversations] = useState<boolean>(true)
 
+    const [clickAwayEffect, setClickAwayEffect] = useState<boolean>(false)
+
     const router = useRouter()
     // const cookies = localStorage.getItem('user')
     let cookies: any;
@@ -170,10 +172,21 @@ const Home = () => {
     }
 
     const handleNewConv = () => {
-        getUsers()
-        setShowNewConv(!showNewConv)
-        setCanRotate(true)
-        rotateForSec()
+        // getUsers()
+        // setShowNewConv(!showNewConv)
+        // setCanRotate(true)
+        // rotateForSec()
+        if(!clickAwayEffect) {
+            getUsers()
+            setShowNewConv(!showNewConv)
+            setCanRotate(true)
+            rotateForSec()
+            setTimeout(() => {
+                setClickAwayEffect(false)
+            }, 100)
+        }else{
+            setClickAwayEffect(false)
+        }
     }
 
     const handleMessageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -307,7 +320,7 @@ const Home = () => {
                     hasMatchingConversations={hasMatchingConversations}
                 />
 
-                <NewConversation canRotate={canRotate} handleNewConv={handleNewConv} showNewConv={showNewConv} setShowNewConv={setShowNewConv} users={users} searchUsers={searchUsers} handleSearchUsers={handleSearchUsers} createConversation={createConversation} />
+                <NewConversation canRotate={canRotate} handleNewConv={handleNewConv} showNewConv={showNewConv} setShowNewConv={setShowNewConv} users={users} searchUsers={searchUsers} handleSearchUsers={handleSearchUsers} createConversation={createConversation} clickAwayEffect={clickAwayEffect} setClickAwayEffect={setClickAwayEffect} />
             </div>
 
             <Chat
