@@ -1,9 +1,8 @@
-import React, { ChangeEventHandler, useState } from 'react'
+import React, { ChangeEventHandler } from 'react'
 import styles from './NewConversation.module.css'
 import NewConv from '@/assets/NewConv.svg'
 import Image from 'next/image'
 import NewConversationModal from './NewConversationModal/NewConversationModal'
-import { useClickAway } from '@uidotdev/usehooks'
 
 const NewConversation = ({ canRotate, handleNewConv, showNewConv, setShowNewConv, users, searchUsers, handleSearchUsers, createConversation }: { canRotate: boolean, handleNewConv: Function, showNewConv: boolean, setShowNewConv: Function, users: UserInfos[], searchUsers: string, handleSearchUsers: ChangeEventHandler, createConversation: Function }) => {
 
