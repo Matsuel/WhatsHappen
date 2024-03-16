@@ -8,7 +8,6 @@ import styles from '@/styles/Home.module.css'
 import ConversationsTypes from '@/Components/Conversations/ConversationsTypes/ConversationsTypes';
 import Chat from '@/Components/Chat/Chat';
 import NewConversation from '@/Components/Conversations/NewConversation/NewConversation';
-import NewConversationModal from '@/Components/Conversations/NewConversationModal/NewConversationModal';
 import ConversationsList from '@/Components/Conversations/ConversationsList/ConversationsList';
 
 
@@ -308,10 +307,7 @@ const Home = () => {
                     hasMatchingConversations={hasMatchingConversations}
                 />
 
-                {/* modal next ui center  */}
-                <NewConversationModal showNewConv={showNewConv} setShowNewConv={setShowNewConv} users={users} searchUsers={searchUsers} handleSearchUsers={handleSearchUsers} createConversation={createConversation} />
-
-                <NewConversation canRotate={canRotate} handleNewConv={handleNewConv} />
+                <NewConversation canRotate={canRotate} handleNewConv={handleNewConv} showNewConv={showNewConv} setShowNewConv={setShowNewConv} users={users} searchUsers={searchUsers} handleSearchUsers={handleSearchUsers} createConversation={createConversation} />
             </div>
 
             <Chat
