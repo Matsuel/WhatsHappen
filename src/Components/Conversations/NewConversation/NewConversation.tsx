@@ -4,7 +4,7 @@ import NewConv from '@/assets/NewConv.svg'
 import Image from 'next/image'
 import NewConversationModal from './NewConversationModal/NewConversationModal'
 
-const NewConversation = ({ canRotate, handleNewConv, showNewConv, setShowNewConv, users, searchUsers, handleSearchUsers, createConversation, clickAwayEffect, setClickAwayEffect }: { canRotate: boolean, handleNewConv: Function, showNewConv: boolean, setShowNewConv: Function, users: UserInfos[], searchUsers: string, handleSearchUsers: ChangeEventHandler<HTMLInputElement>, createConversation: Function, clickAwayEffect: boolean, setClickAwayEffect: Function }) => {
+const NewConversation = ({ canRotate, handleNewConv, showNewConv, setShowNewConv, users, searchUsers, handleSearchUsers, createConversation, clickAwayEffect, setClickAwayEffect }: NewConversationProps) => {
 
     return (
         <>

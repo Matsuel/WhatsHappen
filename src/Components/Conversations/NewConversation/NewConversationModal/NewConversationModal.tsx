@@ -6,7 +6,7 @@ import ChatBubble from '@/assets/ChatBubble.svg'
 import AddContact from '@/assets/AddContact.svg'
 import { useClickAway } from '@uidotdev/usehooks'
 
-const NewConversationModal = ({ showNewConv, setShowNewConv, users, searchUsers, handleSearchUsers, createConversation, clickAwayEffect, setClickAwayEffect }: { showNewConv: boolean, setShowNewConv: Function, users: UserInfos[], searchUsers: string, handleSearchUsers: ChangeEventHandler<HTMLInputElement>, createConversation: Function, clickAwayEffect: boolean, setClickAwayEffect: Function }) => {
+const NewConversationModal = ({ showNewConv, setShowNewConv, users, searchUsers, handleSearchUsers, createConversation, clickAwayEffect, setClickAwayEffect }: NewConversationModalProps) => {
 
     const ref = useClickAway<any>(() => {
         setShowNewConv(false)

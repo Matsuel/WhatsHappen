@@ -231,6 +231,29 @@ interface ConversationInfosProps {
     handleConversationActive: Function
 }
 
+interface NewConversationProps {
+    canRotate: boolean,
+    handleNewConv: Function,
+    showNewConv: boolean,
+    setShowNewConv: Function,
+    users: UserInfos[],
+    searchUsers: string,
+    handleSearchUsers: ChangeEventHandler<HTMLInputElement>,
+    createConversation: Function,
+    clickAwayEffect: boolean,
+    setClickAwayEffect: Function
+}
+
+interface NewConversationModalProps {
+    showNewConv: boolean,
+    setShowNewConv: Function,
+    users: UserInfos[],
+    searchUsers: string,
+    handleSearchUsers: ChangeEventHandler<HTMLInputElement>,
+    createConversation: Function,
+    clickAwayEffect: boolean,
+    setClickAwayEffect: Function
+}
 
 declare module '*.svg' {
     const content: any;
