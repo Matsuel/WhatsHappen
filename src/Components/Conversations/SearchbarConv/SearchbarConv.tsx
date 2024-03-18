@@ -23,11 +23,11 @@ const SearchbarConv = ({ setSearch, setHasMatchingConversations, conversations, 
                     <input type="text" placeholder='Rechercher ici' name="search" id="search" className={styles.searchInput} onChange={(e) => handleSearch(e, setSearch, setHasMatchingConversations, conversations)} />
                 </div>
             ) : (
-                <div className={styles.newConv} onClick={() => setShowFullSidebar(true)}>
+                <div className={styles.logoMinimized} onClick={() => setShowFullSidebar(true)}>
                     <Image src={Search} alt="search" className={styles.addLogo} />
                 </div>
             )}
-            <div className={styles.newConv} onClick={() => handleNewConv()}>
+            <div className={showFullSidebar ? styles.newConv : styles.logoMinimized} onClick={() => handleNewConv()}>
                 <Image src={Plus} alt="add" className={styles.addLogo} />
             </div>
         </div>
