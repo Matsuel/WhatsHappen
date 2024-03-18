@@ -183,7 +183,8 @@ interface ChatProps {
     handleReaction: Function,
     files: any[],
     setFiles: (files: any[]) => void,
-    setFilesEmpty: (filesEmpty: boolean) => void
+    setFilesEmpty: (filesEmpty: boolean) => void,
+    showFullSidebar: boolean,
 }
 
 interface ConversationListProps {
@@ -198,6 +199,11 @@ interface ConversationListProps {
     userId: string,
     typeConv: number,
     hasMatchingConversations: boolean,
+    showFullSidebar: boolean,
+    setShowFullSidebar: Function,
+    handleNewConv: Function,
+    setSearch: Function,
+    setHasMatchingConversations: Function
 }
 
 interface ConversationProps {
@@ -209,7 +215,8 @@ interface ConversationProps {
     handlePinnedConversation: Function,
     userId: string
     classActive: string,
-    noConvActiveClass: string
+    noConvActiveClass: string,
+    showFullSidebar: boolean
 }
 
 interface ConversationStatusProps {

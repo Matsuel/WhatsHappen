@@ -10,6 +10,18 @@
     gap: 10px;
 }
 
+.searchWrapperMinimized {
+    position: relative;
+    width: 80%;
+    height: auto;
+    margin-top: 8%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
 .searchBar {
     width: 80%;
     height: 50px;

@@ -31,6 +31,8 @@ const Home = () => {
     const scrollBottomRef = useRef<HTMLDivElement>(null)
     const [hasMatchingConversations, setHasMatchingConversations] = useState<boolean>(true)
 
+    const [showFullSidebar, setShowFullSidebar] = useState<boolean>(true)
+
     const [clickAwayEffect, setClickAwayEffect] = useState<boolean>(false)
 
     const router = useRouter()
@@ -303,9 +305,9 @@ const Home = () => {
 
             <ConversationsTypes setTypeConv={setTypeConv} typeConv={typeConv} />
             
-            <div className={styles.conversationssection}>
+            {/* <div className={styles.conversationssection}> */}
 
-                <SearchbarConv setSearch={setSearch} setHasMatchingConversations={setHasMatchingConversations} conversations={conversations} handleNewConv={handleNewConv} />
+                {/* <SearchbarConv setSearch={setSearch} setHasMatchingConversations={setHasMatchingConversations} conversations={conversations} handleNewConv={handleNewConv} /> */}
 
                 <ConversationsList
                     conversations={conversations}
@@ -319,10 +321,15 @@ const Home = () => {
                     userId={userId}
                     typeConv={typeConv}
                     hasMatchingConversations={hasMatchingConversations}
+                    showFullSidebar={showFullSidebar}
+                    setShowFullSidebar={setShowFullSidebar} 
+                    handleNewConv={handleNewConv}
+                    setHasMatchingConversations={setHasMatchingConversations}
+                    setSearch={setSearch}                   
                 />
 
-                <NewConversationModal showNewConv={showNewConv} setShowNewConv={setShowNewConv} users={users} searchUsers={searchUsers} handleSearchUsers={handleSearchUsers} createConversation={createConversation} clickAwayEffect={clickAwayEffect} setClickAwayEffect={setClickAwayEffect} />
-            </div>
+                {/* <NewConversationModal showNewConv={showNewConv} setShowNewConv={setShowNewConv} users={users} searchUsers={searchUsers} handleSearchUsers={handleSearchUsers} createConversation={createConversation} clickAwayEffect={clickAwayEffect} setClickAwayEffect={setClickAwayEffect} /> */}
+            {/* </div> */}
 
             <Chat
                 conversationActive={conversationActive}
@@ -342,6 +349,7 @@ const Home = () => {
                 files={files}
                 setFiles={setFiles}
                 setFilesEmpty={setFilesEmpty}
+                showFullSidebar={showFullSidebar}
             />
 
         </div>

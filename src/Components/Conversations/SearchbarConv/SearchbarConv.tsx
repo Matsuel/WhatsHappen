@@ -9,16 +9,23 @@ interface SearchbarConvProps {
     setSearch: Function,
     setHasMatchingConversations: Function,
     conversations: ConversationInfos[],
-    handleNewConv: Function
+    handleNewConv: Function,
+    showFullSidebar: boolean,
+    setShowFullSidebar: Function
 }
 
-const SearchbarConv = ({ setSearch, setHasMatchingConversations, conversations, handleNewConv }: SearchbarConvProps) => {
+const SearchbarConv = ({ setSearch, setHasMatchingConversations, conversations, handleNewConv, setShowFullSidebar, showFullSidebar }: SearchbarConvProps) => {
     return (
-        <div className={styles.searchWrapper}>
+        <div className={showFullSidebar ? styles.searchWrapper : styles.searchWrapperMinimized}>
+            {showFullSidebar ? (
             <div className={styles.searchBar}>
                 <Image src={Search} alt="search" className={styles.searchLogo} />
                 <input type="text" placeholder='Rechercher ici' name="search" id="search" className={styles.searchInput} onChange={(e) => handleSearch(e, setSearch, setHasMatchingConversations, conversations)} />
-            </div>
+            </div>) :(
+                <div className={styles.newConv} onClick={() => setShowFullSidebar(true)}>
+                    <Image src={Search} alt="search" className={styles.addLogo} />
+                </div>
+            ) }
             <div className={styles.newConv} onClick={() => handleNewConv()}>
                 <Image src={Plus} alt="add" className={styles.addLogo} />
             </div>

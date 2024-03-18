@@ -5,9 +5,9 @@ import MessagesArea from './MessagesArea/MessagesArea'
 import BottomBar from './BottomArea/BottomArea'
 import NoConvActive from '../Conversations/NoConvActive/NoConvActive'
 
-const Chat = ({ conversationActive, conversationInfos, messages, userId, scrollBottomRef, showSearchConv, handleSearchConv, message, handleMessageChange, sendMessage, typingStatus, filesEmpty, deleteMessage, handleReaction, files, setFiles, setFilesEmpty }: ChatProps) => {
+const Chat = ({ conversationActive, conversationInfos, messages, userId, scrollBottomRef, showSearchConv, handleSearchConv, message, handleMessageChange, sendMessage, typingStatus, filesEmpty, deleteMessage, handleReaction, files, setFiles, setFilesEmpty, showFullSidebar }: ChatProps) => {
     return (
-        <div className={styles.messagessection}>
+        <div className={showFullSidebar ? styles.messagessection : styles.messagessectionMaximized}>
             {conversationActive !== '' ? (
                 <>
                     <TopBar
