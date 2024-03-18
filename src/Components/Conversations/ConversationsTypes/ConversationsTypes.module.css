@@ -1,53 +1,60 @@
-.convstype {
-    width: 80%;
-    height: 7%;
+.ConversationsTypes {
+    width: 5%;
+    height: 100%;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: space-around;
-    margin-top: 5%;
+    justify-content: flex-start;
+    gap: 10px;
     background-color: #fff;
-    border-radius: 24px;
+    border-right: 1px solid #E5E5E5;
+}
+
+.whatsappLogo {
+    width: 50px;
+    height: 50px;
+    margin-top: 20px;
+}
+
+.separator {
+    width: 100%;
+    height: 1px;
+    background-color: #E5E5E5;
 }
 
 .convtype {
-    width: 33%;
-    height: 100%;
+    width: 60px;
+    height: 60px;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    font-size: 18px;
+    cursor: pointer;
+    color: #000;
+    border-radius: 50%;
+    border: 1px solid #45c755;
+    font-size: 10px;
     font-family: 'Plus Jakarta Sans', sans-serif;
-    color: #5A6A9D;
 }
 
 .convtype:hover {
-    cursor: pointer;
-    background-color: #128C7E;
-    color: white;
-    font-family: 'Plus Jakarta Sans', sans-serif;
+    background-color: #45c755;
 }
 
-.convtype:hover:nth-child(1) {
-    border-top-left-radius: 24px;
-    border-bottom-left-radius: 24px;
-}
-
-.convtype:hover:nth-child(3) {
-    border-top-right-radius: 24px;
-    border-bottom-right-radius: 24px;
+.convtype svg {
+    width: 25px;
+    height: 25px;
 }
 
 .convtypeActive {
-    background-color: #128C7E;
-    color: white;
+    background-color: #f5f6fa;
 }
 
-.convtypeActive:nth-child(1) {
-    border-top-left-radius: 24px;
-    border-bottom-left-radius: 24px;
+.convtypeActive:hover{
+    background-color: #fff;
+
 }
 
-.convtypeActive:nth-child(3) {
-    border-top-right-radius: 24px;
-    border-bottom-right-radius: 24px;
+.convtypeActive {
+    color: #45c755;
 }

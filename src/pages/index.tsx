@@ -8,9 +8,7 @@ import styles from '@/styles/Home.module.css'
 import ConversationsTypes from '@/Components/Conversations/ConversationsTypes/ConversationsTypes';
 import Chat from '@/Components/Chat/Chat';
 import ConversationsList from '@/Components/Conversations/ConversationsList/ConversationsList';
-import NewConversationModal from '@/Components/Conversations/NewConversation/NewConversationModal/NewConversationModal';
-
-
+import NewConversationModal from '@/Components/Conversations/NewConversationModal/NewConversationModal';
 
 const Home = () => {
     const [filesEmpty, setFilesEmpty] = useState<boolean>(true)
@@ -176,7 +174,7 @@ const Home = () => {
         // setShowNewConv(!showNewConv)
         // setCanRotate(true)
         // rotateForSec()
-        if(!clickAwayEffect) {
+        if (!clickAwayEffect) {
             getUsers()
             setShowNewConv(!showNewConv)
             setCanRotate(true)
@@ -184,7 +182,7 @@ const Home = () => {
             setTimeout(() => {
                 setClickAwayEffect(false)
             }, 100)
-        }else{
+        } else {
             setClickAwayEffect(false)
         }
     }
@@ -298,13 +296,16 @@ const Home = () => {
         })
     }
 
+    
+
     return (
         <div className={styles.home}>
+
+            <ConversationsTypes setTypeConv={setTypeConv} typeConv={typeConv} />
+            
             <div className={styles.conversationssection}>
 
                 <SearchbarConv setSearch={setSearch} setHasMatchingConversations={setHasMatchingConversations} conversations={conversations} handleNewConv={handleNewConv} />
-
-                <ConversationsTypes setTypeConv={setTypeConv} typeConv={typeConv} />
 
                 <ConversationsList
                     conversations={conversations}
