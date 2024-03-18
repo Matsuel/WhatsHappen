@@ -298,38 +298,33 @@ const Home = () => {
         })
     }
 
-    
+
 
     return (
         <div className={styles.home}>
 
             <ConversationsTypes setTypeConv={setTypeConv} typeConv={typeConv} />
-            
-            {/* <div className={styles.conversationssection}> */}
 
-                {/* <SearchbarConv setSearch={setSearch} setHasMatchingConversations={setHasMatchingConversations} conversations={conversations} handleNewConv={handleNewConv} /> */}
+            <ConversationsList
+                conversations={conversations}
+                conversationActive={conversationActive}
+                handleConversationActive={handleConversationActive}
+                handleHoverConv={handleHoverConv}
+                handleHoverConvReset={handleHoverConvReset}
+                search={search}
+                typingStatus={typingStatus}
+                handlePinnedConversation={handlePinnedConversation}
+                userId={userId}
+                typeConv={typeConv}
+                hasMatchingConversations={hasMatchingConversations}
+                showFullSidebar={showFullSidebar}
+                setShowFullSidebar={setShowFullSidebar}
+                handleNewConv={handleNewConv}
+                setHasMatchingConversations={setHasMatchingConversations}
+                setSearch={setSearch}
+            />
 
-                <ConversationsList
-                    conversations={conversations}
-                    conversationActive={conversationActive}
-                    handleConversationActive={handleConversationActive}
-                    handleHoverConv={handleHoverConv}
-                    handleHoverConvReset={handleHoverConvReset}
-                    search={search}
-                    typingStatus={typingStatus}
-                    handlePinnedConversation={handlePinnedConversation}
-                    userId={userId}
-                    typeConv={typeConv}
-                    hasMatchingConversations={hasMatchingConversations}
-                    showFullSidebar={showFullSidebar}
-                    setShowFullSidebar={setShowFullSidebar} 
-                    handleNewConv={handleNewConv}
-                    setHasMatchingConversations={setHasMatchingConversations}
-                    setSearch={setSearch}                   
-                />
-
-                {/* <NewConversationModal showNewConv={showNewConv} setShowNewConv={setShowNewConv} users={users} searchUsers={searchUsers} handleSearchUsers={handleSearchUsers} createConversation={createConversation} clickAwayEffect={clickAwayEffect} setClickAwayEffect={setClickAwayEffect} /> */}
-            {/* </div> */}
+            <NewConversationModal showNewConv={showNewConv} setShowNewConv={setShowNewConv} users={users} searchUsers={searchUsers} handleSearchUsers={handleSearchUsers} createConversation={createConversation} clickAwayEffect={clickAwayEffect} setClickAwayEffect={setClickAwayEffect} />
 
             <Chat
                 conversationActive={conversationActive}
