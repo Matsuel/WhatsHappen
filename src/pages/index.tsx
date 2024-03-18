@@ -7,8 +7,8 @@ import { useRouter } from 'next/router';
 import styles from '@/styles/Home.module.css'
 import ConversationsTypes from '@/Components/Conversations/ConversationsTypes/ConversationsTypes';
 import Chat from '@/Components/Chat/Chat';
-import NewConversation from '@/Components/Conversations/NewConversation/NewConversation';
 import ConversationsList from '@/Components/Conversations/ConversationsList/ConversationsList';
+import NewConversationModal from '@/Components/Conversations/NewConversation/NewConversationModal/NewConversationModal';
 
 
 
@@ -302,7 +302,7 @@ const Home = () => {
         <div className={styles.home}>
             <div className={styles.conversationssection}>
 
-                <SearchbarConv setSearch={setSearch} setHasMatchingConversations={setHasMatchingConversations} conversations={conversations} />
+                <SearchbarConv setSearch={setSearch} setHasMatchingConversations={setHasMatchingConversations} conversations={conversations} handleNewConv={handleNewConv} />
 
                 <ConversationsTypes setTypeConv={setTypeConv} typeConv={typeConv} />
 
@@ -320,7 +320,7 @@ const Home = () => {
                     hasMatchingConversations={hasMatchingConversations}
                 />
 
-                <NewConversation canRotate={canRotate} handleNewConv={handleNewConv} showNewConv={showNewConv} setShowNewConv={setShowNewConv} users={users} searchUsers={searchUsers} handleSearchUsers={handleSearchUsers} createConversation={createConversation} clickAwayEffect={clickAwayEffect} setClickAwayEffect={setClickAwayEffect} />
+                <NewConversationModal showNewConv={showNewConv} setShowNewConv={setShowNewConv} users={users} searchUsers={searchUsers} handleSearchUsers={handleSearchUsers} createConversation={createConversation} clickAwayEffect={clickAwayEffect} setClickAwayEffect={setClickAwayEffect} />
             </div>
 
             <Chat

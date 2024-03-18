@@ -8,7 +8,7 @@ import NoConvActive from '../Conversations/NoConvActive/NoConvActive'
 const Chat = ({ conversationActive, conversationInfos, messages, userId, scrollBottomRef, showSearchConv, handleSearchConv, message, handleMessageChange, sendMessage, typingStatus, filesEmpty, deleteMessage, handleReaction, files, setFiles, setFilesEmpty }: ChatProps) => {
     return (
         <div className={styles.messagessection}>
-            {conversationActive !== '' ? (
+            {/* {conversationActive !== '' ? (
                 <>
                     <TopBar
                         name={conversationInfos.name}
@@ -44,7 +44,7 @@ const Chat = ({ conversationActive, conversationInfos, messages, userId, scrollB
                 </>
             ) : (
                 <NoConvActive />
-            )}
+            )} */}
         </div>
     )
 }

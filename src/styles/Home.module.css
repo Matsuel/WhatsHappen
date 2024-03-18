@@ -10,12 +10,12 @@
 }
 
 .conversationssection {
-    width: 30%;
+    width: 25%;
     height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #F5FAFC;
+    background-color: #fff;
 }
 
 .noresult:hover {
