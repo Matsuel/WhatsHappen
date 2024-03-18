@@ -209,8 +209,6 @@ interface ConversationProps {
     handlePinnedConversation: Function,
     userId: string
     classActive: string,
-    topRound: string,
-    bottomRound: string,
     noConvActiveClass: string
 }
 

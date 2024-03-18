@@ -8,10 +8,9 @@ import ConversationInfos from '../ConversationInfos/ConversationInfos'
 import Image from 'next/image'
 
 
-const Conversation = ({ conversation, handleConversationActive, handleHoverConv, handleHoverConvReset, typingStatus, handlePinnedConversation, userId, classActive, topRound, bottomRound, noConvActiveClass }: ConversationProps) => {
+const Conversation = ({ conversation, handleConversationActive, handleHoverConv, handleHoverConvReset, typingStatus, handlePinnedConversation, userId, classActive, noConvActiveClass }: ConversationProps) => {
     return (
-        <div className={styles.conversation + " " + classActive + " " + topRound + " " + bottomRound + " " + noConvActiveClass} key={conversation._id} onMouseEnter={() => handleHoverConv(conversation._id)} onMouseLeave={handleHoverConvReset}>
-        {/* <div className={`conversation ${classActive} ${topRound} ${bottomRound} ${noConvActiveClass}`} key={conversation._id} onMouseEnter={() => handleHoverConv(conversation._id)} onMouseLeave={handleHoverConvReset}> */}
+        <div className={styles.conversation + " " + classActive + " " + noConvActiveClass} key={conversation._id} onMouseEnter={() => handleHoverConv(conversation._id)} onMouseLeave={handleHoverConvReset}>
 
             <ConversationStatus _id={conversation._id} pic={conversation.pic} status={conversation.status} handleConversationActive={handleConversationActive} />
 

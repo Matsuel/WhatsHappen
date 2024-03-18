@@ -3,40 +3,37 @@
     width: 95%;
     height: 80%;
     overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
 }
 
 .conversationActive {
     background-color: #D1E4E8;
-}
-
-.convtoprounded {
-    border-top-left-radius: 12px;
-    border-top-right-radius: 12px;
-}
-
-.convtoprounded:hover {
-    border-top-left-radius: 12px;
-    border-top-right-radius: 12px;
-}
-
-.convbottomrounded {
-    border-bottom-left-radius: 12px;
-    border-bottom-right-radius: 12px;
-}
-
-.convbottomrounded:hover {
-    border-bottom-left-radius: 12px;
-    border-bottom-right-radius: 12px;
+    border-radius: 12px;
 }
 
 .noActiveClass:hover {
     border-radius: 12px;
 }
 
+.title {
+    width: 85%;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #a1a4b3;
+    margin-bottom: 5%;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+}
 
-
-
-
-
-
-
+.title svg {
+    fill: #a1a4b3;
+    width: 20px;
+    height: 20px;
+}

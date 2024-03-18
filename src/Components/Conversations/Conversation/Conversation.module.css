@@ -1,16 +1,18 @@
 .conversation {
     width: 90%;
     height: 11%;
-    /* border-radius: 12px; */
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 .conversation:hover {
     background-color: #D1E4E8;
     cursor: pointer;
+    border-radius: 12px;
 }
 
 .pinned {
