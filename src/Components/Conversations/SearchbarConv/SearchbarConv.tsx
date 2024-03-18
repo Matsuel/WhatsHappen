@@ -18,14 +18,15 @@ const SearchbarConv = ({ setSearch, setHasMatchingConversations, conversations, 
     return (
         <div className={showFullSidebar ? styles.searchWrapper : styles.searchWrapperMinimized}>
             {showFullSidebar ? (
-            <div className={styles.searchBar}>
-                <Image src={Search} alt="search" className={styles.searchLogo} />
-                <input type="text" placeholder='Rechercher ici' name="search" id="search" className={styles.searchInput} onChange={(e) => handleSearch(e, setSearch, setHasMatchingConversations, conversations)} />
-            </div>) :(
+                <div className={styles.searchBar}>
+                    <Image src={Search} alt="search" className={styles.searchLogo} />
+                    <input type="text" placeholder='Rechercher ici' name="search" id="search" className={styles.searchInput} onChange={(e) => handleSearch(e, setSearch, setHasMatchingConversations, conversations)} />
+                </div>
+            ) : (
                 <div className={styles.newConv} onClick={() => setShowFullSidebar(true)}>
                     <Image src={Search} alt="search" className={styles.addLogo} />
                 </div>
-            ) }
+            )}
             <div className={styles.newConv} onClick={() => handleNewConv()}>
                 <Image src={Plus} alt="add" className={styles.addLogo} />
             </div>
