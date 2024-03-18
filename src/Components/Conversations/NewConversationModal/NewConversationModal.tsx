@@ -17,17 +17,28 @@ const NewConversationModal = ({ showNewConv, setShowNewConv, users, searchUsers,
     return (
         <>
             {showNewConv ? (
-                // Finir le style
                 <div className={styles.newconvmodal} ref={ref}>
-                    <input type="text" placeholder='Nom de votre interlocuteur' className={styles.newconvinput} onChange={handleSearchUsers} ref={ref} />
+                    <input type="text" placeholder='Rechercher ici' className={styles.newconvinput} onChange={handleSearchUsers} ref={ref} maxLength={50} />
                     {users.length > 0 && searchUsers !== "" ? (
                         <div className={styles.users}>
                             {users.map((user, index) => {
                                 return (
                                     user.username.toLowerCase().includes(searchUsers.toLowerCase()) ? (
+
                                         <div className={styles.newconvuser} key={user._id}>
-                                            <Image src={user.pic !== "" ? `data:image/jpeg;base64,${user.pic}` : Conv1} className={styles.userpic} alt="userpic" width={0} height={0} />
-                                            <p className={styles.username}>{user.username}</p>
+
+                                            <Image
+                                                src={user.pic !== "" ? `data:image/jpeg;base64,${user.pic}` : Conv1}
+                                                className={styles.userpic}
+                                                alt="userpic"
+                                                width={0}
+                                                height={0}
+                                            />
+
+                                            <p className={styles.username}>
+                                                {user.username}
+                                            </p>
+
                                             <div className={styles.actions}>
                                                 <div className={styles.actionDiv}>
                                                     <Image

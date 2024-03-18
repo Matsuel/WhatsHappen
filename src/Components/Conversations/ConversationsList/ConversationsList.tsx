@@ -6,7 +6,7 @@ import ChevronLeft from '@/assets/ChevronLeft.svg'
 import Image from 'next/image'
 import SearchbarConv from '../SearchbarConv/SearchbarConv'
 
-const ConversationsList = ({ conversations, conversationActive, handleConversationActive, handleHoverConv, handleHoverConvReset, search, typingStatus, handlePinnedConversation, userId, typeConv, hasMatchingConversations, setShowFullSidebar, showFullSidebar, handleNewConv, setHasMatchingConversations, setSearch }: ConversationListProps) => {
+const ConversationsList = ({ conversations, conversationActive, handleConversationActive, handleHoverConv, handleHoverConvReset, search, typingStatus, handlePinnedConversation, userId, typeConv, hasMatchingConversations, setShowFullSidebar, showFullSidebar, handleNewConv, setHasMatchingConversations, setSearch, showNewConv }: ConversationListProps) => {
 
     const handleShowFullSidebar = () => {
         setShowFullSidebar(!showFullSidebar)
@@ -19,7 +19,7 @@ const ConversationsList = ({ conversations, conversationActive, handleConversati
 
     return (
         <div className={showFullSidebar ? styles.conversationssection: styles.conversationsMinimized}>
-            <SearchbarConv conversations={conversations} handleNewConv={handleNewConv} setSearch={setSearch} setHasMatchingConversations={setHasMatchingConversations} showFullSidebar={showFullSidebar} setShowFullSidebar={setShowFullSidebar} />
+            <SearchbarConv conversations={conversations} handleNewConv={handleNewConv} setSearch={setSearch} setHasMatchingConversations={setHasMatchingConversations} showFullSidebar={showFullSidebar} setShowFullSidebar={setShowFullSidebar} showNewConv={showNewConv} />
             <div className={styles.conversations}>
                 <div className={styles.ConversationsList}>
                     {

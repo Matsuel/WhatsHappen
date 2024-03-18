@@ -4,6 +4,7 @@ import Search from '@/assets/Search.svg'
 import Image from 'next/image'
 import { handleSearch } from '../../../Functions/SearchBars/Search'
 import Plus from '@/assets/Plus.svg'
+import Minus from '@/assets/Minus.svg'
 
 interface SearchbarConvProps {
     setSearch: Function,
@@ -11,10 +12,11 @@ interface SearchbarConvProps {
     conversations: ConversationInfos[],
     handleNewConv: Function,
     showFullSidebar: boolean,
-    setShowFullSidebar: Function
+    setShowFullSidebar: Function,
+    showNewConv: boolean,
 }
 
-const SearchbarConv = ({ setSearch, setHasMatchingConversations, conversations, handleNewConv, setShowFullSidebar, showFullSidebar }: SearchbarConvProps) => {
+const SearchbarConv = ({ setSearch, setHasMatchingConversations, conversations, handleNewConv, setShowFullSidebar, showFullSidebar, showNewConv }: SearchbarConvProps) => {
     return (
         <div className={showFullSidebar ? styles.searchWrapper : styles.searchWrapperMinimized}>
             {showFullSidebar ? (
@@ -28,7 +30,7 @@ const SearchbarConv = ({ setSearch, setHasMatchingConversations, conversations, 
                 </div>
             )}
             <div className={showFullSidebar ? styles.newConv : styles.logoMinimized} onClick={() => handleNewConv()}>
-                <Image src={Plus} alt="add" className={styles.addLogo} />
+                <Image src={showNewConv ? Minus : Plus} alt="add" className={styles.addLogo} />
             </div>
         </div>
     )

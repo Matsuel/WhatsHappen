@@ -322,6 +322,7 @@ const Home = () => {
                 handleNewConv={handleNewConv}
                 setHasMatchingConversations={setHasMatchingConversations}
                 setSearch={setSearch}
+                showNewConv={showNewConv}
             />
 
             <NewConversationModal showNewConv={showNewConv} setShowNewConv={setShowNewConv} users={users} searchUsers={searchUsers} handleSearchUsers={handleSearchUsers} createConversation={createConversation} clickAwayEffect={clickAwayEffect} setClickAwayEffect={setClickAwayEffect} />

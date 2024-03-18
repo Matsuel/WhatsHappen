@@ -203,7 +203,8 @@ interface ConversationListProps {
     setShowFullSidebar: Function,
     handleNewConv: Function,
     setSearch: Function,
-    setHasMatchingConversations: Function
+    setHasMatchingConversations: Function,
+    showNewConv: boolean
 }
 
 interface ConversationProps {
