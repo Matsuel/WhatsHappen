@@ -17,7 +17,7 @@ const SearchbarConv = ({ setSearch, setHasMatchingConversations, conversations, 
         <div className={styles.searchWrapper}>
             <div className={styles.searchBar}>
                 <Image src={Search} alt="search" className={styles.searchLogo} />
-                <input type="text" placeholder='Rechercher une conversation ici' name="search" id="search" className={styles.searchInput} onChange={(e) => handleSearch(e, setSearch, setHasMatchingConversations, conversations)} />
+                <input type="text" placeholder='Rechercher ici' name="search" id="search" className={styles.searchInput} onChange={(e) => handleSearch(e, setSearch, setHasMatchingConversations, conversations)} />
             </div>
             <div className={styles.newConv} onClick={() => handleNewConv()}>
                 <Image src={Plus} alt="add" className={styles.addLogo} />
