@@ -5,6 +5,14 @@ import Online from '../../../assets/Online.svg'
 import Offline from '../../../assets/Offline.svg'
 import Image from 'next/image'
 
+
+interface ConversationStatusProps {
+    _id: string,
+    pic: string,
+    status: boolean,
+    handleConversationActive: Function
+}
+
 const ConversationStatus = ({ _id, pic, status, handleConversationActive }: ConversationStatusProps) => {
     return (
         <div className={styles.convimagestatus} onClick={() => handleConversationActive(_id)}>

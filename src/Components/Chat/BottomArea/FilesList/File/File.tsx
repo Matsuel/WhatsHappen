@@ -3,6 +3,14 @@ import styles from './File.module.css'
 import Trash from '../../../../../assets/Trash.svg'
 import { FileIcon, defaultStyles } from 'react-file-icon'
 import { deleteFile } from '../../../../../Functions/BottomBar/BottomBar'
+
+interface FileProps {
+    file: FileInfos,
+    index: number,
+    setFiles: Function,
+    files: FileInfos[],
+    setFilesEmpty: Function,
+}
 import Image from 'next/image'
 
 const File = ({ file, index, setFiles, files, setFilesEmpty }: FileProps) => {

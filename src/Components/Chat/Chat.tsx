@@ -5,6 +5,31 @@ import MessagesArea from './MessagesArea/MessagesArea'
 import BottomBar from './BottomArea/BottomArea'
 import NoConvActive from '../Conversations/NoConvActive/NoConvActive'
 
+interface ChatProps {
+    conversationActive: string,
+    conversationInfos: {
+        name: string,
+        pic: string,
+        status: boolean
+    },
+    messages: any[],
+    userId: string,
+    scrollBottomRef: any,
+    showSearchConv: boolean,
+    handleSearchConv: (e: React.ChangeEvent<HTMLInputElement>) => void,
+    message: string,
+    handleMessageChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
+    sendMessage: Function,
+    typingStatus: {},
+    filesEmpty: boolean,
+    deleteMessage: Function,
+    handleReaction: Function,
+    files: any[],
+    setFiles: (files: any[]) => void,
+    setFilesEmpty: (filesEmpty: boolean) => void,
+    showFullSidebar: boolean,
+}
+
 const Chat = ({ conversationActive, conversationInfos, messages, userId, scrollBottomRef, showSearchConv, handleSearchConv, message, handleMessageChange, sendMessage, typingStatus, filesEmpty, deleteMessage, handleReaction, files, setFiles, setFilesEmpty, showFullSidebar }: ChatProps) => {
     return (
         <div className={showFullSidebar ? styles.messagessection : styles.messagessectionMaximized}>

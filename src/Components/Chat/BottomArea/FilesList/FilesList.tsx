@@ -3,6 +3,13 @@ import styles from './FilesList.module.css'
 import Trash from '../../assets/Trash.svg'
 import File from './File/File'
 
+
+interface FilesListProps {
+    files: FileInfos[],
+    setFiles: Function,
+    setFilesEmpty: Function,
+}
+
 const FilesList = ({ files, setFiles, setFilesEmpty }: FilesListProps) => {
   return (
     <>

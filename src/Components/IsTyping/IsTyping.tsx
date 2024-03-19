@@ -1,6 +1,12 @@
 import React from 'react'
 import styles from './IsTyping.module.css'
 
+interface IsTypingProps {
+  conversationActive: string,
+  typingStatus: Object,
+  name: string,
+}
+
 const IsTyping = ({ conversationActive, typingStatus, name }: IsTypingProps) => {
   return (
     <>

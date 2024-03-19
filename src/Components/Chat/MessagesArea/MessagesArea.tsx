@@ -6,6 +6,17 @@ import MessageDate from './MessagesList/MessageDate/MessageDate'
 import MessageFile from './MessagesList/MessageFile/MessageFile'
 import MessagesList from './MessagesList/MessagesList'
 
+interface MessagesAreaProps {
+    userId: string,
+    scrollBottomRef: any,
+    showSearchConv: boolean,
+    messagesCount: number,
+    messages: message[],
+    filesEmpty: boolean,
+    deleteMessage: Function,
+    handleReaction: Function,
+}
+
 const MessagesArea = ({ userId, scrollBottomRef, showSearchConv, messages, messagesCount, filesEmpty, deleteMessage, handleReaction }: MessagesAreaProps) => {
     const [messageDay, setMessageDay] = useState<Number>(0)
 

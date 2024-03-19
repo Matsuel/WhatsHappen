@@ -11,6 +11,16 @@ const emojiList = ["1f929", "1f607", "1f913", "1f635-200d-1f4ab", "1fae0", "1f60
 
 const RandomEmojis: EmojiPickerProps[] = emojiList.map((emoji) => ({ unified: emoji }));
 
+interface BottombarProps {
+    conversationActive: string,
+    message: string,
+    handleMessageChange: Function,
+    sendMessage: Function,
+    files: FileInfos[],
+    setFiles: Function,
+    setFilesEmpty: Function,
+}
+
 const Bottombar = ({ conversationActive, message, handleMessageChange, sendMessage, files, setFiles, setFilesEmpty }: BottombarProps) => {
     const [emojiIndex, setEmojiIndex] = useState<number>(Math.floor(Math.random() * RandomEmojis.length))
     const [openPicker, setOpenPicker] = useState<boolean>(false)

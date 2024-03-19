@@ -6,6 +6,19 @@ import styles from './Message.module.css'
 import { ContextMenuMessageButton } from '../ContextMenuMessage/ContextMenuMessage'
 import ShowDate from '../../../../Home/ShowDate/ShowDate'
 
+interface MessageProps {
+    message: message,
+    userId: string,
+    i: number,
+    scrollBottomRef: any,
+    topRounded: boolean,
+    bottomRounded: boolean,
+    messagesCount: number,
+    deleteMessage: Function,
+    showSearchConv: boolean,
+    handleReaction: Function,
+}
+
 const Message = ({ message, userId, i, scrollBottomRef, bottomRounded, topRounded, messagesCount, deleteMessage, showSearchConv, handleReaction }: MessageProps) => {
 
     const [rightClick, setRightClick] = useState<boolean>(false)

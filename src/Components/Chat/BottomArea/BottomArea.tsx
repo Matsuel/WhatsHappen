@@ -5,6 +5,19 @@ import IsTyping from '../../IsTyping/IsTyping'
 import FilesList from './FilesList/FilesList'
 import Bottombar from '../Bottombar/Bottombar'
 
+interface BottomBarProps {
+    conversationActive: string,
+    message: string,
+    handleMessageChange: Function,
+    sendMessage: Function,
+    typingStatus: Object,
+    name: string,
+    filesEmpty: boolean,
+    setFilesEmpty: Function,
+    files: FileInfos[],
+    setFiles: Function,
+}
+
 const BottomArea = ({ conversationActive, message, handleMessageChange, sendMessage, typingStatus, name, filesEmpty, setFilesEmpty, files, setFiles }: BottomBarProps) => {
 
     return (

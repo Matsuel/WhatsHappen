@@ -3,6 +3,17 @@ import styles from './ConversationInfos.module.css'
 import DoubleChevrons from '../../../assets/DoubleChevrons.svg'
 import Image from 'next/image'
 
+
+interface ConversationInfosProps {
+    _id: string,
+    name: string,
+    last_message_sender: string,
+    last_message_content: string,
+    typingStatus: {},
+    userId: string,
+    handleConversationActive: Function
+}
+
 const ConversationInfos = ({ _id, name, last_message_sender, last_message_content, typingStatus, userId, handleConversationActive }: ConversationInfosProps) => {
     return (
         <div className={styles.conversationinfos} onClick={() => handleConversationActive(_id)}>

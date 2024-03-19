@@ -2,6 +2,11 @@ import React from 'react'
 
 import styles from './MessageDate.module.css'
 
+interface MessageDateProps {
+    message: message
+}
+
+
 const MessageDate = ({ message }: MessageDateProps) => {
     const today = new Date(message.date).toDateString() === new Date().toDateString()
     const yesterday = new Date(message.date).toDateString() === new Date(Date.now() - 86400000).toDateString()

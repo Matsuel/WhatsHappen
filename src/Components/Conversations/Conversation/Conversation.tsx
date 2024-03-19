@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { MouseEventHandler } from 'react'
 import styles from './Conversation.module.css'
 import Pinned from '@/assets/Pinned.svg'
 import Pin from '@/assets/Pin.svg'
@@ -7,6 +7,18 @@ import ConversationStatus from '../ConversationStatus/ConversationStatus'
 import ConversationInfos from '../ConversationInfos/ConversationInfos'
 import Image from 'next/image'
 
+interface ConversationProps {
+    conversation: ConversationInfos,
+    handleConversationActive: Function,
+    handleHoverConv: Function,
+    handleHoverConvReset: MouseEventHandler<HTMLDivElement>,
+    typingStatus: {},
+    handlePinnedConversation: Function,
+    userId: string
+    classActive: string,
+    noConvActiveClass: string,
+    showFullSidebar: boolean
+}
 
 const Conversation = ({ conversation, handleConversationActive, handleHoverConv, handleHoverConvReset, typingStatus, handlePinnedConversation, userId, classActive, noConvActiveClass, showFullSidebar }: ConversationProps) => {
     return (

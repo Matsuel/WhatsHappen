@@ -1,10 +1,30 @@
-import React from 'react'
+import React, { MouseEventHandler } from 'react'
 import styles from './ConversationsList.module.css'
 import NoResult from '../NoResult/NoResult'
 import Conversation from '../Conversation/Conversation'
 import ChevronLeft from '@/assets/ChevronLeft.svg'
 import Image from 'next/image'
 import SearchbarConv from '../SearchbarConv/SearchbarConv'
+
+interface ConversationListProps {
+    conversations: ConversationInfos[],
+    conversationActive: string,
+    handleConversationActive: Function,
+    handleHoverConv: Function,
+    handleHoverConvReset: MouseEventHandler<HTMLDivElement>,
+    search: string,
+    typingStatus: {},
+    handlePinnedConversation: Function,
+    userId: string,
+    typeConv: number,
+    hasMatchingConversations: boolean,
+    showFullSidebar: boolean,
+    setShowFullSidebar: Function,
+    handleNewConv: Function,
+    setSearch: Function,
+    setHasMatchingConversations: Function,
+    showNewConv: boolean
+}
 
 const ConversationsList = ({ conversations, conversationActive, handleConversationActive, handleHoverConv, handleHoverConvReset, search, typingStatus, handlePinnedConversation, userId, typeConv, hasMatchingConversations, setShowFullSidebar, showFullSidebar, handleNewConv, setHasMatchingConversations, setSearch, showNewConv }: ConversationListProps) => {
 

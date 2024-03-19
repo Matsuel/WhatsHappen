@@ -8,6 +8,14 @@ import Expand from '@/assets/Expand.svg'
 import styles from './TopBar.module.css'
 import Image from 'next/image'
 
+interface TopBarProps {
+    name: string,
+    pic: string,
+    status: boolean,
+    handleSearchConv: Function,
+    showSearchConv: boolean,
+}
+
 
 const TopBar = ({ name, pic, status, handleSearchConv, showSearchConv }: TopBarProps) => {
 

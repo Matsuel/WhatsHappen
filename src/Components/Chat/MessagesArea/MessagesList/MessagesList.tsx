@@ -4,6 +4,15 @@ import MessageFile from './MessageFile/MessageFile'
 import MessageDate from './MessageDate/MessageDate'
 import { isBottomRounded, isTopRounded } from '../../../../Functions/MessagesList/MessagesList'
 
+interface MessagesListProps {
+    userId: string,
+    scrollBottomRef: any,
+    showSearchConv: boolean,
+    messages: message[],
+    messagesCount: number,
+    deleteMessage: Function,
+    handleReaction: Function,
+}
 
 const MessagesList = ({ userId, scrollBottomRef, showSearchConv, messages, messagesCount, deleteMessage, handleReaction }: MessagesListProps) => {
     return (

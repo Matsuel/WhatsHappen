@@ -2,9 +2,21 @@ import React, { useState } from 'react'
 import styles from './MessageFile.module.css'
 import { FileIcon, defaultStyles } from 'react-file-icon'
 import Download from '../../../../../assets/Download.svg'
-import { ContextMenuMessage, ContextMenuMessageButton } from '../ContextMenuMessage/ContextMenuMessage'
+import { ContextMenuMessageButton } from '../ContextMenuMessage/ContextMenuMessage'
 import { handleContextMenu, downloadFile  } from '../../../../../Functions/Message/Message'
 import Image from 'next/image'
+
+interface MessageFileProps {
+    message: message,
+    userId: string,
+    i: number,
+    scrollBottomRef: any,
+    topRounded: boolean,
+    bottomRounded: boolean,
+    messagesCount: number,
+    deleteMessage: Function,
+    showSearchConv: boolean,
+}
 
 const MessageFile = ({ message, userId, i, scrollBottomRef, bottomRounded, topRounded, messagesCount, deleteMessage, showSearchConv }: MessageFileProps) => {
 
@@ -20,9 +32,6 @@ const MessageFile = ({ message, userId, i, scrollBottomRef, bottomRounded, topRo
     return (
         <>
         {/* Voir si je peux pas gérer la condition directement dans le composant */}
-            {rightClick &&
-                <ContextMenuMessage setRightClick={setRightClick} showSearchConv={showSearchConv} />
-            }
 
             <div className={styles.fileelement + " " + firstPlan} ref={i === messagesCount - 1 ? scrollBottomRef : null} onContextMenu={(e) => handleContextMenu(e, setRightClick)}>
 
