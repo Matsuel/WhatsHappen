@@ -16,5 +16,5 @@
 }
 
 .pinned {
-    transition: all 1s ease;
+    transition: all 1s ease-in-out;
 }

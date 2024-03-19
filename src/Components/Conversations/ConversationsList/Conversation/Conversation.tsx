@@ -2,9 +2,9 @@ import React, { MouseEventHandler } from 'react'
 import styles from './Conversation.module.css'
 import Pinned from '@/assets/Pinned.svg'
 import Pin from '@/assets/Pin.svg'
-import ShowDate from '../../Home/ShowDate/ShowDate'
-import ConversationStatus from '../ConversationStatus/ConversationStatus'
-import ConversationInfos from '../ConversationInfos/ConversationInfos'
+import ShowDate from '../../../Home/ShowDate/ShowDate'
+import ConversationStatus from '../../ConversationStatus/ConversationStatus'
+import ConversationInfos from '../../ConversationInfos/ConversationInfos'
 import Image from 'next/image'
 
 interface ConversationProps {

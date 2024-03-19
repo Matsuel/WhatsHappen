@@ -1,7 +1,7 @@
 import React, { MouseEventHandler } from 'react'
 import styles from './ConversationsList.module.css'
 import NoResult from '../NoResult/NoResult'
-import Conversation from '../Conversation/Conversation'
+import Conversation from './Conversation/Conversation'
 import ChevronLeft from '@/assets/ChevronLeft.svg'
 import Image from 'next/image'
 import SearchbarConv from '../SearchbarConv/SearchbarConv'
