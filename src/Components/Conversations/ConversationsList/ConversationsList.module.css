@@ -65,28 +65,27 @@
     height: 20px;
 }
 
-.ConversationsBtnOpen {
+.ConversationsBtnArea {
     position: absolute;
     left: 25%;
     top: 50%;
+    width: 2%;
+    height: 100%;;
+    margin-left: .2em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     transform: translateY(-50%);
     z-index: 2;
     cursor: pointer;
     transition: all 0.3s ease-in-out;
 }
 
-.ConversationsBtnClose {
+.Chevron {
     position: absolute;
-    left: 11%;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 2;
-    cursor: pointer;
-    transform: rotate(180deg);
-    transition: all 0.3s ease-in-out;
-}
-
-.ChevronLeft {
-    width: 20px;
-    height: 20px;
+    width: 5px;
+    height: 1em;
+    background-color: #ccc;
+    border-radius: 9999px;
+    transition: all 0.2s ease;
 }

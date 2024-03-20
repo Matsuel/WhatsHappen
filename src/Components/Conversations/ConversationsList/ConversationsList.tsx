@@ -1,9 +1,7 @@
-import React, { MouseEventHandler } from 'react'
+import React, { MouseEventHandler, useState } from 'react'
 import styles from './ConversationsList.module.css'
 import NoResult from '../NoResult/NoResult'
 import Conversation from './Conversation/Conversation'
-import ChevronLeft from '@/assets/ChevronLeft.svg'
-import Image from 'next/image'
 import SearchbarConv from '../SearchbarConv/SearchbarConv'
 
 interface ConversationListProps {
@@ -33,6 +31,8 @@ const ConversationsList = ({ conversations, conversationActive, handleConversati
     }
 
     const conversationsNoResult: string[] = ["Aucune conversation trouvée", "Aucun groupe n'a été trouvé", "Aucun contact n'a été trouvé"]
+
+    const [hovered, setHovered] = useState<Boolean>(false)
 
     const pinnedByMe = conversations.filter((conv) => conv.pinnedBy.includes(userId))
     const notPinnedByMe = conversations.filter((conv) => !conv.pinnedBy.includes(userId))
@@ -140,12 +140,29 @@ const ConversationsList = ({ conversations, conversationActive, handleConversati
                         )
                     }
                 </div>
-                <div className={showFullSidebar ? styles.ConversationsBtnOpen : styles.ConversationsBtnClose} onClick={handleShowFullSidebar}>
-                    <Image
-                        src={ChevronLeft}
-                        alt="ChevronLeft"
-                        className={styles.ChevronLeft}
+                <div className={styles.ConversationsBtnArea}
+                    style={{
+                        left: showFullSidebar ? "25%" : "11%"
+                    }}
+                    onClick={handleShowFullSidebar}
+                    onMouseEnter={() => setHovered(true)}
+                    onMouseLeave={() => setHovered(false)}
+                >
+
+                    <div
+                        className={styles.Chevron}
+                        style={{
+                            transform: hovered ? (showFullSidebar ? "rotate(-45deg)" : "rotate(45deg)") : "rotate(0deg)",
+                            marginTop: "0.45em"
+                        }}
                     />
+                    <div
+                        className={styles.Chevron}
+                        style={{
+                            transform: hovered ? (showFullSidebar ? "rotate(45deg)" : "rotate(-45deg)") : "rotate(0deg)",
+                            marginTop: "-0.45em"
+                        }}
+                        />
                 </div>
             </div>
         </div>
