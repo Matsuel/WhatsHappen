@@ -1,9 +1,5 @@
-const copyContentToClipboard = (content: string, setCopyDone: Function) => {
-    setCopyDone(true)
+const copyContentToClipboard = (content: string) => {
     navigator.clipboard.writeText(content)
-    setTimeout(() => {
-        setCopyDone(false)
-    }, 1500)
 }
 
 export {

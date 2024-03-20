@@ -35,6 +35,16 @@
     background-color: #fff;
 }
 
+.messagecontextitem:first-child {
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+}
+
+.messagecontextitem:last-child {
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+}
+
 .contexttitle {
     width: 50%;
     margin-left: 15%;

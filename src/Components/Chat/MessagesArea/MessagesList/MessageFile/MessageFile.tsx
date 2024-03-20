@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import styles from './MessageFile.module.css'
 import { FileIcon, defaultStyles } from 'react-file-icon'
 import Download from '../../../../../assets/Download.svg'
-import { ContextMenuMessageButton } from '../ContextMenuMessage/ContextMenuMessage'
+import { ContextMenuMessageButton } from '../ContextMenu/ContextMenu'
 import { handleContextMenu, downloadFile  } from '../../../../../Functions/Message/Message'
 import Image from 'next/image'
 

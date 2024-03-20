@@ -3,7 +3,7 @@ import Picker, { Emoji } from 'emoji-picker-react'
 import { handleContextMenu, handleMouseDown, handleMouseUp } from '../../../../../Functions/Message/Message'
 
 import styles from './Message.module.css'
-import { ContextMenuMessageButton } from '../ContextMenuMessage/ContextMenuMessage'
+import { ContextMenu } from '../ContextMenu/ContextMenu'
 import ShowDate from '../../../../Conversations/ConversationsList/Conversation/ShowDate/ShowDate'
 
 interface MessageProps {
@@ -78,9 +78,20 @@ const Message = ({
                             })}
                         </div>
                     }
-                    <ShowDate date={message.date} className='messagetime' />
+                    <ShowDate
+                        date={message.date}
+                        className='messagetime'
+                    />
                 </div>
-                {rightClick && <ContextMenuMessageButton message={message} userId={userId} deleteMessage={deleteMessage} isReceived={isReceived} />}
+
+                <ContextMenu
+                    message={message}
+                    userId={userId}
+                    deleteMessage={deleteMessage}
+                    isReceived={isReceived}
+                    rightClick={rightClick}
+                    setRightClick={setRightClick}
+                />
             </div>
         </>
     )
