@@ -4,7 +4,7 @@ import { handleContextMenu, handleMouseDown, handleMouseUp } from '../../../../.
 
 import styles from './Message.module.css'
 import { ContextMenuMessageButton } from '../ContextMenuMessage/ContextMenuMessage'
-import ShowDate from '../../../../Home/ShowDate/ShowDate'
+import ShowDate from '../../../../Conversations/ConversationsList/Conversation/ShowDate/ShowDate'
 
 interface MessageProps {
     message: message,
@@ -19,7 +19,18 @@ interface MessageProps {
     handleReaction: Function,
 }
 
-const Message = ({ message, userId, i, scrollBottomRef, bottomRounded, topRounded, messagesCount, deleteMessage, showSearchConv, handleReaction }: MessageProps) => {
+const Message = ({
+    message,
+    userId,
+    i,
+    scrollBottomRef,
+    bottomRounded,
+    topRounded,
+    messagesCount,
+    deleteMessage,
+    showSearchConv,
+    handleReaction
+}: MessageProps) => {
 
     const [rightClick, setRightClick] = useState<boolean>(false)
     const [longPress, setLongPress] = useState<number | null>(null)
@@ -32,13 +43,13 @@ const Message = ({ message, userId, i, scrollBottomRef, bottomRounded, topRounde
 
     return (
         <>
-            <div className={styles.message + " " + firstPlan} ref={i === messagesCount - 1 ? scrollBottomRef : null} onContextMenu={(e) => handleContextMenu(e, setRightClick)} 
+            <div className={styles.message + " " + firstPlan} ref={i === messagesCount - 1 ? scrollBottomRef : null} onContextMenu={(e) => handleContextMenu(e, setRightClick)}
                 onClick={(e) => e.detail === 2 ? handleReaction(message._id, "2764-fe0f") : null}
                 onMouseDown={() => handleMouseDown(setRightClick, setLongPress)}
                 onMouseUp={() => handleMouseUp(longPress, setLongPress)}
                 onMouseLeave={() => handleMouseUp(longPress, setLongPress)}>
-                {rightClick && <Picker reactionsDefaultOpen={true} className={styles.reactiondiv + " " + (isReceived ? styles.messagecontextmenureceived : styles.messagecontextmenusent)} 
-                onEmojiClick={(emoji: EmojiPickerProps) => { handleReaction(message._id, emoji.unified); setRightClick(false); }} 
+                {rightClick && <Picker reactionsDefaultOpen={true} className={styles.reactiondiv + " " + (isReceived ? styles.messagecontextmenureceived : styles.messagecontextmenusent)}
+                    onEmojiClick={(emoji: EmojiPickerProps) => { handleReaction(message._id, emoji.unified); setRightClick(false); }}
                 />}
                 <div className={messageClass + " " + topClass + " " + bottomClass} key={message._id}>
                     <p className={styles.messagecontent}>

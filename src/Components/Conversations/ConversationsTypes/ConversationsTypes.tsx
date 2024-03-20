@@ -39,19 +39,25 @@ const ConversationsTypes = ({ setTypeConv, typeConv }: ConversationsTypesProps) 
 
     return (
         <div className={styles.ConversationsTypes}>
-                <Image src={Whatsapp} alt="whatsapp" className={styles.whatsappLogo} />
-                <div className={styles.separator}></div>
-                {
-                    conversationsTypes.map((convType, index) => (
-                        <div key={index} className={styles.convtype + ` ${typeConv === convType.type ? styles.convtypeActive : ''}`} onClick={() => setTypeConv(convType.type)}>
-                            {/* <Image src={convType.logo} alt="chatbubble" className={styles.typeLogo} /> */}
-                            {convType.logo}
-                            {convType.name}
-                        </div>
-                    ))
-                }
 
-            </div>
+            <Image
+                src={Whatsapp}
+                alt="whatsapp"
+                className={styles.whatsappLogo}
+            />
+
+            <div className={styles.separator}></div>
+            {
+                conversationsTypes.map((convType, index) => (
+                    <div key={index} className={styles.convtype + ` ${typeConv === convType.type ? styles.convtypeActive : ''}`} onClick={() => setTypeConv(convType.type)}>
+                        {/* <Image src={convType.logo} alt="chatbubble" className={styles.typeLogo} /> */}
+                        {convType.logo}
+                        {convType.name}
+                    </div>
+                ))
+            }
+
+        </div>
     )
 }
 

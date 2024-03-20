@@ -2,9 +2,9 @@ import React, { MouseEventHandler } from 'react'
 import styles from './Conversation.module.css'
 import Pinned from '@/assets/Pinned.svg'
 import Pin from '@/assets/Pin.svg'
-import ShowDate from '../../../Home/ShowDate/ShowDate'
+import ShowDate from './ShowDate/ShowDate'
 import ConversationStatus from '../../ConversationStatus/ConversationStatus'
-import ConversationInfos from '../../ConversationInfos/ConversationInfos'
+import ConversationInfos from './ConversationInfos/ConversationInfos'
 import Image from 'next/image'
 
 interface ConversationProps {
@@ -22,9 +22,19 @@ interface ConversationProps {
 
 const Conversation = ({ conversation, handleConversationActive, handleHoverConv, handleHoverConvReset, typingStatus, handlePinnedConversation, userId, classActive, noConvActiveClass, showFullSidebar }: ConversationProps) => {
     return (
-        <div className={styles.conversation + " " + classActive + " " + noConvActiveClass} key={conversation._id} onMouseEnter={() => handleHoverConv(conversation._id)} onMouseLeave={handleHoverConvReset}>
+        <div
+            className={styles.conversation + " " + classActive + " " + noConvActiveClass}
+            key={conversation._id}
+            onMouseEnter={() => handleHoverConv(conversation._id)}
+            onMouseLeave={handleHoverConvReset}
+        >
 
-            <ConversationStatus _id={conversation._id} pic={conversation.pic} status={conversation.status} handleConversationActive={handleConversationActive} />
+            <ConversationStatus
+                _id={conversation._id}
+                pic={conversation.pic}
+                status={conversation.status}
+                handleConversationActive={handleConversationActive}
+            />
 
             {showFullSidebar ? (
                 <>
@@ -38,9 +48,16 @@ const Conversation = ({ conversation, handleConversationActive, handleHoverConv,
                         handleConversationActive={handleConversationActive}
                     />
 
-                    <ShowDate date={conversation.last_message_date} />
-                    
-                    <Image src={conversation.pinnedBy.includes(userId) ? Pinned : Pin} alt="pinned" className={styles.pinned} onClick={() => handlePinnedConversation(conversation._id)} />
+                    <ShowDate
+                        date={conversation.last_message_date}
+                    />
+
+                    <Image
+                        src={conversation.pinnedBy.includes(userId) ? Pinned : Pin}
+                        alt="pinned"
+                        className={styles.pinned}
+                        onClick={() => handlePinnedConversation(conversation._id)}
+                    />
                 </>
             ) : null}
         </div>

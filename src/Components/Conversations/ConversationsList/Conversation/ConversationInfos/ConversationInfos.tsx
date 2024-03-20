@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './ConversationInfos.module.css'
-import DoubleChevrons from '../../../assets/DoubleChevrons.svg'
+import DoubleChevrons from '@/assets/DoubleChevrons.svg'
 import Image from 'next/image'
 
 
@@ -16,7 +16,10 @@ interface ConversationInfosProps {
 
 const ConversationInfos = ({ _id, name, last_message_sender, last_message_content, typingStatus, userId, handleConversationActive }: ConversationInfosProps) => {
     return (
-        <div className={styles.conversationinfos} onClick={() => handleConversationActive(_id)}>
+        <div
+            className={styles.conversationinfos}
+            onClick={() => handleConversationActive(_id)}
+        >
             {/* Voir si j'ai pas besoin de créer un composant pour afficher le nom ailleurs */}
             <div>{name.charAt(0).toUpperCase() + name.slice(1)}</div>
             {/* Composant pour afficher le dernier message ou le statut de la conversation */}

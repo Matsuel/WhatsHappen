@@ -38,10 +38,22 @@ const ConversationsList = ({ conversations, conversationActive, handleConversati
     const notPinnedByMe = conversations.filter((conv) => !conv.pinnedBy.includes(userId))
 
     return (
-        <div className={showFullSidebar ? styles.conversationssection: styles.conversationsMinimized}>
-            <SearchbarConv conversations={conversations} handleNewConv={handleNewConv} setSearch={setSearch} setHasMatchingConversations={setHasMatchingConversations} showFullSidebar={showFullSidebar} setShowFullSidebar={setShowFullSidebar} showNewConv={showNewConv} />
+        <div className={showFullSidebar ? styles.conversationssection : styles.conversationsMinimized}>
+
+            <SearchbarConv
+                conversations={conversations}
+                handleNewConv={handleNewConv}
+                setSearch={setSearch}
+                setHasMatchingConversations={setHasMatchingConversations}
+                showFullSidebar={showFullSidebar}
+                setShowFullSidebar={setShowFullSidebar}
+                showNewConv={showNewConv}
+            />
+
             <div className={styles.conversations}>
+
                 <div className={styles.ConversationsList}>
+
                     {
                         pinnedByMe.length > 0 && typeConv === 1 && hasMatchingConversations ? (
                             <>
@@ -49,6 +61,7 @@ const ConversationsList = ({ conversations, conversationActive, handleConversati
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 48 48"><path fill="" stroke="" stroke-linejoin="round" stroke-width="4" d="M10.6963 17.5042C13.3347 14.8657 16.4701 14.9387 19.8781 16.8076L32.62 9.74509L31.8989 4.78683L43.2126 16.1005L38.2656 15.3907L31.1918 28.1214C32.9752 31.7589 33.1337 34.6647 30.4953 37.3032C30.4953 37.3032 26.235 33.0429 22.7171 29.525L6.44305 41.5564L18.4382 25.2461C14.9202 21.7281 10.6963 17.5042 10.6963 17.5042Z" /></svg>
                                     {showFullSidebar ? "Pin" : null}
                                 </h2>
+
                                 {pinnedByMe.map((conversation) => {
 
                                     const classActive = conversation._id === conversationActive ? styles.conversationActive : ''
@@ -87,6 +100,7 @@ const ConversationsList = ({ conversations, conversationActive, handleConversati
                                     </svg>
                                     {showFullSidebar ? "Conversations" : null}
                                 </h2>
+
                                 {notPinnedByMe.map((conversation) => {
 
                                     const classActive = conversation._id === conversationActive ? styles.conversationActive : ''
@@ -118,14 +132,20 @@ const ConversationsList = ({ conversations, conversationActive, handleConversati
                     }
                     {
                         typeConv === 1 && !hasMatchingConversations ? (
-                            <NoResult content={conversationsNoResult[typeConv - 1]} />
+                            <NoResult
+                                content={conversationsNoResult[typeConv - 1]}
+                            />
                         ) : (
                             null
                         )
                     }
                 </div>
                 <div className={showFullSidebar ? styles.ConversationsBtnOpen : styles.ConversationsBtnClose} onClick={handleShowFullSidebar}>
-                    <Image src={ChevronLeft} alt="ChevronLeft" className={styles.ChevronLeft} />
+                    <Image
+                        src={ChevronLeft}
+                        alt="ChevronLeft"
+                        className={styles.ChevronLeft}
+                    />
                 </div>
             </div>
         </div>
