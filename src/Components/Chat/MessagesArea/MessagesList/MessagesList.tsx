@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import Message from './Message/Message'
 import MessageFile from './MessageFile/MessageFile'
 import MessageDate from './MessageDate/MessageDate'
@@ -6,7 +6,6 @@ import { isBottomRounded, isTopRounded } from '../../../../Functions/MessagesLis
 
 interface MessagesListProps {
     userId: string,
-    scrollBottomRef: any,
     showSearchConv: boolean,
     messages: message[],
     messagesCount: number,
@@ -14,7 +13,16 @@ interface MessagesListProps {
     handleReaction: Function,
 }
 
-const MessagesList = ({ userId, scrollBottomRef, showSearchConv, messages, messagesCount, deleteMessage, handleReaction }: MessagesListProps) => {
+const MessagesList = ({ userId,  showSearchConv, messages, messagesCount, deleteMessage, handleReaction }: MessagesListProps) => {
+
+    const scrollBottomRef = useRef<HTMLDivElement>(null)
+
+    useEffect(() => {
+        if (scrollBottomRef.current) {
+            scrollBottomRef.current.scrollIntoView()
+        }
+    }, [messages])
+
     return (
         <>
             {messages.map((message, i) => {

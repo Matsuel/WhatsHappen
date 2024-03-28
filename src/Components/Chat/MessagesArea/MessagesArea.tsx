@@ -8,7 +8,6 @@ import MessagesList from './MessagesList/MessagesList'
 
 interface MessagesAreaProps {
     userId: string,
-    scrollBottomRef: any,
     showSearchConv: boolean,
     messagesCount: number,
     messages: message[],
@@ -17,7 +16,7 @@ interface MessagesAreaProps {
     handleReaction: Function,
 }
 
-const MessagesArea = ({ userId, scrollBottomRef, showSearchConv, messages, messagesCount, filesEmpty, deleteMessage, handleReaction }: MessagesAreaProps) => {
+const MessagesArea = ({ userId, showSearchConv, messages, messagesCount, filesEmpty, deleteMessage, handleReaction }: MessagesAreaProps) => {
     const [messageDay, setMessageDay] = useState<Number>(0)
 
     return (
@@ -35,7 +34,6 @@ const MessagesArea = ({ userId, scrollBottomRef, showSearchConv, messages, messa
 
             <MessagesList
                 userId={userId}
-                scrollBottomRef={scrollBottomRef}
                 showSearchConv={showSearchConv}
                 messagesCount={messagesCount}
                 messages={messages}

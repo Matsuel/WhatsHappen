@@ -15,22 +15,22 @@ interface ConversationListProps {
     handlePinnedConversation: Function,
     userId: string,
     typeConv: number,
-    hasMatchingConversations: boolean,
     showFullSidebar: boolean,
     setShowFullSidebar: Function,
     handleNewConv: Function,
     setSearch: Function,
-    setHasMatchingConversations: Function,
     showNewConv: boolean
 }
 
-const ConversationsList = ({ conversations, conversationActive, handleConversationActive, handleHoverConv, handleHoverConvReset, search, typingStatus, handlePinnedConversation, userId, typeConv, hasMatchingConversations, setShowFullSidebar, showFullSidebar, handleNewConv, setHasMatchingConversations, setSearch, showNewConv }: ConversationListProps) => {
+const ConversationsList = ({ conversations, conversationActive, handleConversationActive, handleHoverConv, handleHoverConvReset, search, typingStatus, handlePinnedConversation, userId, typeConv, setShowFullSidebar, showFullSidebar, handleNewConv, setSearch, showNewConv }: ConversationListProps) => {
 
     const handleShowFullSidebar = () => {
         setShowFullSidebar(!showFullSidebar)
     }
 
     const conversationsNoResult: string[] = ["Aucune conversation trouvée", "Aucun groupe n'a été trouvé", "Aucun contact n'a été trouvé"]
+    const [hasMatchingConversations, setHasMatchingConversations] = useState<boolean>(true)
+
 
     const [hovered, setHovered] = useState<Boolean>(false)
 

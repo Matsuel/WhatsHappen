@@ -14,7 +14,6 @@ interface ChatProps {
     },
     messages: any[],
     userId: string,
-    scrollBottomRef: any,
     showSearchConv: boolean,
     handleSearchConv: (e: React.ChangeEvent<HTMLInputElement>) => void,
     message: string,
@@ -30,7 +29,7 @@ interface ChatProps {
     showFullSidebar: boolean,
 }
 
-const Chat = ({ conversationActive, conversationInfos, messages, userId, scrollBottomRef, showSearchConv, handleSearchConv, message, handleMessageChange, sendMessage, typingStatus, filesEmpty, deleteMessage, handleReaction, files, setFiles, setFilesEmpty, showFullSidebar }: ChatProps) => {
+const Chat = ({ conversationActive, conversationInfos, messages, userId, showSearchConv, handleSearchConv, message, handleMessageChange, sendMessage, typingStatus, filesEmpty, deleteMessage, handleReaction, files, setFiles, setFilesEmpty, showFullSidebar }: ChatProps) => {
     return (
         <div className={showFullSidebar ? styles.messagessection : styles.messagessectionMaximized}>
             {conversationActive !== '' ? (
@@ -45,7 +44,6 @@ const Chat = ({ conversationActive, conversationInfos, messages, userId, scrollB
 
                     <MessagesArea
                         userId={userId}
-                        scrollBottomRef={scrollBottomRef}
                         showSearchConv={showSearchConv}
                         messages={messages}
                         messagesCount={messages.length}

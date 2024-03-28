@@ -25,18 +25,15 @@ const Home = () => {
     const [searchUsers, setSearchUsers] = useState<string>('')
     const [typeConv, setTypeConv] = useState<number>(1)
     const [showNewConv, setShowNewConv] = useState<boolean>(false)
-    const [canRotate, setCanRotate] = useState<boolean>(false)
     const [users, setUsers] = useState<UserInfos[]>([])
     const [userId, setUserId] = useState<string>('')
-    const scrollBottomRef = useRef<HTMLDivElement>(null)
-    const [hasMatchingConversations, setHasMatchingConversations] = useState<boolean>(true)
+    
 
     const [showFullSidebar, setShowFullSidebar] = useState<boolean>(true)
 
     const [clickAwayEffect, setClickAwayEffect] = useState<boolean>(false)
 
     const router = useRouter()
-    // const cookies = localStorage.getItem('user')
     let cookies: any;
     if (typeof window !== "undefined") {
         cookies = localStorage.getItem('user')
@@ -172,15 +169,9 @@ const Home = () => {
     }
 
     const handleNewConv = () => {
-        // getUsers()
-        // setShowNewConv(!showNewConv)
-        // setCanRotate(true)
-        // rotateForSec()
         if (!clickAwayEffect) {
             getUsers()
             setShowNewConv(!showNewConv)
-            setCanRotate(true)
-            rotateForSec()
             setTimeout(() => {
                 setClickAwayEffect(false)
             }, 100)
@@ -194,17 +185,7 @@ const Home = () => {
         setMessage(e.target.value)
     }
 
-    const rotateForSec = () => {
-        setTimeout(() => {
-            setCanRotate(false)
-        }, 500)
-    }
-
-    useEffect(() => {
-        if (scrollBottomRef.current) {
-            scrollBottomRef.current.scrollIntoView()
-        }
-    }, [conversationMessages])
+    
 
     const getConversationsMessages = async (conversation_id: string) => {
         socket.emit('conversationmessages', { cookies, conversation_id })
@@ -316,11 +297,9 @@ const Home = () => {
                 handlePinnedConversation={handlePinnedConversation}
                 userId={userId}
                 typeConv={typeConv}
-                hasMatchingConversations={hasMatchingConversations}
                 showFullSidebar={showFullSidebar}
                 setShowFullSidebar={setShowFullSidebar}
                 handleNewConv={handleNewConv}
-                setHasMatchingConversations={setHasMatchingConversations}
                 setSearch={setSearch}
                 showNewConv={showNewConv}
             />
@@ -332,7 +311,6 @@ const Home = () => {
                 conversationInfos={conv.conversationInfos}
                 messages={conv.messages}
                 userId={userId}
-                scrollBottomRef={scrollBottomRef}
                 showSearchConv={showSearchConv}
                 handleSearchConv={handleSearchConv}
                 message={message}
