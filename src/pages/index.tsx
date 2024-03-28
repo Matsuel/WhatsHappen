@@ -10,38 +10,48 @@ import ConversationsList from '@/Components/Conversations/ConversationsList/Conv
 import NewConversationModal from '@/Components/Conversations/NewConversationModal/NewConversationModal';
 
 const Home = () => {
+
+    //dégager ça dans bottombar
     const [filesEmpty, setFilesEmpty] = useState<boolean>(true)
+    //dégager ça dans bottombar
+    const [message, setMessage] = useState<string>('')
+
+    //dégager ça dans bottombar
+    const [files, setFiles] = useState<FileInfos[]>([])
+
+
     const [typingStatus, setTypingStatus] = useState<{}>({})
     const [userId, setUserId] = useState<string>('')
-    
+
     //déplacer ça dans conversationsList
     const [conversations, setConversations] = useState<ConversationInfos[]>([])
-    
-    
+
+
+    //dégager ça dans messagesList et l'utiliser à la place de conv
     const [conversationMessages, setConversationMessages] = useState<message[]>([])
+
+    //dégager ça dans conversationsList
     const [conversationActive, setConversationActive] = useState<string>('')
-    
+
     //refaire ça en séparant les conversations et les messages conversationInfosActive et messagesConversationActive
     const [conv, setConv] = useState<conversation>({} as conversation)
-    
-    
+
+
     const [search, setSearch] = useState<string>('')
-    const [message, setMessage] = useState<string>('')
-    const [files, setFiles] = useState<FileInfos[]>([])
     const [searchUsers, setSearchUsers] = useState<string>('')
     const [typeConv, setTypeConv] = useState<number>(1)
     const [showNewConv, setShowNewConv] = useState<boolean>(false)
-    
+
     //déplacer ça dans modal
     const [users, setUsers] = useState<UserInfos[]>([])
-    
+
     //voir pour le déclarer en tant que variable dans _app.tsx car il est utilisé dans plusieurs composants
     const [socket, setSocket] = useState<any>(null)
-    
+
     //dégager ça dans messageArea
     const [showSearchConv, setShowSearchConv] = useState<boolean>(false)
 
-    
+
     const [showFullSidebar, setShowFullSidebar] = useState<boolean>(true)
 
     const [clickAwayEffect, setClickAwayEffect] = useState<boolean>(false)
@@ -97,6 +107,7 @@ const Home = () => {
             }))
         })
 
+        //deplacer ça dans messagesList
         newSocket.on('syncmessages', (data) => {
             setConversationMessages(data.messages)
             setConv({ ...conv, messages: data.messages })
@@ -146,6 +157,7 @@ const Home = () => {
         });
     }
 
+    //dégager ça dans conversationsList
     const handleConversationActive = (conversationId: string) => {
         if (conversationId === conversationActive) {
             setConversationActive('')
@@ -189,7 +201,7 @@ const Home = () => {
         setMessage(e.target.value)
     }
 
-    
+
 
     const getConversationsMessages = async (conversation_id: string) => {
         socket.emit('conversationmessages', { cookies, conversation_id })
@@ -199,6 +211,7 @@ const Home = () => {
         })
     }
 
+    //dégager ça dans bottombar
     const sendMessage = async (conversation_id: string, files: FileInfos[]) => {
         const content = message
         if (content.trim() === '' && files.length === 0) return
@@ -265,7 +278,16 @@ const Home = () => {
                 showNewConv={showNewConv}
             />
 
-            <NewConversationModal showNewConv={showNewConv} setShowNewConv={setShowNewConv} users={users} searchUsers={searchUsers} handleSearchUsers={handleSearchUsers} createConversation={createConversation} clickAwayEffect={clickAwayEffect} setClickAwayEffect={setClickAwayEffect} />
+            <NewConversationModal
+                showNewConv={showNewConv}
+                setShowNewConv={setShowNewConv}
+                users={users}
+                searchUsers={searchUsers}
+                handleSearchUsers={handleSearchUsers}
+                createConversation={createConversation}
+                clickAwayEffect={clickAwayEffect}
+                setClickAwayEffect={setClickAwayEffect}
+            />
 
             <Chat
                 conversationActive={conversationActive}
