@@ -5,35 +5,38 @@ import { handleContextMenu, handleMouseDown, handleMouseUp } from '../../../../.
 import styles from './Message.module.css'
 import { ContextMenu } from '../ContextMenu/ContextMenu'
 import ShowDate from '../../../../Conversations/ConversationsList/Conversation/ShowDate/ShowDate'
+import { decodeToken } from 'react-jwt'
 
 interface MessageProps {
     message: message,
-    userId: string,
     i: number,
     scrollBottomRef: any,
     topRounded: boolean,
     bottomRounded: boolean,
     messagesCount: number,
     deleteMessage: Function,
-    showSearchConv: boolean,
     handleReaction: Function,
 }
 
 const Message = ({
     message,
-    userId,
     i,
     scrollBottomRef,
     bottomRounded,
     topRounded,
     messagesCount,
     deleteMessage,
-    showSearchConv,
     handleReaction
 }: MessageProps) => {
 
     const [rightClick, setRightClick] = useState<boolean>(false)
     const [longPress, setLongPress] = useState<number | null>(null)
+
+    let userId = ""
+    if (typeof window !== 'undefined') {
+        const token: User | null = decodeToken(localStorage.getItem('user') as string)
+        userId = token?.userId as string
+    }
 
     const isReceived = message.sender_id !== userId
     const messageClass = isReceived ? styles.messagereceived : styles.messagesent

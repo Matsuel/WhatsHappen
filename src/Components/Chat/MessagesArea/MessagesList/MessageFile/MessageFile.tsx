@@ -2,25 +2,30 @@ import React, { useState } from 'react'
 import styles from './MessageFile.module.css'
 import { FileIcon, defaultStyles } from 'react-file-icon'
 import Download from '../../../../../assets/Download.svg'
-import { ContextMenuMessageButton } from '../ContextMenu/ContextMenu'
+import { decodeToken } from 'react-jwt';
+
 import { handleContextMenu, downloadFile  } from '../../../../../Functions/Message/Message'
 import Image from 'next/image'
 
 interface MessageFileProps {
     message: message,
-    userId: string,
     i: number,
     scrollBottomRef: any,
     topRounded: boolean,
     bottomRounded: boolean,
     messagesCount: number,
     deleteMessage: Function,
-    showSearchConv: boolean,
 }
 
-const MessageFile = ({ message, userId, i, scrollBottomRef, bottomRounded, topRounded, messagesCount, deleteMessage, showSearchConv }: MessageFileProps) => {
+const MessageFile = ({ message, i, scrollBottomRef, bottomRounded, topRounded, messagesCount, deleteMessage }: MessageFileProps) => {
 
     const [rightClick, setRightClick] = useState<boolean>(false)
+
+    let userId = ""
+    if (typeof window !== 'undefined') {
+        const token: User | null = decodeToken(localStorage.getItem('user') as string)
+        userId = token?.userId as string
+    }
 
     const isReceived = message.sender_id !== userId
 
@@ -43,12 +48,6 @@ const MessageFile = ({ message, userId, i, scrollBottomRef, bottomRounded, topRo
                     </div>
 
                 </div>
-
-                {/* Voir si je peux pas gérer la condition directement dans le composant */}
-                {rightClick &&
-                    <ContextMenuMessageButton message={message} userId={userId} deleteMessage={deleteMessage} isReceived={isReceived} />
-                }
-
             </div>
         </>
     )

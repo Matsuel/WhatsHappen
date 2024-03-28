@@ -3,6 +3,7 @@ import styles from './ConversationsList.module.css'
 import NoResult from '../NoResult/NoResult'
 import Conversation from './Conversation/Conversation'
 import SearchbarConv from '../SearchbarConv/SearchbarConv'
+import { decodeToken } from 'react-jwt'
 
 interface ConversationListProps {
     conversations: ConversationInfos[],
@@ -13,7 +14,6 @@ interface ConversationListProps {
     search: string,
     typingStatus: {},
     handlePinnedConversation: Function,
-    userId: string,
     typeConv: number,
     showFullSidebar: boolean,
     setShowFullSidebar: Function,
@@ -22,7 +22,22 @@ interface ConversationListProps {
     showNewConv: boolean
 }
 
-const ConversationsList = ({ conversations, conversationActive, handleConversationActive, handleHoverConv, handleHoverConvReset, search, typingStatus, handlePinnedConversation, userId, typeConv, setShowFullSidebar, showFullSidebar, handleNewConv, setSearch, showNewConv }: ConversationListProps) => {
+const ConversationsList = ({
+    conversations,
+    conversationActive,
+    handleConversationActive,
+    handleHoverConv,
+    handleHoverConvReset,
+    search,
+    typingStatus,
+    handlePinnedConversation,
+    typeConv,
+    setShowFullSidebar,
+    showFullSidebar,
+    handleNewConv,
+    setSearch,
+    showNewConv
+}: ConversationListProps) => {
 
     const handleShowFullSidebar = () => {
         setShowFullSidebar(!showFullSidebar)
@@ -31,6 +46,11 @@ const ConversationsList = ({ conversations, conversationActive, handleConversati
     const conversationsNoResult: string[] = ["Aucune conversation trouvée", "Aucun groupe n'a été trouvé", "Aucun contact n'a été trouvé"]
     const [hasMatchingConversations, setHasMatchingConversations] = useState<boolean>(true)
 
+    let userId = ""
+    if (typeof window !== 'undefined') {
+        const token: User | null = decodeToken(localStorage.getItem('user') as string)
+        userId = token?.userId as string
+    }
 
     const [hovered, setHovered] = useState<Boolean>(false)
 
@@ -162,7 +182,7 @@ const ConversationsList = ({ conversations, conversationActive, handleConversati
                             transform: hovered ? (showFullSidebar ? "rotate(45deg)" : "rotate(-45deg)") : "rotate(0deg)",
                             marginTop: "-0.45em"
                         }}
-                        />
+                    />
                 </div>
             </div>
         </div>

@@ -295,7 +295,6 @@ const Home = () => {
                 search={search}
                 typingStatus={typingStatus}
                 handlePinnedConversation={handlePinnedConversation}
-                userId={userId}
                 typeConv={typeConv}
                 showFullSidebar={showFullSidebar}
                 setShowFullSidebar={setShowFullSidebar}
@@ -310,7 +309,6 @@ const Home = () => {
                 conversationActive={conversationActive}
                 conversationInfos={conv.conversationInfos}
                 messages={conv.messages}
-                userId={userId}
                 showSearchConv={showSearchConv}
                 handleSearchConv={handleSearchConv}
                 message={message}
