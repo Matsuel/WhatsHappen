@@ -10,8 +10,6 @@ import Image from 'next/image'
 interface ConversationProps {
     conversation: ConversationInfos,
     handleConversationActive: Function,
-    handleHoverConv: Function,
-    handleHoverConvReset: MouseEventHandler<HTMLDivElement>,
     typingStatus: {},
     handlePinnedConversation: Function,
     userId: string
@@ -20,13 +18,11 @@ interface ConversationProps {
     showFullSidebar: boolean
 }
 
-const Conversation = ({ conversation, handleConversationActive, handleHoverConv, handleHoverConvReset, typingStatus, handlePinnedConversation, userId, classActive, noConvActiveClass, showFullSidebar }: ConversationProps) => {
+const Conversation = ({ conversation, handleConversationActive, typingStatus, handlePinnedConversation, userId, classActive, noConvActiveClass, showFullSidebar }: ConversationProps) => {
     return (
         <div
             className={styles.conversation + " " + classActive + " " + noConvActiveClass}
             key={conversation._id}
-            onMouseEnter={() => handleHoverConv(conversation._id)}
-            onMouseLeave={handleHoverConvReset}
         >
 
             <ConversationStatus

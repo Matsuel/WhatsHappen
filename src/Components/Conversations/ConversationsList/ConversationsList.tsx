@@ -9,8 +9,6 @@ interface ConversationListProps {
     conversations: ConversationInfos[],
     conversationActive: string,
     handleConversationActive: Function,
-    handleHoverConv: Function,
-    handleHoverConvReset: MouseEventHandler<HTMLDivElement>,
     search: string,
     typingStatus: {},
     handlePinnedConversation: Function,
@@ -26,8 +24,6 @@ const ConversationsList = ({
     conversations,
     conversationActive,
     handleConversationActive,
-    handleHoverConv,
-    handleHoverConvReset,
     search,
     typingStatus,
     handlePinnedConversation,
@@ -61,9 +57,9 @@ const ConversationsList = ({
         <div className={showFullSidebar ? styles.conversationssection : styles.conversationsMinimized}>
 
             <SearchbarConv
+                setSearch={setSearch}
                 conversations={conversations}
                 handleNewConv={handleNewConv}
-                setSearch={setSearch}
                 setHasMatchingConversations={setHasMatchingConversations}
                 showFullSidebar={showFullSidebar}
                 setShowFullSidebar={setShowFullSidebar}
@@ -93,8 +89,6 @@ const ConversationsList = ({
                                             <Conversation
                                                 conversation={conversation}
                                                 handleConversationActive={handleConversationActive}
-                                                handleHoverConv={handleHoverConv}
-                                                handleHoverConvReset={handleHoverConvReset}
                                                 typingStatus={typingStatus}
                                                 handlePinnedConversation={handlePinnedConversation}
                                                 userId={userId}
@@ -132,8 +126,6 @@ const ConversationsList = ({
                                             <Conversation
                                                 conversation={conversation}
                                                 handleConversationActive={handleConversationActive}
-                                                handleHoverConv={handleHoverConv}
-                                                handleHoverConvReset={handleHoverConvReset}
                                                 typingStatus={typingStatus}
                                                 handlePinnedConversation={handlePinnedConversation}
                                                 userId={userId}

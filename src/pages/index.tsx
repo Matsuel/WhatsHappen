@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { io } from 'socket.io-client';
 import { decodeToken } from 'react-jwt';
-import SearchbarConv from '@/Components/Conversations/SearchbarConv/SearchbarConv';
 import { useRouter } from 'next/router';
 
 import styles from '@/styles/Home.module.css'
@@ -13,22 +12,36 @@ import NewConversationModal from '@/Components/Conversations/NewConversationModa
 const Home = () => {
     const [filesEmpty, setFilesEmpty] = useState<boolean>(true)
     const [typingStatus, setTypingStatus] = useState<{}>({})
-    const [socket, setSocket] = useState<any>(null)
+    const [userId, setUserId] = useState<string>('')
+    
+    //déplacer ça dans conversationsList
     const [conversations, setConversations] = useState<ConversationInfos[]>([])
+    
+    
     const [conversationMessages, setConversationMessages] = useState<message[]>([])
     const [conversationActive, setConversationActive] = useState<string>('')
+    
+    //refaire ça en séparant les conversations et les messages conversationInfosActive et messagesConversationActive
     const [conv, setConv] = useState<conversation>({} as conversation)
-    const [showSearchConv, setShowSearchConv] = useState<boolean>(false)
+    
+    
     const [search, setSearch] = useState<string>('')
     const [message, setMessage] = useState<string>('')
     const [files, setFiles] = useState<FileInfos[]>([])
     const [searchUsers, setSearchUsers] = useState<string>('')
     const [typeConv, setTypeConv] = useState<number>(1)
     const [showNewConv, setShowNewConv] = useState<boolean>(false)
-    const [users, setUsers] = useState<UserInfos[]>([])
-    const [userId, setUserId] = useState<string>('')
     
+    //déplacer ça dans modal
+    const [users, setUsers] = useState<UserInfos[]>([])
+    
+    //voir pour le déclarer en tant que variable dans _app.tsx car il est utilisé dans plusieurs composants
+    const [socket, setSocket] = useState<any>(null)
+    
+    //dégager ça dans messageArea
+    const [showSearchConv, setShowSearchConv] = useState<boolean>(false)
 
+    
     const [showFullSidebar, setShowFullSidebar] = useState<boolean>(true)
 
     const [clickAwayEffect, setClickAwayEffect] = useState<boolean>(false)
@@ -40,12 +53,12 @@ const Home = () => {
     }
 
     if (!cookies) {
-        // window.location.href = '/login'
         if (typeof window !== "undefined") {
             router.push('/login')
         }
     }
 
+    // faire un hook pour ça
     useEffect(() => {
         if (cookies) {
             const token: User | null = decodeToken(cookies)
@@ -54,14 +67,12 @@ const Home = () => {
     }, [cookies])
 
     useEffect(() => {
-        // const cookies = localStorage.getItem('user')
         let cookies;
         if (typeof window !== "undefined") {
             cookies = localStorage.getItem('user')
         }
         const token: User | null = decodeToken(cookies as string)
-        const userId = token?.userId as string
-        setUserId(userId)
+        setUserId(token?.userId as string)
         const newSocket = io('http://localhost:3001')
 
         newSocket.on('connect', () => {
@@ -119,25 +130,19 @@ const Home = () => {
         }
     }, [])
 
+    //déplacer ça dans conversationsList
     const getConversations = async () => {
         socket.emit('conversations', { cookies })
         socket.on('conversations', (data: any) => {
-            if (data.conversations) {
-                setConversations(data.conversations)
-            } else {
-                console.log('Échec de la connexion:', data.error);
-            }
+            data.conversations ? setConversations(data.conversations) : console.log('Échec de la connexion:', data.error);
         });
     }
 
+    //déplacer ça dans modal
     const getUsers = async () => {
         socket.emit('users', { cookies })
         socket.on('users', (data: any) => {
-            if (data.users) {
-                setUsers(data.users)
-            } else {
-                console.log('Échec de la connexion:', data.error);
-            }
+            data.users ? setUsers(data.users) : console.log('Échec de la connexion:', data.error);
         });
     }
 
@@ -158,14 +163,12 @@ const Home = () => {
         setSearchUsers(e.target.value.trim())
     }
 
+    //exporter le socket et déplacer cette fonction dans le modal
     const createConversation = async (user_id: string) => {
         socket.emit('newconversation', { cookies, user_id })
         socket.on('newconversation', (data: any) => {
-            if (data.created) {
-                getConversations()
-                getUsers()
-            }
-        })
+            data.created ? (getConversations(), setShowNewConv(false)) : console.log('Échec de la connexion:', data.error);
+        });
     }
 
     const handleNewConv = () => {
@@ -180,6 +183,7 @@ const Home = () => {
         }
     }
 
+    //exporter le socket et déplacer cette fonction dans bottombar
     const handleMessageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         socket.emit('typing', { cookies, conversation_id: conversationActive })
         setMessage(e.target.value)
@@ -200,31 +204,26 @@ const Home = () => {
         if (content.trim() === '' && files.length === 0) return
         socket.emit('newmessage', { cookies, conversation_id, content, files })
         socket.on('newmessage', (data: any) => {
-            if (data.sent) {
-                setMessage('')
-                setFilesEmpty(true)
-                setFiles([])
-                getConversationsMessages(conversation_id)
-                // getConversations()
-            }
+            data.sent ? (setMessage(''), setFilesEmpty(true), setFiles([]), getConversationsMessages(conversation_id)) : console.log('Échec de la connexion:', data.error);
         })
     }
 
+    //mettre ça dans conversationsList
     const handlePinnedConversation = (conversation_id: string) => {
         socket.emit('pinconversation', { cookies, conversation_id })
         socket.on('pinconversation', (data: any) => {
-            if (data.pinned) {
-                getConversations()
-            }
+            data.pinned ? getConversations() : null
         })
     }
 
+    //dégager ça dans messageArea
     const handleSearchConv = () => {
         setShowSearchConv(!showSearchConv)
     }
 
+
+    //mettre ça dans messagesList
     const deleteMessage = (message_id: string) => {
-        console.log(message_id)
         socket.emit('deletemessage', { cookies, message_id, conversationActive })
         socket.on('deletemessage', (data: any) => {
             if (data.deleted) {
@@ -235,47 +234,11 @@ const Home = () => {
         })
     }
 
-    const handleHoverConv = (conversation_id: string) => {
-
-        const activeConv = conversations.find((conv) => conv._id === conversationActive)
-        const handleConv = conversations.find((conv) => conv._id === conversation_id)
-
-        conversations.forEach((conv) => {
-            conv.topRounded = true
-            conv.bottomRounded = true
-        })
-
-        if (conversationActive && conversation_id !== conversationActive) {
-            const handleConvIndex = conversations.indexOf(handleConv as ConversationInfos)
-            const activeConvIndex = conversations.indexOf(activeConv as ConversationInfos)
-
-            if (handleConvIndex - activeConvIndex === 1) {
-                conversations[handleConvIndex].topRounded = false
-                conversations[activeConvIndex].bottomRounded = false
-            } else if (handleConvIndex - activeConvIndex === -1) {
-                conversations[handleConvIndex].bottomRounded = false
-                conversations[activeConvIndex].topRounded = false
-            }
-            setConversations([...conversations])
-        }
-    }
-
-    const handleHoverConvReset = () => {
-        conversations.forEach((conv) => {
-            conv.topRounded = true
-            conv.bottomRounded = true
-        })
-        setConversations([...conversations])
-    }
-
+    //mettre ça dans messagesList
     const handleReaction = (message_id: string, reaction_id: string) => {
         socket.emit('reaction', { cookies, message_id, reaction_id, conversationActive })
         socket.on('reaction', (data: any) => {
-            if (data.reacted) {
-                getConversationsMessages(conversationActive)
-                // conv.messages = conversationMessages
-                // setConv({...conv})
-            }
+            data.reacted ? getConversationsMessages(conversationActive) : null
         })
     }
 
@@ -290,9 +253,8 @@ const Home = () => {
                 conversations={conversations}
                 conversationActive={conversationActive}
                 handleConversationActive={handleConversationActive}
-                handleHoverConv={handleHoverConv}
-                handleHoverConvReset={handleHoverConvReset}
                 search={search}
+                // voir le passer en tant que context car il n'est utilisé que loin dans l'arbre
                 typingStatus={typingStatus}
                 handlePinnedConversation={handlePinnedConversation}
                 typeConv={typeConv}
@@ -314,6 +276,7 @@ const Home = () => {
                 message={message}
                 handleMessageChange={handleMessageChange}
                 sendMessage={sendMessage}
+                // voir le passer en tant que context car il n'est utilisé que loin dans l'arbre
                 typingStatus={typingStatus}
                 filesEmpty={filesEmpty}
                 deleteMessage={deleteMessage}

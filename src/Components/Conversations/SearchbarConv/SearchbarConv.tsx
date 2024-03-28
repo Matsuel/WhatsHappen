@@ -17,6 +17,8 @@ interface SearchbarConvProps {
 }
 
 const SearchbarConv = ({ setSearch, setHasMatchingConversations, conversations, handleNewConv, setShowFullSidebar, showFullSidebar, showNewConv }: SearchbarConvProps) => {
+
+    
     return (
         <div className={showFullSidebar ? styles.searchWrapper : styles.searchWrapperMinimized}>
             {showFullSidebar ? (
