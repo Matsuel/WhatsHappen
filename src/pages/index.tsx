@@ -90,6 +90,7 @@ const Home = () => {
         })
         newSocket.emit('synchro', { userId: userId })
 
+        //enlever ça car y'a déjà une fonction qui fait ça pareil pour le on
         newSocket.emit('conversations', { cookies })
 
         newSocket.on('conversations', (data) => {
@@ -132,6 +133,7 @@ const Home = () => {
 
         })
 
+        // créer une fonction pour ça
         setInterval(() => {
             newSocket.emit('synchrostatus', { userId: userId })
         }, 5000)
@@ -141,7 +143,7 @@ const Home = () => {
         }
     }, [])
 
-    //déplacer ça dans conversationsList
+    //déplacer ça dans conversationsList et l'utiliser au lancement de la page
     const getConversations = async () => {
         socket.emit('conversations', { cookies })
         socket.on('conversations', (data: any) => {
@@ -183,6 +185,7 @@ const Home = () => {
         });
     }
 
+    //dégager ça dans modal
     const handleNewConv = () => {
         if (!clickAwayEffect) {
             getUsers()
@@ -203,6 +206,7 @@ const Home = () => {
 
 
 
+    //dégager ça dans chatarea
     const getConversationsMessages = async (conversation_id: string) => {
         socket.emit('conversationmessages', { cookies, conversation_id })
         socket.on('conversationmessages', (data: any) => {
