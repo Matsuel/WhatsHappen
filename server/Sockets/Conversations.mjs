@@ -7,6 +7,8 @@ import checkToken from '../Functions/CheckToken.mjs';
 import mongoose from 'mongoose';
 import {connectedUsers} from '../server.mjs';
 
+
+// Fonction qui récupère les conversations de l'utilisateur actuellement connecté
 function getConversations(socket) {
     socket.on('conversations', async (data) => {
         const { cookies } = data
@@ -22,6 +24,7 @@ function getConversations(socket) {
     })
 }
 
+// Fonction qui récupère les informations des conversations
 async function getConversationsInfos(conversations, userId) {
     conversations = await Promise.all(conversations.map(async (conversation) => {
         let otherUserId = conversation.users_id.filter((id) => id !== userId)[0];
@@ -48,6 +51,7 @@ function sortConversations(conversations, userId) {
     return conversations;
 }
 
+// Fonction qui crée une nouvelle conversation
 function createConversation(socket) {
     socket.on('newconversation', async (data) => {
         const { cookies, user_id } = data;
@@ -66,6 +70,7 @@ function createConversation(socket) {
     })
 }
 
+// Fonction qui récupère les messages d'une conversation
 function getMessages(socket) {
     socket.on('conversationmessages', async (data) => {
         const { cookies, conversation_id } = data;
@@ -79,20 +84,7 @@ function getMessages(socket) {
     })
 }
 
-function newMessage(socket) {
-    socket.on('newmessage', async (data) => {
-        const { cookies, conversation_id, content } = data;
-        if (await checkToken(cookies)) {
-            const sender_id = jwt.verify(cookies, secretTest).userId;
-            let message = new Message({ sender_id, conversation_id, date: new Date().toISOString(), content });
-            await message.save();
-            socket.emit('newmessage', { sent: true });
-        } else {
-            socket.emit('newmessage', { sent: false });
-        }
-    })
-}
-
+// Fonction qui permet d'épingler une conversation
 function pinConversation(socket) {
     socket.on('pinconversation', async (data) => {
         const { cookies, conversation_id } = data;
@@ -110,4 +102,4 @@ function pinConversation(socket) {
     })
 }
 
-export { getConversations, createConversation, getMessages, newMessage, pinConversation, getConversationsInfos, sortConversations };
+export { getConversations, createConversation, getMessages, pinConversation, getConversationsInfos, sortConversations };

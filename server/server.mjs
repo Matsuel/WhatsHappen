@@ -5,9 +5,8 @@ import cors from 'cors';
 import { connectMongo } from './Functions/ConnectMongo.mjs';
 import { login } from './Sockets/Login.mjs';
 import { register } from './Sockets/Register.mjs';
-import { getConversations, createConversation, getMessages, newMessage, pinConversation, getConversationsInfos, sortConversations } from './Sockets/Conversations.mjs';
+import { getConversations, createConversation, getMessages, pinConversation, getConversationsInfos, sortConversations } from './Sockets/Conversations.mjs';
 import { getUsers } from './Sockets/Users.mjs';
-import { Message, MessageSchema } from './Models/Message.mjs';
 import { Conversation } from './Models/Conversation.mjs';
 import jwt from 'jsonwebtoken';
 import checkToken from './Functions/CheckToken.mjs';
@@ -39,6 +38,7 @@ connectMongo();
 
 io.on('connection', (socket) => {
 
+    //canal permettant de sauvagarder les utilisateurs connectés
     socket.on('synchro', (data) => {
         if (!connectedUsers[data.userId]) {
             connectedUsers[data.userId] = socket;
@@ -46,6 +46,7 @@ io.on('connection', (socket) => {
         }
     })
 
+    //canal permettant de supprimer un utilisateur de la liste des connectés
     socket.on('disconnect', () => {
         for (let [key, value] of Object.entries(connectedUsers)) {
             if (value === socket) {
@@ -54,6 +55,7 @@ io.on('connection', (socket) => {
         }
     })
 
+    //staut quand l'utilisateur est en train d'écrire
     socket.on('typing', async (data) => {
         const { cookies, conversation_id } = data;
         if (checkToken(cookies)) {
@@ -72,6 +74,7 @@ io.on('connection', (socket) => {
         }
     })
 
+    //envoie d'un message et synchro avec l'autre utilisateur si il est connecté
     socket.on('newmessage', async (data) => {
         console.log(data);
         const { cookies, conversation_id, content, files } = data;
@@ -156,6 +159,7 @@ io.on('connection', (socket) => {
         if (connectedUsers[otherId]) connectedUsers[otherId].emit('syncmessages', { messages: await M.find(), conversations: conversations });
     }
 
+    //permet de savoir si l'utilisateur est connecté
     socket.on('synchrostatus', async (data) => {
         let status = {};
         const conversationList = await Conversation.find({ users_id: data.userId });
@@ -170,6 +174,7 @@ io.on('connection', (socket) => {
         socket.emit('synchrostatus', { status });
     })
 
+    //permet de supprimer un message
     socket.on('deletemessage', async (data) => {
         console.log(data);
         const { cookies, message_id, conversationActive } = data;
@@ -189,6 +194,7 @@ io.on('connection', (socket) => {
         }
     })
 
+    //permet de réagir à un message
     socket.on('reaction', async (data) => {
         console.log(data);
         const { cookies, message_id, reaction_id, conversationActive } = data;
@@ -225,7 +231,6 @@ io.on('connection', (socket) => {
     createConversation(socket);
     getMessages(socket);
     pinConversation(socket);
-    // newMessage(socket); 
 
     getUsers(socket);
 });

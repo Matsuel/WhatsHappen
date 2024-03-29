@@ -4,6 +4,8 @@ import {Conversation} from '../Models/Conversation.mjs';
 import checkToken from '../Functions/CheckToken.mjs';
 const secretTest = "84554852585915452156252015015201520152152252"
 
+
+// Fonction qui récupère les utilisateurs disponibles pour une nouvelle conversation
 function getUsers (socket) {
     socket.on('users', async (data) => {
         const { cookies } = data;
