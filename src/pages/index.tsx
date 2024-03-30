@@ -1,7 +1,8 @@
-import React, { useEffect, useState, useRef } from 'react'
-import { io } from 'socket.io-client';
+import React, { useEffect, useState } from 'react'
 import { decodeToken } from 'react-jwt';
 import { useRouter } from 'next/router';
+
+import { socket } from './_app';
 
 import styles from '@/styles/Home.module.css'
 import ConversationsTypes from '@/Components/Conversations/ConversationsTypes/ConversationsTypes';
@@ -45,9 +46,6 @@ const Home = () => {
     //déplacer ça dans modal
     const [users, setUsers] = useState<UserInfos[]>([])
 
-    //voir pour le déclarer en tant que variable dans _app.tsx car il est utilisé dans plusieurs composants
-    const [socket, setSocket] = useState<any>(null)
-
     //dégager ça dans messageArea
     const [showSearchConv, setShowSearchConv] = useState<boolean>(false)
 
@@ -83,17 +81,13 @@ const Home = () => {
         }
         const token: User | null = decodeToken(cookies as string)
         setUserId(token?.userId as string)
-        const newSocket = io('http://localhost:3001')
 
-        newSocket.on('connect', () => {
-            setSocket(newSocket)
-        })
-        newSocket.emit('synchro', { userId: userId })
+        socket.emit('synchro', { userId: userId })
 
         //enlever ça car y'a déjà une fonction qui fait ça pareil pour le on
-        newSocket.emit('conversations', { cookies })
+        socket.emit('conversations', { cookies })
 
-        newSocket.on('conversations', (data) => {
+        socket.on('conversations', (data) => {
             if (data.conversations) {
                 setConversations(data.conversations)
             } else {
@@ -101,7 +95,7 @@ const Home = () => {
             }
         });
 
-        newSocket.on('typing', (data) => {
+        socket.on('typing', (data) => {
             setTypingStatus((prev) => ({
                 ...prev,
                 [data.conversationId]: data.typing
@@ -109,7 +103,7 @@ const Home = () => {
         })
 
         //deplacer ça dans messagesList
-        newSocket.on('syncmessages', (data) => {
+        socket.on('syncmessages', (data) => {
             setConversationMessages(data.messages)
             setConv({ ...conv, messages: data.messages })
             // voir si on peut pas faire autrement voir pk cpt, ça reçoit plus de messages
@@ -123,7 +117,7 @@ const Home = () => {
             setConversations([...conversations])
         })
 
-        newSocket.on('synchrostatus', (data) => {
+        socket.on('synchrostatus', (data) => {
             const statusOther = data.status
             setConversations((prevConversations) => {
                 return prevConversations.map((conv) => {
@@ -135,12 +129,8 @@ const Home = () => {
 
         // créer une fonction pour ça
         setInterval(() => {
-            newSocket.emit('synchrostatus', { userId: userId })
+            socket.emit('synchrostatus', { userId: userId })
         }, 5000)
-
-        return () => {
-            newSocket.close()
-        }
     }, [])
 
     //déplacer ça dans conversationsList et l'utiliser au lancement de la page
@@ -295,8 +285,6 @@ const Home = () => {
 
             <Chat
                 conversationActive={conversationActive}
-                conversationInfos={conv.conversationInfos}
-                messages={conv.messages}
                 showSearchConv={showSearchConv}
                 handleSearchConv={handleSearchConv}
                 message={message}

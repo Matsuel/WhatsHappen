@@ -13,6 +13,7 @@ import checkToken from './Functions/CheckToken.mjs';
 import mongoose from 'mongoose';
 import fs from 'fs';
 import path from 'path';
+import { User } from './Models/User.mjs';
 const secretTest = "84554852585915452156252015015201520152152252"
 
 
@@ -221,6 +222,19 @@ io.on('connection', (socket) => {
             otherSynchroMessage(cookies, conversationActive);
         }
         socket.emit('reaction', { reacted: false });
+    })
+
+    socket.on('otherinfos', async (data) => {
+        const { cookies, conversation_id } = data;
+        if (await checkToken(cookies)) {
+            const sender_id = jwt.verify(cookies, secretTest).userId;
+            const conversation = await Conversation.findById(conversation_id);
+            const otherId = conversation.users_id.filter((id) => id !== sender_id)[0];
+            const user = await User.findById(otherId);
+            socket.emit('otherinfos', { name: user.username, pic: user.pic });
+        }else{
+            socket.emit('otherinfos', { name: null, pic: null, id: null });
+        }
     })
 
 

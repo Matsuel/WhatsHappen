@@ -1,18 +1,13 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from './Chat.module.css'
 import TopBar from './TopBar/TopBar'
 import MessagesArea from './MessagesArea/MessagesArea'
 import BottomBar from './BottomArea/BottomArea'
 import NoConvActive from '../Conversations/NoConvActive/NoConvActive'
+import { socket } from '@/pages/_app'
 
 interface ChatProps {
     conversationActive: string,
-    conversationInfos: {
-        name: string,
-        pic: string,
-        status: boolean
-    },
-    messages: any[],
     showSearchConv: boolean,
     handleSearchConv: (e: React.ChangeEvent<HTMLInputElement>) => void,
     message: string,
@@ -28,7 +23,45 @@ interface ChatProps {
     showFullSidebar: boolean,
 }
 
-const Chat = ({ conversationActive, conversationInfos, messages, showSearchConv, handleSearchConv, message, handleMessageChange, sendMessage, typingStatus, filesEmpty, deleteMessage, handleReaction, files, setFiles, setFilesEmpty, showFullSidebar }: ChatProps) => {
+const Chat = ({ conversationActive, showSearchConv, handleSearchConv, message, handleMessageChange, sendMessage, typingStatus, filesEmpty, deleteMessage, handleReaction, files, setFiles, setFilesEmpty, showFullSidebar }: ChatProps) => {
+
+    const [messages, setMessages] = useState<message[]>([])
+    const [conversationInfos, setConversationInfos] = useState({
+        name: '',
+        pic: '',
+        status: false
+    })
+
+    let cookies =""
+    if (typeof window !== 'undefined') {
+        cookies = localStorage.getItem('user') || ''
+    }
+
+    const getConversationsMessages = async (conversation_id: string) => {
+        socket.emit('conversationmessages', { cookies, conversation_id })
+        socket.on('conversationmessages', (data: any) => {
+            setMessages(data.messages)
+        })
+    }
+    
+    const getOtherInfos = async (conversation_id: string) => {
+        socket.emit('otherinfos', { cookies, conversation_id })
+        socket.on('otherinfos', (data: any) => {
+            setConversationInfos({
+                name: data.name,
+                pic: data.pic,
+                status: data.status
+            })
+        })
+    }
+
+    useEffect(() => {
+        if (conversationActive !== '') {
+            getConversationsMessages(conversationActive)
+            getOtherInfos(conversationActive)
+        }
+    }, [conversationActive])
+
     return (
         <div className={showFullSidebar ? styles.messagessection : styles.messagessectionMaximized}>
             {conversationActive !== '' ? (
