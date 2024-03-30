@@ -133,14 +133,6 @@ const Home = () => {
         }, 5000)
     }, [])
 
-    //déplacer ça dans conversationsList et l'utiliser au lancement de la page
-    const getConversations = async () => {
-        socket.emit('conversations', { cookies })
-        socket.on('conversations', (data: any) => {
-            data.conversations ? setConversations(data.conversations) : console.log('Échec de la connexion:', data.error);
-        });
-    }
-
     //déplacer ça dans modal
     const getUsers = async () => {
         socket.emit('users', { cookies })
@@ -171,7 +163,12 @@ const Home = () => {
     const createConversation = async (user_id: string) => {
         socket.emit('newconversation', { cookies, user_id })
         socket.on('newconversation', (data: any) => {
-            data.created ? (getConversations(), setShowNewConv(false)) : console.log('Échec de la connexion:', data.error);
+            if (data.created) {
+                socket.emit('conversations', { cookies })
+                setShowNewConv(false)
+            }else{
+                console.log('Échec de la connexion:', data.error);
+            }
         });
     }
 
@@ -219,7 +216,9 @@ const Home = () => {
     const handlePinnedConversation = (conversation_id: string) => {
         socket.emit('pinconversation', { cookies, conversation_id })
         socket.on('pinconversation', (data: any) => {
-            data.pinned ? getConversations() : null
+            if (data.pinned) {
+                socket.emit('conversations', { cookies })
+            }
         })
     }
 
@@ -257,7 +256,6 @@ const Home = () => {
             <ConversationsTypes setTypeConv={setTypeConv} typeConv={typeConv} />
 
             <ConversationsList
-                conversations={conversations}
                 conversationActive={conversationActive}
                 handleConversationActive={handleConversationActive}
                 search={search}
