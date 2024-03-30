@@ -148,7 +148,7 @@ const Home = () => {
             return
         }
         setConversationActive(conversationId)
-        getConversationsMessages(conversationId)
+        socket.emit('conversationmessages', { cookies, conversation_id:conversationId })
         conv.messages = conversationMessages
         conv.conversationInfos = conversations.find((conv) => conv._id === conversationId) as ConversationInfos
         conv.conversationInfos.bottomRounded = true
@@ -160,17 +160,7 @@ const Home = () => {
     }
 
     //exporter le socket et déplacer cette fonction dans le modal
-    const createConversation = async (user_id: string) => {
-        socket.emit('newconversation', { cookies, user_id })
-        socket.on('newconversation', (data: any) => {
-            if (data.created) {
-                socket.emit('conversations', { cookies })
-                setShowNewConv(false)
-            }else{
-                console.log('Échec de la connexion:', data.error);
-            }
-        });
-    }
+    
 
     //dégager ça dans modal
     const handleNewConv = () => {
@@ -191,36 +181,16 @@ const Home = () => {
         setMessage(e.target.value)
     }
 
-
-
-    //dégager ça dans chatarea
-    const getConversationsMessages = async (conversation_id: string) => {
-        socket.emit('conversationmessages', { cookies, conversation_id })
-        socket.on('conversationmessages', (data: any) => {
-            setConversationMessages(data.messages)
-            conv.messages = data.messages
-        })
-    }
-
     //dégager ça dans bottombar
     const sendMessage = async (conversation_id: string, files: FileInfos[]) => {
         const content = message
         if (content.trim() === '' && files.length === 0) return
         socket.emit('newmessage', { cookies, conversation_id, content, files })
         socket.on('newmessage', (data: any) => {
-            data.sent ? (setMessage(''), setFilesEmpty(true), setFiles([]), getConversationsMessages(conversation_id)) : console.log('Échec de la connexion:', data.error);
+            data.sent ? (setMessage(''), setFilesEmpty(true), setFiles([]), socket.emit('conversationmessages', { cookies, conversation_id })) : console.log('Échec de la connexion:', data.error);
         })
     }
-
-    //mettre ça dans conversationsList
-    const handlePinnedConversation = (conversation_id: string) => {
-        socket.emit('pinconversation', { cookies, conversation_id })
-        socket.on('pinconversation', (data: any) => {
-            if (data.pinned) {
-                socket.emit('conversations', { cookies })
-            }
-        })
-    }
+    
 
     //dégager ça dans messageArea
     const handleSearchConv = () => {
@@ -244,7 +214,7 @@ const Home = () => {
     const handleReaction = (message_id: string, reaction_id: string) => {
         socket.emit('reaction', { cookies, message_id, reaction_id, conversationActive })
         socket.on('reaction', (data: any) => {
-            data.reacted ? getConversationsMessages(conversationActive) : null
+            data.reacted ? socket.emit('conversationmessages', { cookies, conversation_id:conversationActive }) : null
         })
     }
 
@@ -261,7 +231,6 @@ const Home = () => {
                 search={search}
                 // voir le passer en tant que context car il n'est utilisé que loin dans l'arbre
                 typingStatus={typingStatus}
-                handlePinnedConversation={handlePinnedConversation}
                 typeConv={typeConv}
                 showFullSidebar={showFullSidebar}
                 setShowFullSidebar={setShowFullSidebar}
@@ -276,7 +245,6 @@ const Home = () => {
                 users={users}
                 searchUsers={searchUsers}
                 handleSearchUsers={handleSearchUsers}
-                createConversation={createConversation}
                 clickAwayEffect={clickAwayEffect}
                 setClickAwayEffect={setClickAwayEffect}
             />

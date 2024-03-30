@@ -5,6 +5,7 @@ import Image from 'next/image'
 import ChatBubble from '@/assets/ChatBubble.svg'
 import AddContact from '@/assets/AddContact.svg'
 import { useClickAway } from '@uidotdev/usehooks'
+import { socket } from '@/pages/_app'
 
 interface NewConversationModalProps {
     showNewConv: boolean,
@@ -12,18 +13,34 @@ interface NewConversationModalProps {
     users: UserInfos[],
     searchUsers: string,
     handleSearchUsers: ChangeEventHandler<HTMLInputElement>,
-    createConversation: Function,
     clickAwayEffect: boolean,
     setClickAwayEffect: Function
 }
 
 
-const NewConversationModal = ({ showNewConv, setShowNewConv, users, searchUsers, handleSearchUsers, createConversation, clickAwayEffect, setClickAwayEffect }: NewConversationModalProps) => {
+const NewConversationModal = ({ showNewConv, setShowNewConv, users, searchUsers, handleSearchUsers, clickAwayEffect, setClickAwayEffect }: NewConversationModalProps) => {
 
     const ref = useClickAway<any>(() => {
         setShowNewConv(false)
         setClickAwayEffect(!clickAwayEffect)
     })
+
+    let cookies = ""
+    if (typeof window !== 'undefined') {
+        cookies = localStorage.getItem('user') || ''
+    }
+
+    const createConversation = async (user_id: string) => {
+        socket.emit('newconversation', { cookies, user_id })
+        socket.on('newconversation', (data: any) => {
+            if (data.created) {
+                socket.emit('conversations', { cookies })
+                setShowNewConv(false)
+            }else{
+                console.log('Échec de la connexion:', data.error);
+            }
+        });
+    }
 
 
     return (

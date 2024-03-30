@@ -11,7 +11,6 @@ interface ConversationListProps {
     handleConversationActive: Function,
     search: string,
     typingStatus: {},
-    handlePinnedConversation: Function,
     typeConv: number,
     showFullSidebar: boolean,
     setShowFullSidebar: Function,
@@ -25,7 +24,6 @@ const ConversationsList = ({
     handleConversationActive,
     search,
     typingStatus,
-    handlePinnedConversation,
     typeConv,
     setShowFullSidebar,
     showFullSidebar,
@@ -51,6 +49,15 @@ const ConversationsList = ({
         socket.on('conversations', (data: any) => {
             data.conversations ? setConversations(data.conversations) : console.log('Échec de la connexion:', data.error);
         });
+    }
+
+    const handlePinnedConversation = (conversation_id: string) => {
+        socket.emit('pinconversation', { cookies, conversation_id })
+        socket.on('pinconversation', (data: any) => {
+            if (data.pinned) {
+                socket.emit('conversations', { cookies })
+            }
+        })
     }
 
     const handleShowFullSidebar = () => {
