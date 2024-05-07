@@ -11,7 +11,6 @@ interface ConversationListProps {
     handleConversationActive: Function,
     search: string,
     typingStatus: {},
-    typeConv: number,
     showFullSidebar: boolean,
     setShowFullSidebar: Function,
     handleNewConv: Function,
@@ -24,7 +23,6 @@ const ConversationsList = ({
     handleConversationActive,
     search,
     typingStatus,
-    typeConv,
     setShowFullSidebar,
     showFullSidebar,
     handleNewConv,
@@ -33,7 +31,7 @@ const ConversationsList = ({
 }: ConversationListProps) => {
 
     const [conversations, setConversations] = useState<ConversationInfos[]>([])
-    const conversationsNoResult: string[] = ["Aucune conversation trouvée", "Aucun groupe n'a été trouvé", "Aucun contact n'a été trouvé"]
+    const conversationsNoResult: string = "Aucune conversation trouvée"
     const [hasMatchingConversations, setHasMatchingConversations] = useState<boolean>(true)
 
     let cookies = ""
@@ -134,9 +132,9 @@ const ConversationsList = ({
 
                     })}
                     {
-                        typeConv === 1 && !hasMatchingConversations ? (
+                        !hasMatchingConversations ? (
                             <NoResult
-                                content={conversationsNoResult[typeConv - 1]}
+                                content={conversationsNoResult}
                             />
                         ) : (
                             null

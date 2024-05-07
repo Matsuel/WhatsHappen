@@ -1,20 +1,21 @@
 .searchWrapper {
     position: relative;
-    width: 80%;
-    height: 5%;
+    width: 90%;
+    height: 2%;
     margin-top: 8%;
+    margin-bottom: 8%;
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: center;
-    gap: 10px;
+    justify-content: space-between;
 }
 
 .searchWrapperMinimized {
     position: relative;
-    width: 80%;
+    width: 85%;
     height: auto;
     margin-top: 8%;
+    margin-bottom: 8%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -24,7 +25,7 @@
 
 .searchBar {
     width: 80%;
-    height: 50px;
+    height: 45px;
 }
 
 .searchLogo {
@@ -37,7 +38,7 @@
 }
 
 .searchInput {
-    border-radius: 50px;
+    border-radius: 12px;
     width: 100%;
     height: 100%;
     font-size: 16px;
@@ -56,8 +57,8 @@
 }
 
 .newConv {
-    height: 50px;
-    width: 50px;
+    height: 45px;
+    width: 45px;
     border-radius: 50%;
     background-color: #f5f6fa;
     display: flex;
@@ -67,8 +68,8 @@
 }
 
 .logoMinimized {
-    width: 75px;
-    height: 75px;
+    width: 55px;
+    height: 55px;
     border-radius: 50%;
     background-color: #f5f6fa;
     display: flex;
@@ -76,3 +77,8 @@
     justify-content: center;
     cursor: pointer;
 }
+
+.addLogo {
+    width: 30px;
+    height: 30px;
+}   

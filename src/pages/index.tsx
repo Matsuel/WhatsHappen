@@ -1,11 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { decodeToken } from 'react-jwt';
 import { useRouter } from 'next/router';
-
 import { socket } from './_app';
-
 import styles from '@/styles/Home.module.css'
-import ConversationsTypes from '@/Components/Conversations/ConversationsTypes/ConversationsTypes';
 import Chat from '@/Components/Chat/Chat';
 import ConversationsList from '@/Components/Conversations/ConversationsList/ConversationsList';
 import NewConversationModal from '@/Components/Conversations/NewConversationModal/NewConversationModal';
@@ -40,7 +37,6 @@ const Home = () => {
 
     const [search, setSearch] = useState<string>('')
     const [searchUsers, setSearchUsers] = useState<string>('')
-    const [typeConv, setTypeConv] = useState<number>(1)
     const [showNewConv, setShowNewConv] = useState<boolean>(false)
 
     //déplacer ça dans modal
@@ -117,6 +113,7 @@ const Home = () => {
             setConversations([...conversations])
         })
 
+        // pas besoin de ça vu qu'on a la liste des gens connectés
         socket.on('synchrostatus', (data) => {
             const statusOther = data.status
             setConversations((prevConversations) => {
@@ -127,7 +124,7 @@ const Home = () => {
 
         })
 
-        // créer une fonction pour ça
+        // pas besoin de ça vu qu'on a la liste des gens connectés
         setInterval(() => {
             socket.emit('synchrostatus', { userId: userId })
         }, 5000)
@@ -223,15 +220,12 @@ const Home = () => {
     return (
         <div className={styles.home}>
 
-            <ConversationsTypes setTypeConv={setTypeConv} typeConv={typeConv} />
-
             <ConversationsList
                 conversationActive={conversationActive}
                 handleConversationActive={handleConversationActive}
                 search={search}
                 // voir le passer en tant que context car il n'est utilisé que loin dans l'arbre
                 typingStatus={typingStatus}
-                typeConv={typeConv}
                 showFullSidebar={showFullSidebar}
                 setShowFullSidebar={setShowFullSidebar}
                 handleNewConv={handleNewConv}
