@@ -6,6 +6,7 @@ import styles from '@/styles/Home.module.css'
 import Chat from '@/Components/Chat/Chat';
 import ConversationsList from '@/Components/Conversations/ConversationsList/ConversationsList';
 import NewConversationModal from '@/Components/Conversations/NewConversationModal/NewConversationModal';
+import Head from 'next/head';
 
 const Home = () => {
 
@@ -219,6 +220,11 @@ const Home = () => {
 
     return (
         <div className={styles.home}>
+
+            <Head>
+                <title>Whatshappen</title>
+                <link rel="icon" href="/favicon.ico" />
+            </Head>
 
             <ConversationsList
                 conversationActive={conversationActive}
