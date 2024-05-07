@@ -5,6 +5,9 @@ import Conversation from './Conversation/Conversation'
 import SearchbarConv from '../SearchbarConv/SearchbarConv'
 import { decodeToken } from 'react-jwt'
 import { socket } from '@/pages/_app'
+import Image from 'next/image'
+import Conv1 from '../../../assets/conv1.svg'
+import PinnedConversations from '@/Components/PinnedConversations/PinnedConversations'
 
 interface ConversationListProps {
     conversationActive: string,
@@ -95,6 +98,14 @@ const ConversationsList = ({
             <div className={styles.conversations}>
 
                 <div className={styles.ConversationsList}>
+
+                    <PinnedConversations
+                        pinnedConversations={pinnedConversations}
+                        conversationActive={conversationActive}
+                        handleConversationActive={handleConversationActive}
+                        search={search}
+                        showFullSidebar={showFullSidebar}
+                    />
 
                     {conversationsFiltered.map((convtype) => {
                         return (
