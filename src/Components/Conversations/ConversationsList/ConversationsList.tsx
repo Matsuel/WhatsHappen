@@ -1,5 +1,5 @@
 import React, { MouseEventHandler, useEffect, useState } from 'react'
-import styles from './ConversationsList.module.css'
+import styles from './styles.module.css'
 import NoResult from '../NoResult/NoResult'
 import Conversation from './Conversation/Conversation'
 import SearchbarConv from '../SearchbarConv/SearchbarConv'
@@ -8,6 +8,7 @@ import { socket } from '@/pages/_app'
 import Image from 'next/image'
 import Conv1 from '../../../assets/conv1.svg'
 import PinnedConversations from '@/Components/PinnedConversations/PinnedConversations'
+import ExpandBtn from './ExpandBtn'
 
 interface ConversationListProps {
     conversationActive: string,
@@ -61,16 +62,12 @@ const ConversationsList = ({
         })
     }
 
-    const handleShowFullSidebar = () => {
-        setShowFullSidebar(!showFullSidebar)
-    }
-
 
     useEffect(() => {
         getConversations()
     }, [conversationActive])
 
-    const [hovered, setHovered] = useState<Boolean>(false)
+    
 
     const pinnedConversations = conversations.filter((conv) => conv.pinnedBy.includes(userId))
 
@@ -149,30 +146,12 @@ const ConversationsList = ({
                         )
                     }
                 </div>
-                <div className={styles.ConversationsBtnArea}
-                    style={{
-                        left: showFullSidebar ? "20%" : "5%"
-                    }}
-                    onClick={handleShowFullSidebar}
-                    onMouseEnter={() => setHovered(true)}
-                    onMouseLeave={() => setHovered(false)}
-                >
 
-                    <div
-                        className={styles.Chevron}
-                        style={{
-                            transform: hovered ? (showFullSidebar ? "rotate(-45deg)" : "rotate(45deg)") : "rotate(0deg)",
-                            marginTop: "0.45em"
-                        }}
-                    />
-                    <div
-                        className={styles.Chevron}
-                        style={{
-                            transform: hovered ? (showFullSidebar ? "rotate(45deg)" : "rotate(-45deg)") : "rotate(0deg)",
-                            marginTop: "-0.45em"
-                        }}
-                    />
-                </div>
+                <ExpandBtn
+                    setShowFullSidebar={setShowFullSidebar}
+                    showFullSidebar={showFullSidebar}
+                />
+                
             </div>
         </div>
     )
