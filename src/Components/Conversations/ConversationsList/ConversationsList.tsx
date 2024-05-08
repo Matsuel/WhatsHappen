@@ -88,11 +88,8 @@ const ConversationsList = ({
             <SearchbarConv
                 setSearch={setSearch}
                 conversations={conversations}
-                handleNewConv={handleNewConv}
                 setHasMatchingConversations={setHasMatchingConversations}
-                showFullSidebar={showFullSidebar}
-                setShowFullSidebar={setShowFullSidebar}
-                showNewConv={showNewConv}
+                search={search}
             />
 
             <div className={styles.conversations}>
@@ -150,10 +147,10 @@ const ConversationsList = ({
                     }
                 </div>
 
-                <ExpandBtn
+                {/* <ExpandBtn
                     setShowFullSidebar={setShowFullSidebar}
                     showFullSidebar={showFullSidebar}
-                />
+                /> */}
 
             </div>
         </div>

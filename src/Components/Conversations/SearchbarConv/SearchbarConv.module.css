@@ -1,6 +1,8 @@
 .searchWrapper {
     position: relative;
-    width: 90%;
+    width: 100%;
+    padding-left: 5%;
+    padding-right: 5%;
     height: 2%;
     margin-top: 8%;
     margin-bottom: 8%;
@@ -10,75 +12,52 @@
     justify-content: space-between;
 }
 
-.searchWrapperMinimized {
-    position: relative;
-    width: 85%;
-    height: auto;
-    margin-top: 8%;
-    margin-bottom: 8%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-}
-
 .searchBar {
-    width: 80%;
-    height: 45px;
+    width: 100%;
+    height: 30px;
 }
 
 .searchLogo {
     position: absolute;
-    left: 5%;
-    width: 30px;
-    height: 30px;
+    left: 7%;
+    width: 27px;
+    height: 27px;
     top: 50%;
     transform: translateY(-50%);
 }
 
 .searchInput {
-    border-radius: 12px;
+    border-radius: 6px;
     width: 100%;
     height: 100%;
     font-size: 16px;
-    text-indent: 50px;
+    text-indent: 40px;
     border: none;
     background-color: #f5f6fa;
     color: #000;
+    font-family: 'SfPro', sans-serif;
+    font-weight: 500;
+    transition: all 0.3s ease-in-out;
 }
 
 .searchInput:focus {
     outline: none;
+    width: 98%;
+    transition: all 0.3s ease-in-out;
 }
 
 .searchInput::placeholder {
-    color: #b8b7be;
+    color: #848484;
+    font-family: 'SfPro', sans-serif;
 }
 
-.newConv {
-    height: 45px;
-    width: 45px;
-    border-radius: 50%;
-    background-color: #f5f6fa;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.cancelBtn {
+    all: unset;
     cursor: pointer;
-}
-
-.logoMinimized {
-    width: 55px;
-    height: 55px;
-    border-radius: 50%;
-    background-color: #f5f6fa;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-}
-
-.addLogo {
-    width: 30px;
-    height: 30px;
+    font-family: 'SfPro', sans-serif;
+    font-weight: 550;
+    font-size: 16px;
+    color: #007AFF;
+    margin-left: 10px;
+    transition: all 0.3s ease-in-out;
 }
