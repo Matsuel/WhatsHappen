@@ -1,2 +1,2 @@
+# Nettoyer le code en mettant les varibales utilisées une fois en context, et en les mettant dans le bon composant + résoudre pb pinconversations qui engendre trop de rendus.
 # Scss pour gérer animation du search bar direct en scss
-# Refaire l'autre navbar
