@@ -1,17 +1,22 @@
-import React, { useEffect, useRef } from 'react'
-import Message from '../../../Message/Message'
-import MessageFile from '../../../MessageFile/MessageFile'
-import MessageDate from '../../../MessageDate/MessageDate'
-import { isBottomRounded, isTopRounded } from '../../../../Functions/MessagesList/MessagesList'
+import React, { useEffect, useRef, useState } from 'react'
+import MessagePrivacy from '../MessagePrivacy/MessagePrivacy'
+import styles from './style.module.css'
+import MessageDate from '../MessageDate/MessageDate'
+import Message from '../Message/Message'
+import MessageFile from '../MessageFile/MessageFile'
+import { isBottomRounded, isTopRounded } from '@/Functions/MessagesList/MessagesList'
 
-interface MessagesListProps {
-    messages: message[],
+interface MessagesAreaProps {
+    showSearchConv: boolean,
     messagesCount: number,
+    messages: message[],
+    filesEmpty: boolean,
     deleteMessage: Function,
     handleReaction: Function,
 }
 
-const MessagesList = ({  messages, messagesCount, deleteMessage, handleReaction }: MessagesListProps) => {
+const MessagesArea = ({ showSearchConv, messages, messagesCount, filesEmpty, deleteMessage, handleReaction }: MessagesAreaProps) => {
+    const [messageDay, setMessageDay] = useState<Number>(0)
 
     const scrollBottomRef = useRef<HTMLDivElement>(null)
 
@@ -22,7 +27,15 @@ const MessagesList = ({  messages, messagesCount, deleteMessage, handleReaction 
     }, [messages])
 
     return (
-        <>
+        <div className={styles.messagesection + " " + (showSearchConv ? styles.messagesectionmedium : styles.messagesectionfull) + " " + (filesEmpty ? styles.messagesectionheightMax : styles.messagesectionheightMin)}>
+            <MessagePrivacy />
+
+            {
+                messageDay === 0 && messages.length > 0 ?
+                    <MessageDate message={messages[0]} />
+                    : null
+            }
+
             {messages.map((message, i) => {
                 const nextMessage = i < messagesCount - 1 ? messages[i + 1] : null
                 const previousMessage = i > 0 ? messages[i - 1] : null
@@ -64,8 +77,8 @@ const MessagesList = ({  messages, messagesCount, deleteMessage, handleReaction 
                     </>
                 )
             })}
-        </>
+        </div>
     )
 }
 
-export default MessagesList
+export default MessagesArea

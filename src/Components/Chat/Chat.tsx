@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import styles from './style.module.css'
 import Header from './Header'
-import MessagesArea from './MessagesArea/MessagesArea'
+import MessagesArea from './MessagesArea'
 import BottomBar from './FilesList'
 import NoConvActive from '../Conversations/NoConvActive/NoConvActive'
 import { socket } from '@/pages/_app'
