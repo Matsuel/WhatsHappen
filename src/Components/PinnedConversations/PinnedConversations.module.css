@@ -1,68 +1,37 @@
-.pinnedConversationsWrap {
+.pinnedConversations {
     width: 100%;
     height: auto;
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 5px;
-}
-
-.pinnedConversations {
-    width: 90%;
-    height: 100%;
-    display: flex;
     flex-direction: row;
-    align-items: flex-start;
-    justify-content: flex-start;
-    gap: 2%;
     flex-wrap: wrap;
-}
-
-.conversationimage {
-    width: 65px;
-    height: 65px;
-    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+    gap: 5%;
+    margin-bottom: 5%;
 }
 
 .pinnedConversation {
-    padding: 3%;
-    width: auto;
+    width: 30%;
     height: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 5px;
-    margin-bottom: 2%;
-}
-
-.pinnedConversation:hover {
-    background-color: #D1E4E8;
     border-radius: 12px;
+    padding: 1%;
     cursor: pointer;
 }
 
-.pinnedConversationActive {
-    background-color: #D1E4E8;
-    border-radius: 12px;
+.conversationimage {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
 }
 
-.title {
-    width: 85%;
-    text-align: left;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 18px;
-    font-weight: 600;
-    color: #a1a4b3;
-    margin-bottom: 5%;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 500;
-}
-
-.title svg {
-    fill: #a1a4b3;
-    width: 20px;
-    height: 20px;
-}
+.conversationname {
+    font-family: 'SfPro', sans-serif;
+    font-size: 16px;
+    font-weight: 550;
+    color: #848484;
+    margin-top: 5%;
+}   
