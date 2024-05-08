@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react'
-import Message from './Message/Message'
-import MessageFile from './MessageFile/MessageFile'
-import MessageDate from './MessageDate/MessageDate'
+import Message from '../../../Message/Message'
+import MessageFile from '../../../MessageFile/MessageFile'
+import MessageDate from '../../../MessageDate/MessageDate'
 import { isBottomRounded, isTopRounded } from '../../../../Functions/MessagesList/MessagesList'
 
 interface MessagesListProps {

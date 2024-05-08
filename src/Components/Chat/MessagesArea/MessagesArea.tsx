@@ -1,9 +1,7 @@
 import React, { useState } from 'react'
-import MessagePrivacy from './MessagePrivacy/MessagePrivacy'
-import Message from './MessagesList/Message/Message'
+import MessagePrivacy from '../../MessagePrivacy/MessagePrivacy'
 import styles from './MessagesArea.module.css'
-import MessageDate from './MessagesList/MessageDate/MessageDate'
-import MessageFile from './MessagesList/MessageFile/MessageFile'
+import MessageDate from '../../MessageDate/MessageDate'
 import MessagesList from './MessagesList/MessagesList'
 
 interface MessagesAreaProps {

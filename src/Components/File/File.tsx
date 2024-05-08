@@ -1,8 +1,8 @@
 import React from 'react'
 import styles from './File.module.css'
-import Trash from '../../../../../assets/Trash.svg'
+import Trash from '@/assets/Trash.svg'
 import { FileIcon, defaultStyles } from 'react-file-icon'
-import { deleteFile } from '../../../../../Functions/BottomBar/BottomBar'
+import { deleteFile } from '@/Functions/BottomBar/BottomBar'
 
 interface FileProps {
     file: FileInfos,

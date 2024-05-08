@@ -126,3 +126,28 @@
     right: -0.4em;
     bottom: 4.5em;
 }
+
+/* FileArea Style */
+
+.bottomArea {
+    width: 100%;
+    height: 10%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+/* FileList style  */
+
+.fileslist {
+    background-color: #F6F6F6;
+    bottom: 8%;
+    position: absolute;
+    width: 98.7%;
+    overflow-x: auto;
+    height: 16%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}

@@ -1,10 +1,10 @@
 import React, { useState, KeyboardEvent } from 'react'
 import Picker, { Emoji } from 'emoji-picker-react'
-import { handleContextMenu, handleMouseDown, handleMouseUp } from '../../../../../Functions/Message/Message'
+import { handleContextMenu, handleMouseDown, handleMouseUp } from '../../Functions/Message/Message'
 
-import styles from './Message.module.css'
-import { ContextMenu } from '../ContextMenu/ContextMenu'
-import ShowDate from '../../../../Conversations/ConversationsList/Conversation/ShowDate/ShowDate'
+import styles from './style.module.css'
+import { ContextMenu } from './ContextMenu'
+import ShowDate from '../Conversations/ConversationsList/Conversation/ShowDate/ShowDate'
 import { decodeToken } from 'react-jwt'
 
 interface MessageProps {
