@@ -1,14 +1,13 @@
-import React, { MouseEventHandler, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from './styles.module.css'
 import NoResult from '../NoResult/NoResult'
 import Conversation from './Conversation/Conversation'
 import SearchbarConv from '../SearchbarConv/SearchbarConv'
 import { decodeToken } from 'react-jwt'
 import { socket } from '@/pages/_app'
-import Image from 'next/image'
-import Conv1 from '../../../assets/conv1.svg'
 import PinnedConversations from '@/Components/PinnedConversations/PinnedConversations'
 import ExpandBtn from './ExpandBtn'
+import Header from './Header'
 
 interface ConversationListProps {
     conversationActive: string,
@@ -67,7 +66,7 @@ const ConversationsList = ({
         getConversations()
     }, [conversationActive])
 
-    
+
 
     const pinnedConversations = conversations.filter((conv) => conv.pinnedBy.includes(userId))
 
@@ -81,6 +80,10 @@ const ConversationsList = ({
 
     return (
         <div className={showFullSidebar ? styles.conversationssection : styles.conversationsMinimized}>
+
+            <Header
+                handleNewConv={handleNewConv}
+            />
 
             <SearchbarConv
                 setSearch={setSearch}
@@ -151,7 +154,7 @@ const ConversationsList = ({
                     setShowFullSidebar={setShowFullSidebar}
                     showFullSidebar={showFullSidebar}
                 />
-                
+
             </div>
         </div>
     )

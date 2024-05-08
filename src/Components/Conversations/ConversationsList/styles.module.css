@@ -4,9 +4,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #fff;
-    border-top-right-radius: 20px;
-    border-bottom-right-radius: 20px;
+    border-right: 2px solid #f8f8f8;
 }
 
 .conversationsMinimized {
@@ -15,7 +13,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #fff;
 }
 
 .conversations {
@@ -90,4 +87,42 @@
     background-color: #ccc;
     border-radius: 9999px;
     transition: all 0.2s ease;
+}
+
+/* header style  */
+
+.header {
+    width: 100%;
+    height: auto;
+    padding: 1em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #f8f8f8;
+}
+
+.headerTitle {
+    font-size: 1.5em;
+    color: #000;
+    font-family: 'SfPro', sans-serif;
+    font-weight: 550;
+}
+
+.editButton {
+    all:unset;
+    cursor: pointer;
+    color: #007AFF;
+    font-family: 'SfPro', sans-serif;
+    font-weight: 550;
+    font-size: 1.1em;
+}
+
+.addConvbtn {
+    all:unset;
+    cursor: pointer;
+}
+
+.addLogo {
+    width: 2em;
+    height: 2em;
 }
