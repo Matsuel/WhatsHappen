@@ -20,10 +20,23 @@ interface ChatProps {
     files: any[],
     setFiles: (files: any[]) => void,
     setFilesEmpty: (filesEmpty: boolean) => void,
-    showFullSidebar: boolean,
 }
 
-const Chat = ({ conversationActive, showSearchConv, handleSearchConv, message, handleMessageChange, sendMessage, typingStatus, filesEmpty, deleteMessage, handleReaction, files, setFiles, setFilesEmpty, showFullSidebar }: ChatProps) => {
+const Chat = ({
+    conversationActive,
+    showSearchConv,
+    handleSearchConv,
+    message,
+    handleMessageChange,
+    sendMessage,
+    typingStatus,
+    filesEmpty,
+    deleteMessage,
+    handleReaction,
+    files,
+    setFiles,
+    setFilesEmpty
+}: ChatProps) => {
 
     const [messages, setMessages] = useState<message[]>([])
     const [conversationInfos, setConversationInfos] = useState({
@@ -32,7 +45,7 @@ const Chat = ({ conversationActive, showSearchConv, handleSearchConv, message, h
         status: false
     })
 
-    let cookies =""
+    let cookies = ""
     if (typeof window !== 'undefined') {
         cookies = localStorage.getItem('user') || ''
     }
@@ -43,7 +56,7 @@ const Chat = ({ conversationActive, showSearchConv, handleSearchConv, message, h
             setMessages(data.messages)
         })
     }
-    
+
     const getOtherInfos = async (conversation_id: string) => {
         socket.emit('otherinfos', { cookies, conversation_id })
         socket.on('otherinfos', (data: any) => {
@@ -63,7 +76,7 @@ const Chat = ({ conversationActive, showSearchConv, handleSearchConv, message, h
     }, [conversationActive])
 
     return (
-        <div className={showFullSidebar ? styles.messagessection : styles.messagessectionMaximized}>
+        <div className={styles.messagessection}>
             {conversationActive !== '' ? (
                 <>
                     <TopBar

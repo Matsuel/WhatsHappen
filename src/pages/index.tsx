@@ -5,8 +5,8 @@ import { socket } from './_app';
 import styles from '@/styles/Home.module.css'
 import Chat from '@/Components/Chat/Chat';
 import ConversationsList from '@/Components/Conversations/ConversationsList/ConversationsList';
-import NewConversationModal from '@/Components/Conversations/NewConversationModal/NewConversationModal';
 import Head from 'next/head';
+import Modal from '@/Components/Modal/Modal';
 
 const Home = () => {
 
@@ -37,17 +37,10 @@ const Home = () => {
 
 
     const [search, setSearch] = useState<string>('')
-    const [searchUsers, setSearchUsers] = useState<string>('')
     const [showNewConv, setShowNewConv] = useState<boolean>(false)
-
-    //déplacer ça dans modal
-    const [users, setUsers] = useState<UserInfos[]>([])
 
     //dégager ça dans messageArea
     const [showSearchConv, setShowSearchConv] = useState<boolean>(false)
-
-
-    const [showFullSidebar, setShowFullSidebar] = useState<boolean>(true)
 
     const [clickAwayEffect, setClickAwayEffect] = useState<boolean>(false)
 
@@ -131,14 +124,6 @@ const Home = () => {
         }, 5000)
     }, [])
 
-    //déplacer ça dans modal
-    const getUsers = async () => {
-        socket.emit('users', { cookies })
-        socket.on('users', (data: any) => {
-            data.users ? setUsers(data.users) : console.log('Échec de la connexion:', data.error);
-        });
-    }
-
     //dégager ça dans conversationsList
     const handleConversationActive = (conversationId: string) => {
         if (conversationId === conversationActive) {
@@ -153,17 +138,12 @@ const Home = () => {
         conv.conversationInfos.topRounded = true
     }
 
-    const handleSearchUsers = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setSearchUsers(e.target.value.trim())
-    }
-
     //exporter le socket et déplacer cette fonction dans le modal
     
 
     //dégager ça dans modal
     const handleNewConv = () => {
         if (!clickAwayEffect) {
-            getUsers()
             setShowNewConv(!showNewConv)
             setTimeout(() => {
                 setClickAwayEffect(false)
@@ -236,12 +216,9 @@ const Home = () => {
                 setSearch={setSearch}
             />
 
-            <NewConversationModal
+            <Modal
                 showNewConv={showNewConv}
                 setShowNewConv={setShowNewConv}
-                users={users}
-                searchUsers={searchUsers}
-                handleSearchUsers={handleSearchUsers}
                 clickAwayEffect={clickAwayEffect}
                 setClickAwayEffect={setClickAwayEffect}
             />
@@ -261,7 +238,6 @@ const Home = () => {
                 files={files}
                 setFiles={setFiles}
                 setFilesEmpty={setFilesEmpty}
-                showFullSidebar={showFullSidebar}
             />
 
         </div>
