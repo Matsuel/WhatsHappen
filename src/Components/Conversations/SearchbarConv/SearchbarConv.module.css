@@ -42,8 +42,6 @@
 
 .searchInput:focus {
     outline: none;
-    width: 98%;
-    transition: all 0.3s ease-in-out;
 }
 
 .searchInput::placeholder {
