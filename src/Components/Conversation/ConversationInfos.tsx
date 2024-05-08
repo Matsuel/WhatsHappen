@@ -14,7 +14,16 @@ interface ConversationInfosProps {
     handleConversationActive: Function
 }
 
-const ConversationInfos = ({ _id, name, last_message_sender, last_message_content, typingStatus, userId, handleConversationActive }: ConversationInfosProps) => {
+const ConversationInfos = ({
+    _id,
+    name,
+    last_message_sender,
+    last_message_content,
+    typingStatus,
+    userId,
+    handleConversationActive
+}: ConversationInfosProps) => {
+    
     return (
         <div
             className={styles.conversationinfos}

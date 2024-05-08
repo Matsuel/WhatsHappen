@@ -37,7 +37,7 @@ const Conversation = ({
     const handlePinnedConversation = (conversation_id: string) => {
         socket.emit('pinconversation', { cookies, conversation_id })
     }
-    
+
     return (
         <div
             className={styles.conversation + " " + classActive + " " + noConvActiveClass}
@@ -51,26 +51,30 @@ const Conversation = ({
                 handleConversationActive={handleConversationActive}
             />
 
-            <ConversationInfos
-                _id={conversation._id}
-                name={conversation.name}
-                last_message_sender={conversation.last_message_sender}
-                last_message_content={conversation.last_message_content}
-                typingStatus={typingStatus}
-                userId={userId}
-                handleConversationActive={handleConversationActive}
-            />
+            <div className={styles.infos}>
 
-            <ShowDate
-                date={conversation.last_message_date}
-            />
+                <ConversationInfos
+                    _id={conversation._id}
+                    name={conversation.name}
+                    last_message_sender={conversation.last_message_sender}
+                    last_message_content={conversation.last_message_content}
+                    typingStatus={typingStatus}
+                    userId={userId}
+                    handleConversationActive={handleConversationActive}
+                />
 
-            <Image
-                src={Pin}
-                alt="pinned"
-                className={styles.pinned}
-                onClick={() => handlePinnedConversation(conversation._id)}
-            />
+                <ShowDate
+                    date={conversation.last_message_date}
+                />
+
+                <Image
+                    src={Pin}
+                    alt="pinned"
+                    className={styles.pinned}
+                    onClick={() => handlePinnedConversation(conversation._id)}
+                />
+
+            </div>
 
         </div>
     )

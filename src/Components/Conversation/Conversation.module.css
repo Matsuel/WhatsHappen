@@ -19,6 +19,16 @@
     transition: all 1s ease-in-out;
 }
 
+.infos {
+    width: 80%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 2px solid #f1f1f1;
+}
+
 /* Conversation informations style  */
 
 .conversationinfos {
@@ -40,6 +50,7 @@
     width: auto;
     height: 100%;
     margin-top: 15px;
+    margin-right: 15px;
 }
 
 .conversationimage {

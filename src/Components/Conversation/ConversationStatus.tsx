@@ -13,7 +13,13 @@ interface ConversationStatusProps {
     handleConversationActive: Function
 }
 
-const ConversationStatus = ({ _id, pic, status, handleConversationActive }: ConversationStatusProps) => {
+const ConversationStatus = ({
+    _id,
+    pic,
+    status,
+    handleConversationActive
+}: ConversationStatusProps) => {
+    
     return (
         <div className={styles.convimagestatus} onClick={() => handleConversationActive(_id)}>
 
