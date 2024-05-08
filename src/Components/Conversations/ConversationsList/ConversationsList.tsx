@@ -40,28 +40,22 @@ const ConversationsList = ({
 
     const getConversations = async () => {
         socket.emit('conversations', { cookies })
-        socket.on('conversations', (data: any) => {
-            data.conversations ? setConversations(data.conversations) : console.log('Échec de la connexion:', data.error);
-        });
     }
 
-    const handlePinnedConversation = (conversation_id: string) => {
-        socket.emit('pinconversation', { cookies, conversation_id })
-        socket.on('pinconversation', (data: any) => {
-            if (data.pinned) {
-                socket.emit('conversations', { cookies })
-            }
-        })
-    }
+    socket.on('conversations', (data: any) => {
+        data.conversations ? setConversations(data.conversations) : console.log('Échec de la connexion:', data.error);
+    });
+
+    socket.on('pinconversation', (data: any) => {
+        if (data.pinned) {
+            socket.emit('conversations', { cookies })
+        }
+    })
 
 
     useEffect(() => {
         getConversations()
-    }, [conversationActive])
-
-
-
-    const pinnedConversations = conversations.filter((conv) => conv.pinnedBy.includes(userId))
+    }, [])
 
     const notPinnedConversations = conversations.filter((conv) => !conv.pinnedBy.includes(userId))
 
@@ -84,7 +78,7 @@ const ConversationsList = ({
                 <div className={styles.ConversationsList}>
 
                     <PinnedConversations
-                        pinnedConversations={pinnedConversations}
+                        pinnedConversations={conversations.filter((conv) => conv.pinnedBy.includes(userId))}
                         conversationActive={conversationActive}
                         handleConversationActive={handleConversationActive}
                         search={search}
@@ -102,12 +96,11 @@ const ConversationsList = ({
                                     conversation={conversation}
                                     handleConversationActive={handleConversationActive}
                                     typingStatus={typingStatus}
-                                    handlePinnedConversation={handlePinnedConversation}
                                     userId={userId}
                                     classActive={classActive}
                                     noConvActiveClass={noConvActiveClass}
                                 />
-                            ) 
+                            )
                         )
                     })}
                     {

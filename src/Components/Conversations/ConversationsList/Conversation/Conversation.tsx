@@ -1,17 +1,17 @@
-import React, { MouseEventHandler } from 'react'
+import React from 'react'
 import styles from './Conversation.module.css'
-import Pinned from '@/assets/Pinned.svg'
 import Pin from '@/assets/Pin.svg'
 import ShowDate from './ShowDate/ShowDate'
 import ConversationStatus from '../../ConversationStatus/ConversationStatus'
 import ConversationInfos from './ConversationInfos/ConversationInfos'
 import Image from 'next/image'
+import { socket } from '@/pages/_app'
+import { decodeToken } from 'react-jwt'
 
 interface ConversationProps {
     conversation: ConversationInfos,
     handleConversationActive: Function,
     typingStatus: {},
-    handlePinnedConversation: Function,
     userId: string
     classActive: string,
     noConvActiveClass: string,
@@ -21,11 +21,23 @@ const Conversation = ({
     conversation,
     handleConversationActive,
     typingStatus,
-    handlePinnedConversation,
     userId,
     classActive,
     noConvActiveClass
 }: ConversationProps) => {
+
+    let cookies = ""
+    if (typeof window !== 'undefined') {
+        cookies = localStorage.getItem('user') || ''
+        const token: User | null = decodeToken(cookies)
+        userId = token?.userId as string
+    }
+
+    // Mettre ça dans un dossier Functions
+    const handlePinnedConversation = (conversation_id: string) => {
+        socket.emit('pinconversation', { cookies, conversation_id })
+    }
+    
     return (
         <div
             className={styles.conversation + " " + classActive + " " + noConvActiveClass}
@@ -54,7 +66,7 @@ const Conversation = ({
             />
 
             <Image
-                src={conversation.pinnedBy.includes(userId) ? Pinned : Pin}
+                src={Pin}
                 alt="pinned"
                 className={styles.pinned}
                 onClick={() => handlePinnedConversation(conversation._id)}
