@@ -49,7 +49,7 @@ const InputBar = ({
                 )}
             </Dropzone>
             <input type="text" name="message-input" id="message-input" className={styles.messageinput} value={message} onChange={(e) => handleMessageChange(e)} onKeyDown={(e) => handleEnterPressed(e, sendMessage, conversationActive, files)} />
-            <Image src={VoiceMessage} alt="voicemessage" className={styles.voicemessage} />
+            <Image src={VoiceMessage} alt="voicemessage" className={styles.joinfile} />
             <div className={styles.emojiPicker} onMouseEnter={handleRandomEmoji} onClick={() => setOpenPicker(!openPicker)}>
                 <Emoji unified={RandomEmojis[emojiIndex].unified} size={24} />
             </div>
