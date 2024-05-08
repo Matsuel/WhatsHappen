@@ -15,7 +15,7 @@ const Header = ({
             <button className={styles.editButton}>
                 Modifier
             </button>
-            <h1 className={styles.headerTitle}>Messages</h1>
+            <h2 className={styles.headerTitle}>Messages</h2>
             <button className={styles.addConvbtn}>
                 <Image
                     src={NewConv}
