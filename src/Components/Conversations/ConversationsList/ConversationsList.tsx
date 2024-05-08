@@ -42,19 +42,22 @@ const ConversationsList = ({
         socket.emit('conversations', { cookies })
     }
 
-    socket.on('conversations', (data: any) => {
-        data.conversations ? setConversations(data.conversations) : console.log('Échec de la connexion:', data.error);
-    });
-
-    socket.on('pinconversation', (data: any) => {
-        if (data.pinned) {
-            socket.emit('conversations', { cookies })
-        }
-    })
+    
 
 
     useEffect(() => {
         getConversations()
+
+        socket.on('conversations', (data: any) => {
+            console.log(data)
+            data.conversations ? setConversations(data.conversations) : console.log('Échec de la connexion:', data.error);
+        });
+    
+        socket.on('pinconversation', (data: any) => {
+            if (data.pinned) {
+                socket.emit('conversations', { cookies })
+            }
+        })
     }, [])
 
     const notPinnedConversations = conversations.filter((conv) => !conv.pinnedBy.includes(userId))

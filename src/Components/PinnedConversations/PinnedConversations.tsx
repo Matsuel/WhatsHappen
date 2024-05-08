@@ -28,7 +28,6 @@ const PinnedConversations = ({
 
     const handleContextMenu = (e: { preventDefault: () => void; pageX: any; pageY: any; }, conversationId: string) => {
         e.preventDefault()
-        console.log('context menu', e.pageX, e.pageY)
         let newConversationPinned = conversationPinned
         if (newConversationPinned === conversationId) {
             newConversationPinned = ""
