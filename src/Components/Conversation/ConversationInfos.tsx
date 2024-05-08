@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from './ConversationInfos.module.css'
+import styles from './Conversation.module.css'
 import DoubleChevrons from '@/assets/DoubleChevrons.svg'
 import Image from 'next/image'
 

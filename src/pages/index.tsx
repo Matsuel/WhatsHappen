@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import { socket } from './_app';
 import styles from '@/styles/Home.module.css'
 import Chat from '@/Components/Chat/Chat';
-import ConversationsList from '@/Components/Conversations/ConversationsList/ConversationsList';
+import Sidebar from '@/Components/Sidebar/Sidebar';
 import Head from 'next/head';
 import Modal from '@/Components/Modal/Modal';
 
@@ -206,7 +206,7 @@ const Home = () => {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <ConversationsList
+            <Sidebar
                 conversationActive={conversationActive}
                 handleConversationActive={handleConversationActive}
                 search={search}

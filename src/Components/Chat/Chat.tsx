@@ -3,7 +3,7 @@ import styles from './style.module.css'
 import Header from './Header'
 import MessagesArea from './MessagesArea'
 import BottomBar from './FilesList'
-import NoConvActive from '../Conversations/NoConvActive/NoConvActive'
+import NoConvActive from '../NoConvActive/NoConvActive'
 import { socket } from '@/pages/_app'
 
 interface ChatProps {

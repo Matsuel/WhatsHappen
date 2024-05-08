@@ -1,22 +1,22 @@
 import React, { useState } from 'react'
-import styles from './SearchbarConv.module.css'
+import styles from './styles.module.css'
 import Search from '@/assets/Search.svg'
 import Image from 'next/image'
-import { handleSearch } from '../../../Functions/SearchBars/Search'
+import { handleSearch } from '../../Functions/SearchBars/Search'
 
-interface SearchbarConvProps {
+interface SearchbarProps {
     setSearch: Function,
     setHasMatchingConversations: Function,
     conversations: ConversationInfos[],
     search: string
 }
 
-const SearchbarConv = ({
+const Searchbar = ({
     setSearch,
     setHasMatchingConversations,
     conversations,
     search
-}: SearchbarConvProps) => {
+}: SearchbarProps) => {
 
     const [isFocused, setIsFocused] = useState<boolean>(false)
 
@@ -48,4 +48,4 @@ const SearchbarConv = ({
     )
 }
 
-export default SearchbarConv
+export default Searchbar

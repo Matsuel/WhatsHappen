@@ -4,7 +4,7 @@ import { handleContextMenu, handleMouseDown, handleMouseUp } from '../../Functio
 
 import styles from './style.module.css'
 import { ContextMenu } from './ContextMenu'
-import ShowDate from '../Conversations/ConversationsList/Conversation/ShowDate/ShowDate'
+import ShowDate from '../ShowDate/ShowDate'
 import { decodeToken } from 'react-jwt'
 
 interface MessageProps {

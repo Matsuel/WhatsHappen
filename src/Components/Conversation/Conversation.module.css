@@ -1,0 +1,62 @@
+.conversation {
+    width: 95%;
+    height: 11%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.conversation:hover {
+    background-color: #D1E4E8;
+    cursor: pointer;
+    border-radius: 12px;
+}
+
+.pinned {
+    transition: all 1s ease-in-out;
+}
+
+/* Conversation informations style  */
+
+.conversationinfos {
+    width: 60%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-evenly;
+    color: #000;
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* Conversation status style */
+
+.convimagestatus {
+    justify-self: center;
+    position: relative;
+    width: auto;
+    height: 100%;
+    margin-top: 15px;
+}
+
+.conversationimage {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 50%;
+}
+
+.speakerstatus {
+    position: absolute;
+    bottom: 15px;
+    right: 0;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #fff;
+    border: 2px solid #F6F6F6;
+}

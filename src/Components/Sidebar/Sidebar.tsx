@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import styles from './styles.module.css'
 import NoResult from '../NoResult/NoResult'
-import Conversation from './Conversation/Conversation'
-import SearchbarConv from '../SearchbarConv/SearchbarConv'
+import Conversation from '@/Components/Conversation/Conversation'
+import Searchbar from './Searchbar'
 import { decodeToken } from 'react-jwt'
 import { socket } from '@/pages/_app'
 import PinnedConversations from '@/Components/PinnedConversations/PinnedConversations'
 import Header from './Header'
 
-interface ConversationListProps {
+interface SidebarProps {
     conversationActive: string,
     handleConversationActive: Function,
     search: string,
@@ -17,14 +17,14 @@ interface ConversationListProps {
     setSearch: Function
 }
 
-const ConversationsList = ({
+const Sidebar = ({
     conversationActive,
     handleConversationActive,
     search,
     typingStatus,
     handleNewConv,
     setSearch
-}: ConversationListProps) => {
+}: SidebarProps) => {
 
     const [conversations, setConversations] = useState<ConversationInfos[]>([])
     const conversationsNoResult: string = "Aucune conversation trouvée"
@@ -69,7 +69,7 @@ const ConversationsList = ({
                 handleNewConv={handleNewConv}
             />
 
-            <SearchbarConv
+            <Searchbar
                 setSearch={setSearch}
                 conversations={conversations}
                 setHasMatchingConversations={setHasMatchingConversations}
@@ -121,4 +121,4 @@ const ConversationsList = ({
     )
 }
 
-export default ConversationsList
+export default Sidebar

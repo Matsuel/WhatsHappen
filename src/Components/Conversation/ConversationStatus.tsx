@@ -1,8 +1,8 @@
 import React from 'react'
-import styles from './ConversationStatus.module.css'
-import Conv1 from '../../../assets/conv1.svg'
-import Online from '../../../assets/Online.svg'
-import Offline from '../../../assets/Offline.svg'
+import styles from './Conversation.module.css'
+import Conv1 from '@/assets/Conv1.svg'
+import Online from '@/assets/Online.svg'
+import Offline from '@/assets/Offline.svg'
 import Image from 'next/image'
 
 
