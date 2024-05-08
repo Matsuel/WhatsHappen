@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import styles from './Chat.module.css'
-import TopBar from './TopBar/TopBar'
+import styles from './style.module.css'
+import Header from './Header'
 import MessagesArea from './MessagesArea/MessagesArea'
 import BottomBar from './BottomArea/BottomArea'
 import NoConvActive from '../Conversations/NoConvActive/NoConvActive'
@@ -79,10 +79,9 @@ const Chat = ({
         <div className={styles.messagessection}>
             {conversationActive !== '' ? (
                 <>
-                    <TopBar
+                    <Header
                         name={conversationInfos.name}
                         pic={conversationInfos.pic}
-                        status={conversationInfos.status}
                         handleSearchConv={handleSearchConv}
                         showSearchConv={showSearchConv}
                     />

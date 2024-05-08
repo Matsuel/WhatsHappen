@@ -3,7 +3,7 @@ import React from 'react'
 import styles from './BottomArea.module.css'
 import IsTyping from '../../IsTyping/IsTyping'
 import FilesList from './FilesList/FilesList'
-import Bottombar from '../Bottombar/Bottombar'
+import Bottombar from '../InputBar'
 
 interface BottomBarProps {
     conversationActive: string,

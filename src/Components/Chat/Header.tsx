@@ -1,23 +1,26 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Conv1 from '@/assets/conv1.svg'
 import Phone from '@/assets/Phone.svg'
 import Video from '@/assets/Video.svg'
 import SearchConv from '@/assets/SearchConv.svg'
 import Expand from '@/assets/Expand.svg'
 
-import styles from './TopBar.module.css'
+import styles from './style.module.css'
 import Image from 'next/image'
 
-interface TopBarProps {
+interface HeaderProps {
     name: string,
     pic: string,
-    status: boolean,
     handleSearchConv: Function,
     showSearchConv: boolean,
 }
 
-
-const TopBar = ({ name, pic, status, handleSearchConv, showSearchConv }: TopBarProps) => {
+const Header = ({
+    name,
+    pic,
+    handleSearchConv,
+    showSearchConv
+}: HeaderProps) => {
 
     return (
         <div className={styles.conversationtopbar}>
@@ -47,4 +50,4 @@ const TopBar = ({ name, pic, status, handleSearchConv, showSearchConv }: TopBarP
     )
 }
 
-export default TopBar
+export default Header
