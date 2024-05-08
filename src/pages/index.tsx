@@ -232,11 +232,8 @@ const Home = () => {
                 search={search}
                 // voir le passer en tant que context car il n'est utilisé que loin dans l'arbre
                 typingStatus={typingStatus}
-                showFullSidebar={showFullSidebar}
-                setShowFullSidebar={setShowFullSidebar}
                 handleNewConv={handleNewConv}
                 setSearch={setSearch}
-                showNewConv={showNewConv}
             />
 
             <NewConversationModal

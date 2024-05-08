@@ -15,10 +15,17 @@ interface ConversationProps {
     userId: string
     classActive: string,
     noConvActiveClass: string,
-    showFullSidebar: boolean
 }
 
-const Conversation = ({ conversation, handleConversationActive, typingStatus, handlePinnedConversation, userId, classActive, noConvActiveClass, showFullSidebar }: ConversationProps) => {
+const Conversation = ({
+    conversation,
+    handleConversationActive,
+    typingStatus,
+    handlePinnedConversation,
+    userId,
+    classActive,
+    noConvActiveClass
+}: ConversationProps) => {
     return (
         <div
             className={styles.conversation + " " + classActive + " " + noConvActiveClass}
@@ -32,30 +39,27 @@ const Conversation = ({ conversation, handleConversationActive, typingStatus, ha
                 handleConversationActive={handleConversationActive}
             />
 
-            {showFullSidebar ? (
-                <>
-                    <ConversationInfos
-                        _id={conversation._id}
-                        name={conversation.name}
-                        last_message_sender={conversation.last_message_sender}
-                        last_message_content={conversation.last_message_content}
-                        typingStatus={typingStatus}
-                        userId={userId}
-                        handleConversationActive={handleConversationActive}
-                    />
+            <ConversationInfos
+                _id={conversation._id}
+                name={conversation.name}
+                last_message_sender={conversation.last_message_sender}
+                last_message_content={conversation.last_message_content}
+                typingStatus={typingStatus}
+                userId={userId}
+                handleConversationActive={handleConversationActive}
+            />
 
-                    <ShowDate
-                        date={conversation.last_message_date}
-                    />
+            <ShowDate
+                date={conversation.last_message_date}
+            />
 
-                    <Image
-                        src={conversation.pinnedBy.includes(userId) ? Pinned : Pin}
-                        alt="pinned"
-                        className={styles.pinned}
-                        onClick={() => handlePinnedConversation(conversation._id)}
-                    />
-                </>
-            ) : null}
+            <Image
+                src={conversation.pinnedBy.includes(userId) ? Pinned : Pin}
+                alt="pinned"
+                className={styles.pinned}
+                onClick={() => handlePinnedConversation(conversation._id)}
+            />
+
         </div>
     )
 }

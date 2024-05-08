@@ -6,7 +6,6 @@ import SearchbarConv from '../SearchbarConv/SearchbarConv'
 import { decodeToken } from 'react-jwt'
 import { socket } from '@/pages/_app'
 import PinnedConversations from '@/Components/PinnedConversations/PinnedConversations'
-import ExpandBtn from './ExpandBtn'
 import Header from './Header'
 
 interface ConversationListProps {
@@ -14,11 +13,8 @@ interface ConversationListProps {
     handleConversationActive: Function,
     search: string,
     typingStatus: {},
-    showFullSidebar: boolean,
-    setShowFullSidebar: Function,
     handleNewConv: Function,
-    setSearch: Function,
-    showNewConv: boolean
+    setSearch: Function
 }
 
 const ConversationsList = ({
@@ -26,11 +22,8 @@ const ConversationsList = ({
     handleConversationActive,
     search,
     typingStatus,
-    setShowFullSidebar,
-    showFullSidebar,
     handleNewConv,
-    setSearch,
-    showNewConv
+    setSearch
 }: ConversationListProps) => {
 
     const [conversations, setConversations] = useState<ConversationInfos[]>([])
@@ -79,7 +72,7 @@ const ConversationsList = ({
     ]
 
     return (
-        <div className={showFullSidebar ? styles.conversationssection : styles.conversationsMinimized}>
+        <div className={styles.conversationssection}>
 
             <Header
                 handleNewConv={handleNewConv}
@@ -101,7 +94,6 @@ const ConversationsList = ({
                         conversationActive={conversationActive}
                         handleConversationActive={handleConversationActive}
                         search={search}
-                        showFullSidebar={showFullSidebar}
                     />
 
                     {conversationsFiltered.map((convtype) => {
@@ -109,7 +101,7 @@ const ConversationsList = ({
                             <>
                                 <h2 className={styles.title}>
                                     {convtype.icon}
-                                    {showFullSidebar ? convtype.name : null}
+                                    convtype.name
                                 </h2>
                                 {convtype.conversations.map((conversation) => {
 
@@ -127,7 +119,6 @@ const ConversationsList = ({
                                                 userId={userId}
                                                 classActive={classActive}
                                                 noConvActiveClass={noConvActiveClass}
-                                                showFullSidebar={showFullSidebar}
                                             />
                                         ) : null
                                     )
@@ -146,12 +137,6 @@ const ConversationsList = ({
                         )
                     }
                 </div>
-
-                {/* <ExpandBtn
-                    setShowFullSidebar={setShowFullSidebar}
-                    showFullSidebar={showFullSidebar}
-                /> */}
-
             </div>
         </div>
     )
