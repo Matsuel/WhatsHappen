@@ -1,10 +1,10 @@
 import React, { ChangeEventHandler, useState } from 'react'
 import styles from './Modal.module.css'
-import Conv1 from '@/assets/conv1.svg'
 import Image from 'next/image'
 import NewConv from '@/assets/NewConv.svg'
 import { useClickAway } from '@uidotdev/usehooks'
 import { socket } from '@/pages/_app'
+import Avatar from '../Avatar/Avatar'
 
 interface ModalProps {
     showNewConv: boolean,
@@ -80,13 +80,19 @@ const Modal = ({
 
                                     <div className={styles.newconvuser} key={user._id}>
 
-                                        <Image
-                                            src={user.pic !== "" ? `data:image/jpeg;base64,${user.pic}` : Conv1}
-                                            className={styles.userpic}
-                                            alt="userpic"
-                                            width={0}
-                                            height={0}
-                                        />
+                                        {user.pic !== "" ?
+                                            <Image
+                                                src={`data:image/jpeg;base64,${user.pic}`}
+                                                className={styles.userpic}
+                                                alt="userpic"
+                                                width={0}
+                                                height={0}
+                                            /> :
+                                            <Avatar
+                                                width={80}
+                                                height={80}
+                                            />
+                                        }
 
                                         <p className={styles.username}>
                                             {user.username}

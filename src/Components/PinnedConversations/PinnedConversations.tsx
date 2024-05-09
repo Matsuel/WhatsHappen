@@ -1,11 +1,6 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
-import Conv1 from '../../assets/conv1.svg';
 import styles from './PinnedConversations.module.css';
-import Pinned from '../../assets/Pinned.svg';
-import Bin from '../../assets/Bin.svg';
-import { socket } from '@/pages/_app';
-import { decodeToken } from 'react-jwt';
 import ContextMenuPin from './ContextMenuPinned';
 import Avatar from '../Avatar/Avatar';
 
