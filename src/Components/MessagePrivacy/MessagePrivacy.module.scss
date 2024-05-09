@@ -1,6 +1,6 @@
 .messageprivacy {
     margin-top: 100px;
-    width: 64%;
+    width: 50%;
     height: auto;
     display: flex;
     flex-direction: row;
@@ -14,7 +14,8 @@
 
 .securitymessage {
     width: 80%;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'SfPro', sans-serif;
     font-size: 16px;
     color: #000;
+    font-weight: 500;
 }
