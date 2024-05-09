@@ -7,6 +7,7 @@ import Bin from '../../assets/Bin.svg';
 import { socket } from '@/pages/_app';
 import { decodeToken } from 'react-jwt';
 import ContextMenuPin from './ContextMenuPinned';
+import Avatar from '../Avatar/Avatar';
 
 interface PinnedConversationsProps {
     pinnedConversations: ConversationInfos[],
@@ -69,13 +70,20 @@ const PinnedConversations = ({
                                         onContextMenu={(e) => handleContextMenu(e, conversation._id)}
                                     >
 
-                                        <Image
-                                            src={conversation.pic ? `data:image/jpeg;base64,${conversation.pic}` : Conv1}
-                                            alt="conv1"
-                                            className={styles.conversationimage}
-                                            width={0}
-                                            height={0}
-                                        />
+                                        {conversation.pic ?
+                                            <Image
+                                                src={`data:image/jpeg;base64,${conversation.pic}`}
+                                                alt="conv1"
+                                                className={styles.conversationimage}
+                                                width={0}
+                                                height={0}
+                                            />
+                                            :
+                                            <Avatar
+                                                width={75}
+                                                height={75}
+                                            />
+                                        }
 
                                         <h3 className={styles.conversationname}>
                                             {conversation.name.charAt(0).toUpperCase() + conversation.name.slice(1)}

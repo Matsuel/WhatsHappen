@@ -1,5 +1,4 @@
 import React from 'react'
-import Conv1 from '@/assets/conv1.svg'
 import Phone from '@/assets/Phone.svg'
 import Video from '@/assets/Video.svg'
 import SearchConv from '@/assets/SearchConv.svg'
@@ -7,6 +6,7 @@ import Expand from '@/assets/Expand.svg'
 
 import styles from './style.module.css'
 import Image from 'next/image'
+import Avatar from '../Avatar/Avatar'
 
 interface HeaderProps {
     name: string,
@@ -25,7 +25,7 @@ const Header = ({
     return (
         <div className={styles.conversationtopbar}>
             <div className={styles.topbarleft}>
-                <Image src={pic ? `data:image/jpeg;base64,${pic}` : Conv1} alt="conv1" className={styles.topbarimage} width={0} height={0} />
+                {pic ? <Image src={`data:image/jpeg;base64,${pic}`} alt="avatar" className={styles.topbarimage} width={0} height={0} /> : <Avatar width={60} height={60} />}
                 <div className={styles.topbarnamestatut}>
                     <h2 className={styles.conversationname}>
                         {name.charAt(0).toUpperCase() + name.slice(1)}

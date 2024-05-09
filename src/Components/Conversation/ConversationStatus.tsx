@@ -1,9 +1,9 @@
 import React from 'react'
 import styles from './Conversation.module.css'
-import Conv1 from '@/assets/Conv1.svg'
 import Online from '@/assets/Online.svg'
 import Offline from '@/assets/Offline.svg'
 import Image from 'next/image'
+import Avatar from '../Avatar/Avatar'
 
 
 interface ConversationStatusProps {
@@ -23,13 +23,7 @@ const ConversationStatus = ({
     return (
         <div className={styles.convimagestatus} onClick={() => handleConversationActive(_id)}>
 
-            <Image
-                src={pic ? `data:image/jpeg;base64,${pic}` : Conv1}
-                alt="conv1"
-                className={styles.conversationimage}
-                width={0}
-                height={0}
-            />
+            {pic ? <Image src={`data:image/jpeg;base64,${pic}`} alt="conv1" className={styles.conversationimage} width={0} height={0} /> : <Avatar width={60} height={60} />}
 
             <Image
                 src={status ? Online : Offline}

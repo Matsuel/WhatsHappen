@@ -10,12 +10,12 @@
     z-index: 1;
     position: absolute;
     width: 98.7%;
-    height: 10%;
+    height: 7.7%;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    /* background-color: #fff; */
-    backdrop-filter: blur(10px);
+    background-color: #fff;
+    border-bottom: 2px solid #f8f8f8;
 }
 
 .topbarleft {
