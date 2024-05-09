@@ -1,5 +1,20 @@
 .messageday {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+}
+
+.messagedaytext {
     color: #000;
     font-family: 'Montserrat', sans-serif;
+    margin-top: 2%;
+}
+
+.messagedayline {
+    height: 2px;
+    background-color: #000;
+    opacity: 0.2;
     margin-top: 2%;
 }
