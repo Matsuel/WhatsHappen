@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
-import styles from './PinnedConversations.module.css';
+import styles from './PinnedConversations.module.scss';
 import ContextMenuPin from './ContextMenuPinned';
 import Avatar from '../Avatar/Avatar';
 

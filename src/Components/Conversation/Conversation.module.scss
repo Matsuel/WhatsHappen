@@ -7,26 +7,39 @@
     justify-content: space-around;
     padding-left: 10px;
     padding-right: 10px;
+
+    .pinned {
+        transition: all 1s ease-in-out;
+    }
+    
+    .infos {
+        width: 80%;
+        height: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 2px solid #f1f1f1;
+    }
 }
 
 .conversation:hover {
-    background-color: #D1E4E8;
+    background-color: #007aff;
     cursor: pointer;
     border-radius: 12px;
+
+    .infos {
+        border: none;
+    }
 }
 
-.pinned {
-    transition: all 1s ease-in-out;
-}
+.conversationActive {
+    background-color: #007AFF;
+    border-radius: 12px;
 
-.infos {
-    width: 80%;
-    height: 100%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    border-bottom: 2px solid #f1f1f1;
+    .infos {
+        border: none;
+    }
 }
 
 /* Conversation informations style  */

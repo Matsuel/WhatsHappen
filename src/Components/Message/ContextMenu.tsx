@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import styles from './style.module.css'
+import React from 'react'
+import styles from './style.module.scss'
 import Pin from '@/assets/Pin.svg'
 import { copyContentToClipboard } from '../../Functions/ContextMenu/ContextMenu'
 import Image from 'next/image'

@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from './Conversation.module.css'
+import styles from './Conversation.module.scss'
 import Pin from '@/assets/Pin.svg'
 import ShowDate from '../ShowDate/ShowDate'
 import ConversationStatus from './ConversationStatus'
@@ -13,8 +13,8 @@ interface ConversationProps {
     handleConversationActive: Function,
     typingStatus: {},
     userId: string
-    classActive: string,
-    noConvActiveClass: string,
+    classActive: boolean,
+    noConvActiveClass: boolean,
 }
 
 const Conversation = ({
@@ -40,7 +40,11 @@ const Conversation = ({
 
     return (
         <div
-            className={styles.conversation + " " + classActive + " " + noConvActiveClass}
+            className={[
+                styles.conversation,
+                classActive && styles.conversationActive,
+                noConvActiveClass && styles.noActiveClass
+            ].join(" ")}
             key={conversation._id}
         >
 

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import styles from './styles.module.css'
+import styles from './styles.module.scss'
 import NoResult from '../NoResult/NoResult'
 import Conversation from '@/Components/Conversation/Conversation'
 import Searchbar from './Searchbar'
@@ -89,9 +89,9 @@ const Sidebar = ({
 
                     {notPinnedConversations.map((conversation) => {
 
-                        const classActive = conversation._id === conversationActive ? styles.conversationActive : ''
+                        const classActive = conversation._id === conversationActive
 
-                        const noConvActiveClass = conversationActive === "" ? styles.noActiveClass : ''
+                        const noConvActiveClass = conversationActive === ""
 
                         return (
                             conversation.name.toLowerCase().includes(search.toLowerCase()) && (

@@ -1,0 +1,94 @@
+.pinnedConversations {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 5%;
+    margin-bottom: 5%;
+
+    .pinnedConversation {
+        width: 30%;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border-radius: 12px;
+        padding: 1%;
+        margin-bottom: 2%;
+        cursor: pointer;
+
+        .conversationimage {
+            width: 75px;
+            height: 75px;
+            border-radius: 50%;
+            border: 4px solid #fff;
+        }
+        
+        .conversationname {
+            font-family: 'SfPro', sans-serif;
+            font-size: 16px;
+            font-weight: 550;
+            color: #848484;
+            margin-top: 5%;
+        }  
+    }
+
+    .pinnedConversation:hover {
+        background-color: #007aff;
+        
+        .conversationname {
+            color: #fff;
+        }
+    }
+
+    .pinnedConversationActive {
+        background-color: #007aff;
+        
+        .conversationname {
+            color: #fff;
+        }
+    }
+}
+
+
+
+ 
+
+/* Context Menu  */
+
+.contextMenu {
+    z-index: 5000;
+    position: absolute;
+    width: 7%;
+    height: auto;
+    background-color: #ededef;
+    border-radius: 12px;
+    padding: 0.5%;
+}
+
+.contextMenuItem {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2%;
+    cursor: pointer;    
+}
+
+.contextMenuLabel {
+    font-family: 'SfPro', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: #000;
+}
+
+.icon {
+    width: 20px;
+    height: 20px;
+}

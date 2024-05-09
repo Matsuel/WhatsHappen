@@ -2,7 +2,7 @@ import React from "react"
 import Image from "next/image"
 import Pinned from "@/assets/Pinned.svg"
 import Bin from "@/assets/Bin.svg"
-import styles from "./PinnedConversations.module.css"
+import styles from "./PinnedConversations.module.scss"
 import { decodeToken } from "react-jwt"
 import { socket } from "@/pages/_app"
 

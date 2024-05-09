@@ -70,6 +70,11 @@
     margin: 8px;
 }
 
+.messagecontentMe,
+.messagetime {
+    margin: 8px;
+}
+
 .messagetime {
     font-family: 'Montserrat', sans-serif;
     font-size: 14px;
@@ -85,6 +90,16 @@
     overflow-wrap: break-word;
     margin-left: 20px;
     color: #000;
+}
+
+.messagecontentMe {
+    width: 80%;
+    height: auto;
+    align-self: flex-start;
+    font-family: 'Montserrat', sans-serif;
+    overflow-wrap: break-word;
+    margin-left: 20px;
+    color: #fff;
 }
 
 .messagefirstplan {

@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from './Conversation.module.css'
+import styles from './Conversation.module.scss'
 import Online from '@/assets/Online.svg'
 import Offline from '@/assets/Offline.svg'
 import Image from 'next/image'

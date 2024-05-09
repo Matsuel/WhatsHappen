@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import styles from './styles.module.css'
+import styles from './styles.module.scss'
 import Search from '@/assets/Search.svg'
 import Image from 'next/image'
 import { handleSearch } from '../../Functions/SearchBars/Search'

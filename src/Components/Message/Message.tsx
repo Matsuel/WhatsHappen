@@ -2,7 +2,7 @@ import React, { useState, KeyboardEvent } from 'react'
 import Picker, { Emoji } from 'emoji-picker-react'
 import { handleContextMenu, handleMouseDown, handleMouseUp } from '../../Functions/Message/Message'
 
-import styles from './style.module.css'
+import styles from './style.module.scss'
 import { ContextMenu } from './ContextMenu'
 import ShowDate from '../ShowDate/ShowDate'
 import { decodeToken } from 'react-jwt'
@@ -62,7 +62,9 @@ const Message = ({
                     onEmojiClick={(emoji: EmojiPickerProps) => { handleReaction(message._id, emoji.unified); setRightClick(false); }}
                 />}
                 <div className={messageClass + " " + topClass + " " + bottomClass} key={message._id}>
-                    <p className={styles.messagecontent}>
+                    <p className={
+                        isReceived ? styles.messagecontent : styles.messagecontentMe
+                    }>
                         {message.content}
                     </p>
                     {
