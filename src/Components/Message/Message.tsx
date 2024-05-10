@@ -83,10 +83,10 @@ const Message = ({
                             })}
                         </div>
                     }
-                    <ShowDate
+                    {/* <ShowDate
                         date={message.date}
                         className='messagetime'
-                    />
+                    /> */}
                 </div>
 
                 <ContextMenu

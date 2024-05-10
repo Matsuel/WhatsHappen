@@ -1,7 +1,7 @@
 .messagereceived {
     position: relative;
     align-self: flex-start;
-    min-width: 15%;
+    min-width: 5%;
     max-width: 30%;
     height: auto;
     display: flex;
@@ -30,7 +30,7 @@
 .messagesent {
     position: relative;
     align-self: flex-end;
-    min-width: 15%;
+    min-width: 5%;
     max-width: 35%;
     height: auto;
     display: flex;
@@ -62,17 +62,16 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 10px;
 }
 
 .messagecontent,
 .messagetime {
-    margin: 8px;
+    margin: 10px 15px;
 }
 
 .messagecontentMe,
 .messagetime {
-    margin: 8px;
+    margin: 10px 15px;
 }
 
 .messagetime {
@@ -88,7 +87,7 @@
     align-self: flex-start;
     font-family: 'Montserrat', sans-serif;
     overflow-wrap: break-word;
-    margin-left: 20px;
+    // margin-left: 20px;
     color: #000;
 }
 

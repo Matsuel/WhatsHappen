@@ -172,7 +172,7 @@
     justify-content: flex-start;
     overflow-y: auto;
     padding: 1em;
-    gap: 1em;
+    gap: .4em;
 }
 
 .messagesectionfull {
