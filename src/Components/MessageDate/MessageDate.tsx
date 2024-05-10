@@ -17,7 +17,6 @@ const MessageDate = ({
 
     useEffect(() => {
         setWidth(ref.current?.offsetWidth as number)
-        console.log(ref.current?.offsetWidth)
     }, [])
 
     const today = new Date(message.date).toDateString() === new Date().toDateString()
