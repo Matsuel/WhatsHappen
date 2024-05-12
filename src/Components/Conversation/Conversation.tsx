@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styles from './Conversation.module.scss'
 import Pin from '@/assets/Pin.svg'
 import ShowDate from '../ShowDate/ShowDate'
@@ -7,6 +7,7 @@ import ConversationInfos from './ConversationInfos'
 import Image from 'next/image'
 import { socket } from '@/pages/_app'
 import { decodeToken } from 'react-jwt'
+import ContextConversation from './ContextConversation'
 
 interface ConversationProps {
     conversation: ConversationInfos,
@@ -33,9 +34,22 @@ const Conversation = ({
         userId = token?.userId as string
     }
 
-    // Mettre ça dans un dossier Functions
-    const handlePinnedConversation = (conversation_id: string) => {
-        socket.emit('pinconversation', { cookies, conversation_id })
+    const [contextMenu, setContextMenu] = useState<boolean>(false)
+    const [points, setPoints] = useState({ x: 0, y: 0 })
+    const [conversationPinned, setConversationPinned] = useState<string>("")
+
+    const handleContextMenu = (e: { preventDefault: () => void; pageX: any; pageY: any; }, conversationId: string) => {
+        e.preventDefault()
+        let newConversationPinned = conversationPinned
+        if (newConversationPinned === conversationId) {
+            newConversationPinned = ""
+            setContextMenu(false)
+        } else {
+            newConversationPinned = conversationId
+            setContextMenu(true)
+            setPoints({ x: e.pageX, y: e.pageY })
+        }
+        setConversationPinned(newConversationPinned)
     }
 
     return (
@@ -46,7 +60,17 @@ const Conversation = ({
                 noConvActiveClass && styles.noActiveClass
             ].join(" ")}
             key={conversation._id}
+            onContextMenu={(e) => handleContextMenu(e, conversation._id)}
         >
+
+            {
+                contextMenu && conversationPinned === conversation._id &&
+                <ContextConversation
+                    conversationId={conversation._id}
+                    points={points}
+                />
+            }
+
 
             <ConversationStatus
                 _id={conversation._id}
@@ -71,12 +95,7 @@ const Conversation = ({
                     date={conversation.last_message_date}
                 />
 
-                <Image
-                    src={Pin}
-                    alt="pinned"
-                    className={styles.pinned}
-                    onClick={() => handlePinnedConversation(conversation._id)}
-                />
+                {/* Context Menu à ajouter ici */}
 
             </div>
 
