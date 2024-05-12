@@ -8,7 +8,7 @@ const MessagePrivacy = () => {
     return (
         <div className={styles.messageprivacy}>
             <Image src={Security} alt="security" className={styles.security} />
-            <p className={styles.securitymessage}>Les messages sont chiffrés de bout en bout. Personne en dehors de ce chat, pas même WhatsApp, ne peut les lire ou les écouter, cliquez pour en savoir plus.</p>
+            <p className={styles.securitymessage}>Les messages sont chiffrés de bout en bout. Personne en dehors de ce chat, pas même Whatshappen, ne peut les lire ou les écouter, cliquez pour en savoir plus.</p>
         </div>
     )
 }

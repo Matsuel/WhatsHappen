@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import Image from 'next/image';
 import styles from './PinnedConversations.module.scss';
-import Avatar from '../Avatar/Avatar';
 import ContextMenuConversation from '../ContextMenuConversation/ContextMenuConversation';
+import DisplayAvatar from '../DisplayAvatar/DisplayAvatar';
 
 interface PinnedConversationsProps {
     pinnedConversations: ConversationInfos[],
@@ -68,20 +67,7 @@ const PinnedConversations = ({
                                         onContextMenu={(e) => handleContextMenu(e, conversation._id)}
                                     >
 
-                                        {conversation.pic ?
-                                            <Image
-                                                src={`data:image/jpeg;base64,${conversation.pic}`}
-                                                alt="conv1"
-                                                className={styles.conversationimage}
-                                                width={0}
-                                                height={0}
-                                            />
-                                            :
-                                            <Avatar
-                                                width={75}
-                                                height={75}
-                                            />
-                                        }
+                                        <DisplayAvatar pic={conversation.pic} size={75} />
 
                                         <h3 className={styles.conversationname}>
                                             {conversation.name.charAt(0).toUpperCase() + conversation.name.slice(1)}

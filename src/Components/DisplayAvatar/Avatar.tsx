@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './Avatar.module.scss';
+import styles from './DisplayAvatar.module.scss';
 
 interface AvatarProps {
     width: number,

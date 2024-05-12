@@ -4,7 +4,7 @@ import Image from 'next/image'
 import NewConv from '@/assets/NewConv.svg'
 import { useClickAway } from '@uidotdev/usehooks'
 import { socket } from '@/pages/_app'
-import Avatar from '../Avatar/Avatar'
+import Avatar from '../DisplayAvatar/Avatar'
 
 interface ModalProps {
     showNewConv: boolean,
