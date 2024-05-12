@@ -48,7 +48,7 @@ const InputBar = ({
                     </div>
                 )}
             </Dropzone>
-            <input type="text" name="message-input" id="message-input" className={styles.messageinput} value={message} onChange={(e) => handleMessageChange(e)} onKeyDown={(e) => handleEnterPressed(e, sendMessage, conversationActive, files)} />
+            <input type="text" name="message-input" id="message-input" className={styles.messageinput} value={message} onChange={(e) => handleMessageChange(e.target.value, false)} onKeyDown={(e) => handleEnterPressed(e, sendMessage, conversationActive, files)} />
             <Image src={VoiceMessage} alt="voicemessage" className={styles.joinfile} />
             <div className={styles.emojiPicker} onMouseEnter={handleRandomEmoji} onClick={() => setOpenPicker(!openPicker)}>
                 <Emoji unified={RandomEmojis[emojiIndex].unified} size={24} />
@@ -56,7 +56,9 @@ const InputBar = ({
 
             {openPicker &&
                 <div className={styles.emojiPickerContainer}>
-                    <EmojiPicker />
+                    <EmojiPicker 
+                    onEmojiClick={(e) => handleMessageChange(e.emoji, true)}
+                    />
                 </div>
             }
         </div>

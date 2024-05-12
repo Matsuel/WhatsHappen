@@ -11,7 +11,7 @@ interface ChatProps {
     showSearchConv: boolean,
     handleSearchConv: (e: React.ChangeEvent<HTMLInputElement>) => void,
     message: string,
-    handleMessageChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
+    handleMessageChange: (e: string, emojie:boolean) => void,
     sendMessage: Function,
     typingStatus: {},
     filesEmpty: boolean,

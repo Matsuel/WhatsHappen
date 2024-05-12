@@ -154,9 +154,9 @@ const Home = () => {
     }
 
     //exporter le socket et déplacer cette fonction dans bottombar
-    const handleMessageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleMessageChange = (e: string,emoji: boolean) => {
         socket.emit('typing', { cookies, conversation_id: conversationActive })
-        setMessage(e.target.value)
+        emoji ? setMessage(message + e) : setMessage(e)
     }
 
     //dégager ça dans bottombar
