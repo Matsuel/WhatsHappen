@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import styles from './PinnedConversations.module.scss';
-import ContextMenuPin from './ContextMenuPinned';
 import Avatar from '../Avatar/Avatar';
+import ContextMenuConversation from '../ContextMenuConversation/ContextMenuConversation';
 
 interface PinnedConversationsProps {
     pinnedConversations: ConversationInfos[],
@@ -53,9 +53,12 @@ const PinnedConversations = ({
                                 <>
                                     {
                                         contextMenu && conversationPinned === conversation._id &&
-                                        <ContextMenuPin
+                                        <ContextMenuConversation
                                             conversationId={conversation._id}
                                             points={points}
+                                            setContextMenu={setContextMenu}
+                                            setConversationPinned={setConversationPinned}
+                                            pin={true}
                                         />
                                     }
                                     <div

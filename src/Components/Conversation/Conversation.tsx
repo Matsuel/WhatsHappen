@@ -4,10 +4,8 @@ import Pin from '@/assets/Pin.svg'
 import ShowDate from '../ShowDate/ShowDate'
 import ConversationStatus from './ConversationStatus'
 import ConversationInfos from './ConversationInfos'
-import Image from 'next/image'
-import { socket } from '@/pages/_app'
 import { decodeToken } from 'react-jwt'
-import ContextConversation from './ContextConversation'
+import ContextMenuConversation from '../ContextMenuConversation/ContextMenuConversation'
 
 interface ConversationProps {
     conversation: ConversationInfos,
@@ -65,9 +63,12 @@ const Conversation = ({
 
             {
                 contextMenu && conversationPinned === conversation._id &&
-                <ContextConversation
+                <ContextMenuConversation
                     conversationId={conversation._id}
                     points={points}
+                    setContextMenu={setContextMenu}
+                    setConversationPinned={setConversationPinned}
+                    pin={false}
                 />
             }
 

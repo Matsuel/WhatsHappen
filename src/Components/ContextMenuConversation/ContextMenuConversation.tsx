@@ -1,22 +1,27 @@
 import React from 'react';
 
-import styles from './Conversation.module.scss';
-import { socket } from '@/pages/_app';
-import { decodeToken } from 'react-jwt';
-import Pin from '@/assets/Pin.svg';
-import Bin from '@/assets/Bin.svg';
+import styles from './ContextMenuConversation.module.scss';
 import Image from 'next/image';
+import { decodeToken } from 'react-jwt';
+import Pinned from '@/assets/Pinned.svg';
+import Bin from '@/assets/Bin.svg';
+import { socket } from '@/pages/_app';
 
-interface ContextConversationProps {
+interface ContextMenuConversationProps {
     conversationId: string,
     points: { x: number, y: number },
+    setContextMenu: Function,
+    setConversationPinned: Function,
+    pin: boolean
 }
 
-const ContextConversation = ({
+const ContextMenuConversation = ({
     conversationId,
-    points
-}: ContextConversationProps) => {
-
+    points,
+    setContextMenu,
+    setConversationPinned,
+    pin
+}: ContextMenuConversationProps) => {
     let cookies = ""
     let userId = ""
     if (typeof window !== 'undefined') {
@@ -26,21 +31,21 @@ const ContextConversation = ({
     }
 
     const handlePinnedConversation = (conversation_id: string) => {
+        setContextMenu(false)
+        setConversationPinned("")
         socket.emit('pinconversation', { cookies, conversation_id })
     }
 
     const items = [
         {
-            label: 'Épingler',
+            label: pin ? 'Détacher' : 'Épingler',
             onClick: () => handlePinnedConversation(conversationId),
             color: '#000000',
-            icon: Pin
+            icon: Pinned
         },
         {
             label: 'Supprimer',
-            onClick: () => {
-                console.log('delete')
-            },
+            onClick: () => console.log('delete'),
             color: '#FF0000',
             icon: Bin
         }
@@ -51,7 +56,6 @@ const ContextConversation = ({
             className={styles.contextMenu}
             style={{ top: points.y, left: points.x }}
         >
-
             {items.map((item) => (
                 <div
                     className={styles.contextMenuItem}
@@ -68,9 +72,8 @@ const ContextConversation = ({
                     />
                 </div>
             ))}
-
         </div>
-    );
+    )
 };
 
-export default ContextConversation;
+export default ContextMenuConversation;
