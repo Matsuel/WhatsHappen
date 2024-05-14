@@ -14,9 +14,6 @@ const Reactions = ({
     id
 }: ReactionsProps) => {
 
-    
-    
-
     return (
         <>
             {
