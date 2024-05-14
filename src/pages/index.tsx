@@ -58,8 +58,6 @@ const Home = () => {
         //enlever ça car y'a déjà une fonction qui fait ça pareil pour le on
         socket.emit('conversations', { cookies })        
 
-        
-
         // pas besoin de ça vu qu'on a la liste des gens connectés
         setInterval(() => {
             socket.emit('synchrostatus', { userId: userId })
