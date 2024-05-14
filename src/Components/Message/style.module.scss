@@ -217,3 +217,42 @@
 .reactiondiv {
     margin-bottom: 2%;
 }
+
+// isTyping style 
+
+.isTyping {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    background-color: #9a9fab;
+    border-radius: 50%;
+    animation: blink 1.2s infinite;
+}
+
+.dot:nth-child(2) {
+    animation-delay: 0.33s;
+}
+
+.dot:nth-child(3) {
+    animation-delay: 0.66s;
+}
+
+@keyframes blink {
+    0% {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}

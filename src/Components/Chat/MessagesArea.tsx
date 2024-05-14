@@ -5,6 +5,7 @@ import MessageDate from '../MessageDate/MessageDate'
 import Message from '../Message/Message'
 import MessageFile from '../MessageFile/MessageFile'
 import { isBottomRounded, isTopRounded } from '@/Functions/MessagesList/MessagesList'
+import IsTyping from '../Message/IsTyping'
 
 interface MessagesAreaProps {
     showSearchConv: boolean,
@@ -84,6 +85,10 @@ const MessagesArea = ({
                     </>
                 )
             })}
+            
+            <IsTyping
+                isTyping={true}
+            />
         </div>
     )
 }
