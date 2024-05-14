@@ -115,12 +115,15 @@
 .reactions {
     position: absolute;
     bottom: -10px;
-    left: 15px;
-    width: 80%;
+    right: 5px;
+    width: auto;
     height: auto;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    background-color: #fff;
+    border-radius: 12px;
+    padding: 1px;
 }
 
 .reaction {
@@ -131,14 +134,10 @@
     align-items: center;
 }
 
-.myReaction {
-    background-color: #fff;
-    border-radius: 8px;
-    cursor: pointer;
-}
-
-.myReaction:hover {
-    background-color: #D7F8F4;
+.reactionCount {
+    font-family: 'SfPro', sans-serif;
+    font-size: 14px;
+    color: #000;
 }
 
 .messagecontextmenusent {

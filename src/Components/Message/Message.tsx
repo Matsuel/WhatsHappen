@@ -52,7 +52,7 @@ const Message = ({
 
     return (
         <>
-            <div className={styles.message + " " + firstPlan+" " + hasReactions} ref={i === messagesCount - 1 ? scrollBottomRef : null} onContextMenu={(e) => handleContextMenu(e, setRightClick)}
+            <div className={styles.message + " " + firstPlan + " " + hasReactions} ref={i === messagesCount - 1 ? scrollBottomRef : null} onContextMenu={(e) => handleContextMenu(e, setRightClick)}
                 onClick={(e) => e.detail === 2 ? handleReaction(message._id, "2764-fe0f") : null}
                 onMouseDown={() => handleMouseDown(setRightClick, setLongPress)}
                 onMouseUp={() => handleMouseUp(longPress, setLongPress)}
@@ -76,11 +76,17 @@ const Message = ({
                                 const myReaction = reaction.user_id === userId
 
                                 return (
-                                    <div className={styles.reaction + " " + (myReaction ? styles.myReaction : "")} key={i} onClick={() => { handleReaction(message._id, reaction.reaction) }}>
+                                    <div className={styles.reaction} key={i} onClick={() => { handleReaction(message._id, reaction.reaction) }}>
                                         <Emoji unified={reaction.reaction} size={13} />
                                     </div>
                                 )
                             })}
+
+                            <div className={styles.reaction}>
+                                <h4 className={styles.reactionCount}>
+                                    {message.reactions.length}
+                                </h4>
+                            </div>
                         </div>
                     }
                 </div>
