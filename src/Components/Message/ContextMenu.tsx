@@ -92,7 +92,10 @@ const Button = ({
     return (
         <>
             {canSee &&
-                <div className={styles.messagecontextitem} onClick={() => action()}>
+                <div
+                    className={styles.messagecontextitem}
+                    onClick={() => action()}
+                >
                     <div
                         style={{ color: color }}
                         className={styles.contexttitle}>
