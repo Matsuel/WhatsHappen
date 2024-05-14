@@ -11,7 +11,7 @@
     .pinned {
         transition: all 1s ease-in-out;
     }
-    
+
     .infos {
         width: 80%;
         height: 100%;
@@ -52,7 +52,20 @@
     align-items: flex-start;
     justify-content: space-evenly;
     color: #000;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'SfPro', sans-serif;
+
+    .lastMessage {
+        width: 40px;
+        height: 30px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .conversationName {
+        font-size: 16px;
+        font-weight: 600;
+    }
 }
 
 /* Conversation status style */
@@ -83,4 +96,43 @@
     border-radius: 50%;
     background-color: #fff;
     border: 2px solid #F6F6F6;
+}
+
+// isTyping style 
+
+.isTyping {
+    width: 40px;
+    height: 30px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    .dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background-color: #fff;
+        animation: blink 1s infinite;
+    }
+
+    .dot:nth-child(2) {
+        animation-delay: 0.33s;
+    }
+
+    .dot:nth-child(3) {
+        animation-delay: 0.66s;
+    }
+
+    @keyframes blink {
+
+        0%,
+        100% {
+            opacity: 0;
+        }
+
+        50% {
+            opacity: 1;
+        }
+    }
 }
