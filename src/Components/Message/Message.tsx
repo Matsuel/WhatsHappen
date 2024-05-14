@@ -60,13 +60,15 @@ const Message = ({
     const handleReaction = (message_id: string, reaction_id: string) => {
         socket.emit('reaction', { cookies, message_id, reaction_id, conversationActive })
         socket.on('reaction', (data: any) => {
-            data.reacted ? socket.emit('conversationmessages', { cookies, conversation_id:conversationActive }) : null
+            data.reacted ? socket.emit('conversationmessages', { cookies, conversation_id: conversationActive }) : null
         })
     }
 
     return (
         <>
-            <div className={styles.message + " " + firstPlan + " " + hasReactions} ref={i === messagesCount - 1 ? scrollBottomRef : null} onContextMenu={(e) => handleContextMenu(e, setRightClick)}
+            <div className={styles.message + " " + firstPlan + " " + hasReactions}
+                ref={i === messagesCount - 1 ? scrollBottomRef : null}
+                onContextMenu={(e) => handleContextMenu(e, setRightClick)}
                 onClick={(e) => e.detail === 2 ? handleReaction(message._id, "2764-fe0f") : null}
                 onMouseDown={() => handleMouseDown(setRightClick, setLongPress)}
                 onMouseUp={() => handleMouseUp(longPress, setLongPress)}
@@ -87,7 +89,7 @@ const Message = ({
                         handleReaction={handleReaction}
                         id={message._id}
                     />
-                    
+
                 </div>
 
                 <ContextMenu
