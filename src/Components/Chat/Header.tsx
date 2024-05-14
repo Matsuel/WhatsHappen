@@ -3,7 +3,6 @@ import Phone from '@/assets/Phone.svg'
 import Video from '@/assets/Video.svg'
 import SearchConv from '@/assets/SearchConv.svg'
 import Expand from '@/assets/Expand.svg'
-
 import styles from './style.module.css'
 import Image from 'next/image'
 import { capitalize } from '@/Functions/Utils/capitalize'

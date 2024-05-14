@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import styles from './Conversation.module.scss'
-import Pin from '@/assets/Pin.svg'
 import ShowDate from '../ShowDate/ShowDate'
 import ConversationStatus from './ConversationStatus'
 import ConversationInfos from './ConversationInfos'

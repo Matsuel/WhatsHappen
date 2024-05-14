@@ -1,5 +1,4 @@
 import React from 'react';
-
 import styles from './ContextMenuConversation.module.scss';
 import Image from 'next/image';
 import { decodeToken } from 'react-jwt';

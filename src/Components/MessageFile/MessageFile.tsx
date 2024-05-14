@@ -3,7 +3,6 @@ import styles from './MessageFile.module.css'
 import { FileIcon, defaultStyles } from 'react-file-icon'
 import Download from '@/assets/Download.svg'
 import { decodeToken } from 'react-jwt';
-
 import { handleContextMenu, downloadFile  } from '../../Functions/Message/Message'
 import Image from 'next/image'
 

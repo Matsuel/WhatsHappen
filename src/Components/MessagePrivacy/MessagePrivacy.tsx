@@ -1,7 +1,6 @@
 import React from 'react'
 import Security from '@/assets/Security.svg'
 import Image from 'next/image'
-
 import styles from './MessagePrivacy.module.scss'
 
 const MessagePrivacy = () => {

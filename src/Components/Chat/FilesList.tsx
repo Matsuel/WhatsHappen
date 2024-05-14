@@ -1,7 +1,5 @@
 import React from 'react'
-
 import styles from './style.module.css'
-import IsTyping from '../IsTyping/IsTyping'
 import Bottombar from './InputBar'
 import File from '../File/File'
 

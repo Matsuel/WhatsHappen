@@ -1,7 +1,6 @@
 import React, { useState, KeyboardEvent } from 'react'
-import Picker, { Emoji } from 'emoji-picker-react'
+import Picker from 'emoji-picker-react'
 import { handleContextMenu, handleMouseDown, handleMouseUp } from '../../Functions/Message/Message'
-
 import styles from './style.module.scss'
 import { ContextMenu } from './ContextMenu'
 import { decodeToken } from 'react-jwt'
