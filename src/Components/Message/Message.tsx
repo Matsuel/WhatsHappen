@@ -5,6 +5,8 @@ import { handleContextMenu, handleMouseDown, handleMouseUp } from '../../Functio
 import styles from './style.module.scss'
 import { ContextMenu } from './ContextMenu'
 import { decodeToken } from 'react-jwt'
+import { socket } from '@/pages/_app'
+import Reactions from './Reactions'
 
 interface MessageProps {
     message: message,
@@ -14,7 +16,7 @@ interface MessageProps {
     bottomRounded: boolean,
     messagesCount: number,
     deleteMessage: Function,
-    handleReaction: Function,
+    conversationActive: string
 }
 
 const Message = ({
@@ -25,7 +27,7 @@ const Message = ({
     topRounded,
     messagesCount,
     deleteMessage,
-    handleReaction
+    conversationActive
 }: MessageProps) => {
 
     const [rightClick, setRightClick] = useState<boolean>(false)
@@ -50,6 +52,18 @@ const Message = ({
         }
     }
 
+    let cookies: any;
+    if (typeof window !== "undefined") {
+        cookies = localStorage.getItem('user')
+    }
+
+    const handleReaction = (message_id: string, reaction_id: string) => {
+        socket.emit('reaction', { cookies, message_id, reaction_id, conversationActive })
+        socket.on('reaction', (data: any) => {
+            data.reacted ? socket.emit('conversationmessages', { cookies, conversation_id:conversationActive }) : null
+        })
+    }
+
     return (
         <>
             <div className={styles.message + " " + firstPlan + " " + hasReactions} ref={i === messagesCount - 1 ? scrollBottomRef : null} onContextMenu={(e) => handleContextMenu(e, setRightClick)}
@@ -67,28 +81,13 @@ const Message = ({
                     }>
                         {message.content}
                     </p>
-                    {
-                        message.reactions && message.reactions.length > 0 &&
 
-                        <div className={styles.reactions}>
-
-                            {message.reactions.map((reaction, i) => {
-                                const myReaction = reaction.user_id === userId
-
-                                return (
-                                    <div className={styles.reaction} key={i} onClick={() => { handleReaction(message._id, reaction.reaction) }}>
-                                        <Emoji unified={reaction.reaction} size={13} />
-                                    </div>
-                                )
-                            })}
-
-                            <div className={styles.reaction}>
-                                <h4 className={styles.reactionCount}>
-                                    {message.reactions.length}
-                                </h4>
-                            </div>
-                        </div>
-                    }
+                    <Reactions
+                        reactions={message.reactions}
+                        handleReaction={handleReaction}
+                        id={message._id}
+                    />
+                    
                 </div>
 
                 <ContextMenu

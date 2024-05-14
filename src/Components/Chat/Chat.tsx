@@ -16,7 +16,6 @@ interface ChatProps {
     typingStatus: {},
     filesEmpty: boolean,
     deleteMessage: Function,
-    handleReaction: Function,
     files: any[],
     setFiles: (files: any[]) => void,
     setFilesEmpty: (filesEmpty: boolean) => void,
@@ -32,7 +31,6 @@ const Chat = ({
     typingStatus,
     filesEmpty,
     deleteMessage,
-    handleReaction,
     files,
     setFiles,
     setFilesEmpty
@@ -92,7 +90,7 @@ const Chat = ({
                         messagesCount={messages.length}
                         filesEmpty={filesEmpty}
                         deleteMessage={deleteMessage}
-                        handleReaction={handleReaction}
+                        conversationActive={conversationActive}
                     />
 
                     <BottomBar

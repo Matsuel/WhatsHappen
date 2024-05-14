@@ -12,10 +12,17 @@ interface MessagesAreaProps {
     messages: message[],
     filesEmpty: boolean,
     deleteMessage: Function,
-    handleReaction: Function,
+    conversationActive: string,
 }
 
-const MessagesArea = ({ showSearchConv, messages, messagesCount, filesEmpty, deleteMessage, handleReaction }: MessagesAreaProps) => {
+const MessagesArea = ({
+    showSearchConv,
+    messages,
+    messagesCount,
+    filesEmpty,
+    deleteMessage,
+    conversationActive,
+}: MessagesAreaProps) => {
     const [messageDay, setMessageDay] = useState<Number>(0)
 
     const scrollBottomRef = useRef<HTMLDivElement>(null)
@@ -61,7 +68,7 @@ const MessagesArea = ({ showSearchConv, messages, messagesCount, filesEmpty, del
                                     bottomRounded={isBottomRounded(nextMessage, message.sender_id, message.date)}
                                     messagesCount={messagesCount}
                                     deleteMessage={deleteMessage}
-                                    handleReaction={handleReaction}
+                                    conversationActive={conversationActive}
                                 /> :
                                 <MessageFile
                                     message={message}

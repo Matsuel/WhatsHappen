@@ -189,12 +189,7 @@ const Home = () => {
     }
 
     //mettre ça dans messagesList
-    const handleReaction = (message_id: string, reaction_id: string) => {
-        socket.emit('reaction', { cookies, message_id, reaction_id, conversationActive })
-        socket.on('reaction', (data: any) => {
-            data.reacted ? socket.emit('conversationmessages', { cookies, conversation_id:conversationActive }) : null
-        })
-    }
+    
 
 
 
@@ -234,7 +229,6 @@ const Home = () => {
                 typingStatus={typingStatus}
                 filesEmpty={filesEmpty}
                 deleteMessage={deleteMessage}
-                handleReaction={handleReaction}
                 files={files}
                 setFiles={setFiles}
                 setFilesEmpty={setFilesEmpty}
