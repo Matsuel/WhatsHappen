@@ -71,7 +71,7 @@ const Home = () => {
 
     // pas besoin de ça vu qu'on a la liste des gens connectés
     socket.on('synchrostatus', (data) => {
-        console.log(data)
+        // console.log(data)
     })
 
     //dégager ça dans conversationsList
@@ -108,7 +108,13 @@ const Home = () => {
         if (content.trim() === '' && files.length === 0) return
         socket.emit('newmessage', { cookies, conversation_id, content, files })
         socket.on('newmessage', (data: any) => {
-            data.sent ? (setMessage(''), socket.emit('conversationmessages', { cookies, conversation_id })) : console.log('Échec de la connexion:', data.error);
+            if (data.sent) {
+                setMessage('')
+                socket.emit('conversationmessages', { cookies, conversation_id })
+                // créer un canal qui recharge les messages de la conversation active pour la sidebar
+            } else {
+                console.log('Échec de la connexion:', data)
+            }
         })
     }
     
