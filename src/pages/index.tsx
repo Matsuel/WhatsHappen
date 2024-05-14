@@ -111,6 +111,7 @@ const Home = () => {
             if (data.sent) {
                 setMessage('')
                 socket.emit('conversationmessages', { cookies, conversation_id })
+                socket.emit('conversations', { cookies })
                 // créer un canal qui recharge les messages de la conversation active pour la sidebar
             } else {
                 console.log('Échec de la connexion:', data)
