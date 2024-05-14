@@ -11,7 +11,7 @@ interface ChatProps {
     showSearchConv: boolean,
     handleSearchConv: (e: React.ChangeEvent<HTMLInputElement>) => void,
     message: string,
-    handleMessageChange: (e: string, emojie:boolean) => void,
+    handleMessageChange: (e: string, emojie: boolean) => void,
     sendMessage: Function,
     typingStatus: {},
     filesEmpty: boolean,
@@ -85,6 +85,7 @@ const Chat = ({
                     />
 
                     <MessagesArea
+                        typingStatus={typingStatus}
                         showSearchConv={showSearchConv}
                         messages={messages}
                         messagesCount={messages.length}
@@ -98,7 +99,6 @@ const Chat = ({
                         message={message}
                         handleMessageChange={handleMessageChange}
                         sendMessage={sendMessage}
-                        typingStatus={typingStatus}
                         name={conversationInfos.name}
                         filesEmpty={filesEmpty}
                         setFilesEmpty={setFilesEmpty}

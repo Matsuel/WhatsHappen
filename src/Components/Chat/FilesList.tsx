@@ -10,7 +10,6 @@ interface FilesListProps {
     message: string,
     handleMessageChange: Function,
     sendMessage: Function,
-    typingStatus: Object,
     name: string,
     filesEmpty: boolean,
     setFilesEmpty: Function,
@@ -23,7 +22,6 @@ const FilesList = ({
     message,
     handleMessageChange,
     sendMessage,
-    typingStatus,
     name,
     filesEmpty,
     setFilesEmpty,
@@ -33,7 +31,6 @@ const FilesList = ({
 
     return (
         <div className={styles.bottomArea}>
-            <IsTyping conversationActive={conversationActive} typingStatus={typingStatus} name={name} />
 
             {files.length > 0 ? (
                 <div className={styles.fileslist}>

@@ -86,6 +86,7 @@ const Home = () => {
         });
 
         socket.on('typing', (data) => {
+            console.log(data)
             setTypingStatus((prev) => ({
                 ...prev,
                 [data.conversationId]: data.typing
