@@ -1,7 +1,5 @@
 import React, { useState } from 'react'
 import styles from './Conversation.module.scss'
-import DoubleChevrons from '@/assets/DoubleChevrons.svg'
-import Image from 'next/image'
 import { socket } from '@/pages/_app'
 import IsTyping from './IsTyping'
 import { capitalize } from '@/Functions/Utils/capitalize'
