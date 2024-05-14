@@ -7,6 +7,7 @@ import Eye from '@/assets/Eye.svg'
 import EyeSlash from '@/assets/EyeSlash.svg'
 import Trash from '@/assets/Trash.svg'
 import JoinFile from '@/assets/JoinFile.svg'
+import Head from 'next/head'
 
 const LoginPage = () => {
   const [socket, setSocket] = useState<any>(null)
@@ -92,12 +93,17 @@ const LoginPage = () => {
   return (
     <div className={styles.LoginPage}>
 
+      <Head>
+        <title>iMessages - Login</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+
       <div className={styles.form}>
         <form className={styles.part}>
           {!login ? (
             <>
               <Image alt='whatsapp' src={WhatsApp} width={50} height={50} className={styles.whatsappLogo} />
-              <h2 className={styles.title}>S'inscrire sur Whatsapp</h2>
+              <h2 className={styles.title}>S'inscrire sur iMessages</h2>
               <div className={styles.fileWrapper}>
                 <p className={selectedFile ? styles.fileInputText : styles.fileInputTextNoFile}>
                   {fileName.charAt(0).toUpperCase() + fileName.slice(1).toLowerCase() || 'Choisissez un fichier'}
@@ -115,10 +121,10 @@ const LoginPage = () => {
                 <input onChange={(e) => setConfirmPassword(e.target.value)} placeholder='Confirmez votre mot de passe' className={styles.inputpassword} type={passwordShown[1] ? "text" : "password"} minLength={5} />
                 <Image alt='eye' src={passwordShown[1] ? EyeSlash : Eye} width={20} onClick={() => togglePasswordVisiblity(1)} className={styles.eye} />
               </div>
-              <button onClick={(e) => handleSubmitRegister(e)} className={styles.buttonlogin}>S'inscrire sur WhatsApp</button>
+              <button onClick={(e) => handleSubmitRegister(e)} className={styles.buttonlogin}>S'inscrire sur iMessages</button>
             </>
           ) : (
-            <button onClick={() => setLogin(false)} className={styles.buttonlogin}>S'inscrire sur WhatsApp</button>
+            <button onClick={() => setLogin(false)} className={styles.buttonlogin}>S'inscrire sur iMessages</button>
           )}
 
         </form>
@@ -128,16 +134,16 @@ const LoginPage = () => {
           {login ? (
             <>
               <Image alt='whatsapp' src={WhatsApp} width={50} height={50} className={styles.whatsappLogo} />
-              <h2 className={styles.title}>Se connecter à WhatsApp</h2>
+              <h2 className={styles.title}>Se connecter à iMessages</h2>
               <input onChange={(e) => setEmail(e.target.value)} placeholder='Entrez votre adresse mail' className={styles.inputlogin} type="text" maxLength={20} />
               <div className={styles.passwordWrapper}>
                 <input onChange={(e) => setPassword(e.target.value)} placeholder='Entrez votre mot de passe' className={styles.inputpassword} type={passwordShown[2] ? "text" : "password"} minLength={5} />
                 <Image alt='eye' src={passwordShown[2] ? EyeSlash : Eye} width={20} onClick={() => togglePasswordVisiblity(2)} className={styles.eye} />
               </div>
-              <button onClick={(e) => handleSubmitLogin(e)} className={styles.buttonlogin}>Se connecter à WhatsApp</button>
+              <button onClick={(e) => handleSubmitLogin(e)} className={styles.buttonlogin}>Se connecter à iMessages</button>
             </>
           ) : (
-            <button onClick={() => setLogin(true)} className={styles.buttonlogin}>Se connecter à WhatsApp</button>
+            <button onClick={() => setLogin(true)} className={styles.buttonlogin}>Se connecter à iMessages</button>
           )}
         </form>
 

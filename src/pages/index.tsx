@@ -83,7 +83,7 @@ const Home = () => {
         <div className={styles.home}>
 
             <Head>
-                <title>Whatshappen</title>
+                <title>iMessages</title>
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
