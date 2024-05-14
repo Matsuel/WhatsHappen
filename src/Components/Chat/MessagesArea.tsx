@@ -14,7 +14,6 @@ interface MessagesAreaProps {
     filesEmpty: boolean,
     deleteMessage: Function,
     conversationActive: string,
-    typingStatus: { [key: string]: boolean }
 }
 
 const MessagesArea = ({
@@ -24,7 +23,6 @@ const MessagesArea = ({
     filesEmpty,
     deleteMessage,
     conversationActive,
-    typingStatus
 }: MessagesAreaProps) => {
 
     const [messageDay, setMessageDay] = useState<Number>(0)
@@ -90,7 +88,6 @@ const MessagesArea = ({
             })}
             
             <IsTyping
-                isTyping={typingStatus[conversationActive]}
             />
         </div>
     )

@@ -12,7 +12,6 @@ interface SidebarProps {
     conversationActive: string,
     handleConversationActive: Function,
     search: string,
-    typingStatus: {},
     handleNewConv: Function,
     setSearch: Function
 }
@@ -21,7 +20,6 @@ const Sidebar = ({
     conversationActive,
     handleConversationActive,
     search,
-    typingStatus,
     handleNewConv,
     setSearch
 }: SidebarProps) => {
@@ -49,7 +47,6 @@ const Sidebar = ({
         getConversations()
 
         socket.on('conversations', (data: any) => {
-            console.log(data)
             data.conversations ? setConversations(data.conversations) : console.log('Échec de la connexion:', data.error);
         });
     
@@ -98,7 +95,6 @@ const Sidebar = ({
                                 <Conversation
                                     conversation={conversation}
                                     handleConversationActive={handleConversationActive}
-                                    typingStatus={typingStatus}
                                     userId={userId}
                                     classActive={classActive}
                                     noConvActiveClass={noConvActiveClass}

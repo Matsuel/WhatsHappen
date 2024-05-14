@@ -1,13 +1,19 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styles from './style.module.scss'
+import { socket } from '@/pages/_app'
 
 interface IsTypingProps {
-    isTyping: boolean
 }
 
 const IsTyping = ({
-    isTyping
 }: IsTypingProps) => {
+
+    const [isTyping, setIsTyping] = useState<boolean>(false)
+
+    socket.on('typing', (data: any) => {
+        setIsTyping(data.typing)
+    })
+
     return (
         <>
             {isTyping &&

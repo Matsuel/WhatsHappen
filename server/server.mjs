@@ -59,7 +59,7 @@ io.on('connection', (socket) => {
     //staut quand l'utilisateur est en train d'écrire
     socket.on('typing', async (data) => {
         const { cookies, conversation_id } = data;
-        if (checkToken(cookies)) {
+        if (await checkToken(cookies)) {
             const sender_id = jwt.verify(cookies, secretTest).userId;
             const conversation = await Conversation.findById(conversation_id);
             const otherId = conversation.users_id.filter((id) => id !== sender_id)[0];

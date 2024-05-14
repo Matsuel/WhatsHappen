@@ -18,8 +18,6 @@ const Home = () => {
     //dégager ça dans bottombar
     const [files, setFiles] = useState<FileInfos[]>([])
 
-
-    const [typingStatus, setTypingStatus] = useState<{}>({})
     const [userId, setUserId] = useState<string>('')
 
     //déplacer ça dans conversationsList
@@ -85,13 +83,7 @@ const Home = () => {
             }
         });
 
-        socket.on('typing', (data) => {
-            console.log(data)
-            setTypingStatus((prev) => ({
-                ...prev,
-                [data.conversationId]: data.typing
-            }))
-        })
+        
 
         //deplacer ça dans messagesList
         socket.on('syncmessages', (data) => {
@@ -206,8 +198,6 @@ const Home = () => {
                 conversationActive={conversationActive}
                 handleConversationActive={handleConversationActive}
                 search={search}
-                // voir le passer en tant que context car il n'est utilisé que loin dans l'arbre
-                typingStatus={typingStatus}
                 handleNewConv={handleNewConv}
                 setSearch={setSearch}
             />
@@ -226,8 +216,6 @@ const Home = () => {
                 message={message}
                 handleMessageChange={handleMessageChange}
                 sendMessage={sendMessage}
-                // voir le passer en tant que context car il n'est utilisé que loin dans l'arbre
-                typingStatus={typingStatus}
                 filesEmpty={filesEmpty}
                 deleteMessage={deleteMessage}
                 files={files}

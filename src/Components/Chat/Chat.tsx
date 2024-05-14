@@ -13,7 +13,6 @@ interface ChatProps {
     message: string,
     handleMessageChange: (e: string, emojie: boolean) => void,
     sendMessage: Function,
-    typingStatus: {},
     filesEmpty: boolean,
     deleteMessage: Function,
     files: any[],
@@ -28,7 +27,6 @@ const Chat = ({
     message,
     handleMessageChange,
     sendMessage,
-    typingStatus,
     filesEmpty,
     deleteMessage,
     files,
@@ -85,7 +83,6 @@ const Chat = ({
                     />
 
                     <MessagesArea
-                        typingStatus={typingStatus}
                         showSearchConv={showSearchConv}
                         messages={messages}
                         messagesCount={messages.length}

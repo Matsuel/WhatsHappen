@@ -10,7 +10,6 @@ import ContextMenuConversation from '../ContextMenuConversation/ContextMenuConve
 interface ConversationProps {
     conversation: ConversationInfos,
     handleConversationActive: Function,
-    typingStatus: {},
     userId: string
     classActive: boolean,
     noConvActiveClass: boolean,
@@ -19,7 +18,6 @@ interface ConversationProps {
 const Conversation = ({
     conversation,
     handleConversationActive,
-    typingStatus,
     userId,
     classActive,
     noConvActiveClass
@@ -87,7 +85,6 @@ const Conversation = ({
                     name={conversation.name}
                     last_message_sender={conversation.last_message_sender}
                     last_message_content={conversation.last_message_content}
-                    typingStatus={typingStatus}
                     userId={userId}
                     handleConversationActive={handleConversationActive}
                 />
