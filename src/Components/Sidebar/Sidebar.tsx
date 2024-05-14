@@ -26,10 +26,10 @@ const Sidebar = ({
             return
         }
         setConversationActive(conversationId)
-        socket.emit('conversationmessages', { cookies, conversation_id:conversationId })
+        socket.emit('conversationmessages', { cookies, conversation_id: conversationId })
     }
 
-    
+
     const [search, setSearch] = useState<string>('')
     const [conversations, setConversations] = useState<ConversationInfos[]>([])
     const conversationsNoResult: string = "Aucune conversation trouvée"
@@ -47,16 +47,13 @@ const Sidebar = ({
         socket.emit('conversations', { cookies })
     }
 
-    
-
-
     useEffect(() => {
         getConversations()
 
         socket.on('conversations', (data: any) => {
             data.conversations ? setConversations(data.conversations) : console.log('Échec de la connexion:', data.error);
         });
-    
+
         socket.on('pinconversation', (data: any) => {
             if (data.pinned) {
                 socket.emit('conversations', { cookies })
@@ -104,7 +101,7 @@ const Sidebar = ({
                                     userId={userId}
                                     classActive={classActive}
                                     noConvActiveClass={noConvActiveClass}
-                                    handleConversationActive={handleConversationActive}                                    
+                                    handleConversationActive={handleConversationActive}
                                 />
                             )
                         )

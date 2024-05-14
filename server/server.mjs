@@ -109,7 +109,15 @@ io.on('connection', (socket) => {
         let conversations = await Conversation.find({ users_id: sender_id }).sort({ last_message_date: -1 });
         conversations = await getConversationsInfos(conversations, sender_id);
         conversations = sortConversations(conversations, sender_id);
-        if (connectedUsers[otherId]) connectedUsers[otherId].emit('syncmessages', { messages: await M.find(), conversations: conversations });
+        if (connectedUsers[otherId]) {
+            connectedUsers[otherId].emit('syncmessages', { messages: await getLastMessage(conversation_id) });
+        }
+    }
+
+    async function getLastMessage(conversation_id) {
+        let MessageModel = mongoose.model('Messages' + conversation_id);
+        let lastMessage = await MessageModel.findOne().sort({ date: -1 });
+        return lastMessage;
     }
 
     //permet de savoir si l'utilisateur est connecté
@@ -162,11 +170,11 @@ io.on('connection', (socket) => {
                 } else {
                     if (message.reactions[reactionIndex].reaction === reaction_id) {
                         message.reactions.splice(reactionIndex, 1);
-                    }else {
+                    } else {
                         message.reactions[reactionIndex].reaction = reaction_id;
                     }
                 }
-            }else {
+            } else {
                 message.reactions = [{ user_id: sender_id, reaction: reaction_id }];
             }
             await message.save();
@@ -184,7 +192,7 @@ io.on('connection', (socket) => {
             const otherId = conversation.users_id.filter((id) => id !== sender_id)[0];
             const user = await User.findById(otherId);
             socket.emit('otherinfos', { name: user.username, pic: user.pic });
-        }else{
+        } else {
             socket.emit('otherinfos', { name: null, pic: null, id: null });
         }
     })
