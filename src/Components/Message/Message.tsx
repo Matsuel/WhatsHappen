@@ -4,7 +4,6 @@ import { handleContextMenu, handleMouseDown, handleMouseUp } from '../../Functio
 
 import styles from './style.module.scss'
 import { ContextMenu } from './ContextMenu'
-import ShowDate from '../ShowDate/ShowDate'
 import { decodeToken } from 'react-jwt'
 
 interface MessageProps {
@@ -43,6 +42,7 @@ const Message = ({
     const firstPlan = rightClick ? styles.messagefirstplan : ''
     const topClass = isReceived ? (topRounded ? styles.messagereceivedtop : styles.messagereceivedmiddle) : (topRounded ? styles.messagesenttop : styles.messagesentmiddle)
     const bottomClass = isReceived ? (bottomRounded ? styles.messagereceivedbottom : '') : (bottomRounded ? styles.messagesentbottom : '');
+    const hasReactions = message.reactions && message.reactions.length > 0 ? styles.hasReactions : ''
 
     const handleEscape = (e: KeyboardEvent<HTMLDivElement>) => {
         if (e.key === "Escape") {
@@ -52,7 +52,7 @@ const Message = ({
 
     return (
         <>
-            <div className={styles.message + " " + firstPlan} ref={i === messagesCount - 1 ? scrollBottomRef : null} onContextMenu={(e) => handleContextMenu(e, setRightClick)}
+            <div className={styles.message + " " + firstPlan+" " + hasReactions} ref={i === messagesCount - 1 ? scrollBottomRef : null} onContextMenu={(e) => handleContextMenu(e, setRightClick)}
                 onClick={(e) => e.detail === 2 ? handleReaction(message._id, "2764-fe0f") : null}
                 onMouseDown={() => handleMouseDown(setRightClick, setLongPress)}
                 onMouseUp={() => handleMouseUp(longPress, setLongPress)}
@@ -83,10 +83,6 @@ const Message = ({
                             })}
                         </div>
                     }
-                    {/* <ShowDate
-                        date={message.date}
-                        className='messagetime'
-                    /> */}
                 </div>
 
                 <ContextMenu

@@ -106,10 +106,15 @@
 }
 
 
+.hasReactions {
+    height: auto;
+    margin-bottom: 5px;
+}
+
 
 .reactions {
     position: absolute;
-    bottom: 5px;
+    bottom: -10px;
     left: 15px;
     width: 80%;
     height: auto;
