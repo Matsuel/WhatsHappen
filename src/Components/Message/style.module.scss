@@ -150,17 +150,13 @@
     background-color: #fff;
 }
 
-.reactiondiv {
-    margin-bottom: 2%;
-}
-
 /* contextMenu style  */
 
 .messagecontextmenu {
     z-index: 2;
     width: 15%;
     height: auto;
-    margin-top: 2%;
+    margin-top: 1%;
     border-radius: 12px;
     display: flex;
     flex-direction: column;
@@ -216,7 +212,7 @@
 }
 
 .reactiondiv {
-    margin-bottom: 2%;
+    margin-bottom: 1%;
 }
 
 // isTyping style 
