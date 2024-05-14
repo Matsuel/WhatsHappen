@@ -1,12 +1,14 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from './style.module.css'
 import JoinFile from '@/assets/JoinFile.svg'
 import VoiceMessage from '@/assets/VoiceMessage.svg'
 import Dropzone from 'react-dropzone'
-import { onDrop, handleEnterPressed } from '../../Functions/BottomBar/BottomBar'
+import { handleEnterPressed } from '../../Functions/BottomBar/BottomBar'
 import Image from 'next/image'
 import EmojiPicker, { Emoji } from 'emoji-picker-react'
 import { useClickAway } from '@uidotdev/usehooks';
+import { socket } from '@/pages/_app'
+import { decodeToken } from 'react-jwt'
 
 const emojiList = ["1f929", "1f607", "1f913", "1f635-200d-1f4ab", "1fae0", "1f602", "1f929", "1f600", "1f621", "1f603", '1f600', '1f603', '1f604', '1f601', '1f606', '1f605', '1f602', '1f923', '1f642', '1f643', '1f609', '1f60a', '1f607', '1f970', '1f60d', '1f929', '1f618', '1f617', '1f61a'];
 
@@ -14,17 +16,26 @@ const RandomEmojis: EmojiPickerProps[] = emojiList.map((emoji) => ({ unified: em
 
 interface InputBarProps {
     conversationActive: string,
-    message: string,
-    handleMessageChange: Function,
-    sendMessage: Function,
 }
 
 const InputBar = ({
     conversationActive,
-    message,
-    handleMessageChange,
-    sendMessage,
 }: InputBarProps) => {
+
+    const [userId, setUserId] = useState<string>('')
+
+    let cookies: any;
+    if (typeof window !== "undefined") {
+        cookies = localStorage.getItem('user')
+    }
+
+    // faire un hook pour ça
+    useEffect(() => {
+        if (cookies) {
+            const token: User | null = decodeToken(cookies)
+            setUserId(token?.userId as string)
+        }
+    }, [cookies])
 
     const ref = useClickAway(() => {
         setOpenPicker(false);
@@ -50,6 +61,28 @@ const InputBar = ({
 
     const handleRandomEmoji = () => {
         setEmojiIndex(Math.floor(Math.random() * RandomEmojis.length))
+    }
+
+    const [message, setMessage] = useState<string>('')
+    const handleMessageChange = (e: string,emoji: boolean) => {
+        socket.emit('typing', { cookies, conversation_id: conversationActive })
+        emoji ? setMessage(message + e) : setMessage(e)
+    }
+
+    const sendMessage = async (conversation_id: string, files: FileInfos[]) => {
+        const content = message
+        if (content.trim() === '' && files.length === 0) return
+        socket.emit('newmessage', { cookies, conversation_id, content, files })
+        socket.on('newmessage', (data: any) => {
+            if (data.sent) {
+                setMessage('')
+                socket.emit('conversationmessages', { cookies, conversation_id })
+                socket.emit('conversations', { cookies })
+                // créer un canal qui recharge les messages de la conversation active pour la sidebar
+            } else {
+                console.log('Échec de la connexion:', data)
+            }
+        })
     }
 
     return (

@@ -6,12 +6,13 @@ import Message from '../Message/Message'
 import MessageFile from '../MessageFile/MessageFile'
 import { isBottomRounded, isTopRounded } from '@/Functions/MessagesList/MessagesList'
 import IsTyping from '../Message/IsTyping'
+import { socket } from '@/pages/_app'
+import { decodeToken } from 'react-jwt'
 
 interface MessagesAreaProps {
     showSearchConv: boolean,
     messagesCount: number,
     messages: message[],
-    deleteMessage: Function,
     conversationActive: string,
 }
 
@@ -19,9 +20,23 @@ const MessagesArea = ({
     showSearchConv,
     messages,
     messagesCount,
-    deleteMessage,
     conversationActive,
 }: MessagesAreaProps) => {
+
+    const [userId, setUserId] = useState<string>('')
+
+    let cookies: any;
+    if (typeof window !== "undefined") {
+        cookies = localStorage.getItem('user')
+    }
+
+    // faire un hook pour ça
+    useEffect(() => {
+        if (cookies) {
+            const token: User | null = decodeToken(cookies)
+            setUserId(token?.userId as string)
+        }
+    }, [cookies])
 
     const [messageDay, setMessageDay] = useState<Number>(0)
 
@@ -32,6 +47,14 @@ const MessagesArea = ({
             scrollBottomRef.current.scrollIntoView()
         }
     }, [messages])
+
+    const deleteMessage = (message_id: string) => {
+        socket.emit('deletemessage', { cookies, message_id, conversationActive })
+        socket.on('deletemessage', (data: any) => {
+            if (data.deleted) {
+            }
+        })
+    }
 
     return (
         <div className={styles.messagesection + " " + (showSearchConv ? styles.messagesectionmedium : styles.messagesectionfull)}>

@@ -5,17 +5,11 @@ import File from '../File/File'
 
 interface FilesListProps {
     conversationActive: string,
-    message: string,
-    handleMessageChange: Function,
-    sendMessage: Function,
     name: string,
 }
 
 const FilesList = ({
     conversationActive,
-    message,
-    handleMessageChange,
-    sendMessage,
     name,
 }: FilesListProps) => {
 
@@ -24,9 +18,6 @@ const FilesList = ({
 
             <Bottombar
                 conversationActive={conversationActive}
-                message={message}
-                handleMessageChange={handleMessageChange}
-                sendMessage={sendMessage}
             />
         </div>
     )

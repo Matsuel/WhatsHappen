@@ -8,22 +8,10 @@ import { socket } from '@/pages/_app'
 
 interface ChatProps {
     conversationActive: string,
-    showSearchConv: boolean,
-    handleSearchConv: (e: React.ChangeEvent<HTMLInputElement>) => void,
-    message: string,
-    handleMessageChange: (e: string, emojie: boolean) => void,
-    sendMessage: Function,
-    deleteMessage: Function,
 }
 
 const Chat = ({
     conversationActive,
-    showSearchConv,
-    handleSearchConv,
-    message,
-    handleMessageChange,
-    sendMessage,
-    deleteMessage
 }: ChatProps) => {
 
     const [messages, setMessages] = useState<message[]>([])
@@ -56,6 +44,11 @@ const Chat = ({
         })
     }
 
+    const [showSearchConv, setShowSearchConv] = useState<boolean>(false)
+    const handleSearchConv = () => {
+        setShowSearchConv(!showSearchConv)
+    }
+
     useEffect(() => {
         if (conversationActive !== '') {
             getConversationsMessages(conversationActive)
@@ -78,15 +71,11 @@ const Chat = ({
                         showSearchConv={showSearchConv}
                         messages={messages}
                         messagesCount={messages.length}
-                        deleteMessage={deleteMessage}
                         conversationActive={conversationActive}
                     />
 
                     <BottomBar
                         conversationActive={conversationActive}
-                        message={message}
-                        handleMessageChange={handleMessageChange}
-                        sendMessage={sendMessage}
                         name={conversationInfos.name}
                         
                     />

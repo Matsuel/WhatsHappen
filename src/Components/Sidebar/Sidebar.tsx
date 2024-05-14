@@ -10,20 +10,27 @@ import Header from './Header'
 
 interface SidebarProps {
     conversationActive: string,
-    handleConversationActive: Function,
-    search: string,
+    setConversationActive: Function,
     handleNewConv: Function,
-    setSearch: Function
 }
 
 const Sidebar = ({
     conversationActive,
-    handleConversationActive,
-    search,
+    setConversationActive,
     handleNewConv,
-    setSearch
 }: SidebarProps) => {
 
+    const handleConversationActive = (conversationId: string) => {
+        if (conversationId === conversationActive) {
+            setConversationActive('')
+            return
+        }
+        setConversationActive(conversationId)
+        socket.emit('conversationmessages', { cookies, conversation_id:conversationId })
+    }
+
+    
+    const [search, setSearch] = useState<string>('')
     const [conversations, setConversations] = useState<ConversationInfos[]>([])
     const conversationsNoResult: string = "Aucune conversation trouvée"
     const [hasMatchingConversations, setHasMatchingConversations] = useState<boolean>(true)
@@ -80,7 +87,7 @@ const Sidebar = ({
                     <PinnedConversations
                         pinnedConversations={conversations.filter((conv) => conv.pinnedBy.includes(userId))}
                         conversationActive={conversationActive}
-                        handleConversationActive={handleConversationActive}
+                        setConversationActive={setConversationActive}
                         search={search}
                     />
 
@@ -94,10 +101,10 @@ const Sidebar = ({
                             conversation.name.toLowerCase().includes(search.toLowerCase()) && (
                                 <Conversation
                                     conversation={conversation}
-                                    handleConversationActive={handleConversationActive}
                                     userId={userId}
                                     classActive={classActive}
                                     noConvActiveClass={noConvActiveClass}
+                                    handleConversationActive={handleConversationActive}                                    
                                 />
                             )
                         )

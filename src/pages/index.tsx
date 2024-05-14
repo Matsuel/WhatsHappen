@@ -9,19 +9,11 @@ import Head from 'next/head';
 import Modal from '@/Components/Modal/Modal';
 
 const Home = () => {
-    //dégager ça dans bottombar
-    const [message, setMessage] = useState<string>('')
-
     const [userId, setUserId] = useState<string>('')
 
-    //dégager ça dans conversationsList
     const [conversationActive, setConversationActive] = useState<string>('')
 
-    const [search, setSearch] = useState<string>('')
-    const [showNewConv, setShowNewConv] = useState<boolean>(false)
-
-    //dégager ça dans messageArea
-    const [showSearchConv, setShowSearchConv] = useState<boolean>(false)
+    const [showNewConv, setShowNewConv] = useState<boolean>(false)    
 
     const [clickAwayEffect, setClickAwayEffect] = useState<boolean>(false)
 
@@ -73,16 +65,7 @@ const Home = () => {
     socket.on('synchrostatus', (data) => {
         // console.log(data)
     })
-
-    //dégager ça dans conversationsList
-    const handleConversationActive = (conversationId: string) => {
-        if (conversationId === conversationActive) {
-            setConversationActive('')
-            return
-        }
-        setConversationActive(conversationId)
-        socket.emit('conversationmessages', { cookies, conversation_id:conversationId })
-    }
+    
     
     //dégager ça dans modal
     const handleNewConv = () => {
@@ -94,44 +77,7 @@ const Home = () => {
         } else {
             setClickAwayEffect(false)
         }
-    }
-
-    //exporter le socket et déplacer cette fonction dans bottombar
-    const handleMessageChange = (e: string,emoji: boolean) => {
-        socket.emit('typing', { cookies, conversation_id: conversationActive })
-        emoji ? setMessage(message + e) : setMessage(e)
-    }
-
-    //dégager ça dans bottombar
-    const sendMessage = async (conversation_id: string, files: FileInfos[]) => {
-        const content = message
-        if (content.trim() === '' && files.length === 0) return
-        socket.emit('newmessage', { cookies, conversation_id, content, files })
-        socket.on('newmessage', (data: any) => {
-            if (data.sent) {
-                setMessage('')
-                socket.emit('conversationmessages', { cookies, conversation_id })
-                socket.emit('conversations', { cookies })
-                // créer un canal qui recharge les messages de la conversation active pour la sidebar
-            } else {
-                console.log('Échec de la connexion:', data)
-            }
-        })
-    }
-    
-    //dégager ça dans messageArea
-    const handleSearchConv = () => {
-        setShowSearchConv(!showSearchConv)
-    }
-
-    //mettre ça dans messagesList
-    const deleteMessage = (message_id: string) => {
-        socket.emit('deletemessage', { cookies, message_id, conversationActive })
-        socket.on('deletemessage', (data: any) => {
-            if (data.deleted) {
-            }
-        })
-    }
+    }        
 
     return (
         <div className={styles.home}>
@@ -143,10 +89,8 @@ const Home = () => {
 
             <Sidebar
                 conversationActive={conversationActive}
-                handleConversationActive={handleConversationActive}
-                search={search}
+                setConversationActive={setConversationActive}
                 handleNewConv={handleNewConv}
-                setSearch={setSearch}
             />
 
             <Modal
@@ -158,12 +102,6 @@ const Home = () => {
 
             <Chat
                 conversationActive={conversationActive}
-                showSearchConv={showSearchConv}
-                handleSearchConv={handleSearchConv}
-                message={message}
-                handleMessageChange={handleMessageChange}
-                sendMessage={sendMessage}
-                deleteMessage={deleteMessage}
             />
 
         </div>

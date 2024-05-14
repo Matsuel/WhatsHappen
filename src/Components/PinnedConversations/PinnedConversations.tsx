@@ -2,20 +2,30 @@ import React, { useState } from 'react';
 import styles from './PinnedConversations.module.scss';
 import ContextMenuConversation from '../ContextMenuConversation/ContextMenuConversation';
 import DisplayAvatar from '../DisplayAvatar/DisplayAvatar';
+import { socket } from '@/pages/_app';
+import { decodeToken } from 'react-jwt';
 
 interface PinnedConversationsProps {
     pinnedConversations: ConversationInfos[],
     conversationActive: string,
-    handleConversationActive: Function,
+    setConversationActive: Function,
     search: string
 }
 
 const PinnedConversations = ({
     pinnedConversations,
     conversationActive,
-    handleConversationActive,
+    setConversationActive,
     search
 }: PinnedConversationsProps) => {
+
+    let cookies = ""
+    let userId = ""
+    if (typeof window !== 'undefined') {
+        cookies = localStorage.getItem('user') || ''
+        const token: User | null = decodeToken(cookies)
+        userId = token?.userId as string
+    }
 
     const [contextMenu, setContextMenu] = useState<boolean>(false)
     const [points, setPoints] = useState({ x: 0, y: 0 })
@@ -33,6 +43,15 @@ const PinnedConversations = ({
             setPoints({ x: e.pageX, y: e.pageY })
         }
         setConversationPinned(newConversationPinned)
+    }
+
+    const handleConversationActive = (conversationId: string) => {
+        if (conversationId === conversationActive) {
+            setConversationActive('')
+            return
+        }
+        setConversationActive(conversationId)
+        socket.emit('conversationmessages', { cookies, conversation_id:conversationId })
     }
 
     return (
