@@ -93,8 +93,6 @@ const Conversation = ({
                     date={conversation.last_message_date}
                 />
 
-                {/* Context Menu à ajouter ici */}
-
             </div>
 
         </div>

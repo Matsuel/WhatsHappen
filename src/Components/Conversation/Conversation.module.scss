@@ -29,7 +29,11 @@
     border-radius: 12px;
 
     .infos {
-        border: none;
+        border-color: #007aff;
+    }
+
+    .conversationinfos {
+        color: #fff;
     }
 }
 
@@ -39,6 +43,10 @@
 
     .infos {
         border: none;
+    }
+
+    .conversationinfos {
+        color: #fff;
     }
 }
 
