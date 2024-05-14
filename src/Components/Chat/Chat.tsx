@@ -44,6 +44,10 @@ const Chat = ({
         })
     }
 
+    socket.on('syncmessages', (data) => {
+        setMessages(data.messages)
+    })
+
     const [showSearchConv, setShowSearchConv] = useState<boolean>(false)
     const handleSearchConv = () => {
         setShowSearchConv(!showSearchConv)

@@ -101,53 +101,6 @@ io.on('connection', (socket) => {
         await conversation.save();
     }
 
-    async function saveFiles(conversation_id, sender_id, files) {
-        console.log(files);
-        let MessageModel = mongoose.model('Messages' + conversation_id);
-        for (const file of files) {
-            const base64Data = file.content.split(',')[1];
-            const buffer = Buffer.from(base64Data, 'base64');
-
-            let message = {
-                sender_id,
-                conversation_id,
-                date: new Date().toISOString(),
-                content: "",
-                type: "file",
-                fileName: file.name,
-                fileContent: buffer,
-                fileExtension: file.extension,
-                fileType: file.type
-            };
-            await MessageModel.create(message);
-            let conversation = await Conversation.findById(conversation_id);
-            conversation.last_message_date = new Date().toISOString();
-            conversation.last_message_content = "File";
-            conversation.last_message_sender = sender_id;
-            await conversation.save();
-
-            
-
-            if(!fs.existsSync('files')){
-                fs.mkdirSync('files');
-            }
-
-            const extension = path.extname(file.name);
-
-            const fileName = path.basename(file.name, extension);
-
-            const timestamp = Date.now();
-
-            const newFileName = `${fileName}-${timestamp}${extension}`;
-
-            fs.writeFile(path.join('files', newFileName), buffer, (err) => {
-                if (err) throw err;
-                console.log('The file has been saved!');
-            });
-        }
-    }
-
-
     async function otherSynchroMessage(cookies, conversation_id) {
         const sender_id = jwt.verify(cookies, secretTest).userId;
         const conversation = await Conversation.findById(conversation_id);

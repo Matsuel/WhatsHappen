@@ -56,11 +56,6 @@ const Home = () => {
         }, 5000)
     }, [])
 
-    //deplacer ça dans messagesList
-    socket.on('syncmessages', (data) => {
-        console.log(data)
-    })
-
     // pas besoin de ça vu qu'on a la liste des gens connectés
     socket.on('synchrostatus', (data) => {
         // console.log(data)
