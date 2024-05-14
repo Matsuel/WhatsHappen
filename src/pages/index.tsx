@@ -9,14 +9,8 @@ import Head from 'next/head';
 import Modal from '@/Components/Modal/Modal';
 
 const Home = () => {
-
-    //dégager ça dans bottombar
-    const [filesEmpty, setFilesEmpty] = useState<boolean>(true)
     //dégager ça dans bottombar
     const [message, setMessage] = useState<string>('')
-
-    //dégager ça dans bottombar
-    const [files, setFiles] = useState<FileInfos[]>([])
 
     const [userId, setUserId] = useState<string>('')
 
@@ -116,7 +110,7 @@ const Home = () => {
         if (content.trim() === '' && files.length === 0) return
         socket.emit('newmessage', { cookies, conversation_id, content, files })
         socket.on('newmessage', (data: any) => {
-            data.sent ? (setMessage(''), setFilesEmpty(true), setFiles([]), socket.emit('conversationmessages', { cookies, conversation_id })) : console.log('Échec de la connexion:', data.error);
+            data.sent ? (setMessage(''), socket.emit('conversationmessages', { cookies, conversation_id })) : console.log('Échec de la connexion:', data.error);
         })
     }
     
@@ -164,11 +158,7 @@ const Home = () => {
                 message={message}
                 handleMessageChange={handleMessageChange}
                 sendMessage={sendMessage}
-                filesEmpty={filesEmpty}
                 deleteMessage={deleteMessage}
-                files={files}
-                setFiles={setFiles}
-                setFilesEmpty={setFilesEmpty}
             />
 
         </div>

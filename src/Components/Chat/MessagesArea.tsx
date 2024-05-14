@@ -11,7 +11,6 @@ interface MessagesAreaProps {
     showSearchConv: boolean,
     messagesCount: number,
     messages: message[],
-    filesEmpty: boolean,
     deleteMessage: Function,
     conversationActive: string,
 }
@@ -20,7 +19,6 @@ const MessagesArea = ({
     showSearchConv,
     messages,
     messagesCount,
-    filesEmpty,
     deleteMessage,
     conversationActive,
 }: MessagesAreaProps) => {
@@ -36,7 +34,7 @@ const MessagesArea = ({
     }, [messages])
 
     return (
-        <div className={styles.messagesection + " " + (showSearchConv ? styles.messagesectionmedium : styles.messagesectionfull) + " " + (filesEmpty ? styles.messagesectionheightMax : styles.messagesectionheightMin)}>
+        <div className={styles.messagesection + " " + (showSearchConv ? styles.messagesectionmedium : styles.messagesectionfull)}>
             <MessagePrivacy />
 
             {

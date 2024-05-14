@@ -13,11 +13,7 @@ interface ChatProps {
     message: string,
     handleMessageChange: (e: string, emojie: boolean) => void,
     sendMessage: Function,
-    filesEmpty: boolean,
     deleteMessage: Function,
-    files: any[],
-    setFiles: (files: any[]) => void,
-    setFilesEmpty: (filesEmpty: boolean) => void,
 }
 
 const Chat = ({
@@ -27,11 +23,7 @@ const Chat = ({
     message,
     handleMessageChange,
     sendMessage,
-    filesEmpty,
-    deleteMessage,
-    files,
-    setFiles,
-    setFilesEmpty
+    deleteMessage
 }: ChatProps) => {
 
     const [messages, setMessages] = useState<message[]>([])
@@ -86,7 +78,6 @@ const Chat = ({
                         showSearchConv={showSearchConv}
                         messages={messages}
                         messagesCount={messages.length}
-                        filesEmpty={filesEmpty}
                         deleteMessage={deleteMessage}
                         conversationActive={conversationActive}
                     />
@@ -97,10 +88,7 @@ const Chat = ({
                         handleMessageChange={handleMessageChange}
                         sendMessage={sendMessage}
                         name={conversationInfos.name}
-                        filesEmpty={filesEmpty}
-                        setFilesEmpty={setFilesEmpty}
-                        files={files}
-                        setFiles={setFiles}
+                        
                     />
                 </>
             ) : (

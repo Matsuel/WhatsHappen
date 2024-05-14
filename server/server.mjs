@@ -78,12 +78,11 @@ io.on('connection', (socket) => {
     //envoie d'un message et synchro avec l'autre utilisateur si il est connecté
     socket.on('newmessage', async (data) => {
         console.log(data);
-        const { cookies, conversation_id, content, files } = data;
+        const { cookies, conversation_id, content } = data;
         console.log(content);
         if (await checkToken(cookies)) {
             const sender_id = jwt.verify(cookies, secretTest).userId;
             content !== "" ? await saveMessage(conversation_id, content, sender_id) : null;
-            files.length > 0 ? await saveFiles(conversation_id, sender_id, files) : null;
             socket.emit('newmessage', { sent: true });
             otherSynchroMessage(cookies, conversation_id);
         } else {

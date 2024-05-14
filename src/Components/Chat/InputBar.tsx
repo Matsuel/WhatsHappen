@@ -17,9 +17,6 @@ interface InputBarProps {
     message: string,
     handleMessageChange: Function,
     sendMessage: Function,
-    files: FileInfos[],
-    setFiles: Function,
-    setFilesEmpty: Function,
 }
 
 const InputBar = ({
@@ -27,9 +24,6 @@ const InputBar = ({
     message,
     handleMessageChange,
     sendMessage,
-    files,
-    setFiles,
-    setFilesEmpty
 }: InputBarProps) => {
 
     const ref = useClickAway(() => {
@@ -60,7 +54,9 @@ const InputBar = ({
 
     return (
         <div className={styles.conversationbottombar}>
-            <Dropzone onDrop={(acceptedFiles) => onDrop(acceptedFiles, setFiles, setFilesEmpty)}>
+            <Dropzone 
+            // onDrop={(acceptedFiles) => onDrop(acceptedFiles, setFiles, setFilesEmpty)}
+            >
                 {({ getRootProps, getInputProps }) => (
                     <div className={styles.joinfile} {...getRootProps()}>
                         <input {...getInputProps()} />
@@ -68,7 +64,7 @@ const InputBar = ({
                     </div>
                 )}
             </Dropzone>
-            <input type="text" name="message-input" id="message-input" className={styles.messageinput} value={message} onChange={(e) => handleMessageChange(e.target.value, false)} onKeyDown={(e) => handleEnterPressed(e, sendMessage, conversationActive, files)} />
+            <input type="text" name="message-input" id="message-input" className={styles.messageinput} value={message} onChange={(e) => handleMessageChange(e.target.value, false)} onKeyDown={(e) => handleEnterPressed(e, sendMessage, conversationActive)} />
             <Image src={VoiceMessage} alt="voicemessage" className={styles.joinfile} />
             <div className={styles.emojiPicker} 
             onMouseEnter={handleRandomEmoji} 

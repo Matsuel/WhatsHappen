@@ -28,9 +28,9 @@ const deleteFile = (index: number, setFiles: Function, files: FileInfos[], setFi
     files.length === 1 && setFilesEmpty(true)
 }
 
-const handleEnterPressed = (e: React.KeyboardEvent<HTMLInputElement>, sendMessage: Function, conversationActive: string, files: FileInfos[]) => {
+const handleEnterPressed = (e: React.KeyboardEvent<HTMLInputElement>, sendMessage: Function, conversationActive: string) => {
     if (e.key === 'Enter') {
-        sendMessage(conversationActive, files)
+        sendMessage(conversationActive)
     }
 }
 

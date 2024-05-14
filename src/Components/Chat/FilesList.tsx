@@ -9,10 +9,6 @@ interface FilesListProps {
     handleMessageChange: Function,
     sendMessage: Function,
     name: string,
-    filesEmpty: boolean,
-    setFilesEmpty: Function,
-    files: FileInfos[],
-    setFiles: Function,
 }
 
 const FilesList = ({
@@ -21,28 +17,17 @@ const FilesList = ({
     handleMessageChange,
     sendMessage,
     name,
-    filesEmpty,
-    setFilesEmpty,
-    files,
-    setFiles
 }: FilesListProps) => {
 
     return (
         <div className={styles.bottomArea}>
 
-            {files.length > 0 ? (
-                <div className={styles.fileslist}>
-                    {
-                        files.map((file, index) => {
-                            return (
-                                <File key={index} file={file} index={index} setFiles={setFiles} files={files} setFilesEmpty={setFilesEmpty} />
-                            )
-                        })
-                    }
-                </div>
-            ) : null}
-
-            <Bottombar conversationActive={conversationActive} message={message} handleMessageChange={handleMessageChange} sendMessage={sendMessage} files={files} setFiles={setFiles} setFilesEmpty={setFilesEmpty} />
+            <Bottombar
+                conversationActive={conversationActive}
+                message={message}
+                handleMessageChange={handleMessageChange}
+                sendMessage={sendMessage}
+            />
         </div>
     )
 }
