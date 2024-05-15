@@ -11,6 +11,7 @@ import mongoose from 'mongoose';
 import { User } from './Models/User.mjs';
 import bcrypt from 'bcrypt';
 import { color } from './Functions/colors.mjs';
+import { getConversationsInfos, sortConversations } from './Functions/conversation.mjs';
 const secretTest = "84554852585915452156252015015201520152152252"
 
 
@@ -96,25 +97,6 @@ io.on('connection', (socket) => {
         conversation.last_message_content = content;
         conversation.last_message_sender = sender_id;
         await conversation.save();
-    }
-
-    async function otherSynchroMessage(cookies, conversation_id) {
-        const sender_id = jwt.verify(cookies, secretTest).userId;
-        const conversation = await Conversation.findById(conversation_id);
-        const otherId = conversation.users_id.filter((id) => id !== sender_id)[0];
-        const M = mongoose.model('Messages' + conversation_id);
-        let conversations = await Conversation.find({ users_id: sender_id }).sort({ last_message_date: -1 });
-        conversations = await getConversationsInfos(conversations, sender_id);
-        conversations = sortConversations(conversations, sender_id);
-        if (connectedUsers[otherId]) {
-            connectedUsers[otherId].emit('syncmessages', { messages: await getLastMessage(conversation_id) });
-        }
-    }
-
-    async function getLastMessage(conversation_id) {
-        let MessageModel = mongoose.model('Messages' + conversation_id);
-        let lastMessage = await MessageModel.findOne().sort({ date: -1 });
-        return lastMessage;
     }
 
     //permet de savoir si l'utilisateur est connecté
@@ -229,7 +211,7 @@ io.on('connection', (socket) => {
         if (await checkToken(cookies)) {
             let userId = jwt.verify(cookies, secretTest).userId;
             let conversations = await Conversation.find({ users_id: userId }).sort({ last_message_date: -1 });
-            conversations = await getConversationsInfos(conversations, userId);
+            conversations = await getConversationsInfos(conversations, userId, connectedUsers);
             conversations = sortConversations(conversations, userId);
             socket.emit('conversations', { conversations: conversations });
         } else {
@@ -308,31 +290,3 @@ server.listen(3001, () => {
 });
 
 export { server, connectedUsers }
-
-
-// Fonction qui récupère les informations des conversations
-async function getConversationsInfos(conversations, userId) {
-    conversations = await Promise.all(conversations.map(async (conversation) => {
-        let otherUserId = conversation.users_id.filter((id) => id !== userId)[0];
-        let otherUser = await User.findById(otherUserId);
-        let status = connectedUsers[otherUserId] ? true : false;
-        return { ...conversation.toObject(), name: otherUser.username, pic: otherUser.pic, status };
-    }))
-    return conversations;
-}
-
-
-function sortConversations(conversations, userId) {
-    conversations = conversations.sort((a, b) => {
-        // si a est épinglé et pas b
-        if (a.pinnedBy.includes(userId) && !b.pinnedBy.includes(userId)) return -1;
-        // si b est épinglé et pas a
-        if (!a.pinnedBy.includes(userId) && b.pinnedBy.includes(userId)) return 1;
-        // si a est plus récent que b
-        if (a.last_message_date > b.last_message_date) return -1;
-        // si b est plus récent que a
-        if (a.last_message_date < b.last_message_date) return 1;
-        return 0;
-    })
-    return conversations;
-}
