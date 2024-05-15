@@ -23,6 +23,9 @@ const InputBar = ({
 }: InputBarProps) => {
 
     const [userId, setUserId] = useState<string>('')
+    const [emojiIndex, setEmojiIndex] = useState<number>(Math.floor(Math.random() * RandomEmojis.length))
+    const [openPicker, setOpenPicker] = useState<boolean>(false)
+    const [message, setMessage] = useState<string>('')
 
     let cookies: any;
     if (typeof window !== "undefined") {
@@ -41,9 +44,6 @@ const InputBar = ({
         setOpenPicker(false);
     }) as React.MutableRefObject<HTMLDivElement>;
 
-    const [emojiIndex, setEmojiIndex] = useState<number>(Math.floor(Math.random() * RandomEmojis.length))
-    const [openPicker, setOpenPicker] = useState<boolean>(false)
-
     const showEmoji = () => {
         setOpenPicker(!openPicker)
     }
@@ -53,7 +53,6 @@ const InputBar = ({
         setEmojiIndex(Math.floor(Math.random() * RandomEmojis.length))
     }
 
-    const [message, setMessage] = useState<string>('')
     const handleMessageChange = (e: string,emoji: boolean) => {
         socket.emit('typing', { cookies, conversation_id: conversationActive })
         emoji ? setMessage(message + e) : setMessage(e)

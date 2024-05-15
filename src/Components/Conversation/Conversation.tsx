@@ -22,16 +22,16 @@ const Conversation = ({
     noConvActiveClass
 }: ConversationProps) => {
 
+    const [contextMenu, setContextMenu] = useState<boolean>(false)
+    const [points, setPoints] = useState({ x: 0, y: 0 })
+    const [conversationPinned, setConversationPinned] = useState<string>("")
+
     let cookies = ""
     if (typeof window !== 'undefined') {
         cookies = localStorage.getItem('user') || ''
         const token: User | null = decodeToken(cookies)
         userId = token?.userId as string
     }
-
-    const [contextMenu, setContextMenu] = useState<boolean>(false)
-    const [points, setPoints] = useState({ x: 0, y: 0 })
-    const [conversationPinned, setConversationPinned] = useState<string>("")
 
     const handleContextMenu = (e: { preventDefault: () => void; pageX: any; pageY: any; }, conversationId: string) => {
         e.preventDefault()

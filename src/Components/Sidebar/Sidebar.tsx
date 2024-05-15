@@ -20,6 +20,11 @@ const Sidebar = ({
     handleNewConv,
 }: SidebarProps) => {
 
+    const [search, setSearch] = useState<string>('')
+    const [conversations, setConversations] = useState<ConversationInfos[]>([])
+    const conversationsNoResult: string = "Aucune conversation trouvée"
+    const [hasMatchingConversations, setHasMatchingConversations] = useState<boolean>(true)
+
     const handleConversationActive = (conversationId: string) => {
         if (conversationId === conversationActive) {
             setConversationActive('')
@@ -28,12 +33,6 @@ const Sidebar = ({
         setConversationActive(conversationId)
         socket.emit('conversationmessages', { cookies, conversation_id: conversationId })
     }
-
-
-    const [search, setSearch] = useState<string>('')
-    const [conversations, setConversations] = useState<ConversationInfos[]>([])
-    const conversationsNoResult: string = "Aucune conversation trouvée"
-    const [hasMatchingConversations, setHasMatchingConversations] = useState<boolean>(true)
 
     let cookies = ""
     let userId = ""

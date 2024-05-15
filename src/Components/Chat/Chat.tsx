@@ -15,6 +15,7 @@ const Chat = ({
 }: ChatProps) => {
 
     const [messages, setMessages] = useState<message[]>([])
+    const [showSearchConv, setShowSearchConv] = useState<boolean>(false)
     const [conversationInfos, setConversationInfos] = useState({
         name: '',
         pic: '',
@@ -49,7 +50,6 @@ const Chat = ({
         setMessages([...oldMessages, data.messages])
     })
 
-    const [showSearchConv, setShowSearchConv] = useState<boolean>(false)
     const handleSearchConv = () => {
         setShowSearchConv(!showSearchConv)
     }

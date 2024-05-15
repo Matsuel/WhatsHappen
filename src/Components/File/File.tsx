@@ -13,7 +13,13 @@ interface FileProps {
 }
 import Image from 'next/image'
 
-const File = ({ file, index, setFiles, files, setFilesEmpty }: FileProps) => {
+const File = ({
+    file,
+    index,
+    setFiles,
+    files,
+    setFilesEmpty
+}: FileProps) => {
     return (
         <div key={index} className={styles.file}>
             <p className={styles.filename}>{file.name.length > 10 ? file.name.slice(0, 10) + '...' : file.name}</p>

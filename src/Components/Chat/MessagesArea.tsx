@@ -24,6 +24,9 @@ const MessagesArea = ({
 }: MessagesAreaProps) => {
 
     const [userId, setUserId] = useState<string>('')
+    const [messageDay, setMessageDay] = useState<Number>(0)
+
+    const scrollBottomRef = useRef<HTMLDivElement>(null)
 
     let cookies: any;
     if (typeof window !== "undefined") {
@@ -37,10 +40,6 @@ const MessagesArea = ({
             setUserId(token?.userId as string)
         }
     }, [cookies])
-
-    const [messageDay, setMessageDay] = useState<Number>(0)
-
-    const scrollBottomRef = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
         if (scrollBottomRef.current) {

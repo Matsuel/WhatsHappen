@@ -23,6 +23,11 @@ const Modal = ({
 
     const [users, setUsers] = useState<UserInfos[]>([])
 
+    const ref = useClickAway<any>(() => {
+        setShowNewConv(false)
+        setClickAwayEffect(!clickAwayEffect)
+    })
+
     const handleSearchUsers: ChangeEventHandler<HTMLInputElement> = (e) => {
         if (e.target.value.trim() === "") {
             setUsers([])
@@ -30,11 +35,6 @@ const Modal = ({
             socket.emit('searchusers', { token: cookies, search: e.target.value.trim() })
         }
     }
-
-    const ref = useClickAway<any>(() => {
-        setShowNewConv(false)
-        setClickAwayEffect(!clickAwayEffect)
-    })
 
     let cookies = ""
     if (typeof window !== 'undefined') {
