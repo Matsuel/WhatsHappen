@@ -2,18 +2,14 @@ import express from 'express';
 import { createServer } from 'http';
 import { Server } from 'socket.io';
 import cors from 'cors';
+import { MessageSchema } from './Models/Message.mjs';
 import { connectMongo } from './Functions/ConnectMongo.mjs';
-import { login } from './Sockets/Login.mjs';
-import { register } from './Sockets/Register.mjs';
-import { getConversations, createConversation, getMessages, pinConversation, getConversationsInfos, sortConversations } from './Sockets/Conversations.mjs';
-import { getUsers } from './Sockets/Users.mjs';
 import { Conversation } from './Models/Conversation.mjs';
 import jwt from 'jsonwebtoken';
 import checkToken from './Functions/CheckToken.mjs';
 import mongoose from 'mongoose';
-import fs from 'fs';
-import path from 'path';
 import { User } from './Models/User.mjs';
+import bcrypt from 'bcrypt';
 const secretTest = "84554852585915452156252015015201520152152252"
 
 
@@ -26,7 +22,6 @@ const io = new Server(server, {
     cors: {
         origin: "http://localhost:3000",
         methods: ["GET", "POST"],
-        allowedHeaders: ["my-custom-header"],
         credentials: true
     },
     maxHttpBufferSize: 1e9
@@ -197,16 +192,113 @@ io.on('connection', (socket) => {
         }
     })
 
+    socket.on('login', async (data) => {
+        const { email, password } = data;
+        const user = await User.findOne({ $or: [{ username: email }, { mail: email }] });
+        if ((user) && (await bcrypt.compare(password, user.password))) {
+            const token = jwt.sign({ userId: user._id, mail: user.mail, pseudo: user.username }, secretTest, { expiresIn: '720h' });
+            socket.emit('login', { validation: true, token });
+        } else {
+            socket.emit('login', { validation: false });
+        }
+    });
 
+    socket.on('register', async (data) => {
+        const { pseudo, email, password, selectedFile } = data;
+        const user = await User.findOne({ $or: [{ username: pseudo }, { mail: email }] });
+        if (user) {
+            socket.emit('register', { created: false });
+        } else {
+            let filedata = "";
+            if (selectedFile) {
+                filedata = selectedFile.toString('base64')
+                console.log(filedata)
+            }
+            const newUser = new User({ pic: filedata, username: pseudo, mail: email, password: bcrypt.hashSync(password, 10) });
+            await newUser.save();
+            const user = await User.findOne({ $or: [{ username: pseudo }, { mail: email }] });
+            const token = jwt.sign({ userId: user._id, mail: user.mail, pseudo: user.username }, secretTest, { expiresIn: '720h' });
+            socket.emit('register', { created: true, token });
+        }
+    });
 
-    login(socket);
-    register(socket);
-    getConversations(socket);
-    createConversation(socket);
-    getMessages(socket);
-    pinConversation(socket);
+    socket.on('conversations', async (data) => {
+        const { cookies } = data
+        if (await checkToken(cookies)) {
+            let userId = jwt.verify(cookies, secretTest).userId;
+            let conversations = await Conversation.find({ users_id: userId }).sort({ last_message_date: -1 });
+            conversations = await getConversationsInfos(conversations, userId);
+            conversations = sortConversations(conversations, userId);
+            socket.emit('conversations', { conversations: conversations });
+        } else {
+            socket.emit('conversations', { conversations: [] });
+        }
+    })
 
-    getUsers(socket);
+    socket.on('newconversation', async (data) => {
+        const { cookies, user_id } = data;
+        if (await checkToken(cookies)) {
+            let creatorId = jwt.verify(cookies, secretTest).userId;
+            if (await Conversation.findOne({ users_id: [creatorId, user_id] })) return socket.emit('newconversation', { created: false });
+            if (await Conversation.findOne({ users_id: [user_id, creatorId] })) return socket.emit('newconversation', { created: false });
+            let conversation = new Conversation({ users_id: [creatorId, user_id], type: 'single' });
+            await conversation.save();
+            let conv = mongoose.model('Messages' + conversation._id, MessageSchema);
+            conv.createCollection();
+            socket.emit('newconversation', { created: true });
+        } else {
+            socket.emit('newconversation', { created: false });
+        }
+    })
+
+    socket.on('conversationmessages', async (data) => {
+        const { cookies, conversation_id } = data;
+        if (await checkToken(cookies)) {
+            const MessageModel = mongoose.model('Messages' + conversation_id, MessageSchema);
+            let messages = await MessageModel.find();
+            socket.emit('conversationmessages', { messages: messages });
+        } else {
+            socket.emit('conversationmessages', { messages: [] });
+        }
+    })
+
+    socket.on('pinconversation', async (data) => {
+        const { cookies, conversation_id } = data;
+        if (await checkToken(cookies)) {
+            let conversation = await Conversation.findById(conversation_id);
+            let userId = jwt.verify(cookies, secretTest).userId;
+            if (conversation.pinnedBy.includes(userId)) {
+                conversation.pinnedBy = conversation.pinnedBy.filter((id) => id !== userId);
+            } else {
+                conversation.pinnedBy.push(userId);
+            }
+            await conversation.save();
+            socket.emit('pinconversation', { pinned: true });
+        }
+    })
+
+    socket.on('searchusers', async (data) => {
+        const { token, search } = data
+        const user = await checkToken(token)
+        if (user) {
+            const user_id = jwt.decode(token, secretTest).userId
+            let users = await User.find({ _id: { $ne: user_id }, username: { $regex: search, $options: 'i' } })
+            let conversations = await Conversation.find({ users_id: { $all: [user_id] } })
+            conversations = conversations.map(conversation => conversation.users_id)
+            users = users.filter((user) => {
+                let found = false
+                conversations.forEach(conversation => {
+                    if (conversation.includes(user._id)) {
+                        found = true
+                    }
+                })
+                return !found
+            })
+            socket.emit('searchusers', { users: users })
+        } else {
+            socket.emit('searchusers', { users: null })
+        }
+    })
 });
 
 server.listen(3001, () => {
@@ -214,3 +306,31 @@ server.listen(3001, () => {
 });
 
 export { server, connectedUsers }
+
+
+// Fonction qui récupère les informations des conversations
+async function getConversationsInfos(conversations, userId) {
+    conversations = await Promise.all(conversations.map(async (conversation) => {
+        let otherUserId = conversation.users_id.filter((id) => id !== userId)[0];
+        let otherUser = await User.findById(otherUserId);
+        let status = connectedUsers[otherUserId] ? true : false;
+        return { ...conversation.toObject(), name: otherUser.username, pic: otherUser.pic, status };
+    }))
+    return conversations;
+}
+
+
+function sortConversations(conversations, userId) {
+    conversations = conversations.sort((a, b) => {
+        // si a est épinglé et pas b
+        if (a.pinnedBy.includes(userId) && !b.pinnedBy.includes(userId)) return -1;
+        // si b est épinglé et pas a
+        if (!a.pinnedBy.includes(userId) && b.pinnedBy.includes(userId)) return 1;
+        // si a est plus récent que b
+        if (a.last_message_date > b.last_message_date) return -1;
+        // si b est plus récent que a
+        if (a.last_message_date < b.last_message_date) return 1;
+        return 0;
+    })
+    return conversations;
+}
