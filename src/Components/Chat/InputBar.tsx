@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import styles from './style.module.css'
+import styles from './style.module.scss'
 import JoinFile from '@/assets/JoinFile.svg'
 import VoiceMessage from '@/assets/VoiceMessage.svg'
 import Dropzone from 'react-dropzone'

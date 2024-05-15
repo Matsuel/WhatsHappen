@@ -1,5 +1,5 @@
 import React, { ChangeEventHandler, useState } from 'react'
-import styles from './Modal.module.css'
+import styles from './Modal.module.scss'
 import Image from 'next/image'
 import NewConv from '@/assets/NewConv.svg'
 import { useClickAway } from '@uidotdev/usehooks'

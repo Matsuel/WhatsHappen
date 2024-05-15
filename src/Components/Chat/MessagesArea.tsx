@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import MessagePrivacy from '../MessagePrivacy/MessagePrivacy'
-import styles from './style.module.css'
+import styles from './style.module.scss'
 import MessageDate from '../MessageDate/MessageDate'
 import Message from '../Message/Message'
 import MessageFile from '../MessageFile/MessageFile'

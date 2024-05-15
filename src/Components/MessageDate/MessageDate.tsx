@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import styles from './MessageDate.module.css'
+import styles from './MessageDate.module.scss'
 
 interface MessageDateProps {
     message: message

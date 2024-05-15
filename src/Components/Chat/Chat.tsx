@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import styles from './style.module.css'
+import styles from './style.module.scss'
 import Header from './Header'
 import MessagesArea from './MessagesArea'
 import BottomBar from './FilesList'

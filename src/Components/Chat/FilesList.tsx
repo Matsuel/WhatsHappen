@@ -1,7 +1,6 @@
 import React from 'react'
-import styles from './style.module.css'
+import styles from './style.module.scss'
 import Bottombar from './InputBar'
-import File from '../File/File'
 
 interface FilesListProps {
     conversationActive: string,

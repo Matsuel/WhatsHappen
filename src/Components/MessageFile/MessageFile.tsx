@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import styles from './MessageFile.module.css'
+import styles from './MessageFile.module.scss'
 import { FileIcon, defaultStyles } from 'react-file-icon'
 import Download from '@/assets/Download.svg'
 import { decodeToken } from 'react-jwt';

@@ -8,27 +8,27 @@
     background-color: #ededef;
     border-radius: 12px;
     padding: 0.5%;
-}
 
-.contextMenuItem {
-    width: 100%;
-    height: auto;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    gap: 2%;
-    cursor: pointer;    
-}
+    .contextMenuItem {
+        width: 100%;
+        height: auto;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        gap: 2%;
+        cursor: pointer;
 
-.contextMenuLabel {
-    font-family: 'SfPro', sans-serif;
-    font-size: 14px;
-    font-weight: 500;
-    color: #000;
-}
+        .contextMenuLabel {
+            font-family: 'SfPro', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            color: #000;
+        }
 
-.icon {
-    width: 20px;
-    height: 20px;
+        .icon {
+            width: 20px;
+            height: 20px;
+        }
+    }
 }

@@ -5,34 +5,26 @@
     flex-direction: column;
     align-items: center;
     border-right: 2px solid #f8f8f8;
-}
 
-.conversationsMinimized {
-    width: 5%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
+    .conversations {
+        margin-top: 5%;
+        width: 95%;
+        height: 80%;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 5px;
+    }
 
-.conversations {
-    margin-top: 5%;
-    width: 95%;
-    height: 80%;
-    overflow-y: auto;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 5px;
-}
-
-.ConversationsList {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 5px;
+    .ConversationsList {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 5px;
+    }
 }
 
 .ConversationsBtnArea {
@@ -40,7 +32,8 @@
     left: 25%;
     top: 50%;
     width: 2%;
-    height: 100%;;
+    height: 100%;
+    ;
     margin-left: .2em;
     display: flex;
     align-items: center;
@@ -70,32 +63,32 @@
     justify-content: space-between;
     align-items: center;
     border-bottom: 2px solid #f8f8f8;
-}
 
-.headerTitle {
-    font-size: 1.1em;
-    color: #000;
-    font-family: 'SfPro', sans-serif;
-    font-weight: 650;
-}
+    .editButton {
+        all: unset;
+        cursor: pointer;
+        color: #007AFF;
+        font-family: 'SfPro', sans-serif;
+        font-weight: 550;
+        font-size: 1.1em;
+    }
 
-.editButton {
-    all:unset;
-    cursor: pointer;
-    color: #007AFF;
-    font-family: 'SfPro', sans-serif;
-    font-weight: 550;
-    font-size: 1.1em;
-}
+    .headerTitle {
+        font-size: 1.1em;
+        color: #000;
+        font-family: 'SfPro', sans-serif;
+        font-weight: 650;
+    }
 
-.addConvbtn {
-    all:unset;
-    cursor: pointer;
-}
+    .addConvbtn {
+        all: unset;
+        cursor: pointer;
 
-.addLogo {
-    width: 2em;
-    height: 2em;
+        .addLogo {
+            width: 2em;
+            height: 2em;
+        }
+    }
 }
 
 /* Searchbar style  */
@@ -112,52 +105,52 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-}
 
-.searchBar {
-    width: 100%;
-    height: 30px;
-}
+    .searchBar {
+        width: 100%;
+        height: 30px;
 
-.searchLogo {
-    position: absolute;
-    left: 7%;
-    width: 27px;
-    height: 27px;
-    top: 50%;
-    transform: translateY(-50%);
-}
+        .searchLogo {
+            position: absolute;
+            left: 7%;
+            width: 27px;
+            height: 27px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        
+        .searchInput {
+            border-radius: 6px;
+            width: 100%;
+            height: 100%;
+            font-size: 16px;
+            text-indent: 40px;
+            border: none;
+            background-color: #f5f6fa;
+            color: #000;
+            font-family: 'SfPro', sans-serif;
+            font-weight: 500;
+            transition: all 0.3s ease-in-out;
+        }
+        
+        .searchInput:focus {
+            outline: none;
+        }
+        
+        .searchInput::placeholder {
+            color: #848484;
+            font-family: 'SfPro', sans-serif;
+        }
+    }
 
-.searchInput {
-    border-radius: 6px;
-    width: 100%;
-    height: 100%;
-    font-size: 16px;
-    text-indent: 40px;
-    border: none;
-    background-color: #f5f6fa;
-    color: #000;
-    font-family: 'SfPro', sans-serif;
-    font-weight: 500;
-    transition: all 0.3s ease-in-out;
-}
-
-.searchInput:focus {
-    outline: none;
-}
-
-.searchInput::placeholder {
-    color: #848484;
-    font-family: 'SfPro', sans-serif;
-}
-
-.cancelBtn {
-    all: unset;
-    cursor: pointer;
-    font-family: 'SfPro', sans-serif;
-    font-weight: 550;
-    font-size: 16px;
-    color: #007AFF;
-    margin-left: 10px;
-    transition: all 0.3s ease-in-out;
+    .cancelBtn {
+        all: unset;
+        cursor: pointer;
+        font-family: 'SfPro', sans-serif;
+        font-weight: 550;
+        font-size: 16px;
+        color: #007AFF;
+        margin-left: 10px;
+        transition: all 0.3s ease-in-out;
+    }
 }

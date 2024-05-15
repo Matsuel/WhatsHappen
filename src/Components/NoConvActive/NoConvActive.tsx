@@ -1,7 +1,7 @@
 import React from 'react'
 import PhoneConv from '@/assets/PhoneConv.svg'
 import Image from 'next/image'
-import styles from './NoConvActive.module.css'
+import styles from './NoConvActive.module.scss'
 
 const NoConvActive = () => {
     return (

@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from './ShowDate.module.css'
+import styles from './ShowDate.module.scss'
 
 interface ShowDateProps {
     date: string,

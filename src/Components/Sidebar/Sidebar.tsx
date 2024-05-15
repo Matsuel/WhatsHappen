@@ -107,13 +107,10 @@ const Sidebar = ({
                         )
                     })}
                     {
-                        !hasMatchingConversations ? (
-                            <NoResult
-                                content={conversationsNoResult}
-                            />
-                        ) : (
-                            null
-                        )
+                        !hasMatchingConversations &&
+                        <NoResult
+                            content={conversationsNoResult}
+                        />
                     }
                 </div>
             </div>
