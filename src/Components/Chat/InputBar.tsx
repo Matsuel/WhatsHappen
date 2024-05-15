@@ -69,10 +69,10 @@ const InputBar = ({
         emoji ? setMessage(message + e) : setMessage(e)
     }
 
-    const sendMessage = async (conversation_id: string, files: FileInfos[]) => {
+    const sendMessage = async (conversation_id: string) => {
         const content = message
-        if (content.trim() === '' && files.length === 0) return
-        socket.emit('newmessage', { cookies, conversation_id, content, files })
+        if (content.trim() === '') return
+        socket.emit('newmessage', { cookies, conversation_id, content })
         socket.on('newmessage', (data: any) => {
             if (data.sent) {
                 setMessage('')
