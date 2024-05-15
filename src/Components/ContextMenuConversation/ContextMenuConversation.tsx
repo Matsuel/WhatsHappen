@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { MutableRefObject } from 'react';
 import styles from './ContextMenuConversation.module.scss';
 import Image from 'next/image';
 import { decodeToken } from 'react-jwt';
 import Pinned from '@/assets/Pinned.svg';
 import Bin from '@/assets/Bin.svg';
 import { socket } from '@/pages/_app';
+import { useClickAway } from '@uidotdev/usehooks';
 
 interface ContextMenuConversationProps {
     conversationId: string,
@@ -21,6 +22,12 @@ const ContextMenuConversation = ({
     setConversationPinned,
     pin
 }: ContextMenuConversationProps) => {
+
+    const ref = useClickAway(() => {
+        setContextMenu(false)
+        setConversationPinned("")
+    }) as MutableRefObject<HTMLDivElement>;
+
     let cookies = ""
     let userId = ""
     if (typeof window !== 'undefined') {
@@ -54,6 +61,7 @@ const ContextMenuConversation = ({
         <div
             className={styles.contextMenu}
             style={{ top: points.y, left: points.x }}
+            ref={ref}
         >
             {items.map((item) => (
                 <div

@@ -39,23 +39,13 @@ const InputBar = ({
 
     const ref = useClickAway(() => {
         setOpenPicker(false);
-        setEmojiClickAway(true);
     }) as React.MutableRefObject<HTMLDivElement>;
-
-    
-    const [emojiClickAway, setEmojiClickAway] = useState<boolean>(false);
 
     const [emojiIndex, setEmojiIndex] = useState<number>(Math.floor(Math.random() * RandomEmojis.length))
     const [openPicker, setOpenPicker] = useState<boolean>(false)
 
     const showEmoji = () => {
-        if (!openPicker && emojiClickAway) {
-            setOpenPicker(false);
-            setEmojiClickAway(false);
-        }
-        else {
-            setOpenPicker(true);
-        }
+        setOpenPicker(!openPicker)
     }
 
 

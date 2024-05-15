@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { MutableRefObject } from 'react'
 import styles from './style.module.scss'
 import Pin from '@/assets/Pin.svg'
 import Bin from '@/assets/Bin.svg'
@@ -6,6 +6,7 @@ import Edit from '@/assets/Edit.svg'
 import Copy from '@/assets/Copy.svg'
 import { copyContentToClipboard } from '../../Functions/ContextMenu/ContextMenu'
 import Image, { ImageProps } from 'next/image'
+import { useClickAway } from '@uidotdev/usehooks'
 
 interface ContextMenuProps {
     message: message,
@@ -32,6 +33,10 @@ const ContextMenu = ({
     rightClick,
     setRightClick
 }: ContextMenuProps) => {
+
+    const ref = useClickAway(()=>{
+        setRightClick(false)
+    }) as MutableRefObject<HTMLDivElement>;
 
     const Buttons: Button[] = [
         {
@@ -64,7 +69,7 @@ const ContextMenu = ({
     return (
         <>
             {rightClick &&
-                <div className={styles.messagecontextmenu + " " + (isReceived ? styles.messagecontextmenureceived : styles.messagecontextmenusent)}>
+                <div className={styles.messagecontextmenu + " " + (isReceived ? styles.messagecontextmenureceived : styles.messagecontextmenusent)} ref={ref}>
                     {Buttons.map((button, i) => (
                         <Button
                             key={i}
