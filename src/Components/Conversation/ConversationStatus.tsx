@@ -9,19 +9,17 @@ import DisplayAvatar from '../DisplayAvatar/DisplayAvatar'
 interface ConversationStatusProps {
     _id: string,
     pic: string,
-    status: boolean,
-    handleConversationActive: Function
+    status: boolean
 }
 
 const ConversationStatus = ({
     _id,
     pic,
-    status,
-    handleConversationActive
+    status
 }: ConversationStatusProps) => {
     
     return (
-        <div className={styles.convimagestatus} onClick={() => handleConversationActive(_id)}>
+        <div className={styles.convimagestatus}>
 
             <DisplayAvatar pic={pic} size={60} />
 

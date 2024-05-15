@@ -10,8 +10,7 @@ interface ConversationInfosProps {
     name: string,
     last_message_sender: string,
     last_message_content: string,
-    userId: string,
-    handleConversationActive: Function
+    userId: string
 }
 
 const ConversationInfos = ({
@@ -19,8 +18,7 @@ const ConversationInfos = ({
     name,
     last_message_sender,
     last_message_content,
-    userId,
-    handleConversationActive
+    userId
 }: ConversationInfosProps) => {
 
     const [typingStatus, setTypingStatus] = useState({})
@@ -40,7 +38,6 @@ const ConversationInfos = ({
     return (
         <div
             className={styles.conversationinfos}
-            onClick={() => handleConversationActive(_id)}
         >
             <h4 className={styles.conversationName}>
                 {capitalize(name)}

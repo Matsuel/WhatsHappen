@@ -56,6 +56,7 @@ const Conversation = ({
             ].join(" ")}
             key={conversation._id}
             onContextMenu={(e) => handleContextMenu(e, conversation._id)}
+            onClick={() => handleConversationActive(conversation._id)}
         >
 
             {
@@ -74,7 +75,6 @@ const Conversation = ({
                 _id={conversation._id}
                 pic={conversation.pic}
                 status={conversation.status}
-                handleConversationActive={handleConversationActive}
             />
 
             <div className={styles.infos}>
@@ -85,7 +85,6 @@ const Conversation = ({
                     last_message_sender={conversation.last_message_sender}
                     last_message_content={conversation.last_message_content}
                     userId={userId}
-                    handleConversationActive={handleConversationActive}
                 />
 
                 <ShowDate
