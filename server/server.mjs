@@ -10,6 +10,7 @@ import checkToken from './Functions/CheckToken.mjs';
 import mongoose from 'mongoose';
 import { User } from './Models/User.mjs';
 import bcrypt from 'bcrypt';
+import { color } from './Functions/colors.mjs';
 const secretTest = "84554852585915452156252015015201520152152252"
 
 
@@ -38,7 +39,7 @@ io.on('connection', (socket) => {
     socket.on('synchro', (data) => {
         if (!connectedUsers[data.userId]) {
             connectedUsers[data.userId] = socket;
-            console.log(Object.keys(connectedUsers));
+            console.log(color('success', `Connected Users : ${data.userId}`));
         }
     })
 
@@ -47,6 +48,7 @@ io.on('connection', (socket) => {
         for (let [key, value] of Object.entries(connectedUsers)) {
             if (value === socket) {
                 delete connectedUsers[key];
+                console.log(color('error', `Disconnected Users : ${key}`));
             }
         }
     })
