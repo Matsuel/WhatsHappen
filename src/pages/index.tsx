@@ -9,7 +9,6 @@ import Head from 'next/head';
 import Modal from '@/Components/Modal/Modal';
 
 const Home = () => {
-    const [userId, setUserId] = useState<string>('')
 
     const [conversationActive, setConversationActive] = useState<string>('')
 
@@ -27,21 +26,12 @@ const Home = () => {
         }
     }
 
-    // faire un hook pour ça
-    useEffect(() => {
-        if (cookies) {
-            const token: User | null = decodeToken(cookies)
-            setUserId(token?.userId as string)
-        }
-    }, [cookies])
-
     useEffect(() => {
         let cookies;
         if (typeof window !== "undefined") {
             cookies = localStorage.getItem('user')
         }
         const token: User | null = decodeToken(cookies as string)
-        setUserId(token?.userId as string)
 
         socket.emit('synchro', { userId: token?.userId })
 
@@ -53,14 +43,7 @@ const Home = () => {
             socket.emit('synchrostatus', { userId: token?.userId })
         }, 5000)
     }, [])
-
-    // pas besoin de ça vu qu'on a la liste des gens connectés
-    socket.on('synchrostatus', (data) => {
-        // console.log(data)
-    })
     
-    
-    //dégager ça dans modal
     const handleNewConv = () => {
         setShowNewConv(!showNewConv)
     } 
