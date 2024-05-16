@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import styles from './style.module.scss'
 import JoinFile from '@/assets/JoinFile.svg'
 import VoiceMessage from '@/assets/VoiceMessage.svg'
@@ -33,16 +33,14 @@ const InputBar = ({
     }
 
     // faire un hook pour ça
-    useEffect(() => {
-        if (cookies) {
-            const token: User | null = decodeToken(cookies)
-            setUserId(token?.userId as string)
+    const ref = useClickAway((event) => {
+        if (emojiButtonRef.current && emojiButtonRef.current.contains(event.target as Node)) {
+            return;
         }
-    }, [cookies])
-
-    const ref = useClickAway(() => {
         setOpenPicker(false);
     }) as React.MutableRefObject<HTMLDivElement>;
+
+    const emojiButtonRef = useRef<HTMLDivElement>(null);
 
     const showEmoji = () => {
         setOpenPicker(!openPicker)
@@ -53,7 +51,7 @@ const InputBar = ({
         setEmojiIndex(Math.floor(Math.random() * RandomEmojis.length))
     }
 
-    const handleMessageChange = (e: string,emoji: boolean) => {
+    const handleMessageChange = (e: string, emoji: boolean) => {
         socket.emit('typing', { cookies, conversation_id: conversationActive })
         emoji ? setMessage(message + e) : setMessage(e)
     }
@@ -76,7 +74,7 @@ const InputBar = ({
 
     return (
         <div className={styles.conversationbottombar}>
-            <Dropzone 
+            <Dropzone
             // onDrop={(acceptedFiles) => onDrop(acceptedFiles, setFiles, setFilesEmpty)}
             >
                 {({ getRootProps, getInputProps }) => (
@@ -88,9 +86,11 @@ const InputBar = ({
             </Dropzone>
             <input type="text" name="message-input" id="message-input" className={styles.messageinput} value={message} onChange={(e) => handleMessageChange(e.target.value, false)} onKeyDown={(e) => handleEnterPressed(e, sendMessage, conversationActive)} />
             <Image src={VoiceMessage} alt="voicemessage" className={styles.joinfile} />
-            <div className={styles.emojiPicker} 
-            onMouseEnter={handleRandomEmoji} 
-            onClick={() => showEmoji()}>
+            <div className={styles.emojiPicker}
+                onMouseEnter={handleRandomEmoji}
+                ref={emojiButtonRef}
+                onClick={() => showEmoji()}
+            >
                 <Emoji unified={RandomEmojis[emojiIndex].unified} size={24} />
             </div>
 
