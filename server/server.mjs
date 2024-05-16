@@ -9,9 +9,10 @@ import jwt from 'jsonwebtoken';
 import checkToken from './Functions/CheckToken.mjs';
 import mongoose from 'mongoose';
 import { User } from './Models/User.mjs';
-import bcrypt from 'bcrypt';
 import { color } from './Functions/colors.mjs';
 import { getConversationsInfos, sortConversations } from './Functions/conversation.mjs';
+import { login } from './events/user/login.mjs';
+import { register } from './events/user/register.mjs';
 const secretTest = "84554852585915452156252015015201520152152252"
 
 
@@ -176,35 +177,9 @@ io.on('connection', (socket) => {
         }
     })
 
-    socket.on('login', async (data) => {
-        const { email, password } = data;
-        const user = await User.findOne({ $or: [{ username: email }, { mail: email }] });
-        if ((user) && (await bcrypt.compare(password, user.password))) {
-            const token = jwt.sign({ userId: user._id, mail: user.mail, pseudo: user.username }, secretTest, { expiresIn: '720h' });
-            socket.emit('login', { validation: true, token });
-        } else {
-            socket.emit('login', { validation: false });
-        }
-    });
+    socket.on('login', login(socket));
 
-    socket.on('register', async (data) => {
-        const { pseudo, email, password, selectedFile } = data;
-        const user = await User.findOne({ $or: [{ username: pseudo }, { mail: email }] });
-        if (user) {
-            socket.emit('register', { created: false });
-        } else {
-            let filedata = "";
-            if (selectedFile) {
-                filedata = selectedFile.toString('base64')
-                console.log(filedata)
-            }
-            const newUser = new User({ pic: filedata, username: pseudo, mail: email, password: bcrypt.hashSync(password, 10) });
-            await newUser.save();
-            const user = await User.findOne({ $or: [{ username: pseudo }, { mail: email }] });
-            const token = jwt.sign({ userId: user._id, mail: user.mail, pseudo: user.username }, secretTest, { expiresIn: '720h' });
-            socket.emit('register', { created: true, token });
-        }
-    });
+    socket.on('register', register(socket));
 
     socket.on('conversations', async (data) => {
         const { cookies } = data
@@ -286,7 +261,7 @@ io.on('connection', (socket) => {
 });
 
 server.listen(3001, () => {
-    console.log('Server is running on port 3001');
+    console.log(color('success','Server is running on port 3001'));
 });
 
 export { server, connectedUsers }
