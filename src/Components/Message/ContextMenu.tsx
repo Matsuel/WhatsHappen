@@ -69,7 +69,7 @@ const ContextMenu = ({
     return (
         <>
             {rightClick &&
-                <div className={styles.messagecontextmenu + " " + (isReceived ? styles.messagecontextmenureceived : styles.messagecontextmenusent)} ref={ref}>
+                <div className={styles.messagecontextmenu + " " + (isReceived ? styles.messagecontextmenureceived : styles.messagecontextmenusent)}>
                     {Buttons.map((button, i) => (
                         <Button
                             key={i}
