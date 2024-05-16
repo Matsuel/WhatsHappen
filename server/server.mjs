@@ -10,9 +10,10 @@ import checkToken from './Functions/CheckToken.mjs';
 import mongoose from 'mongoose';
 import { User } from './Models/User.mjs';
 import { color } from './Functions/colors.mjs';
-import { getConversationsInfos, sortConversations } from './Functions/conversation.mjs';
+import { sortConversations, getConversationsInfos } from './Functions/conversation.mjs';
 import { login } from './events/user/login.mjs';
 import { register } from './events/user/register.mjs';
+import { otherSynchroMessage, saveMessage } from './Functions/Message.mjs';
 const secretTest = "84554852585915452156252015015201520152152252"
 
 
@@ -83,22 +84,11 @@ io.on('connection', (socket) => {
             const sender_id = jwt.verify(cookies, secretTest).userId;
             content !== "" ? await saveMessage(conversation_id, content, sender_id) : null;
             socket.emit('newmessage', { sent: true });
-            otherSynchroMessage(cookies, conversation_id);
+            otherSynchroMessage(cookies, conversation_id, connectedUsers);
         } else {
             socket.emit('newmessage', { sent: false });
         }
     })
-
-    async function saveMessage(conversation_id, content, sender_id) {
-        let MessageModel = mongoose.model('Messages' + conversation_id);
-        let message = { sender_id, conversation_id, date: new Date().toISOString(), content, type: "text" };
-        await MessageModel.create(message);
-        let conversation = await Conversation.findById(conversation_id);
-        conversation.last_message_date = new Date().toISOString();
-        conversation.last_message_content = content;
-        conversation.last_message_sender = sender_id;
-        await conversation.save();
-    }
 
     //permet de savoir si l'utilisateur est connecté
     socket.on('synchrostatus', async (data) => {
@@ -130,7 +120,7 @@ io.on('connection', (socket) => {
             conversation.last_message_content = lastMessage ? lastMessage.content : null;
             conversation.last_message_sender = lastMessage ? lastMessage.sender_id : null;
             await conversation.save();
-            otherSynchroMessage(cookies, conversationActive);
+            otherSynchroMessage(cookies, conversationActive, connectedUsers);
             socket.emit('deletemessage', { deleted: true });
         }
     })
@@ -159,7 +149,7 @@ io.on('connection', (socket) => {
             }
             await message.save();
             socket.emit('reaction', { reacted: true });
-            otherSynchroMessage(cookies, conversationActive);
+            otherSynchroMessage(cookies, conversationActive, connectedUsers);
         }
         socket.emit('reaction', { reacted: false });
     })
