@@ -29,6 +29,7 @@ const Conversation = ({
     const [contextMenu, setContextMenu] = useState<boolean>(false)
     const [points, setPoints] = useState({ x: 0, y: 0 })
     const [conversationPinned, setConversationPinned] = useState<string>("")
+    const [hover, setHover] = useState<boolean>(false)
 
     let cookies = ""
     if (typeof window !== 'undefined') {
@@ -61,6 +62,8 @@ const Conversation = ({
             key={conversation._id}
             onContextMenu={(e) => handleContextMenu(e, conversation._id)}
             onClick={() => handleConversationActive(conversation._id)}
+            onMouseEnter={() => setHover(true)}
+            onMouseLeave={() => setHover(false)}
         >
 
             {editConversation && <Image
@@ -105,6 +108,7 @@ const Conversation = ({
 
                 <ShowDate
                     date={conversation.last_message_date}
+                    color={hover || classActive ? "#FFFFFF" : "#000000"}
                 />
 
             </div>

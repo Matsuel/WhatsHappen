@@ -26,6 +26,7 @@ const Modal = ({
             return;
         }
         setShowNewConv(false)
+        setUsers([])
     }) as React.MutableRefObject<HTMLInputElement>;
 
     const handleSearchUsers: ChangeEventHandler<HTMLInputElement> = (e) => {

@@ -6,18 +6,18 @@ import NewConv from '@/assets/NewConv.svg';
 interface HeaderProps {
     handleNewConv: Function,
     btnRef: any,
-    handleEditConv: Function
+    handleEditModal: Function
 }
 
 const Header = ({
     handleNewConv,
     btnRef,
-    handleEditConv
+    handleEditModal
  }: HeaderProps) => {
 
     return (
         <div className={styles.header}>
-            <button className={styles.editButton} onClick={() => handleEditConv()}>
+            <button className={styles.editButton} onClick={() => handleEditModal()}>
                 Modifier
             </button>
             <h2 className={styles.headerTitle}>Messages</h2>

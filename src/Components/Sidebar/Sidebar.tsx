@@ -7,6 +7,7 @@ import { decodeToken } from 'react-jwt'
 import { socket } from '@/pages/_app'
 import PinnedConversations from '@/Components/PinnedConversations/PinnedConversations'
 import Header from './Header'
+import EditModal from './EditModal'
 
 interface SidebarProps {
     conversationActive: string,
@@ -23,6 +24,7 @@ const Sidebar = ({
 }: SidebarProps) => {
 
     const [editConversation, setEditConversation] = useState<boolean>(false)
+    const [edit, setEdit] = useState<boolean>(false)
     const [search, setSearch] = useState<string>('')
     const [conversations, setConversations] = useState<ConversationInfos[]>([])
     const conversationsNoResult: string = "Aucune conversation trouvée"
@@ -31,6 +33,10 @@ const Sidebar = ({
 
     const handleEditConv = () => {
         setEditConversation(!editConversation)
+    }
+
+    const handleEditModal = () => {
+        setEdit(!edit)
     }
 
     const handleConversationActive = (conversationId: string) => {
@@ -76,7 +82,14 @@ const Sidebar = ({
             <Header
                 handleNewConv={handleNewConv}
                 btnRef={btnRef}
-                handleEditConv={handleEditConv}
+                handleEditModal={handleEditModal}
+            />
+
+            <EditModal 
+                editConversation={editConversation}
+                setEditConversation={setEditConversation}
+                edit={edit}
+                setEdit={setEdit}
             />
 
             <Searchbar
