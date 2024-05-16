@@ -1,2 +1,2 @@
-# Nettoyer le code en mettant les varibales utilisées une fois en context, et en les mettant dans le bon composant + résoudre pb pinconversations qui engendre trop de rendus.
-# Scss pour gérer animation du search bar direct en scss
+
+![preview](https://github.com/Matsuel/iMessages/assets/75479794/0f39e325-87be-4d55-aa39-b01aa2254c52)
