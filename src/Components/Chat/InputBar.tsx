@@ -26,6 +26,7 @@ const InputBar = ({
     const [emojiIndex, setEmojiIndex] = useState<number>(Math.floor(Math.random() * RandomEmojis.length))
     const [openPicker, setOpenPicker] = useState<boolean>(false)
     const [message, setMessage] = useState<string>('')
+    const emojiButtonRef = useRef<HTMLDivElement>(null);
 
     let cookies: any;
     if (typeof window !== "undefined") {
@@ -40,12 +41,9 @@ const InputBar = ({
         setOpenPicker(false);
     }) as React.MutableRefObject<HTMLDivElement>;
 
-    const emojiButtonRef = useRef<HTMLDivElement>(null);
-
     const showEmoji = () => {
         setOpenPicker(!openPicker)
     }
-
 
     const handleRandomEmoji = () => {
         setEmojiIndex(Math.floor(Math.random() * RandomEmojis.length))

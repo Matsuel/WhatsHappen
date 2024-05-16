@@ -12,12 +12,14 @@ interface SidebarProps {
     conversationActive: string,
     setConversationActive: Function,
     handleNewConv: Function,
+    btnRef: any
 }
 
 const Sidebar = ({
     conversationActive,
     setConversationActive,
     handleNewConv,
+    btnRef
 }: SidebarProps) => {
 
     const [search, setSearch] = useState<string>('')
@@ -67,6 +69,7 @@ const Sidebar = ({
 
             <Header
                 handleNewConv={handleNewConv}
+                btnRef={btnRef}
             />
 
             <Searchbar

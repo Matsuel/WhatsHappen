@@ -1,4 +1,4 @@
-import React, { ChangeEventHandler, useState } from 'react'
+import React, { ChangeEventHandler, useRef, useState } from 'react'
 import styles from './Modal.module.scss'
 import Image from 'next/image'
 import NewConv from '@/assets/NewConv.svg'
@@ -9,24 +9,24 @@ import Avatar from '../DisplayAvatar/Avatar'
 interface ModalProps {
     showNewConv: boolean,
     setShowNewConv: Function,
-    clickAwayEffect: boolean,
-    setClickAwayEffect: Function
+    btnRef: any
 }
 
 
 const Modal = ({
     showNewConv,
     setShowNewConv,
-    clickAwayEffect,
-    setClickAwayEffect
+    btnRef
 }: ModalProps) => {
 
     const [users, setUsers] = useState<UserInfos[]>([])
 
     const ref = useClickAway<any>(() => {
+        if (event && btnRef.current && btnRef.current.contains(event.target as Node)) {
+            return;
+        }
         setShowNewConv(false)
-        setClickAwayEffect(!clickAwayEffect)
-    })
+    }) as React.MutableRefObject<HTMLInputElement>;
 
     const handleSearchUsers: ChangeEventHandler<HTMLInputElement> = (e) => {
         if (e.target.value.trim() === "") {

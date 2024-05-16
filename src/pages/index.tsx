@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { decodeToken } from 'react-jwt';
 import { useRouter } from 'next/router';
 import { socket } from './_app';
@@ -14,8 +14,6 @@ const Home = () => {
     const [conversationActive, setConversationActive] = useState<string>('')
 
     const [showNewConv, setShowNewConv] = useState<boolean>(false)    
-
-    const [clickAwayEffect, setClickAwayEffect] = useState<boolean>(false)
 
     const router = useRouter()
     let cookies: any;
@@ -64,15 +62,10 @@ const Home = () => {
     
     //dégager ça dans modal
     const handleNewConv = () => {
-        if (!clickAwayEffect) {
-            setShowNewConv(!showNewConv)
-            setTimeout(() => {
-                setClickAwayEffect(false)
-            }, 100)
-        } else {
-            setClickAwayEffect(false)
-        }
-    }        
+        setShowNewConv(!showNewConv)
+    } 
+
+    const btnRef = useRef<HTMLButtonElement>(null);
 
     return (
         <div className={styles.home}>
@@ -86,13 +79,13 @@ const Home = () => {
                 conversationActive={conversationActive}
                 setConversationActive={setConversationActive}
                 handleNewConv={handleNewConv}
+                btnRef={btnRef}
             />
 
             <Modal
                 showNewConv={showNewConv}
                 setShowNewConv={setShowNewConv}
-                clickAwayEffect={clickAwayEffect}
-                setClickAwayEffect={setClickAwayEffect}
+                btnRef={btnRef}
             />
 
             <Chat
