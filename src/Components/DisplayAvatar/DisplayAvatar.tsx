@@ -1,6 +1,6 @@
 import React from 'react';
 
-import styles from './DisplayAvatar.module.scss';
+import styles from './style.module.scss';
 import Image from 'next/image';
 import Avatar from './Avatar';
 

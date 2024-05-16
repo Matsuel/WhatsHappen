@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from './NoResult.module.scss'
+import styles from './style.module.scss'
 import Image from 'next/image'
 import NoResultImg from '@/assets/noresult.svg'
 

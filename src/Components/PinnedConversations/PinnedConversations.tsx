@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import styles from './PinnedConversations.module.scss';
+import styles from './style.module.scss';
 import ContextMenuConversation from '../ContextMenuConversation/ContextMenuConversation';
 import DisplayAvatar from '../DisplayAvatar/DisplayAvatar';
 import { socket } from '@/pages/_app';
-import { decodeToken } from 'react-jwt';
+import { useCookie } from '@/hooks/useCookie/useCookie';
 
 interface PinnedConversationsProps {
     pinnedConversations: ConversationInfos[],
@@ -19,17 +19,11 @@ const PinnedConversations = ({
     search
 }: PinnedConversationsProps) => {
 
+    const { cookies } = useCookie()
+
     const [contextMenu, setContextMenu] = useState<boolean>(false)
     const [points, setPoints] = useState({ x: 0, y: 0 })
     const [conversationPinned, setConversationPinned] = useState<string>("")
-
-    let cookies = ""
-    let userId = ""
-    if (typeof window !== 'undefined') {
-        cookies = localStorage.getItem('user') || ''
-        const token: User | null = decodeToken(cookies)
-        userId = token?.userId as string
-    }
 
     const handleContextMenu = (e: { preventDefault: () => void; pageX: any; pageY: any; }, conversationId: string) => {
         e.preventDefault()

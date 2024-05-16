@@ -1,10 +1,11 @@
-import React, { ChangeEventHandler, useRef, useState } from 'react'
-import styles from './Modal.module.scss'
+import React, { ChangeEventHandler, useState } from 'react'
+import styles from './style.module.scss'
 import Image from 'next/image'
 import NewConv from '@/assets/NewConv.svg'
 import { useClickAway } from '@uidotdev/usehooks'
 import { socket } from '@/pages/_app'
 import Avatar from '../DisplayAvatar/Avatar'
+import { useCookie } from '@/hooks/useCookie/useCookie'
 
 interface ModalProps {
     showNewConv: boolean,
@@ -18,6 +19,8 @@ const Modal = ({
     setShowNewConv,
     btnRef
 }: ModalProps) => {
+
+    const { cookies } = useCookie()
 
     const [users, setUsers] = useState<UserInfos[]>([])
 
@@ -35,11 +38,6 @@ const Modal = ({
         } else {
             socket.emit('searchusers', { token: cookies, search: e.target.value.trim() })
         }
-    }
-
-    let cookies = ""
-    if (typeof window !== 'undefined') {
-        cookies = localStorage.getItem('user') || ''
     }
 
     const createConversation = async (user_id: string) => {
@@ -69,6 +67,7 @@ const Modal = ({
                     <input
                         type="text"
                         placeholder='Rechercher ici une nouvelle personne'
+                        autoComplete='off'
                         className={styles.newconvinput}
                         ref={ref}
                         maxLength={50}

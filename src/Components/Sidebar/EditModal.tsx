@@ -1,9 +1,12 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from './styles.module.scss'
 import { useRouter } from 'next/router'
 import DisplayAvatar from '../DisplayAvatar/DisplayAvatar'
 import Delete from '@/assets/Delete.svg'
 import Image from 'next/image'
+import { socket } from '@/pages/_app'
+import { capitalize } from '@/Functions/Utils/capitalize'
+import { useCookie } from '@/hooks/useCookie/useCookie'
 
 interface EditModalProps {
     editConversation: boolean,
@@ -19,12 +22,28 @@ const EditModal = ({
     setEdit
 }: EditModalProps) => {
 
+    const { cookies } = useCookie()
+
     const router = useRouter()
 
     const [userInfos, setUserInfos] = useState({
         username: "Mathéo Lang",
         pic: ""
     })
+
+    const getUserInfos = async () => {
+        socket.emit('userinfos', { cookies })
+        socket.once('userinfos', (data) => {
+            setUserInfos({
+                username: data.user.username,
+                pic: data.user.pic
+            })
+        })
+    }
+
+    useEffect(() => {
+        getUserInfos()
+    }, [])
 
     return (
         <>
@@ -40,7 +59,9 @@ const EditModal = ({
                     size={60}
                 />
                 <div className={styles.userInfos}>
-                    <h3 className={styles.userInfo}>{userInfos.username}</h3>
+                    <h3 className={styles.userInfo}>
+                        {capitalize(userInfos.username)}
+                    </h3>
                     <h4 className={styles.subtitle}>Nom et photo</h4>
 
                 </div>

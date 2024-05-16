@@ -5,6 +5,7 @@ import MessagesArea from './MessagesArea'
 import BottomBar from './FilesList'
 import NoConvActive from '../NoConvActive/NoConvActive'
 import { socket } from '@/pages/_app'
+import { useCookie } from '@/hooks/useCookie/useCookie'
 
 interface ChatProps {
     conversationActive: string,
@@ -14,6 +15,8 @@ const Chat = ({
     conversationActive,
 }: ChatProps) => {
 
+    const {cookies} = useCookie()
+
     const [messages, setMessages] = useState<message[]>([])
     const [showSearchConv, setShowSearchConv] = useState<boolean>(false)
     const [conversationInfos, setConversationInfos] = useState({
@@ -21,11 +24,6 @@ const Chat = ({
         pic: '',
         status: false
     })
-
-    let cookies = ""
-    if (typeof window !== 'undefined') {
-        cookies = localStorage.getItem('user') || ''
-    }
 
     const getConversationsMessages = async (conversation_id: string) => {
         socket.emit('conversationmessages', { cookies, conversation_id })

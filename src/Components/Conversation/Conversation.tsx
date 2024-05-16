@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
-import styles from './Conversation.module.scss'
+import styles from './style.module.scss'
 import ShowDate from '../ShowDate/ShowDate'
 import ConversationStatus from './ConversationStatus'
 import ConversationInfos from './ConversationInfos'
-import { decodeToken } from 'react-jwt'
 import ContextMenuConversation from '../ContextMenuConversation/ContextMenuConversation'
 import Image from 'next/image'
 import Delete from '@/assets/Delete.svg'
+import { useCookie } from '@/hooks/useCookie/useCookie'
 
 interface ConversationProps {
     conversation: ConversationInfos,
@@ -26,17 +26,12 @@ const Conversation = ({
     editConversation
 }: ConversationProps) => {
 
+    const {cookies} = useCookie()
+
     const [contextMenu, setContextMenu] = useState<boolean>(false)
     const [points, setPoints] = useState({ x: 0, y: 0 })
     const [conversationPinned, setConversationPinned] = useState<string>("")
     const [hover, setHover] = useState<boolean>(false)
-
-    let cookies = ""
-    if (typeof window !== 'undefined') {
-        cookies = localStorage.getItem('user') || ''
-        const token: User | null = decodeToken(cookies)
-        userId = token?.userId as string
-    }
 
     const handleContextMenu = (e: { preventDefault: () => void; pageX: any; pageY: any; }, conversationId: string) => {
         e.preventDefault()

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import styles from './Conversation.module.scss'
+import styles from './style.module.scss'
 import { socket } from '@/pages/_app'
 import IsTyping from './IsTyping'
 import { capitalize } from '@/Functions/Utils/capitalize'

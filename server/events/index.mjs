@@ -13,6 +13,8 @@ import { typing } from "./user/typing.mjs";
 import { disconnect } from "./user/disconnect.mjs";
 import { join } from "./user/join.mjs";
 import { synchroStatut } from "./user/synchrostatut.mjs";
+import { userInfos } from "./user/userInfos.mjs";
+
 import { color } from "../Functions/colors.mjs";
 
 let connectedUsers = {};
@@ -35,6 +37,7 @@ export const startEvents = (io) => {
         socket.on('disconnect', disconnect(socket, connectedUsers));
         socket.on('synchro', join(socket, connectedUsers));
         socket.on('synchrostatus', synchroStatut(socket, connectedUsers));
+        socket.on('userinfos', userInfos(socket));
     });
 }
 

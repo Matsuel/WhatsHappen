@@ -6,6 +6,7 @@ import { ContextMenu } from './ContextMenu'
 import { decodeToken } from 'react-jwt'
 import { socket } from '@/pages/_app'
 import Reactions from './Reactions'
+import { useCookie } from '@/hooks/useCookie/useCookie'
 
 interface MessageProps {
     message: message,
@@ -29,6 +30,8 @@ const Message = ({
     conversationActive
 }: MessageProps) => {
 
+    const { cookies } = useCookie()
+
     const [rightClick, setRightClick] = useState<boolean>(false)
     const [longPress, setLongPress] = useState<number | null>(null)
 
@@ -49,11 +52,6 @@ const Message = ({
         if (e.key === "Escape") {
             setRightClick(false)
         }
-    }
-
-    let cookies: any;
-    if (typeof window !== "undefined") {
-        cookies = localStorage.getItem('user')
     }
 
     const handleReaction = (message_id: string, reaction_id: string) => {

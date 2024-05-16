@@ -3,11 +3,11 @@ import styles from './styles.module.scss'
 import NoResult from '../NoResult/NoResult'
 import Conversation from '@/Components/Conversation/Conversation'
 import Searchbar from './Searchbar'
-import { decodeToken } from 'react-jwt'
 import { socket } from '@/pages/_app'
 import PinnedConversations from '@/Components/PinnedConversations/PinnedConversations'
 import Header from './Header'
 import EditModal from './EditModal'
+import { useCookie } from '@/hooks/useCookie/useCookie'
 
 interface SidebarProps {
     conversationActive: string,
@@ -22,7 +22,8 @@ const Sidebar = ({
     handleNewConv,
     btnRef
 }: SidebarProps) => {
-
+    
+    const {cookies, userId} = useCookie()
     const [editConversation, setEditConversation] = useState<boolean>(false)
     const [edit, setEdit] = useState<boolean>(false)
     const [search, setSearch] = useState<string>('')
@@ -48,13 +49,6 @@ const Sidebar = ({
         socket.emit('conversationmessages', { cookies, conversation_id: conversationId })
     }
 
-    let cookies = ""
-    let userId = ""
-    if (typeof window !== 'undefined') {
-        cookies = localStorage.getItem('user') || ''
-        const token: User | null = decodeToken(cookies)
-        userId = token?.userId as string
-    }
 
     const getConversations = async () => {
         socket.emit('conversations', { cookies })

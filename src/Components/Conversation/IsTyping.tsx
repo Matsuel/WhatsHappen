@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from './Conversation.module.scss'
+import styles from './style.module.scss'
 
 const IsTyping = () => {
   return (

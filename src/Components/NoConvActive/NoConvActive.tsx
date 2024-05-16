@@ -1,6 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
-import styles from './NoConvActive.module.scss'
+import styles from './style.module.scss'
 import Logo from '@/assets/Logo.svg'
 
 const NoConvActive = () => {

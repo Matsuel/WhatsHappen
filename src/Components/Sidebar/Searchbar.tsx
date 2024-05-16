@@ -30,6 +30,7 @@ const Searchbar = ({
                     placeholder='Recherche'
                     name="search"
                     id="search"
+                    autoComplete='off'
                     className={styles.searchInput}
                     onChange={(e) => handleSearch(e, setSearch, setHasMatchingConversations, conversations)}
                     onFocus={() => setIsFocused(true)}

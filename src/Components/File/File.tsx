@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from './File.module.scss'
+import styles from './style.module.scss'
 import Trash from '@/assets/Trash.svg'
 import { FileIcon, defaultStyles } from 'react-file-icon'
 import { deleteFile } from '@/Functions/BottomBar/BottomBar'

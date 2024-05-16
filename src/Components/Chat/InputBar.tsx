@@ -8,6 +8,7 @@ import Image from 'next/image'
 import EmojiPicker, { Emoji } from 'emoji-picker-react'
 import { useClickAway } from '@uidotdev/usehooks';
 import { socket } from '@/pages/_app'
+import { useCookie } from '@/hooks/useCookie/useCookie'
 
 const emojiList = ["1f929", "1f607", "1f913", "1f635-200d-1f4ab", "1fae0", "1f602", "1f929", "1f600", "1f621", "1f603", '1f600', '1f603', '1f604', '1f601', '1f606', '1f605', '1f602', '1f923', '1f642', '1f643', '1f609', '1f60a', '1f607', '1f970', '1f60d', '1f929', '1f618', '1f617', '1f61a'];
 
@@ -21,16 +22,12 @@ const InputBar = ({
     conversationActive,
 }: InputBarProps) => {
 
-    const [userId, setUserId] = useState<string>('')
+    const { cookies } = useCookie()
+    
     const [emojiIndex, setEmojiIndex] = useState<number>(Math.floor(Math.random() * RandomEmojis.length))
     const [openPicker, setOpenPicker] = useState<boolean>(false)
     const [message, setMessage] = useState<string>('')
     const emojiButtonRef = useRef<HTMLDivElement>(null);
-
-    let cookies: any;
-    if (typeof window !== "undefined") {
-        cookies = localStorage.getItem('user')
-    }
 
     const ref = useClickAway((event) => {
         if (emojiButtonRef.current && emojiButtonRef.current.contains(event.target as Node)) {
@@ -80,8 +77,24 @@ const InputBar = ({
                     </div>
                 )}
             </Dropzone>
-            <input type="text" name="message-input" id="message-input" className={styles.messageinput} value={message} onChange={(e) => handleMessageChange(e.target.value, false)} onKeyDown={(e) => handleEnterPressed(e, sendMessage, conversationActive)} />
-            <Image src={VoiceMessage} alt="voicemessage" className={styles.joinfile} />
+            
+            <input
+                type="text"
+                name="message-input"
+                id="message-input"
+                autoComplete='off'
+                className={styles.messageinput}
+                value={message}
+                onChange={(e) => handleMessageChange(e.target.value, false)}
+                onKeyDown={(e) => handleEnterPressed(e, sendMessage, conversationActive)}
+            />
+
+            <Image
+                src={VoiceMessage}
+                alt="voicemessage"
+                className={styles.joinfile}
+            />
+
             <div className={styles.emojiPicker}
                 onMouseEnter={handleRandomEmoji}
                 ref={emojiButtonRef}

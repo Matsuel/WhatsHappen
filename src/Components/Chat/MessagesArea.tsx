@@ -7,7 +7,7 @@ import MessageFile from '../MessageFile/MessageFile'
 import { isBottomRounded, isTopRounded } from '@/Functions/MessagesList/MessagesList'
 import IsTyping from '../Message/IsTyping'
 import { socket } from '@/pages/_app'
-import { decodeToken } from 'react-jwt'
+import { useCookie } from '@/hooks/useCookie/useCookie'
 
 interface MessagesAreaProps {
     showSearchConv: boolean,
@@ -23,23 +23,11 @@ const MessagesArea = ({
     conversationActive,
 }: MessagesAreaProps) => {
 
-    const [userId, setUserId] = useState<string>('')
+    const { cookies } = useCookie()
+
     const [messageDay, setMessageDay] = useState<Number>(0)
 
     const scrollBottomRef = useRef<HTMLDivElement>(null)
-
-    let cookies: any;
-    if (typeof window !== "undefined") {
-        cookies = localStorage.getItem('user')
-    }
-
-    // faire un hook pour ça
-    useEffect(() => {
-        if (cookies) {
-            const token: User | null = decodeToken(cookies)
-            setUserId(token?.userId as string)
-        }
-    }, [cookies])
 
     useEffect(() => {
         if (scrollBottomRef.current) {
