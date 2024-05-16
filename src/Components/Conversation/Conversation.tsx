@@ -5,6 +5,8 @@ import ConversationStatus from './ConversationStatus'
 import ConversationInfos from './ConversationInfos'
 import { decodeToken } from 'react-jwt'
 import ContextMenuConversation from '../ContextMenuConversation/ContextMenuConversation'
+import Image from 'next/image'
+import Delete from '@/assets/Delete.svg'
 
 interface ConversationProps {
     conversation: ConversationInfos,
@@ -12,6 +14,7 @@ interface ConversationProps {
     userId: string
     classActive: boolean,
     noConvActiveClass: boolean,
+    editConversation: boolean
 }
 
 const Conversation = ({
@@ -19,7 +22,8 @@ const Conversation = ({
     handleConversationActive,
     userId,
     classActive,
-    noConvActiveClass
+    noConvActiveClass,
+    editConversation
 }: ConversationProps) => {
 
     const [contextMenu, setContextMenu] = useState<boolean>(false)
@@ -58,6 +62,18 @@ const Conversation = ({
             onContextMenu={(e) => handleContextMenu(e, conversation._id)}
             onClick={() => handleConversationActive(conversation._id)}
         >
+
+            {editConversation && <Image
+                src={Delete}
+                alt="Delete"
+                width={35}
+                height={35}
+                className={styles.delete}
+                onClick={(e) => {
+                    e.stopPropagation()
+                }}
+            />}
+
 
             {
                 contextMenu && conversationPinned === conversation._id &&

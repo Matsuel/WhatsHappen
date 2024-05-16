@@ -12,6 +12,11 @@
         transition: all 1s ease-in-out;
     }
 
+    .delete {
+        z-index: 5;
+        cursor: pointer;
+    }
+
     .infos {
         width: 80%;
         height: 100%;
@@ -63,7 +68,7 @@
     font-family: 'SfPro', sans-serif;
 
     .lastMessage {
-        width: 140px;
+        width: 100px;
         height: 30px;
         overflow: hidden;
         text-overflow: ellipsis;

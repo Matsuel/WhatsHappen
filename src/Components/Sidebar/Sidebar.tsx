@@ -22,10 +22,16 @@ const Sidebar = ({
     btnRef
 }: SidebarProps) => {
 
+    const [editConversation, setEditConversation] = useState<boolean>(false)
     const [search, setSearch] = useState<string>('')
     const [conversations, setConversations] = useState<ConversationInfos[]>([])
     const conversationsNoResult: string = "Aucune conversation trouvée"
     const [hasMatchingConversations, setHasMatchingConversations] = useState<boolean>(true)
+
+
+    const handleEditConv = () => {
+        setEditConversation(!editConversation)
+    }
 
     const handleConversationActive = (conversationId: string) => {
         if (conversationId === conversationActive) {
@@ -70,6 +76,7 @@ const Sidebar = ({
             <Header
                 handleNewConv={handleNewConv}
                 btnRef={btnRef}
+                handleEditConv={handleEditConv}
             />
 
             <Searchbar
@@ -104,6 +111,7 @@ const Sidebar = ({
                                     classActive={classActive}
                                     noConvActiveClass={noConvActiveClass}
                                     handleConversationActive={handleConversationActive}
+                                    editConversation={editConversation}
                                 />
                             )
                         )

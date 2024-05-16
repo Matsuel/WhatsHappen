@@ -12,7 +12,7 @@ const Home = () => {
 
     const [conversationActive, setConversationActive] = useState<string>('')
 
-    const [showNewConv, setShowNewConv] = useState<boolean>(false)    
+    const [showNewConv, setShowNewConv] = useState<boolean>(false)
 
     const router = useRouter()
     let cookies: any;
@@ -47,6 +47,8 @@ const Home = () => {
     const handleNewConv = () => {
         setShowNewConv(!showNewConv)
     } 
+
+    
 
     const btnRef = useRef<HTMLButtonElement>(null);
 
