@@ -7,6 +7,8 @@ import ContextMenuConversation from '../ContextMenuConversation/ContextMenuConve
 import Image from 'next/image'
 import Delete from '@/assets/Delete.svg'
 import { useCookie } from '@/hooks/useCookie/useCookie'
+import { toast } from 'sonner'
+import { socket } from '@/pages/_app'
 
 interface ConversationProps {
     conversation: ConversationInfos,
@@ -14,7 +16,8 @@ interface ConversationProps {
     userId: string
     classActive: boolean,
     noConvActiveClass: boolean,
-    editConversation: boolean
+    editConversation: boolean,
+    setEditConversation: Function
 }
 
 const Conversation = ({
@@ -23,7 +26,8 @@ const Conversation = ({
     userId,
     classActive,
     noConvActiveClass,
-    editConversation
+    editConversation,
+    setEditConversation
 }: ConversationProps) => {
 
     const {cookies} = useCookie()
@@ -69,6 +73,14 @@ const Conversation = ({
                 className={styles.delete}
                 onClick={(e) => {
                     e.stopPropagation()
+                    toast("Conversation supprimée",{
+                        position: "bottom-left",
+                        style: {
+                            color: "#000",
+                        }
+                    })
+                    socket.emit('deleteconversation', { cookies, conversation_id: conversation._id })
+                    setEditConversation(false)
                 }}
             />}
 

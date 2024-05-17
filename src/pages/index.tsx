@@ -6,6 +6,7 @@ import Sidebar from '@/Components/Sidebar/Sidebar';
 import Modal from '@/Components/Modal/Modal';
 import { useCookie } from '@/hooks/useCookie/useCookie';
 import CustomHead from '@/Components/CustomHead/CustomHead';
+import { Toaster } from 'sonner';
 
 const Home = () => {
 
@@ -35,6 +36,9 @@ const Home = () => {
         <div className={styles.home}>
 
             <CustomHead title="iMessage" />
+
+            <Toaster
+            />
 
             <Sidebar
                 conversationActive={conversationActive}

@@ -56,17 +56,24 @@ const Sidebar = ({
 
     useEffect(() => {
         getConversations()
-
-        socket.on('conversations', (data: any) => {
-            data.conversations ? setConversations(data.conversations) : console.log('Échec de la connexion:', data.error);
-        });
-
-        socket.on('pinconversation', (data: any) => {
-            if (data.pinned) {
-                socket.emit('conversations', { cookies })
-            }
-        })
     }, [])
+
+    socket.on('conversations', (data: any) => {
+        console.log(data)
+        data.conversations ? setConversations(data.conversations) : console.log('Échec de la connexion:', data.error);
+    });
+
+    socket.on('pinconversation', (data: any) => {
+        if (data.pinned) {
+            socket.emit('conversations', { cookies })
+        }
+    })
+
+    socket.on('deleteconversation', (data: any) => {
+        const prevConversations = conversations
+        setConversations(prevConversations.filter((conv) => conv._id !== data.conversation_id))
+        conversationActive === data.conversation_id && setConversationActive('')
+    })
 
     const notPinnedConversations = conversations.filter((conv) => !conv.pinnedBy.includes(userId))
 
@@ -121,6 +128,7 @@ const Sidebar = ({
                                     noConvActiveClass={noConvActiveClass}
                                     handleConversationActive={handleConversationActive}
                                     editConversation={editConversation}
+                                    setEditConversation={setEditConversation}
                                 />
                             )
                         )

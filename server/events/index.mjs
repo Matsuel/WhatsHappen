@@ -16,6 +16,7 @@ import { synchroStatut } from "./user/synchrostatut.mjs";
 import { userInfos } from "./user/userInfos.mjs";
 
 import { color } from "../Functions/colors.mjs";
+import { deleteConversation } from "./conversation/delete.mjs";
 
 let connectedUsers = {};
 let typingTimeouts = {};
@@ -38,6 +39,7 @@ export const startEvents = (io) => {
         socket.on('synchro', join(socket, connectedUsers));
         socket.on('synchrostatus', synchroStatut(socket, connectedUsers));
         socket.on('userinfos', userInfos(socket));
+        socket.on('deleteconversation', deleteConversation(socket));
     });
 }
 

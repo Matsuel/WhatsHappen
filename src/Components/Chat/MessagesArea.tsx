@@ -37,10 +37,7 @@ const MessagesArea = ({
 
     const deleteMessage = (message_id: string) => {
         socket.emit('deletemessage', { cookies, message_id, conversationActive })
-        socket.on('deletemessage', (data: any) => {
-            if (data.deleted) {
-            }
-        })
+        // requete pour recup les conversations
     }
 
     return (

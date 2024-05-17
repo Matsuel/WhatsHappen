@@ -17,7 +17,7 @@ export const newConversation = (socket) => {
                 let creatorId = jwt.verify(cookies, secretTest).userId;
                 if (await Conversation.findOne({ users_id: [creatorId, user_id] })) return socket.emit('newconversation', { created: false });
                 if (await Conversation.findOne({ users_id: [user_id, creatorId] })) return socket.emit('newconversation', { created: false });
-                let conversation = new Conversation({ users_id: [creatorId, user_id], type: 'single' });
+                let conversation = new Conversation({ users_id: [creatorId, user_id], type: 'single', last_message_date: new Date().toISOString()});
                 await conversation.save();
                 let conv = mongoose.model('Messages' + conversation._id, MessageSchema);
                 conv.createCollection();

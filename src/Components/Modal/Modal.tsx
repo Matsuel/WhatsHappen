@@ -1,4 +1,4 @@
-import React, { ChangeEventHandler, useState } from 'react'
+import React, { ChangeEventHandler, useEffect, useRef, useState } from 'react'
 import styles from './style.module.scss'
 import Image from 'next/image'
 import NewConv from '@/assets/NewConv.svg'
@@ -24,6 +24,7 @@ const Modal = ({
 
     const [users, setUsers] = useState<UserInfos[]>([])
 
+    const inputRef = useRef<HTMLInputElement>(null)
     const ref = useClickAway<any>(() => {
         if (event && btnRef.current && btnRef.current.contains(event.target as Node)) {
             return;
@@ -31,6 +32,13 @@ const Modal = ({
         setShowNewConv(false)
         setUsers([])
     }) as React.MutableRefObject<HTMLInputElement>;
+
+
+    useEffect(() => {
+        if (showNewConv) {
+            inputRef.current?.focus()
+        }
+    }, [showNewConv])
 
     const handleSearchUsers: ChangeEventHandler<HTMLInputElement> = (e) => {
         if (e.target.value.trim() === "") {
@@ -69,7 +77,7 @@ const Modal = ({
                         placeholder='Rechercher ici une nouvelle personne'
                         autoComplete='off'
                         className={styles.newconvinput}
-                        ref={ref}
+                        ref={inputRef}
                         maxLength={50}
                         onChange={handleSearchUsers}
                     />

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import styles from './style.module.scss'
 import JoinFile from '@/assets/JoinFile.svg'
 import VoiceMessage from '@/assets/VoiceMessage.svg'
@@ -28,6 +28,7 @@ const InputBar = ({
     const [openPicker, setOpenPicker] = useState<boolean>(false)
     const [message, setMessage] = useState<string>('')
     const emojiButtonRef = useRef<HTMLDivElement>(null);
+    const inputRef = useRef<HTMLInputElement>(null);
 
     const ref = useClickAway((event) => {
         if (emojiButtonRef.current && emojiButtonRef.current.contains(event.target as Node)) {
@@ -65,6 +66,12 @@ const InputBar = ({
         })
     }
 
+    useEffect(() => {
+        if (inputRef.current) {
+            inputRef.current.focus()
+        }
+    }, [conversationActive])
+
     return (
         <div className={styles.conversationbottombar}>
             <Dropzone
@@ -85,6 +92,7 @@ const InputBar = ({
                 autoComplete='off'
                 className={styles.messageinput}
                 value={message}
+                ref={inputRef}
                 onChange={(e) => handleMessageChange(e.target.value, false)}
                 onKeyDown={(e) => handleEnterPressed(e, sendMessage, conversationActive)}
             />

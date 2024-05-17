@@ -43,6 +43,14 @@ const Chat = ({
         })
     }
 
+    socket.on('deletemessage', (data: any) => {
+        const { deleted, message_id } = data
+        if (deleted === true) {
+            const newMessages = messages.filter((message) => message._id !== message_id)
+            setMessages(newMessages)
+        }
+    })
+
     socket.on('syncmessages', (data) => {
         const oldMessages = messages
         setMessages([...oldMessages, data.messages])

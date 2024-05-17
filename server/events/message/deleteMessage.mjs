@@ -17,12 +17,12 @@ export const deleteMessage = (socket, connectedUsers) => {
             messageToDelete.sender_id === sender_id ? await MessageModel.deleteOne({ _id: message_id }) : null;
             let lastMessage = await MessageModel.findOne().sort({ date: -1 });
             let conversation = await Conversation.findById(conversationActive);
-            conversation.last_message_date = lastMessage ? lastMessage.date : null;
+            conversation.last_message_date = lastMessage ? lastMessage.date : new Date().toISOString();
             conversation.last_message_content = lastMessage ? lastMessage.content : null;
             conversation.last_message_sender = lastMessage ? lastMessage.sender_id : null;
             await conversation.save();
             otherSynchroMessage(cookies, conversationActive, connectedUsers);
-            socket.emit('deletemessage', { deleted: true });
+            socket.emit('deletemessage', { deleted: true, message_id: message_id });
         }
     }
 }
