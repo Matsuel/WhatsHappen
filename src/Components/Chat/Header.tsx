@@ -32,12 +32,10 @@ const Header = ({
             </div>
 
             <div className={styles.topbarright}>
-                {/* Composant TopBarBtn prenant en paramètre une image, une fonction onClick */}
                 <Image src={Phone} alt="phoneconv" className={styles.toprightbtn} />
                 <Image src={Video} alt="video" className={styles.toprightbtn} />
                 <Image src={SearchConv} alt="searchconv" className={styles.toprightbtn} onClick={handleSearchConv as any} />
                 {showSearchConv && <input type="text" name="" id="" placeholder="Rechercher dans la conversation" className={styles.searchconv + " " + styles.searchconvShow} />}
-                {/* Composant TopBarBtn prenant en paramètre une image, une fonction onClick */}
                 <Image src={Expand} alt="expand" className={styles.toprightbtn} />
             </div>
         </div>

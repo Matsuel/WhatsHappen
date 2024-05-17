@@ -77,6 +77,8 @@ const Sidebar = ({
                 handleNewConv={handleNewConv}
                 btnRef={btnRef}
                 handleEditModal={handleEditModal}
+                editConversation={editConversation}
+                setEditConversation={setEditConversation}
             />
 
             <EditModal 

@@ -25,7 +25,7 @@ const MessageDate = ({
     return (
         <div className={styles.messageday}>
             <div
-                style={{ width: "calc(50% - " + (width / 2 + 50) + "px)" }}
+                style={{ width: "calc(50% - " + (width / 2 + 30) + "px)" }}
                 className={styles.messagedayline}></div>
             <p className={styles.messagedaytext} ref={ref}>
                 {

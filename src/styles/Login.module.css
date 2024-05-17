@@ -4,8 +4,7 @@
     align-items: center;
     justify-content: center;
     height: 100vh;
-    background-color: #f0f2f5;
-    background-image: url("../assets/chat-bg.png");
+    background-color: #fff;
     background-position: center;
 }
 

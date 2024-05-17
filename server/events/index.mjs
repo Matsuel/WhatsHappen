@@ -43,6 +43,6 @@ export const startEvents = (io) => {
 
 export const startListeners = (server) => {
     server.listen(3001, () => {
-        console.log(color('success','Server is running on port 3001'));
+        console.log(color('success','Server is running on port 3001 👂'));
     });
 }

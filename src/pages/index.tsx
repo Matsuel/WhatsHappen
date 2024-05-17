@@ -3,9 +3,9 @@ import { socket } from './_app';
 import styles from '@/styles/Home.module.css'
 import Chat from '@/Components/Chat/Chat';
 import Sidebar from '@/Components/Sidebar/Sidebar';
-import Head from 'next/head';
 import Modal from '@/Components/Modal/Modal';
 import { useCookie } from '@/hooks/useCookie/useCookie';
+import CustomHead from '@/Components/CustomHead/CustomHead';
 
 const Home = () => {
 
@@ -34,10 +34,7 @@ const Home = () => {
     return (
         <div className={styles.home}>
 
-            <Head>
-                <title>iMessages</title>
-                <link rel="icon" href="/favicon.ico" />
-            </Head>
+            <CustomHead title="iMessage" />
 
             <Sidebar
                 conversationActive={conversationActive}

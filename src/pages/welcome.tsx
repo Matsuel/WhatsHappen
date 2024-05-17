@@ -2,10 +2,12 @@ import React from 'react'
 import styles from '@/styles/WelcomePage.module.css'
 import Image from 'next/image'
 import WhatsappGif from '@/assets/whatsapp.gif'
+import CustomHead from '@/Components/CustomHead/CustomHead'
 
 const WelcomePage = () => {
   return (
     <div className={styles.welcomePage}>
+      <CustomHead title="iMessage" />
       <div className={styles.titleDiv}>
         <h1 className={styles.title}>Bienvenue sur WhatsApp</h1>
         <Image src={WhatsappGif} alt="WhatsappGif" className={styles.gif} />

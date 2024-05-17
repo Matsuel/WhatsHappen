@@ -7,7 +7,7 @@ import Eye from '@/assets/Eye.svg'
 import EyeSlash from '@/assets/EyeSlash.svg'
 import Trash from '@/assets/Trash.svg'
 import JoinFile from '@/assets/JoinFile.svg'
-import Head from 'next/head'
+import CustomHead from '@/Components/CustomHead/CustomHead'
 
 const LoginPage = () => {
   const [socket, setSocket] = useState<any>(null)
@@ -93,10 +93,7 @@ const LoginPage = () => {
   return (
     <div className={styles.LoginPage}>
 
-      <Head>
-        <title>iMessages - Login</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+      <CustomHead title="iMessage - Login" />
 
       <div className={styles.form}>
         <form className={styles.part}>

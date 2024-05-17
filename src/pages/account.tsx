@@ -1,8 +1,12 @@
+import CustomHead from '@/Components/CustomHead/CustomHead'
 import React from 'react'
 
 const account = () => {
   return (
-    <div>account</div>
+    <div>
+      <CustomHead title="Account" />
+      account
+      </div>
   )
 }
 
