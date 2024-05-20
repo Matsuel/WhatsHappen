@@ -59,7 +59,6 @@ const Sidebar = ({
     }, [])
 
     socket.on('conversations', (data: any) => {
-        console.log(data)
         data.conversations ? setConversations(data.conversations) : console.log('Échec de la connexion:', data.error);
     });
 
@@ -73,6 +72,10 @@ const Sidebar = ({
         const prevConversations = conversations
         setConversations(prevConversations.filter((conv) => conv._id !== data.conversation_id))
         conversationActive === data.conversation_id && setConversationActive('')
+    })
+
+    socket.on('syncconversations', () => {
+        socket.emit('conversations', { cookies })
     })
 
     const notPinnedConversations = conversations.filter((conv) => !conv.pinnedBy.includes(userId))

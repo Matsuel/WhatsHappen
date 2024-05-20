@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 import { Conversation } from '../../Models/Conversation.mjs';
-import { otherSynchroMessage } from '../../Functions/Message.mjs';
+import { otherSynchroMessage, sendLastDeletedMessage } from '../../Functions/Message.mjs';
 import checkToken from '../../Functions/CheckToken.mjs';
 dotenv.config();
 const secretTest = process.env.SECRET;
@@ -21,8 +21,11 @@ export const deleteMessage = (socket, connectedUsers) => {
             conversation.last_message_content = lastMessage ? lastMessage.content : null;
             conversation.last_message_sender = lastMessage ? lastMessage.sender_id : null;
             await conversation.save();
-            otherSynchroMessage(cookies, conversationActive, connectedUsers);
+            // au leiu d'envoyer ça fo envoyer l'id du message supprimé
+            // otherSynchroMessage(cookies, conversationActive, connectedUsers);
+            sendLastDeletedMessage(conversationActive, connectedUsers, message_id, sender_id);
             socket.emit('deletemessage', { deleted: true, message_id: message_id });
+            socket.emit('syncconversations')
         }
     }
 }

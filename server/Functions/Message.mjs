@@ -17,7 +17,23 @@ export async function otherSynchroMessage(cookies, conversation_id, connectedUse
     conversations = sortConversations(conversations, sender_id);
     if (connectedUsers[otherId]) {
         connectedUsers[otherId].emit('syncmessages', { messages: await getLastMessage(conversation_id) });
+        connectedUsers[otherId].emit('syncconversations')
     }
+}
+
+export async function sendLastDeletedMessage(conversation_id, connectedUsers, message_id, sender_id) {
+    const conversation = await Conversation.findById(conversation_id);
+    const otherId = conversation.users_id.filter((id) => id !== sender_id)[0];
+    if (connectedUsers[otherId]) {
+        connectedUsers[otherId].emit('deletemessage', { deleted: true, message_id });
+        connectedUsers[otherId].emit('syncconversations')
+    }
+    // const conversation = await Conversation.findById(conversation_id);
+    // const otherId = conversation.users_id.filter((id) => id !== sender_id)[0];
+    // if (connectedUsers[otherId]) {
+    //     connectedUsers[otherId].emit('deletemessage', { deleted: true, message_id });
+    //     connectedUsers[otherId].emit('syncconversations')
+    // }
 }
 
 export async function getLastMessage(conversation_id) {
