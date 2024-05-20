@@ -28,12 +28,6 @@ export async function sendLastDeletedMessage(conversation_id, connectedUsers, me
         connectedUsers[otherId].emit('deletemessage', { deleted: true, message_id });
         connectedUsers[otherId].emit('syncconversations')
     }
-    // const conversation = await Conversation.findById(conversation_id);
-    // const otherId = conversation.users_id.filter((id) => id !== sender_id)[0];
-    // if (connectedUsers[otherId]) {
-    //     connectedUsers[otherId].emit('deletemessage', { deleted: true, message_id });
-    //     connectedUsers[otherId].emit('syncconversations')
-    // }
 }
 
 export async function getLastMessage(conversation_id) {
