@@ -1,12 +1,12 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import styles from './styles.module.scss';
 import Image from 'next/image';
 import NewConv from '@/assets/NewConv.svg';
+import EditModal from './EditModal';
 
 interface HeaderProps {
     handleNewConv: Function,
     btnRef: any,
-    handleEditModal: Function,
     editConversation: boolean,
     setEditConversation: Function
 }
@@ -14,14 +14,21 @@ interface HeaderProps {
 const Header = ({
     handleNewConv,
     btnRef,
-    handleEditModal,
     editConversation,
     setEditConversation
  }: HeaderProps) => {
 
+    const [edit, setEdit] = useState<boolean>(false)
+
+    const handleEditModal = () => {
+        setEdit(!edit)
+    }
+
+    const editRef = useRef(null)
+
     return (
         <div className={styles.header}>
-            <button className={styles.editButton} onClick={() => editConversation ? setEditConversation(false) : handleEditModal()}>
+            <button className={styles.editButton} onClick={() => editConversation ? setEditConversation(false) : handleEditModal()} ref={editRef}>
                 {editConversation ? 'Annuler' : 'Modifier'}
             </button>
             <h2 className={styles.headerTitle}>Messages</h2>
@@ -33,6 +40,14 @@ const Header = ({
                     onClick={() => handleNewConv()}
                 />
             </button>
+
+            <EditModal 
+                editConversation={editConversation}
+                setEditConversation={setEditConversation}
+                edit={edit}
+                setEdit={setEdit}
+                editRef={editRef}
+            />
         </div>
     );
 };

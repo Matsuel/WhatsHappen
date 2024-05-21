@@ -25,7 +25,7 @@ const Sidebar = ({
     
     const {cookies, userId} = useCookie()
     const [editConversation, setEditConversation] = useState<boolean>(false)
-    const [edit, setEdit] = useState<boolean>(false)
+    
     const [search, setSearch] = useState<string>('')
     const [conversations, setConversations] = useState<ConversationInfos[]>([])
     const conversationsNoResult: string = "Aucune conversation trouvée"
@@ -36,9 +36,6 @@ const Sidebar = ({
         setEditConversation(!editConversation)
     }
 
-    const handleEditModal = () => {
-        setEdit(!edit)
-    }
 
     const handleConversationActive = (conversationId: string) => {
         if (conversationId === conversationActive) {
@@ -86,17 +83,11 @@ const Sidebar = ({
             <Header
                 handleNewConv={handleNewConv}
                 btnRef={btnRef}
-                handleEditModal={handleEditModal}
                 editConversation={editConversation}
                 setEditConversation={setEditConversation}
             />
 
-            <EditModal 
-                editConversation={editConversation}
-                setEditConversation={setEditConversation}
-                edit={edit}
-                setEdit={setEdit}
-            />
+            
 
             <Searchbar
                 setSearch={setSearch}
