@@ -14,6 +14,7 @@ interface MessagesAreaProps {
     messagesCount: number,
     messages: message[],
     conversationActive: string,
+    pic: string
 }
 
 const MessagesArea = ({
@@ -21,9 +22,10 @@ const MessagesArea = ({
     messages,
     messagesCount,
     conversationActive,
+    pic
 }: MessagesAreaProps) => {
 
-    const { cookies } = useCookie()
+    const { cookies, userId } = useCookie()
 
     const [messageDay, setMessageDay] = useState<Number>(0)
 
@@ -54,6 +56,8 @@ const MessagesArea = ({
                 const nextMessage = i < messagesCount - 1 ? messages[i + 1] : null
                 const previousMessage = i > 0 ? messages[i - 1] : null
 
+                const isNextMessageSameSender = isTopRounded(message, nextMessage?.sender_id as string, nextMessage?.date as string) && message.sender_id !== userId ? true : false
+
                 return (
                     <>
                         {
@@ -76,6 +80,8 @@ const MessagesArea = ({
                                     messagesCount={messagesCount}
                                     deleteMessage={deleteMessage}
                                     conversationActive={conversationActive}
+                                    isNextMessageSameSender={isNextMessageSameSender}
+                                    pic={pic}
                                 /> :
                                 <MessageFile
                                     message={message}

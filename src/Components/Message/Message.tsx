@@ -7,6 +7,7 @@ import { decodeToken } from 'react-jwt'
 import { socket } from '@/pages/_app'
 import Reactions from './Reactions'
 import { useCookie } from '@/hooks/useCookie/useCookie'
+import DisplayAvatar from '../DisplayAvatar/DisplayAvatar'
 
 interface MessageProps {
     message: message,
@@ -16,7 +17,9 @@ interface MessageProps {
     bottomRounded: boolean,
     messagesCount: number,
     deleteMessage: Function,
-    conversationActive: string
+    conversationActive: string,
+    isNextMessageSameSender: boolean,
+    pic: string
 }
 
 const Message = ({
@@ -27,7 +30,9 @@ const Message = ({
     topRounded,
     messagesCount,
     deleteMessage,
-    conversationActive
+    conversationActive,
+    isNextMessageSameSender,
+    pic
 }: MessageProps) => {
 
     const { cookies } = useCookie()
@@ -75,6 +80,11 @@ const Message = ({
                     onEmojiClick={(emoji: EmojiPickerProps) => { handleReaction(message._id, emoji.unified); setRightClick(false); }}
                 />}
                 <div className={messageClass + " " + topClass + " " + bottomClass} key={message._id}>
+                    {isNextMessageSameSender &&
+                        <div className={styles.avatarLastMessage}>
+                            <DisplayAvatar pic={pic} size={50} />
+                        </div>
+                    }
                     <p className={
                         isReceived ? styles.messagecontent : styles.messagecontentMe
                     }>

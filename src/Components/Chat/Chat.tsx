@@ -83,6 +83,7 @@ const Chat = ({
                         messages={messages}
                         messagesCount={messages.length}
                         conversationActive={conversationActive}
+                        pic={conversationInfos.pic}
                     />
 
                     <BottomBar

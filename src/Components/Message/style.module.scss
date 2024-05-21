@@ -57,7 +57,7 @@
 }
 
 .message {
-    width: 95%;
+    width: 90%;
     height: auto;
     display: flex;
     flex-direction: column;
@@ -148,6 +148,13 @@
 .messagecontextmenureceived {
     align-self: flex-start;
     background-color: #fff;
+}
+
+.avatarLastMessage {
+    position: absolute;
+    bottom: 50%;
+    transform: translateY(50%);
+    left: -60px;
 }
 
 /* contextMenu style  */
