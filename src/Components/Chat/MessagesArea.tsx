@@ -85,16 +85,17 @@ const MessagesArea = ({
                                     isNextMessageSameSender={isNextMessageSameSender}
                                     pic={pic}
                                 /> :
-                                <MessageFile
-                                    message={message}
-                                    i={i}
-                                    scrollBottomRef={scrollBottomRef}
-                                    key={message._id}
-                                    topRounded={isTopRounded(previousMessage, message.sender_id, message.date)}
-                                    bottomRounded={isBottomRounded(nextMessage, message.sender_id, message.date)}
-                                    messagesCount={messagesCount}
-                                    deleteMessage={deleteMessage}
-                                />
+                                // <MessageFile
+                                //     message={message}
+                                //     i={i}
+                                //     scrollBottomRef={scrollBottomRef}
+                                //     key={message._id}
+                                //     topRounded={isTopRounded(previousMessage, message.sender_id, message.date)}
+                                //     bottomRounded={isBottomRounded(nextMessage, message.sender_id, message.date)}
+                                //     messagesCount={messagesCount}
+                                //     deleteMessage={deleteMessage}
+                                // />
+                                null
                         }
                     </>
                 )
