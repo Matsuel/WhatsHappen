@@ -262,13 +262,23 @@
 
 // Edit Message Style 
 
-.editMessageInput {
-    width: 90%;
+.editMessageWrap {
+    margin-top: 10px;
+    width: 100%;
     height: auto;
-    outline: none;
-    border: none;
-    padding: 10px;
-    border-radius: 12px;
-    color: #000;
-    background-color: #eaeaec;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .editMessageInput {
+        margin-top: 10px;
+        width: 90%;
+        height: auto;
+        outline: none;
+        border: none;
+        padding: 10px;
+        border-radius: 12px;
+        color: #000;
+        background-color: #eaeaec;
+    }
 }
