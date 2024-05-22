@@ -15,7 +15,7 @@ const Chat = ({
     conversationActive,
 }: ChatProps) => {
 
-    const {cookies} = useCookie()
+    const { cookies } = useCookie()
 
     const [messages, setMessages] = useState<message[]>([])
     const [showSearchConv, setShowSearchConv] = useState<boolean>(false)
@@ -52,8 +52,10 @@ const Chat = ({
     })
 
     socket.on('syncmessages', (data) => {
-        const oldMessages = messages
-        setMessages([...oldMessages, data.messages])
+        if (data.conversationId === conversationActive) {
+            const oldMessages = messages
+            setMessages([...oldMessages, data.messages])
+        }
     })
 
     socket.on('editMessage', (data) => {
@@ -102,7 +104,7 @@ const Chat = ({
                     <BottomBar
                         conversationActive={conversationActive}
                         name={conversationInfos.name}
-                        
+
                     />
                 </>
             ) : (

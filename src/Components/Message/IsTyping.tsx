@@ -3,15 +3,19 @@ import styles from './style.module.scss'
 import { socket } from '@/pages/_app'
 
 interface IsTypingProps {
+    conversationActive: string
 }
 
 const IsTyping = ({
+    conversationActive
 }: IsTypingProps) => {
 
     const [isTyping, setIsTyping] = useState<boolean>(false)
 
     socket.on('typing', (data: any) => {
-        setIsTyping(data.typing)
+        if (data.conversationId === conversationActive) {
+            setIsTyping(data.typing)
+        }
     })
 
     return (

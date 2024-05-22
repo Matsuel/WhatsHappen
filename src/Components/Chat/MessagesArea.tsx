@@ -33,7 +33,9 @@ const MessagesArea = ({
 
     useEffect(() => {
         if (scrollBottomRef.current) {
-            scrollBottomRef.current.scrollIntoView()
+            scrollBottomRef.current.scrollIntoView(
+                { behavior: "smooth" }
+            )
         }
     }, [messages])
 
@@ -99,6 +101,7 @@ const MessagesArea = ({
             })}
             
             <IsTyping
+                conversationActive={conversationActive}
             />
         </div>
     )

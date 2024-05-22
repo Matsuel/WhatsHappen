@@ -16,7 +16,7 @@ export async function otherSynchroMessage(cookies, conversation_id, connectedUse
     conversations = await getConversationsInfos(conversations, sender_id, connectedUsers);
     conversations = sortConversations(conversations, sender_id);
     if (connectedUsers[otherId]) {
-        connectedUsers[otherId].emit('syncmessages', { messages: await getLastMessage(conversation_id) });
+        connectedUsers[otherId].emit('syncmessages', { messages: await getLastMessage(conversation_id), conversationId: conversation_id });
         connectedUsers[otherId].emit('syncconversations')
     }
 }
