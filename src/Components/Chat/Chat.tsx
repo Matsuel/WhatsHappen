@@ -56,6 +56,19 @@ const Chat = ({
         setMessages([...oldMessages, data.messages])
     })
 
+    socket.on('editMessage', (data) => {
+        if (data.edited === true) {
+            const prevMessages = messages
+            const newMessages = prevMessages.map((message) => {
+                if (message._id === data.message_id) {
+                    message.content = data.content
+                }
+                return message
+            })
+            setMessages(newMessages)
+        }
+    })
+
     const handleSearchConv = () => {
         setShowSearchConv(!showSearchConv)
     }

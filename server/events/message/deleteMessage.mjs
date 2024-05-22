@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 import { Conversation } from '../../Models/Conversation.mjs';
-import { otherSynchroMessage, sendLastDeletedMessage } from '../../Functions/Message.mjs';
+import { sendLastDeletedMessage } from '../../Functions/Message.mjs';
 import checkToken from '../../Functions/CheckToken.mjs';
 dotenv.config();
 const secretTest = process.env.SECRET;

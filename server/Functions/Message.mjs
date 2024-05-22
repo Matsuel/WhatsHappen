@@ -47,3 +47,12 @@ export async function saveMessage(conversation_id, content, sender_id) {
     conversation.last_message_sender = sender_id;
     await conversation.save();
 }
+
+export async function syncAfterEdit(conversation_id, connectedUsers, message_id, content, sender_id) {
+    const conversation = await Conversation.findById(conversation_id);
+    const otherId = conversation.users_id.filter((id) => id !== sender_id)[0];
+    if (connectedUsers[otherId]) {
+        connectedUsers[otherId].emit('editMessage', { edited: true, message_id: message_id, content: content });
+        connectedUsers[otherId].emit('syncconversations')
+    }
+}

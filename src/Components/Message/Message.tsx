@@ -8,6 +8,8 @@ import { socket } from '@/pages/_app'
 import Reactions from './Reactions'
 import { useCookie } from '@/hooks/useCookie/useCookie'
 import DisplayAvatar from '../DisplayAvatar/DisplayAvatar'
+import Content from './Content'
+import EditMessage from './EditMessage'
 
 interface MessageProps {
     message: message,
@@ -38,6 +40,7 @@ const Message = ({
     const { cookies } = useCookie()
 
     const [rightClick, setRightClick] = useState<boolean>(false)
+    const [editMode, setEditMode] = useState<boolean>(false)
     const [longPress, setLongPress] = useState<number | null>(null)
 
     let userId = ""
@@ -68,46 +71,50 @@ const Message = ({
 
     return (
         <>
-            <div className={styles.message + " " + firstPlan + " " + hasReactions}
-                ref={i === messagesCount - 1 ? scrollBottomRef : null}
-                onContextMenu={(e) => handleContextMenu(e, setRightClick)}
-                onClick={(e) => e.detail === 2 ? handleReaction(message._id, "2764-fe0f") : null}
-                onMouseDown={() => handleMouseDown(setRightClick, setLongPress)}
-                onMouseUp={() => handleMouseUp(longPress, setLongPress)}
-                onMouseLeave={() => handleMouseUp(longPress, setLongPress)}
-                onKeyDown={handleEscape}>
-                {rightClick && <Picker reactionsDefaultOpen={true} className={styles.reactiondiv + " " + (isReceived ? styles.messagecontextmenureceived : styles.messagecontextmenusent)}
-                    onEmojiClick={(emoji: EmojiPickerProps) => { handleReaction(message._id, emoji.unified); setRightClick(false); }}
-                />}
-                <div className={messageClass + " " + topClass + " " + bottomClass} key={message._id}>
-                    {isNextMessageSameSender &&
-                        <div className={styles.avatarLastMessage}>
-                            <DisplayAvatar pic={pic} size={50} />
-                        </div>
-                    }
-                    <p className={
-                        isReceived ? styles.messagecontent : styles.messagecontentMe
-                    }>
-                        {message.content}
-                    </p>
+            {editMode ?
+                <EditMessage
+                    message={message}
+                    setEditMode={setEditMode}
+                    editMode={editMode}
+                    conversationActive={conversationActive}
+                />
+                :
+                <div className={styles.message + " " + firstPlan + " " + hasReactions}
+                    ref={i === messagesCount - 1 ? scrollBottomRef : null}
+                    onContextMenu={(e) => handleContextMenu(e, setRightClick)}
+                    onClick={(e) => e.detail === 2 ? handleReaction(message._id, "2764-fe0f") : null}
+                    onMouseDown={() => handleMouseDown(setRightClick, setLongPress)}
+                    onMouseUp={() => handleMouseUp(longPress, setLongPress)}
+                    onMouseLeave={() => handleMouseUp(longPress, setLongPress)}
+                    onKeyDown={handleEscape}>
+                    {rightClick && <Picker reactionsDefaultOpen={true} className={styles.reactiondiv + " " + (isReceived ? styles.messagecontextmenureceived : styles.messagecontextmenusent)}
+                        onEmojiClick={(emoji: EmojiPickerProps) => { handleReaction(message._id, emoji.unified); setRightClick(false); }}
+                    />}
 
-                    <Reactions
-                        reactions={message.reactions}
+                    {/* {!editMode ? */}
+                    <Content
+                        message={message}
+                        isNextMessageSameSender={isNextMessageSameSender}
+                        pic={pic}
                         handleReaction={handleReaction}
-                        id={message._id}
+                        isReceived={isReceived}
+                        messageClass={messageClass}
+                        topClass={topClass}
+                        bottomClass={bottomClass}
                     />
 
+                    <ContextMenu
+                        message={message}
+                        userId={userId}
+                        deleteMessage={deleteMessage}
+                        isReceived={isReceived}
+                        rightClick={rightClick}
+                        setRightClick={setRightClick}
+                        setEditMode={setEditMode}
+                        editMode={editMode}
+                    />
                 </div>
-
-                <ContextMenu
-                    message={message}
-                    userId={userId}
-                    deleteMessage={deleteMessage}
-                    isReceived={isReceived}
-                    rightClick={rightClick}
-                    setRightClick={setRightClick}
-                />
-            </div>
+            }
         </>
     )
 }

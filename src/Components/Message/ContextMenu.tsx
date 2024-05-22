@@ -14,7 +14,9 @@ interface ContextMenuProps {
     deleteMessage: Function,
     isReceived: boolean,
     rightClick: boolean,
-    setRightClick: Function
+    setRightClick: Function,
+    setEditMode: Function,
+    editMode: boolean
 }
 
 interface Button {
@@ -31,7 +33,9 @@ const ContextMenu = ({
     deleteMessage,
     isReceived,
     rightClick,
-    setRightClick
+    setRightClick,
+    setEditMode,
+    editMode
 }: ContextMenuProps) => {
 
     const ref = useClickAway(()=>{
@@ -48,7 +52,7 @@ const ContextMenu = ({
         {
             title: "Modifier",
             icon: Edit,
-            action: () => { console.log("modifier"); setRightClick(false); },
+            action: () => { setEditMode(!editMode); setRightClick(false); },
             canSee: message.sender_id === userId
         },
         {
