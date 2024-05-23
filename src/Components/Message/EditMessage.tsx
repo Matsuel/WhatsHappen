@@ -36,7 +36,7 @@ const EditMessage = ({
         if (e.key === "Enter" && newMessage.length > 0 && newMessage.trim().length > 0) {
             socket.emit('editMessage', { cookies: cookies, message_id: message._id, content: newMessage, conversation_id: conversationActive })
             setEditMode(false)
-        } else if (newMessage === message.content) {
+        } else if (e.key === "Enter" && newMessage === message.content) {
             setEditMode(false)
         }
     }
@@ -76,7 +76,6 @@ const EditMessage = ({
                 <EmojiPicker
                     onEmojiClick={(e) => {
                         setNewMessage(newMessage + e.emoji)
-                        console.log(e)
                     }}
                 />
             </div>}
