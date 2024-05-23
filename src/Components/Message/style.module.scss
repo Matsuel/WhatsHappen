@@ -57,6 +57,7 @@
 }
 
 .message {
+    // position: relative;
     width: 90%;
     height: auto;
     display: flex;
@@ -151,7 +152,8 @@
 /* contextMenu style  */
 
 .messagecontextmenu {
-    z-index: 2;
+    position: absolute;
+    z-index: 500;
     width: 10%;
     height: auto;
     margin-top: 1%;
@@ -160,19 +162,15 @@
     flex-direction: column;
     align-items: center;
     box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
-}
-
-.messagecontextmenusent {
-    align-self: flex-end;
     background-color: #f5f6fa;
 }
 
-.messagecontextmenureceived {
-    align-self: flex-start;
-    background-color: #f5f6fa;
+.messagecontextmenuPicker {
+    position: relative;
 }
 
 .messagecontextitem {
+    position: relative;
     width: 100%;
     height: 40px;
     display: flex;
@@ -183,7 +181,7 @@
     color: #000;
     cursor: pointer;
     border: none;
-    background-color: transparent;
+    background-color: #fff;
 }
 
 .messagecontextitem:hover {
@@ -212,6 +210,32 @@
 
 .reactiondiv {
     margin-bottom: 1%;
+}
+
+.contextReactions {
+    width: 100%;
+    height: auto;
+    padding: 5px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
+    background-color: #fff;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+
+    .contextEmoji {
+        border: none;
+        outline: none;
+        width: 35px;
+        height: 35px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        background-color: #f5f6fa;
+        cursor: pointer;
+    }
 }
 
 // isTyping style 

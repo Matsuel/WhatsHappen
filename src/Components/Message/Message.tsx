@@ -40,6 +40,7 @@ const Message = ({
     const [rightClick, setRightClick] = useState<boolean>(false)
     const [editMode, setEditMode] = useState<boolean>(false)
     const [longPress, setLongPress] = useState<number | null>(null)
+    const [points, setPoints] = useState({ x: 0, y: 0 })
 
     let userId = ""
     if (typeof window !== 'undefined') {
@@ -92,7 +93,7 @@ const Message = ({
                 :
                 <div className={styles.message + " " + firstPlan + " " + hasReactions}
                     ref={i === messagesCount - 1 ? scrollBottomRef : null}
-                    onContextMenu={(e) => handleContextMenu(e, setRightClick)}
+                    onContextMenu={(e) => handleContextMenu(e, setRightClick, setPoints)}
                     onClick={(e) => e.detail === 2 ? handleReaction(message._id, "2764-fe0f") : null}
                     onMouseDown={() => handleMouseDown(setRightClick, setLongPress)}
                     onMouseUp={() => handleMouseUp(longPress, setLongPress)}
@@ -101,9 +102,21 @@ const Message = ({
                     role='button'
                     tabIndex={0}
                 >
-                    {rightClick && <Picker reactionsDefaultOpen={true} className={styles.reactiondiv + " " + (isReceived ? styles.messagecontextmenureceived : styles.messagecontextmenusent)}
+                    <ContextMenu
+                        message={message}
+                        userId={userId}
+                        deleteMessage={deleteMessage}
+                        isReceived={isReceived}
+                        rightClick={rightClick}
+                        setRightClick={setRightClick}
+                        setEditMode={setEditMode}
+                        editMode={editMode}
+                        points={points}
+                        conversationActive={conversationActive}
+                    />
+                    {/* {rightClick && <Picker reactionsDefaultOpen={true} className={styles.reactiondiv + " " + (isReceived ? styles.messagecontextmenureceived : styles.messagecontextmenusent)}
                         onEmojiClick={(emoji: EmojiPickerProps) => { handleReaction(message._id, emoji.unified); setRightClick(false); }}
-                    />}
+                    />} */}
 
                     <Content
                         message={message}
@@ -114,17 +127,6 @@ const Message = ({
                         messageClass={messageClass}
                         topClass={topClass}
                         bottomClass={bottomClass}
-                    />
-
-                    <ContextMenu
-                        message={message}
-                        userId={userId}
-                        deleteMessage={deleteMessage}
-                        isReceived={isReceived}
-                        rightClick={rightClick}
-                        setRightClick={setRightClick}
-                        setEditMode={setEditMode}
-                        editMode={editMode}
                     />
                 </div>
             }

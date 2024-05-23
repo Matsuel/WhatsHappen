@@ -1,6 +1,7 @@
-const handleContextMenu = (e: React.MouseEvent<HTMLDivElement, MouseEvent>, setRightClick: Function) => {
+const handleContextMenu = (e: { preventDefault: () => void; pageX: any; pageY: any; }, setRightClick: Function, setPoints: Function) => {
     e.preventDefault()
     setRightClick(true)
+    setPoints({ x: e.pageX, y: e.pageY })
 }
 
 const handleMouseDown = (setRightClick: Function, setLongPress: Function) => {
