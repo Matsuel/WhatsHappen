@@ -27,7 +27,7 @@ const InputBar = ({
     const [emojiIndex, setEmojiIndex] = useState<number>(Math.floor(Math.random() * RandomEmojis.length))
     const [openPicker, setOpenPicker] = useState<boolean>(false)
     const [message, setMessage] = useState<string>('')
-    const emojiButtonRef = useRef<HTMLDivElement>(null);
+    const emojiButtonRef = useRef<HTMLButtonElement>(null);
     const inputRef = useRef<HTMLInputElement>(null);
 
     const ref = useClickAway((event) => {
@@ -103,13 +103,13 @@ const InputBar = ({
                 className={styles.joinfile}
             />
 
-            <div className={styles.emojiPicker}
+            <button className={styles.emojiPicker}
                 onMouseEnter={handleRandomEmoji}
                 ref={emojiButtonRef}
                 onClick={() => showEmoji()}
             >
                 <Emoji unified={RandomEmojis[emojiIndex].unified} size={24} />
-            </div>
+            </button>
 
             {openPicker &&
                 <div className={styles.emojiPickerContainer} ref={ref}>

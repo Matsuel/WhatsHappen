@@ -63,6 +63,7 @@ const Conversation = ({
             onClick={() => handleConversationActive(conversation._id)}
             onMouseEnter={() => setHover(true)}
             onMouseLeave={() => setHover(false)}
+            role='button'
         >
 
             {editConversation && <Image

@@ -5,9 +5,7 @@ import styles from './style.module.scss'
 import { ContextMenu } from './ContextMenu'
 import { decodeToken } from 'react-jwt'
 import { socket } from '@/pages/_app'
-import Reactions from './Reactions'
 import { useCookie } from '@/hooks/useCookie/useCookie'
-import DisplayAvatar from '../DisplayAvatar/DisplayAvatar'
 import Content from './Content'
 import EditMessage from './EditMessage'
 
@@ -64,10 +62,13 @@ const Message = ({
 
     const handleReaction = (message_id: string, reaction_id: string) => {
         socket.emit('reaction', { cookies, message_id, reaction_id, conversationActive })
-        socket.on('reaction', (data: any) => {
-            data.reacted ? socket.emit('conversationmessages', { cookies, conversation_id: conversationActive }) : null
-        })
     }
+
+    socket.on('reaction', (data: any) => {
+        if (data.reacted) {
+            socket.emit('conversationmessages', { cookies, conversation_id: conversationActive })
+        }
+    })
 
     return (
         <>
@@ -86,12 +87,13 @@ const Message = ({
                     onMouseDown={() => handleMouseDown(setRightClick, setLongPress)}
                     onMouseUp={() => handleMouseUp(longPress, setLongPress)}
                     onMouseLeave={() => handleMouseUp(longPress, setLongPress)}
-                    onKeyDown={handleEscape}>
+                    onKeyDown={handleEscape}
+                    role='button'
+                    >
                     {rightClick && <Picker reactionsDefaultOpen={true} className={styles.reactiondiv + " " + (isReceived ? styles.messagecontextmenureceived : styles.messagecontextmenusent)}
                         onEmojiClick={(emoji: EmojiPickerProps) => { handleReaction(message._id, emoji.unified); setRightClick(false); }}
                     />}
 
-                    {/* {!editMode ? */}
                     <Content
                         message={message}
                         isNextMessageSameSender={isNextMessageSameSender}

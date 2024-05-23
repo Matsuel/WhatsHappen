@@ -14,9 +14,12 @@ export const newMessage = (socket, connectedUsers) => {
             const { cookies, conversation_id, content } = data;
             if (await checkToken(cookies)) {
                 const sender_id = jwt.verify(cookies, secretTest).userId;
-                content !== "" ? await saveMessage(conversation_id, content, sender_id) : null;
-                socket.emit('newmessage', { sent: true });
-                otherSynchroMessage(cookies, conversation_id, connectedUsers);
+                if (content.trim() !== "") {
+                    await saveMessage(conversation_id, content, sender_id);
+                    socket.emit('newmessage', { sent: true });
+                    otherSynchroMessage(cookies, conversation_id, connectedUsers);
+                }
+
             } else {
                 socket.emit('newmessage', { sent: false });
             }

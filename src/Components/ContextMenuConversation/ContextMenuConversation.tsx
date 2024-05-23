@@ -58,7 +58,7 @@ const ContextMenuConversation = ({
             ref={ref}
         >
             {items.map((item) => (
-                <div
+                <button
                     className={styles.contextMenuItem}
                     onClick={item.onClick}
                     style={{ color: item.color }}
@@ -71,7 +71,7 @@ const ContextMenuConversation = ({
                         width={0}
                         height={0}
                     />
-                </div>
+                </button>
             ))}
         </div>
     )

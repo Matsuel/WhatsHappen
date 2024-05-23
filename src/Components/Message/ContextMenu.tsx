@@ -101,7 +101,7 @@ const Button = ({
     return (
         <>
             {canSee &&
-                <div
+                <button
                     className={styles.messagecontextitem}
                     onClick={() => action()}
                 >
@@ -117,7 +117,7 @@ const Button = ({
                         height={20}
                     />
 
-                </div>
+                </button>
             }
         </>
     )

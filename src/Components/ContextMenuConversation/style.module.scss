@@ -12,6 +12,7 @@
 
     .contextMenuItem {
         width: 100%;
+        border: none;
         height: auto;
         display: flex;
         flex-direction: row;
@@ -19,6 +20,7 @@
         justify-content: space-between;
         gap: 2%;
         cursor: pointer;
+        background-color: transparent;
 
         .contextMenuLabel {
             font-family: 'SfPro', sans-serif;

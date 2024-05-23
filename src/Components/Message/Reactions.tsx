@@ -23,7 +23,7 @@ const Reactions = ({
 
                     {reactions.map((reaction, i) => {
                         return (
-                            <div className={styles.reaction} key={i} onClick={() => { handleReaction(id, reaction.reaction) }}>
+                            <div className={styles.reaction} key={i} onClick={() => { handleReaction(id, reaction.reaction) }} role='button'>
                                 <Emoji unified={reaction.reaction} size={13} />
                             </div>
                         )
