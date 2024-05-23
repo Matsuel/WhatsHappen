@@ -24,7 +24,7 @@ const EditMessage = ({
     const ref = useRef<HTMLInputElement>(null)
 
     const refAway = useClickAway((event) => {
-        if (ref.current && ref.current.contains(event.target as Node)) {
+        if (ref.current?.contains(event.target as Node)) {
             return
         }
         setEditMode(false)

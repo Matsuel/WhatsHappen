@@ -21,12 +21,10 @@ export const reaction = (socket, connectedUsers) => {
                     const reactionIndex = message.reactions.findIndex((reaction) => reaction.user_id === sender_id);
                     if (reactionIndex === -1) {
                         message.reactions.push({ user_id: sender_id, reaction: reaction_id });
+                    } else if (message.reactions[reactionIndex].reaction === reaction_id) {
+                        message.reactions.splice(reactionIndex, 1);
                     } else {
-                        if (message.reactions[reactionIndex].reaction === reaction_id) {
-                            message.reactions.splice(reactionIndex, 1);
-                        } else {
-                            message.reactions[reactionIndex].reaction = reaction_id;
-                        }
+                        message.reactions[reactionIndex].reaction = reaction_id;
                     }
                 } else {
                     message.reactions = [{ user_id: sender_id, reaction: reaction_id }];

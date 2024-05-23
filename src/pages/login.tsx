@@ -72,10 +72,8 @@ const LoginPage = () => {
     e.preventDefault();
     if (password !== confirmPassword) {
       setError('Les mots de passe ne sont pas égaux')
-    } else {
-      if (socket) {
-        socket.emit('register', { pseudo, email, password, selectedFile });
-      }
+    } else if (socket) {
+      socket.emit('register', { pseudo, email, password, selectedFile });
     }
   }
 
@@ -96,6 +94,7 @@ const LoginPage = () => {
       <CustomHead title="iMessage - Login" />
 
       <div className={styles.form}>
+        {error && <p className={styles.error}>{error}</p>}
         <form className={styles.part}>
           {!login ? (
             <>

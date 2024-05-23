@@ -62,6 +62,7 @@ const ContextMenuConversation = ({
                     className={styles.contextMenuItem}
                     onClick={item.onClick}
                     style={{ color: item.color }}
+                    key={item.label}
                 >
                     <p className={styles.contextMenuLabel}>{item.label}</p>
                     <Image

@@ -50,8 +50,18 @@ const Message = ({
     const isReceived = message.sender_id !== userId
     const messageClass = isReceived ? styles.messagereceived : styles.messagesent
     const firstPlan = rightClick ? styles.messagefirstplan : ''
-    const topClass = isReceived ? (topRounded ? styles.messagereceivedtop : styles.messagereceivedmiddle) : (topRounded ? styles.messagesenttop : styles.messagesentmiddle)
-    const bottomClass = isReceived ? (bottomRounded ? styles.messagereceivedbottom : '') : (bottomRounded ? styles.messagesentbottom : '');
+
+    //fonction pour ça
+    let topClass;
+    let bottomClass;
+
+    if (isReceived) {
+        topClass = topRounded ? styles.messagereceivedtop : styles.messagereceivedmiddle;
+        bottomClass = bottomRounded ? styles.messagereceivedbottom : '';
+    } else {
+        topClass = topRounded ? styles.messagesenttop : styles.messagesentmiddle;
+        bottomClass = bottomRounded ? styles.messagesentbottom : '';
+    }
     const hasReactions = message.reactions && message.reactions.length > 0 ? styles.hasReactions : ''
 
     const handleEscape = (e: KeyboardEvent<HTMLDivElement>) => {

@@ -38,10 +38,6 @@ const ContextMenu = ({
     editMode
 }: ContextMenuProps) => {
 
-    const ref = useClickAway(()=>{
-        setRightClick(false)
-    }) as MutableRefObject<HTMLDivElement>;
-
     const Buttons: Button[] = [
         {
             title: "Copier",
@@ -76,7 +72,7 @@ const ContextMenu = ({
                 <div className={styles.messagecontextmenu + " " + (isReceived ? styles.messagecontextmenureceived : styles.messagecontextmenusent)}>
                     {Buttons.map((button, i) => (
                         <Button
-                            key={i}
+                            key={button.title}
                             title={button.title}
                             icon={button.icon}
                             action={button.action}

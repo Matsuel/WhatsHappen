@@ -3,7 +3,6 @@ import MessagePrivacy from '../MessagePrivacy/MessagePrivacy'
 import styles from './style.module.scss'
 import MessageDate from '../MessageDate/MessageDate'
 import Message from '../Message/Message'
-import MessageFile from '../MessageFile/MessageFile'
 import { isBottomRounded, isTopRounded } from '@/Functions/MessagesList/MessagesList'
 import IsTyping from '../Message/IsTyping'
 import { socket } from '@/pages/_app'
@@ -27,8 +26,6 @@ const MessagesArea = ({
 
     const { cookies, userId } = useCookie()
 
-    const [messageDay, setMessageDay] = useState<Number>(0)
-
     const scrollBottomRef = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
@@ -49,7 +46,7 @@ const MessagesArea = ({
             <MessagePrivacy />
 
             {
-                messageDay === 0 && messages.length > 0 ?
+                messages.length > 0 ?
                     <MessageDate message={messages[0]} />
                     : null
             }
@@ -71,7 +68,7 @@ const MessagesArea = ({
                         }
 
                         {
-                            message.type === "text" ?
+                            message.type === "text" &&
                                 <Message
                                     message={message}
                                     i={i}
@@ -84,18 +81,7 @@ const MessagesArea = ({
                                     conversationActive={conversationActive}
                                     isNextMessageSameSender={isNextMessageSameSender}
                                     pic={pic}
-                                /> :
-                                // <MessageFile
-                                //     message={message}
-                                //     i={i}
-                                //     scrollBottomRef={scrollBottomRef}
-                                //     key={message._id}
-                                //     topRounded={isTopRounded(previousMessage, message.sender_id, message.date)}
-                                //     bottomRounded={isBottomRounded(nextMessage, message.sender_id, message.date)}
-                                //     messagesCount={messagesCount}
-                                //     deleteMessage={deleteMessage}
-                                // />
-                                null
+                                />
                         }
                     </>
                 )

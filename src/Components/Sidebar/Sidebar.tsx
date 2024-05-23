@@ -6,7 +6,6 @@ import Searchbar from './Searchbar'
 import { socket } from '@/pages/_app'
 import PinnedConversations from '@/Components/PinnedConversations/PinnedConversations'
 import Header from './Header'
-import EditModal from './EditModal'
 import { useCookie } from '@/hooks/useCookie/useCookie'
 
 interface SidebarProps {
@@ -30,12 +29,6 @@ const Sidebar = ({
     const [conversations, setConversations] = useState<ConversationInfos[]>([])
     const conversationsNoResult: string = "Aucune conversation trouvée"
     const [hasMatchingConversations, setHasMatchingConversations] = useState<boolean>(true)
-
-
-    const handleEditConv = () => {
-        setEditConversation(!editConversation)
-    }
-
 
     const handleConversationActive = (conversationId: string) => {
         if (conversationId === conversationActive) {

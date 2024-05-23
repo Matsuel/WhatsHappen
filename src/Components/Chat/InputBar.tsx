@@ -31,7 +31,7 @@ const InputBar = ({
     const inputRef = useRef<HTMLInputElement>(null);
 
     const ref = useClickAway((event) => {
-        if (emojiButtonRef.current && emojiButtonRef.current.contains(event.target as Node)) {
+        if (emojiButtonRef.current?.contains(event.target as Node)) {
             return;
         }
         setOpenPicker(false);

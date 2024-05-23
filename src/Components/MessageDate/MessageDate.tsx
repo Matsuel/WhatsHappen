@@ -22,19 +22,22 @@ const MessageDate = ({
     const yesterday = new Date(message.date).toDateString() === new Date(Date.now() - 86400000).toDateString()
     const formatedDate = new Date(message.date).toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }).split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')
 
+    let displayDate;
+    if (today) {
+        displayDate = "Aujourd'hui"
+    } else if (yesterday) {
+        displayDate = "Hier"
+    } else {
+        displayDate = formatedDate
+    }
+
     return (
         <div className={styles.messageday}>
             <div
                 style={{ width: "calc(50% - " + (width / 2 + 30) + "px)" }}
                 className={styles.messagedayline}></div>
             <p className={styles.messagedaytext} ref={ref}>
-                {
-                    today ?
-                        "Aujourd'hui" :
-                        yesterday ?
-                            "Hier" :
-                            formatedDate
-                }
+                {displayDate}
             </p>
             <div style={{ width: "calc(50% - " + (width / 2 + 50) + "px)" }} className={styles.messagedayline}></div>
         </div>

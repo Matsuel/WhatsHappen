@@ -36,7 +36,7 @@ const EditModal = ({
     })
 
     const ref = useClickAway((event) => {
-        if (editRef.current && editRef.current.contains(event.target as Node)) {
+        if (editRef.current?.contains(event.target as Node)) {
             return
         }
         setEdit(false)

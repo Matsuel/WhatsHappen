@@ -25,8 +25,8 @@ const Modal = ({
     const [users, setUsers] = useState<UserInfos[]>([])
 
     const inputRef = useRef<HTMLInputElement>(null)
-    const ref = useClickAway<any>(() => {
-        if (event && btnRef.current && btnRef.current.contains(event.target as Node)) {
+    const ref = useClickAway<any>((event) => {
+        if (btnRef.current?.contains(event.target as Node)) {
             return;
         }
         setShowNewConv(false)
