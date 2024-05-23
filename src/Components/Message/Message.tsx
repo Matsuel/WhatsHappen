@@ -89,7 +89,8 @@ const Message = ({
                     onMouseLeave={() => handleMouseUp(longPress, setLongPress)}
                     onKeyDown={handleEscape}
                     role='button'
-                    >
+                    tabIndex={0}
+                >
                     {rightClick && <Picker reactionsDefaultOpen={true} className={styles.reactiondiv + " " + (isReceived ? styles.messagecontextmenureceived : styles.messagecontextmenusent)}
                         onEmojiClick={(emoji: EmojiPickerProps) => { handleReaction(message._id, emoji.unified); setRightClick(false); }}
                     />}

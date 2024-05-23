@@ -64,6 +64,7 @@ const Conversation = ({
             onMouseEnter={() => setHover(true)}
             onMouseLeave={() => setHover(false)}
             role='button'
+            tabIndex={0}
         >
 
             {editConversation && <Image

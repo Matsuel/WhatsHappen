@@ -79,6 +79,7 @@ const PinnedConversations = ({
                                         onClick={() => handleConversationActive(conversation._id)}
                                         onContextMenu={(e) => handleContextMenu(e, conversation._id)}
                                         role='button'
+                                        tabIndex={0}
                                     >
 
                                         <DisplayAvatar pic={conversation.pic} size={75} />
