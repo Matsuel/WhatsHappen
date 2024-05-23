@@ -254,15 +254,18 @@
 // Edit Message Style 
 
 .editMessageWrap {
+    position: relative;
     margin-top: 10px;
     width: 100%;
     height: auto;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
+    justify-content: center;
+    gap: 25px;
 
     .editMessageInput {
-        margin-top: 10px;
+        // margin-top: 10px;
         width: 90%;
         height: auto;
         outline: none;
@@ -271,5 +274,27 @@
         border-radius: 12px;
         color: #000;
         background-color: #eaeaec;
+    }
+
+    .emojiPicker {
+        background-color: transparent;
+        border: none;
+        filter: grayscale(100%);
+        width: 24px;
+        height: 24px;
+        transition: all 0.2s ease-in-out;
+    }
+    
+    .emojiPicker:hover {
+        filter: grayscale(0%);
+        cursor: pointer;
+        transform: scale(1.2);
+        transition: all 0.2s ease-in-out;
+    }
+
+    .emojiPickerWrap {
+        position: absolute;
+        right: 0;
+        bottom: 35px;
     }
 }

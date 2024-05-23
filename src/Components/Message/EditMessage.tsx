@@ -3,6 +3,7 @@ import styles from './style.module.scss'
 import { socket } from '@/pages/_app'
 import { useCookie } from '@/hooks/useCookie/useCookie'
 import { useClickAway } from '@uidotdev/usehooks'
+import EmojiPicker, { Emoji } from 'emoji-picker-react'
 
 interface EditMessageProps {
     message: message,
@@ -21,6 +22,7 @@ const EditMessage = ({
     const { cookies } = useCookie()
 
     const [newMessage, setNewMessage] = useState<string>(message.content)
+    const [showPicker, setShowPicker] = useState<boolean>(false)
     const ref = useRef<HTMLInputElement>(null)
 
     const refAway = useClickAway((event) => {
@@ -31,8 +33,10 @@ const EditMessage = ({
     }) as LegacyRef<HTMLInputElement>
 
     const editMessage = (e: React.KeyboardEvent<HTMLInputElement>) => {
-        if (e.key === "Enter" && newMessage !== message.content && newMessage.length > 0 && newMessage.trim().length > 0) {
+        if (e.key === "Enter" && newMessage.length > 0 && newMessage.trim().length > 0) {
             socket.emit('editMessage', { cookies: cookies, message_id: message._id, content: newMessage, conversation_id: conversationActive })
+            setEditMode(false)
+        } else if (newMessage === message.content) {
             setEditMode(false)
         }
     }
@@ -42,6 +46,10 @@ const EditMessage = ({
             (refAway as MutableRefObject<HTMLInputElement | null>).current?.focus()
         }
     }, [editMode])
+
+    const showEmoji = () => {
+        setShowPicker(!showPicker)
+    }
 
     return (
         <div
@@ -58,6 +66,20 @@ const EditMessage = ({
                 ref={refAway}
                 onKeyDown={(e) => editMessage(e)}
             />
+            <button className={styles.emojiPicker}
+                onClick={() => showEmoji()}
+            >
+                <Emoji unified={"1f600"} size={24} />
+            </button>
+
+            {showPicker && <div className={styles.emojiPickerWrap}>
+                <EmojiPicker
+                    onEmojiClick={(e) => {
+                        setNewMessage(newMessage + e.emoji)
+                        console.log(e)
+                    }}
+                />
+            </div>}
         </div>
     )
 }
