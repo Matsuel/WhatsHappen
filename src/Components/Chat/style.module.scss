@@ -6,7 +6,7 @@
     .messagesection::-webkit-scrollbar {
         width: 7px;
     }
-    
+
     .messagesection::-webkit-scrollbar-thumb {
         background-color: #9a9fab;
         border-radius: 10px;
@@ -40,7 +40,7 @@
             object-position: center;
             border-radius: 12px;
         }
-        
+
         .conversationname {
             font-size: 24px;
             font-family: 'Montserrat', sans-serif;
@@ -55,13 +55,13 @@
         flex-direction: row;
         align-items: center;
         gap: 36px;
-    
+
         .toprightbtn {
             width: 30px;
             height: 30px;
             cursor: pointer;
         }
-    
+
         .searchconv {
             width: 350px;
             height: 50px;
@@ -74,12 +74,12 @@
             transform: translateX(100%);
             transition: transform 1.5s ease-in-out;
         }
-        
+
         .searchconvShow {
             transform: translateX(0%);
-        
+
         }
-        
+
         .searchconv::placeholder {
             color: #9393C1;
         }
@@ -96,7 +96,7 @@
     display: flex;
     align-items: center;
     justify-content: space-evenly;
-    background-color: #f5f5f5   ;
+    background-color: #f5f5f5;
 
     .joinfile {
         width: 24px;
@@ -116,7 +116,7 @@
         background-color: #fff;
         color: #000;
     }
-    
+
     .emojiPicker {
         border: none;
         filter: grayscale(100%);
@@ -124,7 +124,7 @@
         height: 24px;
         transition: all 0.2s ease-in-out;
     }
-    
+
     .emojiPicker:hover {
         filter: grayscale(0%);
         cursor: pointer;
@@ -176,4 +176,27 @@
 
 .messagesectionheightMin {
     height: 75%;
+}
+
+// Go to bottom style 
+
+.gotoBottom {
+    all: unset;
+    position: absolute;
+    bottom: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 50px;
+    background-image: url('../../assets/GoToBottom.svg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+        cursor: pointer;
+        background-image: url('../../assets/GoToBottomFull.svg');
+        transition: all 0.2s ease-in-out;
+    }
 }

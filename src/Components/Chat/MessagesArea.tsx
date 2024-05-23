@@ -7,6 +7,7 @@ import { isBottomRounded, isTopRounded } from '@/Functions/MessagesList/Messages
 import IsTyping from '../Message/IsTyping'
 import { socket } from '@/pages/_app'
 import { useCookie } from '@/hooks/useCookie/useCookie'
+import GotoBottom from './GotoBottom'
 
 interface MessagesAreaProps {
     showSearchConv: boolean,
@@ -69,24 +70,29 @@ const MessagesArea = ({
 
                         {
                             message.type === "text" &&
-                                <Message
-                                    message={message}
-                                    i={i}
-                                    scrollBottomRef={scrollBottomRef}
-                                    key={message._id}
-                                    topRounded={isTopRounded(previousMessage, message.sender_id, message.date)}
-                                    bottomRounded={isBottomRounded(nextMessage, message.sender_id, message.date)}
-                                    messagesCount={messagesCount}
-                                    deleteMessage={deleteMessage}
-                                    conversationActive={conversationActive}
-                                    isNextMessageSameSender={isNextMessageSameSender}
-                                    pic={pic}
-                                />
+                            <Message
+                                message={message}
+                                i={i}
+                                scrollBottomRef={scrollBottomRef}
+                                key={message._id}
+                                topRounded={isTopRounded(previousMessage, message.sender_id, message.date)}
+                                bottomRounded={isBottomRounded(nextMessage, message.sender_id, message.date)}
+                                messagesCount={messagesCount}
+                                deleteMessage={deleteMessage}
+                                conversationActive={conversationActive}
+                                isNextMessageSameSender={isNextMessageSameSender}
+                                pic={pic}
+                            />
                         }
                     </>
                 )
             })}
-            
+
+            <GotoBottom
+                conversationActive={conversationActive}
+                scrollBottomRef={scrollBottomRef}
+            />
+
             <IsTyping
                 conversationActive={conversationActive}
             />
